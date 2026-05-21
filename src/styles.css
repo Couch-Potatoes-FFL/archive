@@ -67,6 +67,12 @@ select {
   font-weight: 800;
 }
 
+.topBar nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
 .topBar nav a {
   padding: 8px 10px;
   color: rgba(245, 247, 241, 0.82);
@@ -180,13 +186,61 @@ h3 {
 
 .controlBand {
   display: grid;
-  grid-template-columns: minmax(280px, 1fr) 180px 220px;
+  grid-template-columns: minmax(280px, 1fr) 180px 220px auto;
   gap: 12px;
   align-items: center;
   padding: 14px;
   background: #e8eddf;
   border: 1px solid #d6ddcc;
   border-radius: 8px;
+}
+
+.categoryGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(260px, 1fr));
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.categoryButton {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) 20px;
+  gap: 12px;
+  align-items: center;
+  min-height: 112px;
+  padding: 16px;
+  color: #172018;
+  background: #ffffff;
+  border: 1px solid #dfe5d7;
+  border-radius: 8px;
+}
+
+.categoryButton:hover {
+  border-color: #9fb39a;
+  box-shadow: 0 10px 22px rgba(30, 48, 31, 0.08);
+  text-decoration: none;
+}
+
+.categoryIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  color: #0f5237;
+  background: #e2eee6;
+  border-radius: 8px;
+}
+
+.categoryButton strong,
+.categoryButton small {
+  display: block;
+}
+
+.categoryButton small {
+  margin-top: 5px;
+  color: #687366;
+  line-height: 1.35;
 }
 
 .searchField,
@@ -228,6 +282,54 @@ select {
   background: #ffffff;
   border: 1px solid #d4dccb;
   border-radius: 8px;
+}
+
+.filterActions,
+.pagerActions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.primaryButton,
+.ghostButton,
+.tablePager button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 42px;
+  padding: 0 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.primaryButton {
+  color: #ffffff;
+  background: #174d34;
+  border: 1px solid #174d34;
+}
+
+.primaryButton:hover {
+  background: #0f3c27;
+}
+
+.ghostButton,
+.tablePager button {
+  color: #174d34;
+  background: #ffffff;
+  border: 1px solid #c8d2c0;
+}
+
+.ghostButton:hover,
+.tablePager button:hover:not(:disabled) {
+  background: #f5f8f1;
+}
+
+.tablePager button:disabled {
+  color: #9aa595;
+  cursor: not-allowed;
+  background: #f0f3eb;
 }
 
 .contentBand,
@@ -344,6 +446,26 @@ td {
   cursor: pointer;
 }
 
+.tablePager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding-top: 14px;
+  color: #687366;
+  font-size: 0.9rem;
+}
+
+.pendingNote {
+  color: #687366;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.pendingNote.active {
+  color: #6e5b23;
+}
+
 .pill {
   display: inline-flex;
   align-items: center;
@@ -393,6 +515,7 @@ td {
   background: #ffffff;
   border: 1px solid #e4e8dc;
   border-radius: 8px;
+  overflow: hidden;
 }
 
 .lineupTable h4 {
@@ -403,23 +526,73 @@ td {
   border-radius: 8px 8px 0 0;
 }
 
-.lineupRow {
-  display: grid;
-  grid-template-columns: 54px minmax(130px, 1fr) minmax(80px, auto);
-  gap: 10px;
-  align-items: center;
-  padding: 8px 12px;
-  border-bottom: 1px solid #edf0e7;
+.lineupScroll {
+  overflow-x: auto;
 }
 
-.lineupRow:last-child {
-  border-bottom: 0;
+.boxScoreTable {
+  min-width: 560px;
+  font-size: 0.9rem;
 }
 
-.lineupRow span {
+.boxScoreTable th,
+.boxScoreTable td {
+  padding: 9px 10px;
+}
+
+.boxScoreTable th:nth-child(4),
+.boxScoreTable th:nth-child(5),
+.numberCell {
+  text-align: right;
+}
+
+.boxScorePlayerRow.bench {
+  background: #fbfcf8;
+}
+
+.boxScorePlayerRow.ir {
+  background: #f7f8f5;
+}
+
+.slotCell {
+  width: 72px;
   color: #6e5b23;
   font-size: 0.78rem;
   font-weight: 800;
+}
+
+.playerCell {
+  min-width: 190px;
+}
+
+.lineupPlayerName {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.playerCell strong,
+.playerCell small {
+  display: block;
+}
+
+.playerCell small {
+  margin-top: 2px;
+  color: #687366;
+  font-size: 0.78rem;
+}
+
+.injuryBadge {
+  color: #d11212;
+  font-size: 0.75rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.lineupSummaryRow {
+  color: #717a70;
+  font-weight: 800;
+  background: #eef0ed;
 }
 
 .emptyCell,
@@ -468,6 +641,7 @@ pre {
 
   .statRail,
   .controlBand,
+  .categoryGrid,
   .contentGrid,
   .lineupColumns {
     grid-template-columns: 1fr;
@@ -479,6 +653,19 @@ pre {
 
   main {
     padding: 18px;
+  }
+
+  .filterActions,
+  .tablePager {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .filterActions,
+  .filterActions button,
+  .pagerActions,
+  .pagerActions button {
+    width: 100%;
   }
 }
 
@@ -492,6 +679,11 @@ pre {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  .topBar nav a {
+    gap: 6px;
+    padding: 8px;
   }
 
   h1 {
