@@ -13,6 +13,7 @@ export type ArchiveManifest = {
     year: number;
     teamCount: number;
     weekCount: number;
+    matchupCount: number;
     hasBoxScores: boolean;
     hasTransactions: boolean;
   }>;
@@ -24,10 +25,17 @@ export type SearchRow = {
   year: number;
   week?: number;
   teamKey?: string;
+  teamName?: string;
+  logoUrl?: string;
   playerName?: string;
+  transactionType?: string;
+  transactionItemType?: string;
+  transactionActionType?: string;
+  transactionStatus?: string;
   label: string;
   summary: string;
   href: string;
+  draftPick?: number;
   bidAmount?: number;
   keeperStatus?: boolean;
 };

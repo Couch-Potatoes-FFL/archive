@@ -340,6 +340,109 @@ select {
   border-radius: 8px;
 }
 
+.teamHistoryBand {
+  margin-top: 18px;
+}
+
+.teamYearList {
+  display: grid;
+  gap: 24px;
+}
+
+.teamYearGroup {
+  min-width: 0;
+}
+
+.teamYearHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #dfe5d7;
+}
+
+.teamYearHeader h3 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.teamYearHeader span {
+  color: #687366;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.teamCardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+}
+
+.teamHistoryCard {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  min-height: 96px;
+  padding: 14px;
+  color: #172018;
+  background: #ffffff;
+  border: 1px solid #dfe5d7;
+  border-radius: 8px;
+}
+
+.teamHistoryCard:hover {
+  border-color: #9fb39a;
+  box-shadow: 0 10px 22px rgba(30, 48, 31, 0.08);
+  text-decoration: none;
+}
+
+.teamCardIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  color: #0f5237;
+  background: #e2eee6;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.teamCardIcon.logo {
+  background: #ffffff;
+  border: 1px solid #dfe5d7;
+}
+
+.teamCardIcon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.teamCardText {
+  min-width: 0;
+}
+
+.teamCardText strong,
+.teamCardText small {
+  display: block;
+}
+
+.teamCardText strong {
+  overflow-wrap: anywhere;
+}
+
+.teamCardText small {
+  margin-top: 5px;
+  color: #687366;
+  font-size: 0.82rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
 .contentGrid {
   display: grid;
   grid-template-columns: minmax(280px, 0.9fr) minmax(320px, 1.4fr);
@@ -488,7 +591,7 @@ td {
 .teamLabel img {
   width: 38px;
   height: 38px;
-  object-fit: cover;
+  object-fit: contain;
   background: #edf0e7;
   border-radius: 8px;
 }

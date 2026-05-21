@@ -17,7 +17,13 @@ import {
   useParams,
   useSearchParams,
 } from "react-router-dom";
-import { formatDate, formatNumber, teamDisplay } from "./data";
+import {
+  archivePublicUrl,
+  formatDate,
+  formatNumber,
+  formatTimestamp,
+  teamDisplay,
+} from "./data";
 import { SimpleTable } from "./SimpleTable";
 import {
   ArchiveManifest,
@@ -54,7 +60,7 @@ const recordTypeOptions: Array<{ value: BrowserFilterType; label: string }> = [
   { value: "week", label: "Weeks" },
   { value: "matchup", label: "Matchups" },
   { value: "transaction", label: "Transactions" },
-  { value: "draft", label: "Draft" },
+  { value: "draft", label: "Drafts" },
   { value: "player", label: "Players" },
 ];
 
@@ -122,7 +128,7 @@ const dataCategories: Array<{
     icon: <ArrowRight size={20} aria-hidden />,
   },
   {
-    title: "Draft",
+    title: "Drafts",
     label: "Find historical draft picks, nominations, bids, and keepers.",
     to: "/browse?type=draft",
     icon: <Database size={20} aria-hidden />,
@@ -159,7 +165,25 @@ const draftSearchColumns: ColumnDef<SearchRow>[] = [
   searchColumns[0],
   searchColumns[1],
   searchColumns[2],
-  searchColumns[3],
+  {
+    header: "Pick",
+    accessorKey: "draftPick",
+    cell: ({ row }) => row.original.draftPick ?? "-",
+  },
+  {
+    header: "Player",
+    accessorKey: "playerName",
+    cell: ({ row }) => (
+      <Link to={row.original.href}>
+        {row.original.playerName ?? row.original.label}
+      </Link>
+    ),
+  },
+  {
+    header: "Team",
+    accessorKey: "teamName",
+    cell: ({ row }) => row.original.teamName ?? row.original.teamKey ?? "-",
+  },
   {
     header: "Bid",
     accessorKey: "bidAmount",
@@ -168,7 +192,41 @@ const draftSearchColumns: ColumnDef<SearchRow>[] = [
         ? `$${formatNumber(row.original.bidAmount)}`
         : "-",
   },
-  searchColumns[4],
+];
+
+const transactionSearchColumns: ColumnDef<SearchRow>[] = [
+  searchColumns[1],
+  searchColumns[2],
+  {
+    header: "Type",
+    accessorKey: "transactionActionType",
+    cell: ({ row }) => row.original.transactionActionType || "Transaction",
+  },
+  {
+    header: "FAB",
+    accessorKey: "bidAmount",
+    cell: ({ row }) =>
+      formatTransactionFab(row.original.transactionType, row.original.bidAmount),
+  },
+  {
+    header: "Team",
+    accessorKey: "teamName",
+    cell: ({ row }) => row.original.teamName ?? row.original.teamKey ?? "-",
+  },
+  {
+    header: "Player",
+    accessorKey: "playerName",
+    cell: ({ row }) => (
+      <Link to={row.original.href}>
+        {row.original.playerName ?? row.original.label}
+      </Link>
+    ),
+  },
+  {
+    header: "Status",
+    accessorKey: "transactionStatus",
+    cell: ({ row }) => row.original.transactionStatus ?? row.original.summary,
+  },
 ];
 
 function App() {
@@ -213,10 +271,8 @@ function DataLandingPage() {
     return <StatusPanel label="Unable to load archive data." tone="danger" />;
   }
 
-  const years = manifest.data.seasons.map((season) => season.year);
-  const latestSeason = Math.max(...years);
-  const weekCount = manifest.data.seasons.reduce(
-    (total, season) => total + season.weekCount,
+  const matchupCount = manifest.data.seasons.reduce(
+    (total, season) => total + season.matchupCount,
     0,
   );
 
@@ -230,18 +286,18 @@ function DataLandingPage() {
         <div className="statRail">
           <Metric
             icon={<CalendarDays size={18} />}
-            label="Seasons"
+            label="Available Seasons"
             value={String(manifest.data.seasons.length)}
           />
           <Metric
             icon={<Database size={18} />}
-            label="Weeks"
-            value={formatNumber(weekCount)}
+            label="Total Matchups"
+            value={formatNumber(matchupCount)}
           />
           <Metric
             icon={<Trophy size={18} />}
-            label="Latest"
-            value={String(latestSeason)}
+            label="Last Modified"
+            value={formatTimestamp(manifest.data.exportedAt)}
           />
         </div>
       </section>
@@ -285,7 +341,9 @@ function BrowserPage() {
   const years = useMemo(
     () =>
       manifest.status === "loaded"
-        ? manifest.data.seasons.map((season) => season.year)
+        ? [...manifest.data.seasons]
+            .sort((left, right) => right.year - left.year)
+            .map((season) => season.year)
         : [],
     [manifest],
   );
@@ -302,25 +360,36 @@ function BrowserPage() {
       appliedFilters.type === "all" &&
       appliedFilters.year === "all"
     ) {
-      return index.data;
+      return sortSearchRows(index.data);
     }
 
-    return index.data.filter((row) => {
-      const matchesType =
-        appliedFilters.type === "all" || row.type === appliedFilters.type;
-      const matchesYear =
-        appliedFilters.year === "all" || row.year === Number(appliedFilters.year);
-      if (!matchesType || !matchesYear) {
-        return false;
-      }
+    return sortSearchRows(
+      index.data.filter((row) => {
+        const matchesType =
+          appliedFilters.type === "all" || row.type === appliedFilters.type;
+        const matchesYear =
+          appliedFilters.year === "all" || row.year === Number(appliedFilters.year);
+        if (!matchesType || !matchesYear) {
+          return false;
+        }
 
-      const haystack = `${row.label} ${row.summary} ${row.playerName ?? ""}`;
-      const matchesQuery =
-        normalizedQuery.length === 0 ||
-        haystack.toLowerCase().includes(normalizedQuery);
+        const haystack = [
+          row.label,
+          row.summary,
+          row.playerName,
+          row.teamName,
+          row.transactionActionType,
+          row.transactionStatus,
+        ]
+          .filter(Boolean)
+          .join(" ");
+        const matchesQuery =
+          normalizedQuery.length === 0 ||
+          haystack.toLowerCase().includes(normalizedQuery);
 
-      return matchesType && matchesYear && matchesQuery;
-    });
+        return matchesType && matchesYear && matchesQuery;
+      }),
+    );
   }, [appliedFilters, index]);
 
   if (manifest.status === "loading" || index.status === "loading") {
@@ -332,8 +401,9 @@ function BrowserPage() {
   }
 
   const hasPendingFilters = !filtersMatch(draftFilters, appliedFilters);
-  const resultColumns =
-    appliedFilters.type === "draft" ? draftSearchColumns : searchColumns;
+  const resultColumns = resultColumnsForType(appliedFilters.type);
+  const showSeasonHistory = appliedFilters.type === "season";
+  const showTeamHistory = appliedFilters.type === "team";
 
   function applyFilters(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -430,18 +500,155 @@ function BrowserPage() {
         </div>
       </form>
 
-      <section className="contentBand">
-        <div className="sectionHeader">
-          <h2>Results</h2>
-          <span className={hasPendingFilters ? "pendingNote active" : "pendingNote"}>
-            {hasPendingFilters
-              ? "Filter changes pending"
-              : `${formatNumber(filteredRows.length)} matching rows`}
-          </span>
-        </div>
-        <SimpleTable data={filteredRows} columns={resultColumns} />
-      </section>
+      {showSeasonHistory ? (
+        <SeasonHistoryResults
+          rows={filteredRows}
+          hasPendingFilters={hasPendingFilters}
+        />
+      ) : showTeamHistory ? (
+        <TeamHistoryResults
+          rows={filteredRows}
+          hasPendingFilters={hasPendingFilters}
+        />
+      ) : (
+        <section className="contentBand">
+          <div className="sectionHeader">
+            <h2>Results</h2>
+            <span
+              className={hasPendingFilters ? "pendingNote active" : "pendingNote"}
+            >
+              {hasPendingFilters
+                ? "Filter changes pending"
+                : `${formatNumber(filteredRows.length)} matching rows`}
+            </span>
+          </div>
+          <SimpleTable data={filteredRows} columns={resultColumns} />
+        </section>
+      )}
     </>
+  );
+}
+
+function SeasonHistoryResults({
+  rows,
+  hasPendingFilters,
+}: {
+  rows: SearchRow[];
+  hasPendingFilters: boolean;
+}) {
+  const seasonRows = useMemo(
+    () => [...rows].sort((left, right) => right.year - left.year),
+    [rows],
+  );
+
+  return (
+    <section className="teamHistoryBand">
+      <div className="sectionHeader">
+        <h2>Seasons</h2>
+        <span className={hasPendingFilters ? "pendingNote active" : "pendingNote"}>
+          {hasPendingFilters
+            ? "Filter changes pending"
+            : `${formatNumber(rows.length)} matching ${pluralizeSeason(rows.length)}`}
+        </span>
+      </div>
+
+      {seasonRows.length ? (
+        <div className="teamCardGrid">
+          {seasonRows.map((season) => (
+            <Link className="teamHistoryCard" key={season.id} to={season.href}>
+              <span className="teamCardIcon" aria-hidden>
+                <CalendarDays size={20} aria-hidden />
+              </span>
+              <span className="teamCardText">
+                <strong>{season.year}</strong>
+                <small>{season.summary}</small>
+              </span>
+            </Link>
+          ))}
+        </div>
+      ) : (
+        <p className="emptyNote">No seasons match these filters.</p>
+      )}
+    </section>
+  );
+}
+
+function TeamHistoryResults({
+  rows,
+  hasPendingFilters,
+}: {
+  rows: SearchRow[];
+  hasPendingFilters: boolean;
+}) {
+  const groupedTeams = useMemo(() => groupRowsByYear(rows), [rows]);
+
+  return (
+    <section className="teamHistoryBand">
+      <div className="sectionHeader">
+        <h2>Teams</h2>
+        <span className={hasPendingFilters ? "pendingNote active" : "pendingNote"}>
+          {hasPendingFilters
+            ? "Filter changes pending"
+            : `${formatNumber(rows.length)} matching ${pluralizeTeam(rows.length)}`}
+        </span>
+      </div>
+
+      {groupedTeams.length ? (
+        <div className="teamYearList">
+          {groupedTeams.map((group) => (
+            <section className="teamYearGroup" key={group.year}>
+              <div className="teamYearHeader">
+                <h3>{group.year}</h3>
+                <span>
+                  {formatNumber(group.rows.length)} {pluralizeTeam(group.rows.length)}
+                </span>
+              </div>
+              <div className="teamCardGrid">
+                {group.rows.map((team) => (
+                  <Link className="teamHistoryCard" key={team.id} to={team.href}>
+                    <TeamCardIcon logoUrl={team.logoUrl} />
+                    <span className="teamCardText">
+                      <strong>{team.label}</strong>
+                      <small>{team.summary}</small>
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          ))}
+        </div>
+      ) : (
+        <p className="emptyNote">No teams match these filters.</p>
+      )}
+    </section>
+  );
+}
+
+function TeamCardIcon({
+  logoUrl,
+}: {
+  logoUrl?: string;
+}) {
+  const [failed, setFailed] = useState(false);
+  const resolvedLogoUrl = archivePublicUrl(logoUrl);
+
+  if (resolvedLogoUrl && !failed) {
+    return (
+      <span className="teamCardIcon logo">
+        <img
+          src={resolvedLogoUrl}
+          alt=""
+          loading="lazy"
+          onError={() => setFailed(true)}
+        />
+      </span>
+    );
+  }
+
+  return (
+    <span className="teamCardIcon" aria-hidden>
+      <Shield size={20} aria-hidden />
+    </span>
   );
 }
 
@@ -602,7 +809,7 @@ function SeasonPage() {
 
       <section className="contentBand">
         <div className="sectionHeader">
-          <h2>Draft</h2>
+          <h2>Drafts</h2>
         </div>
         <SimpleTable data={season.data.draft} columns={draftColumns} />
       </section>
@@ -664,6 +871,12 @@ function WeekPage() {
       cell: ({ row }) => teamDisplay(row.original.teamKey, teamNames),
     },
     { header: "Type", accessorKey: "type" },
+    {
+      header: "FAB",
+      accessorKey: "bidAmount",
+      cell: ({ row }) =>
+        formatTransactionFab(row.original.type, row.original.bidAmount),
+    },
     { header: "Status", accessorKey: "status" },
     {
       header: "Players",
@@ -972,9 +1185,11 @@ function StatusPanel({
 }
 
 function TeamLabel({ team }: { team: PublicTeam }) {
+  const logoUrl = archivePublicUrl(team.logoUrl);
+
   return (
     <span className="teamLabel">
-      {team.logoUrl ? <img src={team.logoUrl} alt="" loading="lazy" /> : null}
+      {logoUrl ? <img src={logoUrl} alt="" loading="lazy" /> : null}
       <span>
         <strong>{team.name}</strong>
         <small>{team.abbrev}</small>
@@ -985,6 +1200,78 @@ function TeamLabel({ team }: { team: PublicTeam }) {
 
 function teamNameMap(teams: PublicTeam[]): Map<string, string> {
   return new Map(teams.map((team) => [team.key, team.name]));
+}
+
+function formatTransactionFab(type?: string, bidAmount?: number): string {
+  if (type?.toUpperCase() === "FREEAGENT") {
+    return "N/A";
+  }
+  if (typeof bidAmount === "number" && Number.isFinite(bidAmount)) {
+    return `$${formatNumber(bidAmount)}`;
+  }
+  return "N/A";
+}
+
+function resultColumnsForType(type: BrowserFilterType): ColumnDef<SearchRow>[] {
+  if (type === "draft") {
+    return draftSearchColumns;
+  }
+  if (type === "transaction") {
+    return transactionSearchColumns;
+  }
+  return searchColumns;
+}
+
+function sortSearchRows(rows: SearchRow[]): SearchRow[] {
+  return [...rows].sort((left, right) => {
+    if (left.year !== right.year) {
+      return right.year - left.year;
+    }
+
+    if (left.type !== right.type) {
+      return left.type.localeCompare(right.type);
+    }
+
+    const leftWeek = left.week ?? -1;
+    const rightWeek = right.week ?? -1;
+    if (leftWeek !== rightWeek) {
+      return rightWeek - leftWeek;
+    }
+
+    if (left.type === "draft" && right.type === "draft") {
+      const leftPick = left.draftPick ?? Number.MAX_SAFE_INTEGER;
+      const rightPick = right.draftPick ?? Number.MAX_SAFE_INTEGER;
+      if (leftPick !== rightPick) {
+        return leftPick - rightPick;
+      }
+    }
+
+    return left.label.localeCompare(right.label);
+  });
+}
+
+function groupRowsByYear(rows: SearchRow[]): Array<{ year: number; rows: SearchRow[] }> {
+  const grouped = rows.reduce((groups, row) => {
+    const existingRows = groups.get(row.year) ?? [];
+    existingRows.push(row);
+    groups.set(row.year, existingRows);
+    return groups;
+  }, new Map<number, SearchRow[]>());
+
+  return [...grouped.entries()]
+    .sort(([leftYear], [rightYear]) => rightYear - leftYear)
+    .map(([year, yearRows]) => ({
+      year,
+      rows: [...yearRows].sort((left, right) => left.label.localeCompare(right.label)),
+    }));
+}
+
+function pluralizeTeam(count: number): string {
+  return count === 1 ? "team" : "teams";
+}
+
+function pluralizeSeason(count: number): string {
+  return count === 1 ? "season" : "seasons";
 }
 
 function filtersFromSearchParams(searchParams: URLSearchParams): BrowserFilters {

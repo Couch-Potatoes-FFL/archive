@@ -13,10 +13,40 @@ function readJson(filePath) {
   return readFile(filePath, "utf8").then((text) => JSON.parse(text));
 }
 
+function loadDotenv(filePath) {
+  return readFile(filePath, "utf8")
+    .then((text) => {
+      for (const rawLine of text.split(/\r?\n/)) {
+        const line = rawLine.trim();
+        if (!line || line.startsWith("#") || !line.includes("=")) {
+          continue;
+        }
+
+        const [rawKey, ...rawValueParts] = line.split("=");
+        const key = rawKey.trim();
+        const value = rawValueParts.join("=").trim().replace(/^['"]|['"]$/g, "");
+        if (key && !process.env[key]) {
+          process.env[key] = value;
+        }
+      }
+    })
+    .catch((error) => {
+      if (error.code !== "ENOENT") {
+        throw error;
+      }
+    });
+}
+
 async function writeJson(relativePath, payload) {
   const destination = path.join(outputDir, relativePath);
   await mkdir(path.dirname(destination), { recursive: true });
   await writeFile(destination, `${JSON.stringify(payload, null, 2)}\n`);
+}
+
+async function writeBinary(relativePath, payload) {
+  const destination = path.join(outputDir, relativePath);
+  await mkdir(path.dirname(destination), { recursive: true });
+  await writeFile(destination, payload);
 }
 
 function teamKey(year, teamId) {
@@ -65,6 +95,76 @@ function publicPlayer(player) {
         : finiteNumber(player.projected_points),
     injuryStatus: player.injury_status || undefined,
   };
+}
+
+function espnCookieHeader() {
+  const swid = process.env.ESPN_SWID?.trim();
+  const espnS2 = process.env.ESPN_S2?.trim();
+  return swid && espnS2 ? `SWID=${swid}; espn_s2=${espnS2}` : undefined;
+}
+
+function shouldCacheLogo(logoUrl) {
+  return typeof logoUrl === "string" && logoUrl.includes("mystique-api.fantasy.espn.com");
+}
+
+function logoExtension(contentType) {
+  if (contentType.includes("svg")) {
+    return ".svg";
+  }
+  if (contentType.includes("png")) {
+    return ".png";
+  }
+  if (contentType.includes("webp")) {
+    return ".webp";
+  }
+  if (contentType.includes("gif")) {
+    return ".gif";
+  }
+  return ".jpg";
+}
+
+async function cacheTeamLogos(year, teams) {
+  const cookie = espnCookieHeader();
+  const cache = new Map();
+
+  for (const team of teams) {
+    if (!shouldCacheLogo(team.logoUrl) || cache.has(team.logoUrl)) {
+      continue;
+    }
+
+    if (!cookie) {
+      console.warn(
+        `Skipping authenticated logo for ${team.key}; ESPN_SWID and ESPN_S2 are required.`,
+      );
+      continue;
+    }
+
+    const response = await fetch(team.logoUrl, {
+      headers: {
+        Accept: "image/*,*/*",
+        Cookie: cookie,
+        "User-Agent": "cpffl-public-archive/1.0",
+      },
+    });
+    const contentType = response.headers.get("content-type") || "";
+
+    if (!response.ok || !contentType.startsWith("image/")) {
+      console.warn(
+        `Unable to cache logo for ${team.key}: ${response.status} ${contentType}`,
+      );
+      continue;
+    }
+
+    const extension = logoExtension(contentType);
+    const relativePath = `assets/team-logos/${year}/${team.key}${extension}`;
+    await writeBinary(relativePath, Buffer.from(await response.arrayBuffer()));
+    cache.set(team.logoUrl, `archive/${relativePath}`);
+  }
+
+  return (team) => ({
+    ...team,
+    logoUrl: cache.get(team.logoUrl) || team.logoUrl,
+  });
 }
 
 function compactTeam(year, team) {
@@ -253,14 +353,36 @@ function draftSearchSummary(teamNames, pick) {
   return parts.join(", ");
 }
 
+function transactionActionType(transaction, item) {
+  return [transaction.type, item?.type].filter(Boolean).join(" ") || "Transaction";
+}
+
+function transactionSearchSummary(transaction) {
+  const parts = [];
+  if (transaction.status) {
+    parts.push(transaction.status);
+  }
+  if (
+    typeof transaction.bidAmount === "number" &&
+    Number.isFinite(transaction.bidAmount) &&
+    transaction.bidAmount > 0
+  ) {
+    parts.push(`$${transaction.bidAmount}`);
+  }
+  return parts.join(", ") || "Transaction";
+}
+
 async function buildSeason(year) {
   const sourcePath = path.join(sourceDir, "seasons", String(year), "structured.json");
   const source = await readJson(sourcePath);
-  const teams = (source.teams || []).map((team) => compactTeam(year, team));
+  let teams = (source.teams || []).map((team) => compactTeam(year, team));
   const standingsSource = source.standings?.data?.length
     ? source.standings.data
     : source.teams || [];
-  const standings = standingsSource.map((team) => compactTeam(year, team));
+  let standings = standingsSource.map((team) => compactTeam(year, team));
+  const localizeLogo = await cacheTeamLogos(year, teams);
+  teams = teams.map(localizeLogo);
+  standings = standings.map(localizeLogo);
   const weeks = [];
   const searchRows = [];
   const names = teamNameLookup(teams);
@@ -319,21 +441,33 @@ async function buildSeason(year) {
     });
 
     transactions.forEach((transaction) => {
-      const players = transaction.items.map((item) => item.player).join(", ");
-      searchRows.push(
-        searchRow(
-          transaction.transactionKey,
-          "transaction",
-          year,
-          `${transaction.type || "Transaction"}: ${teamName(
-            names,
-            transaction.teamKey,
-          )}`,
-          players || transaction.status || "Transaction",
-          `/season/${year}/week/${String(week.week).padStart(2, "0")}`,
-          { week: week.week, teamKey: transaction.teamKey },
-        ),
-      );
+      const transactionItems = transaction.items.length ? transaction.items : [undefined];
+      const transactionTeamName = teamName(names, transaction.teamKey);
+
+      transactionItems.forEach((item, itemIndex) => {
+        const actionType = transactionActionType(transaction, item);
+        searchRows.push(
+          searchRow(
+            `${transaction.transactionKey}-i${String(itemIndex + 1).padStart(2, "0")}`,
+            "transaction",
+            year,
+            item?.player || actionType,
+            transactionSearchSummary(transaction),
+            `/season/${year}/week/${String(week.week).padStart(2, "0")}`,
+            {
+              week: week.week,
+              teamKey: transaction.teamKey,
+              teamName: transactionTeamName,
+              playerName: item?.player,
+              transactionType: transaction.type,
+              transactionItemType: item?.type,
+              transactionActionType: actionType,
+              transactionStatus: transaction.status,
+              bidAmount: transaction.bidAmount,
+            },
+          ),
+        );
+      });
     });
 
     boxScores.forEach((boxScore) => {
@@ -366,8 +500,10 @@ async function buildSeason(year) {
         draftSearchSummary(names, pick),
         `/season/${year}`,
         {
+          draftPick: pick.pick,
           playerName: pick.playerName,
           teamKey: pick.teamKey,
+          teamName: teamName(names, pick.teamKey),
           bidAmount: pick.bidAmount,
           keeperStatus: pick.keeperStatus,
         },
@@ -384,7 +520,7 @@ async function buildSeason(year) {
         team.name,
         `${team.wins}-${team.losses}-${team.ties}, ${team.ownerNames.join(", ")}`,
         `/season/${year}`,
-        { teamKey: team.key },
+        { teamKey: team.key, logoUrl: team.logoUrl },
       ),
     );
   });
@@ -416,6 +552,7 @@ async function buildSeason(year) {
       year,
       teamCount: teams.length,
       weekCount: weeks.length,
+      matchupCount: weeks.reduce((total, week) => total + week.scoreboardCount, 0),
       hasBoxScores: weeks.some((week) => week.hasBoxScores),
       hasTransactions: weeks.some((week) => week.hasTransactions),
     },
@@ -424,11 +561,12 @@ async function buildSeason(year) {
 }
 
 async function main() {
+  await loadDotenv(path.join(rootDir, ".env"));
   const manifest = await readJson(path.join(sourceDir, "manifest.json"));
   const years = manifest.seasons
     .filter((season) => season.ok && season.paths?.structured)
     .map((season) => season.year)
-    .sort((a, b) => a - b);
+    .sort((a, b) => b - a);
 
   await rm(outputDir, { recursive: true, force: true });
   await mkdir(outputDir, { recursive: true });
@@ -447,7 +585,7 @@ async function main() {
   });
   await writeJson(
     "search-index.json",
-    searchRows.sort((a, b) => a.year - b.year || a.type.localeCompare(b.type)),
+    searchRows.sort((a, b) => b.year - a.year || a.type.localeCompare(b.type)),
   );
 
   console.log(
