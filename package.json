@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Static-friendly ESPN fantasy football data export for a private league.",
   "private": true,
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
     "build:data": "node scripts/build_public_archive.mjs",
@@ -17,7 +17,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
     "@tanstack/react-table": "^8.21.3",
     "lucide-react": "^1.16.0",
@@ -26,6 +25,8 @@
     "react-router-dom": "^7.15.1"
   },
   "devDependencies": {
+    "@emnapi/core": "^1.10.0",
+    "@emnapi/runtime": "^1.10.0",
     "@types/react": "^19.2.15",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.2",
