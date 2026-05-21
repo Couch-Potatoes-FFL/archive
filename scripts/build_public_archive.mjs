@@ -242,6 +242,17 @@ function teamName(teamNames, key) {
   return key ? teamNames.get(key) || key : "Unknown";
 }
 
+function draftSearchSummary(teamNames, pick) {
+  const parts = [`Pick ${pick.pick}`, teamName(teamNames, pick.teamKey)];
+  if (typeof pick.bidAmount === "number" && Number.isFinite(pick.bidAmount)) {
+    parts.push(`$${pick.bidAmount}`);
+  }
+  if (pick.keeperStatus) {
+    parts.push("Keeper");
+  }
+  return parts.join(", ");
+}
+
 async function buildSeason(year) {
   const sourcePath = path.join(sourceDir, "seasons", String(year), "structured.json");
   const source = await readJson(sourcePath);
@@ -352,9 +363,14 @@ async function buildSeason(year) {
         "draft",
         year,
         pick.playerName,
-        `Pick ${pick.pick}, ${teamName(names, pick.teamKey)}`,
+        draftSearchSummary(names, pick),
         `/season/${year}`,
-        { playerName: pick.playerName, teamKey: pick.teamKey },
+        {
+          playerName: pick.playerName,
+          teamKey: pick.teamKey,
+          bidAmount: pick.bidAmount,
+          keeperStatus: pick.keeperStatus,
+        },
       ),
     );
   });

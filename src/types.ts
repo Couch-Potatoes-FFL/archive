@@ -28,6 +28,8 @@ export type SearchRow = {
   label: string;
   summary: string;
   href: string;
+  bidAmount?: number;
+  keeperStatus?: boolean;
 };
 
 export type PublicTeam = {

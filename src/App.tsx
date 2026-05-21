@@ -155,6 +155,22 @@ const searchColumns: ColumnDef<SearchRow>[] = [
   },
 ];
 
+const draftSearchColumns: ColumnDef<SearchRow>[] = [
+  searchColumns[0],
+  searchColumns[1],
+  searchColumns[2],
+  searchColumns[3],
+  {
+    header: "Bid",
+    accessorKey: "bidAmount",
+    cell: ({ row }) =>
+      typeof row.original.bidAmount === "number"
+        ? `$${formatNumber(row.original.bidAmount)}`
+        : "-",
+  },
+  searchColumns[4],
+];
+
 function App() {
   return (
     <div className="appShell">
@@ -316,6 +332,8 @@ function BrowserPage() {
   }
 
   const hasPendingFilters = !filtersMatch(draftFilters, appliedFilters);
+  const resultColumns =
+    appliedFilters.type === "draft" ? draftSearchColumns : searchColumns;
 
   function applyFilters(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -421,7 +439,7 @@ function BrowserPage() {
               : `${formatNumber(filteredRows.length)} matching rows`}
           </span>
         </div>
-        <SimpleTable data={filteredRows} columns={searchColumns} />
+        <SimpleTable data={filteredRows} columns={resultColumns} />
       </section>
     </>
   );
