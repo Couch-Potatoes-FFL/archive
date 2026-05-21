@@ -1,0 +1,668 @@
+{
+  "year": 2018,
+  "week": 14,
+  "scoreboard": [
+    {
+      "matchupKey": "2018-w14-m01",
+      "homeTeamKey": "2018-t12",
+      "awayTeamKey": "2018-t00",
+      "homeScore": 199,
+      "awayScore": 0,
+      "winnerTeamKey": "2018-t12",
+      "matchupType": "WINNERS_BRACKET",
+      "isPlayoff": true
+    },
+    {
+      "matchupKey": "2018-w14-m02",
+      "homeTeamKey": "2018-t10",
+      "awayTeamKey": "2018-t02",
+      "homeScore": 129,
+      "awayScore": 170,
+      "winnerTeamKey": "2018-t02",
+      "matchupType": "WINNERS_BRACKET",
+      "isPlayoff": true
+    },
+    {
+      "matchupKey": "2018-w14-m03",
+      "homeTeamKey": "2018-t11",
+      "awayTeamKey": "2018-t03",
+      "homeScore": 146,
+      "awayScore": 160,
+      "winnerTeamKey": "2018-t03",
+      "matchupType": "WINNERS_BRACKET",
+      "isPlayoff": true
+    },
+    {
+      "matchupKey": "2018-w14-m04",
+      "homeTeamKey": "2018-t05",
+      "awayTeamKey": "2018-t00",
+      "homeScore": 153,
+      "awayScore": 0,
+      "winnerTeamKey": "2018-t05",
+      "matchupType": "WINNERS_BRACKET",
+      "isPlayoff": true
+    },
+    {
+      "matchupKey": "2018-w14-m05",
+      "homeTeamKey": "2018-t04",
+      "awayTeamKey": "2018-t01",
+      "homeScore": 133,
+      "awayScore": 272,
+      "winnerTeamKey": "2018-t01",
+      "matchupType": "LOSERS_CONSOLATION_LADDER",
+      "isPlayoff": true
+    },
+    {
+      "matchupKey": "2018-w14-m06",
+      "homeTeamKey": "2018-t09",
+      "awayTeamKey": "2018-t06",
+      "homeScore": 131,
+      "awayScore": 131,
+      "matchupType": "LOSERS_CONSOLATION_LADDER",
+      "isPlayoff": true
+    }
+  ],
+  "boxScores": [],
+  "transactions": [
+    {
+      "transactionKey": "2018-w14-x0001",
+      "teamKey": "2018-t11",
+      "type": "WAIVER",
+      "status": "FAILED_MATCHUPACQUISITIONLIMIT",
+      "scoringPeriod": 14,
+      "date": 1544083200000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Jeff Wilson Jr."
+        },
+        {
+          "type": "DROP",
+          "player": "Evan Engram"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w14-x0002",
+      "teamKey": "2018-t10",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 14,
+      "date": 1543930883335,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Cody Kessler"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w14-x0003",
+      "teamKey": "2018-t05",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 14,
+      "date": 1544363024401,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Kelvin Benjamin"
+        },
+        {
+          "type": "ADD",
+          "player": "Dante Pettis"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w14-x0004",
+      "teamKey": "2018-t02",
+      "type": "WAIVER",
+      "status": "FAILED_MATCHUPACQUISITIONLIMIT",
+      "scoringPeriod": 14,
+      "date": 1544083200000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Jeff Wilson Jr."
+        },
+        {
+          "type": "DROP",
+          "player": "Randall Cobb"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w14-x0005",
+      "teamKey": "2018-t10",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 14,
+      "date": 1544098613514,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Giovani Bernard"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w14-x0006",
+      "teamKey": "2018-t03",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 14,
+      "date": 1544376700990,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Mike Badgley"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w14-x0007",
+      "type": "WAIVER",
+      "status": "PENDING",
+      "scoringPeriod": 14,
+      "date": 1544083200000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Jaylen Samuels"
+        },
+        {
+          "type": "DROP",
+          "player": "Randall Cobb"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w14-x0008",
+      "type": "WAIVER",
+      "status": "EXECUTED",
+      "scoringPeriod": 14,
+      "date": 1544083200000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Packers D/ST"
+        },
+        {
+          "type": "ADD",
+          "player": "Jaguars D/ST"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w14-x0009",
+      "teamKey": "2018-t12",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 14,
+      "date": 1543927041133,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Christian Kirk"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w14-x0010",
+      "teamKey": "2018-t05",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 14,
+      "date": 1544099187820,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "John Brown"
+        },
+        {
+          "type": "ADD",
+          "player": "Quincy Enunwa"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w14-x0011",
+      "type": "WAIVER",
+      "status": "PENDING",
+      "scoringPeriod": 14,
+      "date": 1544083200000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Jeff Wilson Jr."
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w14-x0012",
+      "type": "WAIVER",
+      "status": "PENDING",
+      "scoringPeriod": 14,
+      "date": 1544083200000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Jeff Wilson Jr."
+        },
+        {
+          "type": "DROP",
+          "player": "Randall Cobb"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w14-x0013",
+      "type": "WAIVER",
+      "status": "PENDING",
+      "scoringPeriod": 14,
+      "date": 1544083200000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Jeff Wilson Jr."
+        },
+        {
+          "type": "DROP",
+          "player": "Evan Engram"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w14-x0014",
+      "teamKey": "2018-t02",
+      "type": "WAIVER",
+      "status": "FAILED_MATCHUPACQUISITIONLIMIT",
+      "scoringPeriod": 14,
+      "date": 1544083200000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Jaylen Samuels"
+        },
+        {
+          "type": "DROP",
+          "player": "Randall Cobb"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w14-x0015",
+      "teamKey": "2018-t10",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 14,
+      "date": 1544217478510,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Vance McDonald"
+        },
+        {
+          "type": "DROP",
+          "player": "C.J. Uzomah"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w14-x0016",
+      "type": "WAIVER",
+      "status": "EXECUTED",
+      "scoringPeriod": 14,
+      "date": 1544083200000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Jaylen Samuels"
+        },
+        {
+          "type": "DROP",
+          "player": "A.J. Green"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w14-x0017",
+      "teamKey": "2018-t10",
+      "type": "WAIVER",
+      "status": "FAILED_MATCHUPACQUISITIONLIMIT",
+      "scoringPeriod": 14,
+      "date": 1544083200000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Jeff Wilson Jr."
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w14-x0018",
+      "teamKey": "2018-t05",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 14,
+      "date": 1544117910912,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Quincy Enunwa"
+        },
+        {
+          "type": "ADD",
+          "player": "Kelvin Benjamin"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w14-x0019",
+      "type": "WAIVER",
+      "status": "EXECUTED",
+      "scoringPeriod": 14,
+      "date": 1544083200000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Jeff Wilson Jr."
+        },
+        {
+          "type": "DROP",
+          "player": "Chase Daniel"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w14-x0020",
+      "teamKey": "2018-t03",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 14,
+      "date": 1544019337749,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Graham Gano"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w14-x0021",
+      "type": "WAIVER",
+      "status": "PENDING",
+      "scoringPeriod": 14,
+      "date": 1544083200000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Jaylen Samuels"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w14-x0022",
+      "teamKey": "2018-t10",
+      "type": "WAIVER",
+      "status": "FAILED_MATCHUPACQUISITIONLIMIT",
+      "scoringPeriod": 14,
+      "date": 1544083200000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Jaylen Samuels"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w14-x0023",
+      "teamKey": "2018-t11",
+      "type": "WAIVER",
+      "status": "FAILED_MATCHUPACQUISITIONLIMIT",
+      "scoringPeriod": 14,
+      "date": 1544083200000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Jaylen Samuels"
+        },
+        {
+          "type": "DROP",
+          "player": "Donte Moncrief"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w14-x0024",
+      "teamKey": "2018-t03",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 14,
+      "date": 1544376827700,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Bills D/ST"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w14-x0025",
+      "teamKey": "2018-t11",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 14,
+      "date": 1544119706052,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Jimmy Graham"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w14-x0026",
+      "type": "WAIVER",
+      "status": "EXECUTED",
+      "scoringPeriod": 14,
+      "date": 1544083200000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Chris Hogan"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w14-x0027",
+      "type": "WAIVER",
+      "status": "EXECUTED",
+      "scoringPeriod": 14,
+      "date": 1544083200000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Nick Mullens"
+        },
+        {
+          "type": "DROP",
+          "player": "Jeff Driskel"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w14-x0028",
+      "teamKey": "2018-t03",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 14,
+      "date": 1544376848273,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Seahawks D/ST"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w14-x0029",
+      "teamKey": "2018-t05",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 14,
+      "date": 1544108948559,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Adam Vinatieri"
+        },
+        {
+          "type": "ADD",
+          "player": "Aldrick Rosas"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w14-x0030",
+      "teamKey": "2018-t12",
+      "type": "WAIVER",
+      "status": "FAILED_MATCHUPACQUISITIONLIMIT",
+      "scoringPeriod": 14,
+      "date": 1544083200000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Jaylen Samuels"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w14-x0031",
+      "type": "WAIVER",
+      "status": "PENDING",
+      "scoringPeriod": 14,
+      "date": 1544083200000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Jaylen Samuels"
+        },
+        {
+          "type": "DROP",
+          "player": "Donte Moncrief"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w14-x0032",
+      "teamKey": "2018-t12",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 14,
+      "date": 1544101289529,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Zay Jones"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w14-x0033",
+      "teamKey": "2018-t10",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 14,
+      "date": 1544098598600,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Chargers D/ST"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w14-x0034",
+      "teamKey": "2018-t10",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 14,
+      "date": 1543938428823,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Jonnu Smith"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w14-x0035",
+      "teamKey": "2018-t10",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 14,
+      "date": 1544098667072,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Michael Gallup"
+        },
+        {
+          "type": "DROP",
+          "player": "David Moore"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w14-x0036",
+      "type": "WAIVER",
+      "status": "PENDING",
+      "scoringPeriod": 14,
+      "date": 1544083200000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Jaylen Samuels"
+        }
+      ]
+    }
+  ]
+}

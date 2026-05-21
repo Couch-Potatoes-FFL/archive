@@ -1,0 +1,952 @@
+{
+  "year": 2018,
+  "week": 9,
+  "scoreboard": [
+    {
+      "matchupKey": "2018-w09-m01",
+      "homeTeamKey": "2018-t12",
+      "awayTeamKey": "2018-t05",
+      "homeScore": 201,
+      "awayScore": 230,
+      "winnerTeamKey": "2018-t05",
+      "matchupType": "NONE",
+      "isPlayoff": false
+    },
+    {
+      "matchupKey": "2018-w09-m02",
+      "homeTeamKey": "2018-t04",
+      "awayTeamKey": "2018-t02",
+      "homeScore": 141,
+      "awayScore": 164,
+      "winnerTeamKey": "2018-t02",
+      "matchupType": "NONE",
+      "isPlayoff": false
+    },
+    {
+      "matchupKey": "2018-w09-m03",
+      "homeTeamKey": "2018-t01",
+      "awayTeamKey": "2018-t10",
+      "homeScore": 105,
+      "awayScore": 186,
+      "winnerTeamKey": "2018-t10",
+      "matchupType": "NONE",
+      "isPlayoff": false
+    },
+    {
+      "matchupKey": "2018-w09-m04",
+      "homeTeamKey": "2018-t03",
+      "awayTeamKey": "2018-t09",
+      "homeScore": 152,
+      "awayScore": 144,
+      "winnerTeamKey": "2018-t03",
+      "matchupType": "NONE",
+      "isPlayoff": false
+    },
+    {
+      "matchupKey": "2018-w09-m05",
+      "homeTeamKey": "2018-t11",
+      "awayTeamKey": "2018-t06",
+      "homeScore": 158,
+      "awayScore": 155,
+      "winnerTeamKey": "2018-t11",
+      "matchupType": "NONE",
+      "isPlayoff": false
+    }
+  ],
+  "boxScores": [],
+  "transactions": [
+    {
+      "transactionKey": "2018-w09-x0001",
+      "teamKey": "2018-t12",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1541081726400,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Ronald Jones"
+        },
+        {
+          "type": "ADD",
+          "player": "Adam Humphries"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0002",
+      "teamKey": "2018-t02",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1541354494668,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Delanie Walker"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0003",
+      "teamKey": "2018-t01",
+      "type": "WAIVER",
+      "status": "PENDING",
+      "scoringPeriod": 9,
+      "date": 1541055600000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Jaguars D/ST"
+        },
+        {
+          "type": "ADD",
+          "player": "Courtland Sutton"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0004",
+      "teamKey": "2018-t03",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1541076334352,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Panthers D/ST"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0005",
+      "teamKey": "2018-t05",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1540907184341,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Nelson Agholor"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0006",
+      "type": "WAIVER",
+      "status": "PENDING",
+      "scoringPeriod": 9,
+      "date": 1541055600000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "C.J. Beathard"
+        },
+        {
+          "type": "ADD",
+          "player": "Ryan Fitzpatrick"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0007",
+      "teamKey": "2018-t01",
+      "type": "WAIVER",
+      "status": "FAILED_MATCHUPACQUISITIONLIMIT",
+      "scoringPeriod": 9,
+      "date": 1541055600000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Jaguars D/ST"
+        },
+        {
+          "type": "ADD",
+          "player": "Chiefs D/ST"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0008",
+      "teamKey": "2018-t05",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1541061052223,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Elijah McGuire"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0009",
+      "teamKey": "2018-t01",
+      "type": "WAIVER",
+      "status": "PENDING",
+      "scoringPeriod": 9,
+      "date": 1541055600000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Taywan Taylor"
+        },
+        {
+          "type": "ADD",
+          "player": "Chiefs D/ST"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0010",
+      "teamKey": "2018-t10",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1541344606016,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Tre'Quan Smith"
+        },
+        {
+          "type": "DROP",
+          "player": "Christian Kirk"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0011",
+      "teamKey": "2018-t10",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1541164189722,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Trenton Cannon"
+        },
+        {
+          "type": "ADD",
+          "player": "Nelson Agholor"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0012",
+      "type": "WAIVER",
+      "status": "PENDING",
+      "scoringPeriod": 9,
+      "date": 1541055600000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Taywan Taylor"
+        },
+        {
+          "type": "ADD",
+          "player": "Courtland Sutton"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0013",
+      "teamKey": "2018-t09",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1541096739310,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Vance McDonald"
+        },
+        {
+          "type": "DROP",
+          "player": "DJ Moore"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0014",
+      "teamKey": "2018-t01",
+      "type": "WAIVER",
+      "status": "FAILED_MATCHUPACQUISITIONLIMIT",
+      "scoringPeriod": 9,
+      "date": 1541055600000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "C.J. Beathard"
+        },
+        {
+          "type": "ADD",
+          "player": "Ryan Fitzpatrick"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0015",
+      "teamKey": "2018-t02",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1541024054825,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Chris Ivory"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0016",
+      "teamKey": "2018-t02",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1541072472987,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "49ers D/ST"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0017",
+      "type": "WAIVER",
+      "status": "PENDING",
+      "scoringPeriod": 9,
+      "date": 1541055600000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Jaguars D/ST"
+        },
+        {
+          "type": "ADD",
+          "player": "Chiefs D/ST"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0018",
+      "teamKey": "2018-t09",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1541061053496,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "DJ Moore"
+        },
+        {
+          "type": "DROP",
+          "player": "Kenny Stills"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0019",
+      "teamKey": "2018-t02",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1541099021971,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "49ers D/ST"
+        },
+        {
+          "type": "ADD",
+          "player": "Bills D/ST"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0020",
+      "type": "WAIVER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1541055600000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Cole Beasley"
+        },
+        {
+          "type": "ADD",
+          "player": "DeVante Parker"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0021",
+      "teamKey": "2018-t04",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1540957895527,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Cardinals D/ST"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0022",
+      "teamKey": "2018-t09",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1540946067266,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Jakeem Grant"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0023",
+      "teamKey": "2018-t01",
+      "type": "WAIVER",
+      "status": "FAILED_MATCHUPACQUISITIONLIMIT",
+      "scoringPeriod": 9,
+      "date": 1541055600000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Taywan Taylor"
+        },
+        {
+          "type": "ADD",
+          "player": "Courtland Sutton"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0024",
+      "teamKey": "2018-t04",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1541091928924,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Redskins D/ST"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0025",
+      "teamKey": "2018-t03",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1540928633821,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Nyheim Hines"
+        },
+        {
+          "type": "DROP",
+          "player": "Eagles D/ST"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0026",
+      "teamKey": "2018-t05",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1541100005647,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Tyrell Williams"
+        },
+        {
+          "type": "ADD",
+          "player": "DJ Moore"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0027",
+      "teamKey": "2018-t04",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1541091967693,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Packers D/ST"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0028",
+      "type": "WAIVER",
+      "status": "PENDING",
+      "scoringPeriod": 9,
+      "date": 1541055600000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Trenton Cannon"
+        },
+        {
+          "type": "ADD",
+          "player": "Courtland Sutton"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0029",
+      "type": "WAIVER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1541055600000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Courtland Sutton"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0030",
+      "teamKey": "2018-t05",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1541349393850,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Cordarrelle Patterson"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0031",
+      "teamKey": "2018-t01",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1541072321309,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Taywan Taylor"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0032",
+      "teamKey": "2018-t10",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1541076822050,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Dan Bailey"
+        },
+        {
+          "type": "ADD",
+          "player": "Graham Gano"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0033",
+      "type": "WAIVER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1541055600000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Ryan Fitzpatrick"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0034",
+      "teamKey": "2018-t05",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1541061079721,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Devontae Booker"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0035",
+      "teamKey": "2018-t05",
+      "type": "WAIVER",
+      "status": "PENDING",
+      "scoringPeriod": 9,
+      "date": 1541055600000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Devontae Booker"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0036",
+      "teamKey": "2018-t03",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1540929011895,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Paul Richardson"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0037",
+      "teamKey": "2018-t05",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1540907140634,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Tre'Quan Smith"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0038",
+      "teamKey": "2018-t12",
+      "type": "WAIVER",
+      "status": "PENDING",
+      "scoringPeriod": 9,
+      "date": 1541228400000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Cole Beasley"
+        },
+        {
+          "type": "DROP",
+          "player": "Ronald Jones"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0039",
+      "teamKey": "2018-t05",
+      "type": "WAIVER",
+      "status": "PENDING",
+      "scoringPeriod": 9,
+      "date": 1541055600000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Elijah McGuire"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0040",
+      "teamKey": "2018-t05",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1541268414478,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Jamaal Williams"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0041",
+      "teamKey": "2018-t04",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1540957887561,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Will Fuller V"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0042",
+      "teamKey": "2018-t12",
+      "type": "WAIVER",
+      "status": "PENDING",
+      "scoringPeriod": 9,
+      "date": 1541314800000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Tyrell Williams"
+        },
+        {
+          "type": "DROP",
+          "player": "Robby Anderson"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0043",
+      "teamKey": "2018-t01",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1541072470976,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Jaguars D/ST"
+        },
+        {
+          "type": "ADD",
+          "player": "Cowboys D/ST"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0044",
+      "type": "WAIVER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1541228400000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Cole Beasley"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0045",
+      "teamKey": "2018-t02",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1541024063945,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Patriots D/ST"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0046",
+      "teamKey": "2018-t09",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1540946044373,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Kenjon Barner"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0047",
+      "teamKey": "2018-t05",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1541071655493,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Jamaal Williams"
+        },
+        {
+          "type": "DROP",
+          "player": "Devontae Booker"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0048",
+      "teamKey": "2018-t04",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1541298997422,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Marquez Valdes-Scantling"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0049",
+      "teamKey": "2018-t02",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1541354453454,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "D'Onta Foreman"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0050",
+      "type": "WAIVER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1541055600000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Steelers D/ST"
+        },
+        {
+          "type": "ADD",
+          "player": "Chiefs D/ST"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0051",
+      "teamKey": "2018-t09",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1541061027286,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Peyton Barber"
+        },
+        {
+          "type": "DROP",
+          "player": "Evan Engram"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0052",
+      "type": "WAIVER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1541055600000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Dolphins D/ST"
+        },
+        {
+          "type": "ADD",
+          "player": "Broncos D/ST"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w09-x0053",
+      "teamKey": "2018-t10",
+      "type": "WAIVER",
+      "status": "FAILED_MATCHUPACQUISITIONLIMIT",
+      "scoringPeriod": 9,
+      "date": 1541055600000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Trenton Cannon"
+        },
+        {
+          "type": "ADD",
+          "player": "Courtland Sutton"
+        }
+      ]
+    }
+  ]
+}

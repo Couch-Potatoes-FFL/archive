@@ -1,0 +1,2742 @@
+{
+  "year": 2021,
+  "week": 5,
+  "scoreboard": [
+    {
+      "matchupKey": "2021-w05-m01",
+      "homeTeamKey": "2021-t03",
+      "awayTeamKey": "2021-t09",
+      "homeScore": 182.96,
+      "awayScore": 260.82,
+      "winnerTeamKey": "2021-t09",
+      "matchupType": "NONE",
+      "isPlayoff": false
+    },
+    {
+      "matchupKey": "2021-w05-m02",
+      "homeTeamKey": "2021-t05",
+      "awayTeamKey": "2021-t01",
+      "homeScore": 268.12,
+      "awayScore": 228.98,
+      "winnerTeamKey": "2021-t05",
+      "matchupType": "NONE",
+      "isPlayoff": false
+    },
+    {
+      "matchupKey": "2021-w05-m03",
+      "homeTeamKey": "2021-t04",
+      "awayTeamKey": "2021-t02",
+      "homeScore": 209.76,
+      "awayScore": 214.54,
+      "winnerTeamKey": "2021-t02",
+      "matchupType": "NONE",
+      "isPlayoff": false
+    },
+    {
+      "matchupKey": "2021-w05-m04",
+      "homeTeamKey": "2021-t11",
+      "awayTeamKey": "2021-t10",
+      "homeScore": 187.72,
+      "awayScore": 145.32,
+      "winnerTeamKey": "2021-t11",
+      "matchupType": "NONE",
+      "isPlayoff": false
+    },
+    {
+      "matchupKey": "2021-w05-m05",
+      "homeTeamKey": "2021-t12",
+      "awayTeamKey": "2021-t06",
+      "homeScore": 148.2,
+      "awayScore": 152.88,
+      "winnerTeamKey": "2021-t06",
+      "matchupType": "NONE",
+      "isPlayoff": false
+    }
+  ],
+  "boxScores": [
+    {
+      "matchupKey": "2021-w05-m01",
+      "homeTeamKey": "2021-t03",
+      "awayTeamKey": "2021-t09",
+      "homeScore": 182.96,
+      "awayScore": 260.82,
+      "winnerTeamKey": "2021-t09",
+      "matchupType": "NONE",
+      "isPlayoff": false,
+      "homeProjected": 172.25000000000003,
+      "awayProjected": 181.43,
+      "homeLineup": [
+        {
+          "name": "Patrick Mahomes",
+          "position": "QB",
+          "lineupSlot": "QB",
+          "slotPosition": "QB",
+          "proTeam": "KC",
+          "proOpponent": "BUF",
+          "points": 19.98,
+          "projectedPoints": 23.83,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Aaron Rodgers",
+          "position": "QB",
+          "lineupSlot": "QB",
+          "slotPosition": "QB",
+          "proTeam": "GB",
+          "proOpponent": "CIN",
+          "points": 22.76,
+          "projectedPoints": 20.8,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Austin Ekeler",
+          "position": "RB",
+          "lineupSlot": "RB",
+          "slotPosition": "RB",
+          "proTeam": "LAC",
+          "proOpponent": "CLE",
+          "points": 32.9,
+          "projectedPoints": 18.03,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "George Kittle",
+          "position": "TE",
+          "lineupSlot": "IR",
+          "slotPosition": "IR",
+          "proTeam": "SF",
+          "proOpponent": "ARI",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Mike Evans",
+          "position": "WR",
+          "lineupSlot": "WR",
+          "slotPosition": "WR",
+          "proTeam": "TB",
+          "proOpponent": "MIA",
+          "points": 32.3,
+          "projectedPoints": 17.04,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Allen Robinson II",
+          "position": "WR",
+          "lineupSlot": "RB/WR/TE",
+          "slotPosition": "RB/WR/TE",
+          "proTeam": "CHI",
+          "proOpponent": "LV",
+          "points": 7.2,
+          "projectedPoints": 13.93,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Mike Davis",
+          "position": "RB",
+          "lineupSlot": "RB",
+          "slotPosition": "RB",
+          "proTeam": "ATL",
+          "proOpponent": "NYJ",
+          "points": 13.1,
+          "projectedPoints": 12.63,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "name": "Tyler Boyd",
+          "position": "WR",
+          "lineupSlot": "RB/WR",
+          "slotPosition": "RB/WR",
+          "proTeam": "CIN",
+          "proOpponent": "GB",
+          "points": 6.4,
+          "projectedPoints": 12.81,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Ben Roethlisberger",
+          "position": "QB",
+          "lineupSlot": "OP",
+          "slotPosition": "OP",
+          "proTeam": "PIT",
+          "proOpponent": "DEN",
+          "points": 18.02,
+          "projectedPoints": 14.86,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Curtis Samuel",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "WSH",
+          "proOpponent": "NO",
+          "points": 0.8,
+          "projectedPoints": 9.28,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "name": "Dallas Goedert",
+          "position": "TE",
+          "lineupSlot": "TE",
+          "slotPosition": "TE",
+          "proTeam": "PHI",
+          "proOpponent": "CAR",
+          "points": 4.8,
+          "projectedPoints": 8,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "DeVante Parker",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "MIA",
+          "proOpponent": "TB",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Gerald Everett",
+          "position": "TE",
+          "lineupSlot": "IR",
+          "slotPosition": "IR",
+          "proTeam": "SEA",
+          "proOpponent": "LAR",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Jalen Reagor",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "PHI",
+          "proOpponent": "CAR",
+          "points": 5.4,
+          "projectedPoints": 10.42,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Greg Zuerlein",
+          "position": "K",
+          "lineupSlot": "K",
+          "slotPosition": "K",
+          "proTeam": "DAL",
+          "proOpponent": "NYG",
+          "points": 14,
+          "projectedPoints": 8.46,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "49ers D/ST",
+          "position": "D/ST",
+          "lineupSlot": "D/ST",
+          "slotPosition": "D/ST",
+          "proTeam": "SF",
+          "proOpponent": "ARI",
+          "points": 8,
+          "projectedPoints": 7.4,
+          "injuryStatus": "NORMAL"
+        },
+        {
+          "name": "Marvin Jones Jr.",
+          "position": "WR",
+          "lineupSlot": "WR",
+          "slotPosition": "WR",
+          "proTeam": "JAX",
+          "proOpponent": "TEN",
+          "points": 3.5,
+          "projectedPoints": 14.46,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Latavius Murray",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "BAL",
+          "proOpponent": "IND",
+          "points": 5,
+          "projectedPoints": 11.36,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Cameron Brate",
+          "position": "TE",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "TB",
+          "proOpponent": "MIA",
+          "points": 2.2,
+          "projectedPoints": 8.56,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Tim Patrick",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "DEN",
+          "proOpponent": "PIT",
+          "points": 15.9,
+          "projectedPoints": 12.15,
+          "injuryStatus": "ACTIVE"
+        }
+      ],
+      "awayLineup": [
+        {
+          "name": "Julio Jones",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "TEN",
+          "proOpponent": "JAX",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Travis Kelce",
+          "position": "TE",
+          "lineupSlot": "TE",
+          "slotPosition": "TE",
+          "proTeam": "KC",
+          "proOpponent": "BUF",
+          "points": 16.7,
+          "projectedPoints": 18.42,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Aaron Jones",
+          "position": "RB",
+          "lineupSlot": "RB",
+          "slotPosition": "RB",
+          "proTeam": "GB",
+          "proOpponent": "CIN",
+          "points": 19.9,
+          "projectedPoints": 17.54,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Clyde Edwards-Helaire",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "KC",
+          "proOpponent": "BUF",
+          "points": 3.4,
+          "projectedPoints": 12.16,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Keenan Allen",
+          "position": "WR",
+          "lineupSlot": "WR",
+          "slotPosition": "WR",
+          "proTeam": "LAC",
+          "proOpponent": "CLE",
+          "points": 13.5,
+          "projectedPoints": 17.61,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Commanders D/ST",
+          "position": "D/ST",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "WSH",
+          "proOpponent": "NO",
+          "points": 7,
+          "projectedPoints": 7.98,
+          "injuryStatus": "NORMAL"
+        },
+        {
+          "name": "Ryan Tannehill",
+          "position": "QB",
+          "lineupSlot": "QB",
+          "slotPosition": "QB",
+          "proTeam": "TEN",
+          "proOpponent": "JAX",
+          "points": 13.98,
+          "projectedPoints": 19.73,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Jerry Jeudy",
+          "position": "WR",
+          "lineupSlot": "IR",
+          "slotPosition": "IR",
+          "proTeam": "DEN",
+          "proOpponent": "PIT",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Jameis Winston",
+          "position": "QB",
+          "lineupSlot": "OP",
+          "slotPosition": "OP",
+          "proTeam": "NO",
+          "proOpponent": "WSH",
+          "points": 28.76,
+          "projectedPoints": 16.01,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "name": "Leonard Fournette",
+          "position": "RB",
+          "lineupSlot": "RB/WR/TE",
+          "slotPosition": "RB/WR/TE",
+          "proTeam": "TB",
+          "proOpponent": "MIA",
+          "points": 21,
+          "projectedPoints": 14.6,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Melvin Gordon III",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "DEN",
+          "proOpponent": "PIT",
+          "points": 6.3,
+          "projectedPoints": 12.34,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Matt Ryan",
+          "position": "QB",
+          "lineupSlot": "QB",
+          "slotPosition": "QB",
+          "proTeam": "ATL",
+          "proOpponent": "NYJ",
+          "points": 24.58,
+          "projectedPoints": 17.91,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Jarvis Landry",
+          "position": "WR",
+          "lineupSlot": "IR",
+          "slotPosition": "IR",
+          "proTeam": "CLE",
+          "proOpponent": "LAC",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Mike Williams",
+          "position": "WR",
+          "lineupSlot": "WR",
+          "slotPosition": "WR",
+          "proTeam": "LAC",
+          "proOpponent": "CLE",
+          "points": 43.5,
+          "projectedPoints": 15.84,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Michael Carter",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "NYJ",
+          "proOpponent": "ATL",
+          "points": 14.8,
+          "projectedPoints": 13.04,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Marquise Brown",
+          "position": "WR",
+          "lineupSlot": "RB/WR",
+          "slotPosition": "RB/WR",
+          "proTeam": "BAL",
+          "proOpponent": "IND",
+          "points": 37.5,
+          "projectedPoints": 13.4,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Saints D/ST",
+          "position": "D/ST",
+          "lineupSlot": "D/ST",
+          "slotPosition": "D/ST",
+          "proTeam": "NO",
+          "proOpponent": "WSH",
+          "points": 7,
+          "projectedPoints": 8.05,
+          "injuryStatus": "NORMAL"
+        },
+        {
+          "name": "Cordarrelle Patterson",
+          "position": "RB",
+          "lineupSlot": "RB",
+          "slotPosition": "RB",
+          "proTeam": "ATL",
+          "proOpponent": "NYJ",
+          "points": 18.4,
+          "projectedPoints": 14.22,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Greg Joseph",
+          "position": "K",
+          "lineupSlot": "K",
+          "slotPosition": "K",
+          "proTeam": "MIN",
+          "proOpponent": "DET",
+          "points": 16,
+          "projectedPoints": 8.1,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Jared Cook",
+          "position": "TE",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "LAC",
+          "proOpponent": "CLE",
+          "points": 3.9,
+          "projectedPoints": 10.03,
+          "injuryStatus": "ACTIVE"
+        }
+      ]
+    },
+    {
+      "matchupKey": "2021-w05-m02",
+      "homeTeamKey": "2021-t05",
+      "awayTeamKey": "2021-t01",
+      "homeScore": 268.12,
+      "awayScore": 228.98,
+      "winnerTeamKey": "2021-t05",
+      "matchupType": "NONE",
+      "isPlayoff": false,
+      "homeProjected": 191.33,
+      "awayProjected": 179.57000000000002,
+      "homeLineup": [
+        {
+          "name": "Davante Adams",
+          "position": "WR",
+          "lineupSlot": "RB/WR",
+          "slotPosition": "RB/WR",
+          "proTeam": "GB",
+          "proOpponent": "CIN",
+          "points": 44.6,
+          "projectedPoints": 23.34,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Justin Jefferson",
+          "position": "WR",
+          "lineupSlot": "RB/WR/TE",
+          "slotPosition": "RB/WR/TE",
+          "proTeam": "MIN",
+          "proOpponent": "DET",
+          "points": 24.4,
+          "projectedPoints": 17.74,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Tyler Lockett",
+          "position": "WR",
+          "lineupSlot": "WR",
+          "slotPosition": "WR",
+          "proTeam": "SEA",
+          "proOpponent": "LAR",
+          "points": 10.7,
+          "projectedPoints": 17.49,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "David Montgomery",
+          "position": "RB",
+          "lineupSlot": "IR",
+          "slotPosition": "IR",
+          "proTeam": "CHI",
+          "proOpponent": "LV",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Josh Jacobs",
+          "position": "RB",
+          "lineupSlot": "RB",
+          "slotPosition": "RB",
+          "proTeam": "LV",
+          "proOpponent": "CHI",
+          "points": 16.7,
+          "projectedPoints": 16.02,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Odell Beckham Jr.",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "CLE",
+          "proOpponent": "LAC",
+          "points": 4,
+          "projectedPoints": 13.62,
+          "injuryStatus": "DOUBTFUL"
+        },
+        {
+          "name": "Cooper Kupp",
+          "position": "WR",
+          "lineupSlot": "WR",
+          "slotPosition": "WR",
+          "proTeam": "LAR",
+          "proOpponent": "SEA",
+          "points": 16.2,
+          "projectedPoints": 25.28,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Kareem Hunt",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "CLE",
+          "proOpponent": "LAC",
+          "points": 25.9,
+          "projectedPoints": 13.55,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "name": "Justin Herbert",
+          "position": "QB",
+          "lineupSlot": "QB",
+          "slotPosition": "QB",
+          "proTeam": "LAC",
+          "proOpponent": "CLE",
+          "points": 46.82,
+          "projectedPoints": 20.92,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Javonte Williams",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "DEN",
+          "proOpponent": "PIT",
+          "points": 11.6,
+          "projectedPoints": 10.77,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Baker Mayfield",
+          "position": "QB",
+          "lineupSlot": "QB",
+          "slotPosition": "QB",
+          "proTeam": "CLE",
+          "proOpponent": "LAC",
+          "points": 26,
+          "projectedPoints": 15.83,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "name": "Courtland Sutton",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "DEN",
+          "proOpponent": "PIT",
+          "points": 29,
+          "projectedPoints": 13.53,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Antonio Brown",
+          "position": "WR",
+          "lineupSlot": "OP",
+          "slotPosition": "OP",
+          "proTeam": "TB",
+          "proOpponent": "MIA",
+          "points": 37.4,
+          "projectedPoints": 13.8,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "name": "Rodrigo Blankenship",
+          "position": "K",
+          "lineupSlot": "K",
+          "slotPosition": "K",
+          "proTeam": "IND",
+          "proOpponent": "BAL",
+          "points": 5,
+          "projectedPoints": 7.75,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "name": "Teddy Bridgewater",
+          "position": "QB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "DEN",
+          "proOpponent": "PIT",
+          "points": 18.62,
+          "projectedPoints": 17.17,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "name": "Rondale Moore",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "ARI",
+          "proOpponent": "SF",
+          "points": 14.7,
+          "projectedPoints": 7.54,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Dalton Schultz",
+          "position": "TE",
+          "lineupSlot": "TE",
+          "slotPosition": "TE",
+          "proTeam": "DAL",
+          "proOpponent": "NYG",
+          "points": 13.9,
+          "projectedPoints": 8.95,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Damien Williams",
+          "position": "RB",
+          "lineupSlot": "RB",
+          "slotPosition": "RB",
+          "proTeam": "CHI",
+          "proOpponent": "LV",
+          "points": 16.4,
+          "projectedPoints": 15.22,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Panthers D/ST",
+          "position": "D/ST",
+          "lineupSlot": "D/ST",
+          "slotPosition": "D/ST",
+          "proTeam": "CAR",
+          "proOpponent": "PHI",
+          "points": 10,
+          "projectedPoints": 8.99,
+          "injuryStatus": "NORMAL"
+        }
+      ],
+      "awayLineup": [
+        {
+          "name": "CeeDee Lamb",
+          "position": "WR",
+          "lineupSlot": "WR",
+          "slotPosition": "WR",
+          "proTeam": "DAL",
+          "proOpponent": "NYG",
+          "points": 18.8,
+          "projectedPoints": 15.11,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Antonio Gibson",
+          "position": "RB",
+          "lineupSlot": "RB",
+          "slotPosition": "RB",
+          "proTeam": "WSH",
+          "proOpponent": "NO",
+          "points": 21.2,
+          "projectedPoints": 14.16,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Kyle Pitts",
+          "position": "TE",
+          "lineupSlot": "TE",
+          "slotPosition": "TE",
+          "proTeam": "ATL",
+          "proOpponent": "NYJ",
+          "points": 30.9,
+          "projectedPoints": 10.88,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Robert Woods",
+          "position": "WR",
+          "lineupSlot": "WR",
+          "slotPosition": "WR",
+          "proTeam": "LAR",
+          "proOpponent": "SEA",
+          "points": 32,
+          "projectedPoints": 13.45,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "name": "Damien Harris",
+          "position": "RB",
+          "lineupSlot": "RB",
+          "slotPosition": "RB",
+          "proTeam": "NE",
+          "proOpponent": "HOU",
+          "points": 10.8,
+          "projectedPoints": 12.51,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Michael Gallup",
+          "position": "WR",
+          "lineupSlot": "IR",
+          "slotPosition": "IR",
+          "proTeam": "DAL",
+          "proOpponent": "NYG",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "name": "Tom Brady",
+          "position": "QB",
+          "lineupSlot": "QB",
+          "slotPosition": "QB",
+          "proTeam": "TB",
+          "proOpponent": "MIA",
+          "points": 44.74,
+          "projectedPoints": 25.3,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Deebo Samuel",
+          "position": "WR",
+          "lineupSlot": "RB/WR",
+          "slotPosition": "RB/WR",
+          "proTeam": "SF",
+          "proOpponent": "ARI",
+          "points": 16.1,
+          "projectedPoints": 18.67,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Logan Thomas",
+          "position": "TE",
+          "lineupSlot": "IR",
+          "slotPosition": "IR",
+          "proTeam": "WSH",
+          "proOpponent": "NO",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "name": "Mac Jones",
+          "position": "QB",
+          "lineupSlot": "OP",
+          "slotPosition": "OP",
+          "proTeam": "NE",
+          "proOpponent": "HOU",
+          "points": 11.54,
+          "projectedPoints": 16.79,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Matthew Stafford",
+          "position": "QB",
+          "lineupSlot": "QB",
+          "slotPosition": "QB",
+          "proTeam": "LAR",
+          "proOpponent": "SEA",
+          "points": 19.5,
+          "projectedPoints": 24.28,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Tyler Higbee",
+          "position": "TE",
+          "lineupSlot": "RB/WR/TE",
+          "slotPosition": "RB/WR/TE",
+          "proTeam": "LAR",
+          "proOpponent": "SEA",
+          "points": 8.4,
+          "projectedPoints": 10.62,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "name": "Jakobi Meyers",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "NE",
+          "proOpponent": "HOU",
+          "points": 9.6,
+          "projectedPoints": 14.62,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Broncos D/ST",
+          "position": "D/ST",
+          "lineupSlot": "D/ST",
+          "slotPosition": "D/ST",
+          "proTeam": "DEN",
+          "proOpponent": "PIT",
+          "points": 5,
+          "projectedPoints": 9.02,
+          "injuryStatus": "NORMAL"
+        },
+        {
+          "name": "Harrison Butker",
+          "position": "K",
+          "lineupSlot": "K",
+          "slotPosition": "K",
+          "proTeam": "KC",
+          "proOpponent": "BUF",
+          "points": 10,
+          "projectedPoints": 8.78,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Hunter Renfrow",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "LV",
+          "proOpponent": "CHI",
+          "points": 11.6,
+          "projectedPoints": 12.58,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Kadarius Toney",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "NYG",
+          "proOpponent": "DAL",
+          "points": 34.6,
+          "projectedPoints": 11.55,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "name": "AJ Dillon",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "GB",
+          "proOpponent": "CIN",
+          "points": 16.9,
+          "projectedPoints": 6.61,
+          "injuryStatus": "QUESTIONABLE"
+        }
+      ]
+    },
+    {
+      "matchupKey": "2021-w05-m03",
+      "homeTeamKey": "2021-t04",
+      "awayTeamKey": "2021-t02",
+      "homeScore": 209.76,
+      "awayScore": 214.54,
+      "winnerTeamKey": "2021-t02",
+      "matchupType": "NONE",
+      "isPlayoff": false,
+      "homeProjected": 198.3,
+      "awayProjected": 187.64,
+      "homeLineup": [
+        {
+          "name": "Stefon Diggs",
+          "position": "WR",
+          "lineupSlot": "WR",
+          "slotPosition": "WR",
+          "proTeam": "BUF",
+          "proOpponent": "KC",
+          "points": 8.9,
+          "projectedPoints": 20.02,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Josh Allen",
+          "position": "QB",
+          "lineupSlot": "QB",
+          "slotPosition": "QB",
+          "proTeam": "BUF",
+          "proOpponent": "KC",
+          "points": 40.5,
+          "projectedPoints": 28.17,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Brandin Cooks",
+          "position": "WR",
+          "lineupSlot": "WR",
+          "slotPosition": "WR",
+          "proTeam": "HOU",
+          "proOpponent": "NE",
+          "points": 5.3,
+          "projectedPoints": 17.56,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "name": "Nick Chubb",
+          "position": "RB",
+          "lineupSlot": "RB",
+          "slotPosition": "RB",
+          "proTeam": "CLE",
+          "proOpponent": "LAC",
+          "points": 32,
+          "projectedPoints": 16.68,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Darrell Henderson Jr.",
+          "position": "RB",
+          "lineupSlot": "RB",
+          "slotPosition": "RB",
+          "proTeam": "LAR",
+          "proOpponent": "SEA",
+          "points": 16.9,
+          "projectedPoints": 17.32,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Henry Ruggs III",
+          "position": "WR",
+          "lineupSlot": "RB/WR/TE",
+          "slotPosition": "RB/WR/TE",
+          "proTeam": "LV",
+          "proOpponent": "CHI",
+          "points": 8.1,
+          "projectedPoints": 12.01,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Darnell Mooney",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "CHI",
+          "proOpponent": "LV",
+          "points": 6.5,
+          "projectedPoints": 12.72,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Younghoe Koo",
+          "position": "K",
+          "lineupSlot": "K",
+          "slotPosition": "K",
+          "proTeam": "ATL",
+          "proOpponent": "NYJ",
+          "points": 11,
+          "projectedPoints": 7.49,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Trey Lance",
+          "position": "QB",
+          "lineupSlot": "OP",
+          "slotPosition": "OP",
+          "proTeam": "SF",
+          "proOpponent": "ARI",
+          "points": 14.58,
+          "projectedPoints": 20.28,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Jamaal Williams",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "DET",
+          "proOpponent": "MIN",
+          "points": 8.5,
+          "projectedPoints": 11.32,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Christian Kirk",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "ARI",
+          "proOpponent": "SF",
+          "points": 10,
+          "projectedPoints": 7.65,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Sony Michel",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "LAR",
+          "proOpponent": "SEA",
+          "points": 11.5,
+          "projectedPoints": 4.7,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Mike Gesicki",
+          "position": "TE",
+          "lineupSlot": "TE",
+          "slotPosition": "TE",
+          "proTeam": "MIA",
+          "proOpponent": "TB",
+          "points": 8.3,
+          "projectedPoints": 10.98,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Zack Moss",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "BUF",
+          "proOpponent": "KC",
+          "points": 12.2,
+          "projectedPoints": 11.99,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Lamar Jackson",
+          "position": "QB",
+          "lineupSlot": "QB",
+          "slotPosition": "QB",
+          "proTeam": "BAL",
+          "proOpponent": "IND",
+          "points": 47.88,
+          "projectedPoints": 24.53,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Jaylen Waddle",
+          "position": "WR",
+          "lineupSlot": "RB/WR",
+          "slotPosition": "RB/WR",
+          "proTeam": "MIA",
+          "proOpponent": "TB",
+          "points": 5.3,
+          "projectedPoints": 13.93,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Cardinals D/ST",
+          "position": "D/ST",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "ARI",
+          "proOpponent": "SF",
+          "points": 8,
+          "projectedPoints": 9.97,
+          "injuryStatus": "NORMAL"
+        },
+        {
+          "name": "Cowboys D/ST",
+          "position": "D/ST",
+          "lineupSlot": "D/ST",
+          "slotPosition": "D/ST",
+          "proTeam": "DAL",
+          "proOpponent": "NYG",
+          "points": 11,
+          "projectedPoints": 9.33,
+          "injuryStatus": "NORMAL"
+        }
+      ],
+      "awayLineup": [
+        {
+          "name": "Christian McCaffrey",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "CAR",
+          "proOpponent": "PHI",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "name": "Alvin Kamara",
+          "position": "RB",
+          "lineupSlot": "RB",
+          "slotPosition": "RB",
+          "proTeam": "NO",
+          "proOpponent": "WSH",
+          "points": 28.2,
+          "projectedPoints": 23.09,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Saquon Barkley",
+          "position": "RB",
+          "lineupSlot": "RB",
+          "slotPosition": "RB",
+          "proTeam": "NYG",
+          "proOpponent": "DAL",
+          "points": 0.9,
+          "projectedPoints": 17.44,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Diontae Johnson",
+          "position": "WR",
+          "lineupSlot": "RB/WR/TE",
+          "slotPosition": "RB/WR/TE",
+          "proTeam": "PIT",
+          "proOpponent": "DEN",
+          "points": 17.2,
+          "projectedPoints": 17.74,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Cole Beasley",
+          "position": "WR",
+          "lineupSlot": "WR",
+          "slotPosition": "WR",
+          "proTeam": "BUF",
+          "proOpponent": "KC",
+          "points": 1.5,
+          "projectedPoints": 12.2,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Michael Thomas",
+          "position": "WR",
+          "lineupSlot": "IR",
+          "slotPosition": "IR",
+          "proTeam": "NO",
+          "proOpponent": "WSH",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "name": "Joe Burrow",
+          "position": "QB",
+          "lineupSlot": "QB",
+          "slotPosition": "QB",
+          "proTeam": "CIN",
+          "proOpponent": "GB",
+          "points": 18.34,
+          "projectedPoints": 18.38,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "name": "Mark Andrews",
+          "position": "TE",
+          "lineupSlot": "TE",
+          "slotPosition": "TE",
+          "proTeam": "BAL",
+          "proOpponent": "IND",
+          "points": 44.7,
+          "projectedPoints": 11.61,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Chase Claypool",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "PIT",
+          "proOpponent": "DEN",
+          "points": 28,
+          "projectedPoints": 12.95,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Ja'Marr Chase",
+          "position": "WR",
+          "lineupSlot": "WR",
+          "slotPosition": "WR",
+          "proTeam": "CIN",
+          "proOpponent": "GB",
+          "points": 34.9,
+          "projectedPoints": 15.05,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Kenyan Drake",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "LV",
+          "proOpponent": "CHI",
+          "points": 1.1,
+          "projectedPoints": 9.18,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "name": "Carson Wentz",
+          "position": "QB",
+          "lineupSlot": "OP",
+          "slotPosition": "OP",
+          "proTeam": "IND",
+          "proOpponent": "BAL",
+          "points": 31.58,
+          "projectedPoints": 17.24,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Trey Sermon",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "SF",
+          "proOpponent": "ARI",
+          "points": 0.7,
+          "projectedPoints": 5.28,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "J.D. McKissic",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "WSH",
+          "proOpponent": "NO",
+          "points": 1.7,
+          "projectedPoints": 8.35,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "name": "Daniel Jones",
+          "position": "QB",
+          "lineupSlot": "QB",
+          "slotPosition": "QB",
+          "proTeam": "NYG",
+          "proOpponent": "DAL",
+          "points": 4.82,
+          "projectedPoints": 22.29,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "name": "Sterling Shepard",
+          "position": "WR",
+          "lineupSlot": "IR",
+          "slotPosition": "IR",
+          "proTeam": "NYG",
+          "proOpponent": "DAL",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "name": "Daniel Carlson",
+          "position": "K",
+          "lineupSlot": "K",
+          "slotPosition": "K",
+          "proTeam": "LV",
+          "proOpponent": "CHI",
+          "points": 3,
+          "projectedPoints": 8.53,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Chuba Hubbard",
+          "position": "RB",
+          "lineupSlot": "RB/WR",
+          "slotPosition": "RB/WR",
+          "proTeam": "CAR",
+          "proOpponent": "PHI",
+          "points": 23.4,
+          "projectedPoints": 14.56,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Patriots D/ST",
+          "position": "D/ST",
+          "lineupSlot": "D/ST",
+          "slotPosition": "D/ST",
+          "proTeam": "NE",
+          "proOpponent": "HOU",
+          "points": 6,
+          "projectedPoints": 9.51,
+          "injuryStatus": "NORMAL"
+        },
+        {
+          "name": "Packers D/ST",
+          "position": "D/ST",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "GB",
+          "proOpponent": "CIN",
+          "points": 8,
+          "projectedPoints": 7.58,
+          "injuryStatus": "NORMAL"
+        }
+      ]
+    },
+    {
+      "matchupKey": "2021-w05-m04",
+      "homeTeamKey": "2021-t11",
+      "awayTeamKey": "2021-t10",
+      "homeScore": 187.72,
+      "awayScore": 145.32,
+      "winnerTeamKey": "2021-t11",
+      "matchupType": "NONE",
+      "isPlayoff": false,
+      "homeProjected": 203.05,
+      "awayProjected": 182.76,
+      "homeLineup": [
+        {
+          "name": "D'Andre Swift",
+          "position": "RB",
+          "lineupSlot": "RB",
+          "slotPosition": "RB",
+          "proTeam": "DET",
+          "proOpponent": "MIN",
+          "points": 22.4,
+          "projectedPoints": 17.47,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Derrick Henry",
+          "position": "RB",
+          "lineupSlot": "RB",
+          "slotPosition": "RB",
+          "proTeam": "TEN",
+          "proOpponent": "JAX",
+          "points": 36,
+          "projectedPoints": 25.04,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "DK Metcalf",
+          "position": "WR",
+          "lineupSlot": "WR",
+          "slotPosition": "WR",
+          "proTeam": "SEA",
+          "proOpponent": "LAR",
+          "points": 24.8,
+          "projectedPoints": 20.52,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "name": "James Robinson",
+          "position": "RB",
+          "lineupSlot": "RB/WR/TE",
+          "slotPosition": "RB/WR/TE",
+          "proTeam": "JAX",
+          "proOpponent": "TEN",
+          "points": 26.7,
+          "projectedPoints": 17.06,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "name": "Chase Edmonds",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "ARI",
+          "proOpponent": "SF",
+          "points": 5.4,
+          "projectedPoints": 15.81,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Marquez Callaway",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "NO",
+          "proOpponent": "WSH",
+          "points": 23.5,
+          "projectedPoints": 10.03,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Brandon Aiyuk",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "SF",
+          "proOpponent": "ARI",
+          "points": 5.2,
+          "projectedPoints": 8.82,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Chris Godwin",
+          "position": "WR",
+          "lineupSlot": "WR",
+          "slotPosition": "WR",
+          "proTeam": "TB",
+          "proOpponent": "MIA",
+          "points": 14,
+          "projectedPoints": 15.6,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "name": "Adam Thielen",
+          "position": "WR",
+          "lineupSlot": "RB/WR",
+          "slotPosition": "RB/WR",
+          "proTeam": "MIN",
+          "proOpponent": "DET",
+          "points": 6,
+          "projectedPoints": 15.46,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "name": "T.J. Hockenson",
+          "position": "TE",
+          "lineupSlot": "TE",
+          "slotPosition": "TE",
+          "proTeam": "DET",
+          "proOpponent": "MIN",
+          "points": 4.2,
+          "projectedPoints": 13.17,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "name": "Tua Tagovailoa",
+          "position": "QB",
+          "lineupSlot": "IR",
+          "slotPosition": "IR",
+          "proTeam": "MIA",
+          "proOpponent": "TB",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Derek Carr",
+          "position": "QB",
+          "lineupSlot": "QB",
+          "slotPosition": "QB",
+          "proTeam": "LV",
+          "proOpponent": "CHI",
+          "points": 7.24,
+          "projectedPoints": 19.79,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Justin Tucker",
+          "position": "K",
+          "lineupSlot": "K",
+          "slotPosition": "K",
+          "proTeam": "BAL",
+          "proOpponent": "IND",
+          "points": 3,
+          "projectedPoints": 9.27,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Browns D/ST",
+          "position": "D/ST",
+          "lineupSlot": "D/ST",
+          "slotPosition": "D/ST",
+          "proTeam": "CLE",
+          "proOpponent": "LAC",
+          "points": 6,
+          "projectedPoints": 7.91,
+          "injuryStatus": "NORMAL"
+        },
+        {
+          "name": "Sam Darnold",
+          "position": "QB",
+          "lineupSlot": "QB",
+          "slotPosition": "QB",
+          "proTeam": "CAR",
+          "proOpponent": "PHI",
+          "points": 6.08,
+          "projectedPoints": 20.69,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Emmanuel Sanders",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "BUF",
+          "proOpponent": "KC",
+          "points": 18.4,
+          "projectedPoints": 12.49,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Michael Pittman Jr.",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "IND",
+          "proOpponent": "BAL",
+          "points": 20.9,
+          "projectedPoints": 15.13,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Alexander Mattison",
+          "position": "RB",
+          "lineupSlot": "OP",
+          "slotPosition": "OP",
+          "proTeam": "MIN",
+          "proOpponent": "DET",
+          "points": 31.3,
+          "projectedPoints": 21.07,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Zach Wilson",
+          "position": "QB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "NYJ",
+          "proOpponent": "ATL",
+          "points": 6.98,
+          "projectedPoints": 16.34,
+          "injuryStatus": "ACTIVE"
+        }
+      ],
+      "awayLineup": [
+        {
+          "name": "Tyreek Hill",
+          "position": "WR",
+          "lineupSlot": "RB/WR/TE",
+          "slotPosition": "RB/WR/TE",
+          "proTeam": "KC",
+          "proOpponent": "BUF",
+          "points": 14.8,
+          "projectedPoints": 20.59,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Joe Mixon",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "CIN",
+          "proOpponent": "GB",
+          "points": 10.5,
+          "projectedPoints": 14.63,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "A.J. Brown",
+          "position": "WR",
+          "lineupSlot": "WR",
+          "slotPosition": "WR",
+          "proTeam": "TEN",
+          "proOpponent": "JAX",
+          "points": 6.8,
+          "projectedPoints": 17.39,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Miles Sanders",
+          "position": "RB",
+          "lineupSlot": "RB",
+          "slotPosition": "RB",
+          "proTeam": "PHI",
+          "proOpponent": "CAR",
+          "points": 10.1,
+          "projectedPoints": 12.3,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Dak Prescott",
+          "position": "QB",
+          "lineupSlot": "OP",
+          "slotPosition": "OP",
+          "proTeam": "DAL",
+          "proOpponent": "NYG",
+          "points": 25.68,
+          "projectedPoints": 23.37,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Kenny Golladay",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "NYG",
+          "proOpponent": "DAL",
+          "points": 0,
+          "projectedPoints": 13.22,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Noah Fant",
+          "position": "TE",
+          "lineupSlot": "TE",
+          "slotPosition": "TE",
+          "proTeam": "DEN",
+          "proOpponent": "PIT",
+          "points": 5,
+          "projectedPoints": 11.36,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Tee Higgins",
+          "position": "WR",
+          "lineupSlot": "WR",
+          "slotPosition": "WR",
+          "proTeam": "CIN",
+          "proOpponent": "GB",
+          "points": 10.2,
+          "projectedPoints": 14.22,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "DeVonta Smith",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "PHI",
+          "proOpponent": "CAR",
+          "points": 15.7,
+          "projectedPoints": 13.76,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Kenneth Gainwell",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "PHI",
+          "proOpponent": "CAR",
+          "points": 3.4,
+          "projectedPoints": 8.77,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Ryan Fitzpatrick",
+          "position": "QB",
+          "lineupSlot": "IR",
+          "slotPosition": "IR",
+          "proTeam": "WSH",
+          "proOpponent": "NO",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "name": "Elijah Mitchell",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "SF",
+          "proOpponent": "ARI",
+          "points": 8.2,
+          "projectedPoints": 10.66,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Jared Goff",
+          "position": "QB",
+          "lineupSlot": "QB",
+          "slotPosition": "QB",
+          "proTeam": "DET",
+          "proOpponent": "MIN",
+          "points": 6.12,
+          "projectedPoints": 17.9,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Tyler Bass",
+          "position": "K",
+          "lineupSlot": "K",
+          "slotPosition": "K",
+          "proTeam": "BUF",
+          "proOpponent": "KC",
+          "points": 8,
+          "projectedPoints": 8.47,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Chris Carson",
+          "position": "RB",
+          "lineupSlot": "IR",
+          "slotPosition": "IR",
+          "proTeam": "SEA",
+          "proOpponent": "LAR",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "name": "DeAndre Hopkins",
+          "position": "WR",
+          "lineupSlot": "RB/WR",
+          "slotPosition": "RB/WR",
+          "proTeam": "ARI",
+          "proOpponent": "SF",
+          "points": 19.7,
+          "projectedPoints": 15.74,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "name": "Trevor Lawrence",
+          "position": "QB",
+          "lineupSlot": "QB",
+          "slotPosition": "QB",
+          "proTeam": "JAX",
+          "proOpponent": "TEN",
+          "points": 21.72,
+          "projectedPoints": 18.51,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Alex Collins",
+          "position": "RB",
+          "lineupSlot": "RB",
+          "slotPosition": "RB",
+          "proTeam": "SEA",
+          "proOpponent": "LAR",
+          "points": 9.2,
+          "projectedPoints": 14.05,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "name": "Brandon Bolden",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "NE",
+          "proOpponent": "HOU",
+          "points": 7.1,
+          "projectedPoints": 8.43,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Ravens D/ST",
+          "position": "D/ST",
+          "lineupSlot": "D/ST",
+          "slotPosition": "D/ST",
+          "proTeam": "BAL",
+          "proOpponent": "IND",
+          "points": 8,
+          "projectedPoints": 8.86,
+          "injuryStatus": "NORMAL"
+        }
+      ]
+    },
+    {
+      "matchupKey": "2021-w05-m05",
+      "homeTeamKey": "2021-t12",
+      "awayTeamKey": "2021-t06",
+      "homeScore": 148.2,
+      "awayScore": 152.88,
+      "winnerTeamKey": "2021-t06",
+      "matchupType": "NONE",
+      "isPlayoff": false,
+      "homeProjected": 189.07999999999998,
+      "awayProjected": 153.20999999999998,
+      "homeLineup": [
+        {
+          "name": "Kyler Murray",
+          "position": "QB",
+          "lineupSlot": "QB",
+          "slotPosition": "QB",
+          "proTeam": "ARI",
+          "proOpponent": "SF",
+          "points": 13.66,
+          "projectedPoints": 25.19,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Darren Waller",
+          "position": "TE",
+          "lineupSlot": "TE",
+          "slotPosition": "TE",
+          "proTeam": "LV",
+          "proOpponent": "CHI",
+          "points": 8.5,
+          "projectedPoints": 17.1,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Terry McLaurin",
+          "position": "WR",
+          "lineupSlot": "WR",
+          "slotPosition": "WR",
+          "proTeam": "WSH",
+          "proOpponent": "NO",
+          "points": 8.6,
+          "projectedPoints": 18.1,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Najee Harris",
+          "position": "RB",
+          "lineupSlot": "RB",
+          "slotPosition": "RB",
+          "proTeam": "PIT",
+          "proOpponent": "DEN",
+          "points": 27.2,
+          "projectedPoints": 18.4,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Amari Cooper",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "DAL",
+          "proOpponent": "NYG",
+          "points": 14,
+          "projectedPoints": 14.89,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Corey Davis",
+          "position": "WR",
+          "lineupSlot": "RB/WR",
+          "slotPosition": "RB/WR",
+          "proTeam": "NYJ",
+          "proOpponent": "ATL",
+          "points": 8.5,
+          "projectedPoints": 12.55,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "name": "DJ Moore",
+          "position": "WR",
+          "lineupSlot": "WR",
+          "slotPosition": "WR",
+          "proTeam": "CAR",
+          "proOpponent": "PHI",
+          "points": 8.8,
+          "projectedPoints": 19.26,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Laviska Shenault Jr.",
+          "position": "WR",
+          "lineupSlot": "RB/WR/TE",
+          "slotPosition": "RB/WR/TE",
+          "proTeam": "JAX",
+          "proOpponent": "TEN",
+          "points": 6.8,
+          "projectedPoints": 12.15,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "William Fuller V",
+          "position": "WR",
+          "lineupSlot": "IR",
+          "slotPosition": "IR",
+          "proTeam": "MIA",
+          "proOpponent": "TB",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "name": "Jalen Hurts",
+          "position": "QB",
+          "lineupSlot": "QB",
+          "slotPosition": "QB",
+          "proTeam": "PHI",
+          "proOpponent": "CAR",
+          "points": 21.92,
+          "projectedPoints": 21.39,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "name": "Buccaneers D/ST",
+          "position": "D/ST",
+          "lineupSlot": "D/ST",
+          "slotPosition": "D/ST",
+          "proTeam": "TB",
+          "proOpponent": "MIA",
+          "points": 11,
+          "projectedPoints": 9.11,
+          "injuryStatus": "NORMAL"
+        },
+        {
+          "name": "Matt Gay",
+          "position": "K",
+          "lineupSlot": "K",
+          "slotPosition": "K",
+          "proTeam": "LAR",
+          "proOpponent": "SEA",
+          "points": 9,
+          "projectedPoints": 8.39,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Ty'Son Williams",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "BAL",
+          "proOpponent": "IND",
+          "points": 4.1,
+          "projectedPoints": 0,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Devin Singletary",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "BUF",
+          "proOpponent": "KC",
+          "points": 3.3,
+          "projectedPoints": 9.79,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Tony Pollard",
+          "position": "RB",
+          "lineupSlot": "RB",
+          "slotPosition": "RB",
+          "proTeam": "DAL",
+          "proOpponent": "NYG",
+          "points": 14.3,
+          "projectedPoints": 9.76,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Sammy Watkins",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "BAL",
+          "proOpponent": "IND",
+          "points": 5.5,
+          "projectedPoints": 10.45,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Taylor Heinicke",
+          "position": "QB",
+          "lineupSlot": "OP",
+          "slotPosition": "OP",
+          "proTeam": "WSH",
+          "proOpponent": "NO",
+          "points": 9.92,
+          "projectedPoints": 17.68,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Samaje Perine",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "CIN",
+          "proOpponent": "GB",
+          "points": 17.3,
+          "projectedPoints": 7.61,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Jamison Crowder",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "NYJ",
+          "proOpponent": "ATL",
+          "points": 8.4,
+          "projectedPoints": 11.09,
+          "injuryStatus": "QUESTIONABLE"
+        }
+      ],
+      "awayLineup": [
+        {
+          "name": "Dalvin Cook",
+          "position": "RB",
+          "lineupSlot": "IR",
+          "slotPosition": "IR",
+          "proTeam": "MIN",
+          "proOpponent": "DET",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Calvin Ridley",
+          "position": "WR",
+          "lineupSlot": "WR",
+          "slotPosition": "WR",
+          "proTeam": "ATL",
+          "proOpponent": "NYJ",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "OUT"
+        },
+        {
+          "name": "Ezekiel Elliott",
+          "position": "RB",
+          "lineupSlot": "OP",
+          "slotPosition": "OP",
+          "proTeam": "DAL",
+          "proOpponent": "NYG",
+          "points": 29.2,
+          "projectedPoints": 19.84,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "name": "Jonathan Taylor",
+          "position": "RB",
+          "lineupSlot": "RB",
+          "slotPosition": "RB",
+          "proTeam": "IND",
+          "proOpponent": "BAL",
+          "points": 38.9,
+          "projectedPoints": 15.24,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "JuJu Smith-Schuster",
+          "position": "WR",
+          "lineupSlot": "WR",
+          "slotPosition": "WR",
+          "proTeam": "PIT",
+          "proOpponent": "DEN",
+          "points": 0.6,
+          "projectedPoints": 12.07,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Russell Wilson",
+          "position": "QB",
+          "lineupSlot": "QB",
+          "slotPosition": "QB",
+          "proTeam": "SEA",
+          "proOpponent": "LAR",
+          "points": 9.08,
+          "projectedPoints": 23.86,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Rob Gronkowski",
+          "position": "TE",
+          "lineupSlot": "IR",
+          "slotPosition": "IR",
+          "proTeam": "TB",
+          "proOpponent": "MIA",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Robby Anderson",
+          "position": "WR",
+          "lineupSlot": "RB/WR",
+          "slotPosition": "RB/WR",
+          "proTeam": "CAR",
+          "proOpponent": "PHI",
+          "points": 5,
+          "projectedPoints": 12.33,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Justin Fields",
+          "position": "QB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "CHI",
+          "proOpponent": "LV",
+          "points": 8.84,
+          "projectedPoints": 15.87,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Kirk Cousins",
+          "position": "QB",
+          "lineupSlot": "QB",
+          "slotPosition": "QB",
+          "proTeam": "MIN",
+          "proOpponent": "DET",
+          "points": 13.4,
+          "projectedPoints": 20.9,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "James Conner",
+          "position": "RB",
+          "lineupSlot": "RB",
+          "slotPosition": "RB",
+          "proTeam": "ARI",
+          "proOpponent": "SF",
+          "points": 10.7,
+          "projectedPoints": 13.77,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "A.J. Green",
+          "position": "WR",
+          "lineupSlot": "RB/WR/TE",
+          "slotPosition": "RB/WR/TE",
+          "proTeam": "ARI",
+          "proOpponent": "SF",
+          "points": 2.3,
+          "projectedPoints": 9.55,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Nyheim Hines",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "IND",
+          "proOpponent": "BAL",
+          "points": 1.8,
+          "projectedPoints": 9.16,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Nelson Agholor",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "NE",
+          "proOpponent": "HOU",
+          "points": 6.2,
+          "projectedPoints": 8.58,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Brandon McManus",
+          "position": "K",
+          "lineupSlot": "K",
+          "slotPosition": "K",
+          "proTeam": "DEN",
+          "proOpponent": "PIT",
+          "points": 7,
+          "projectedPoints": 7.74,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Hunter Henry",
+          "position": "TE",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "NE",
+          "proOpponent": "HOU",
+          "points": 18.5,
+          "projectedPoints": 7.24,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Bills D/ST",
+          "position": "D/ST",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "BUF",
+          "proOpponent": "KC",
+          "points": 18,
+          "projectedPoints": 7.14,
+          "injuryStatus": "NORMAL"
+        },
+        {
+          "name": "Dawson Knox",
+          "position": "TE",
+          "lineupSlot": "TE",
+          "slotPosition": "TE",
+          "proTeam": "BUF",
+          "proOpponent": "KC",
+          "points": 27.7,
+          "projectedPoints": 9.51,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "name": "Bears D/ST",
+          "position": "D/ST",
+          "lineupSlot": "D/ST",
+          "slotPosition": "D/ST",
+          "proTeam": "CHI",
+          "proOpponent": "LV",
+          "points": 9,
+          "projectedPoints": 8.4,
+          "injuryStatus": "NORMAL"
+        },
+        {
+          "name": "Myles Gaskin",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "MIA",
+          "proOpponent": "TB",
+          "points": 29.9,
+          "projectedPoints": 8.69,
+          "injuryStatus": "ACTIVE"
+        }
+      ]
+    }
+  ],
+  "transactions": [
+    {
+      "transactionKey": "2021-w05-x0001",
+      "teamKey": "2021-t04",
+      "type": "WAIVER",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1633590645584,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Cardinals D/ST"
+        },
+        {
+          "type": "DROP",
+          "player": "Ravens D/ST"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0002",
+      "teamKey": "2021-t10",
+      "type": "WAIVER",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1633590645582,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Trevor Lawrence"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0003",
+      "teamKey": "2021-t04",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1633609525873,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Cowboys D/ST"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0004",
+      "teamKey": "2021-t11",
+      "type": "WAIVER",
+      "status": "FAILED_INVALIDPLAYERSOURCE",
+      "scoringPeriod": 5,
+      "date": 1633590645583,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Trevor Lawrence"
+        },
+        {
+          "type": "DROP",
+          "player": "Jimmy Garoppolo"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0005",
+      "teamKey": "2021-t05",
+      "type": "WAIVER",
+      "status": "PENDING",
+      "scoringPeriod": 5,
+      "date": 1633544853614,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Damien Williams"
+        },
+        {
+          "type": "DROP",
+          "player": "Myles Gaskin"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0006",
+      "teamKey": "2021-t03",
+      "type": "WAIVER",
+      "status": "FAILED_INVALIDPLAYERSOURCE",
+      "scoringPeriod": 5,
+      "date": 1633590645584,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Damien Williams"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0007",
+      "teamKey": "2021-t02",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1633720618921,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Packers D/ST"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0008",
+      "teamKey": "2021-t10",
+      "type": "WAIVER",
+      "status": "FAILED_INVALIDPLAYERSOURCE",
+      "scoringPeriod": 5,
+      "date": 1633590645585,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Damien Williams"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0009",
+      "teamKey": "2021-t11",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1633653319841,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Zach Wilson"
+        },
+        {
+          "type": "DROP",
+          "player": "Jimmy Garoppolo"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0010",
+      "teamKey": "2021-t10",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1633603917267,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Steelers D/ST"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0011",
+      "teamKey": "2021-t06",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1633885192784,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Myles Gaskin"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0012",
+      "teamKey": "2021-t12",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1633592491537,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Jamison Crowder"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0013",
+      "teamKey": "2021-t02",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1633590771580,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Patriots D/ST"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0014",
+      "teamKey": "2021-t11",
+      "type": "WAIVER",
+      "status": "FAILED_INVALIDPLAYERSOURCE",
+      "scoringPeriod": 5,
+      "date": 1633590645583,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Damien Williams"
+        },
+        {
+          "type": "DROP",
+          "player": "Jimmy Garoppolo"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0015",
+      "teamKey": "2021-t12",
+      "type": "WAIVER",
+      "status": "FAILED_INVALIDPLAYERSOURCE",
+      "scoringPeriod": 5,
+      "date": 1633590645582,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Damien Williams"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0016",
+      "teamKey": "2021-t01",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1633652955061,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "AJ Dillon"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0017",
+      "teamKey": "2021-t05",
+      "type": "WAIVER",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1633590645581,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Damien Williams"
+        },
+        {
+          "type": "DROP",
+          "player": "Myles Gaskin"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0018",
+      "teamKey": "2021-t10",
+      "type": "WAIVER",
+      "status": "CANCELED",
+      "scoringPeriod": 5,
+      "date": 1633451228257,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Trevor Lawrence"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0019",
+      "teamKey": "2021-t05",
+      "type": "WAIVER",
+      "status": "PENDING",
+      "scoringPeriod": 5,
+      "date": 1633591516171,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Panthers D/ST"
+        },
+        {
+          "type": "DROP",
+          "player": "Colts D/ST"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0020",
+      "teamKey": "2021-t06",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1633885039224,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Bears D/ST"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0021",
+      "teamKey": "2021-t12",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1633591917846,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Samaje Perine"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0022",
+      "teamKey": "2021-t05",
+      "type": "WAIVER",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1633679747503,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Panthers D/ST"
+        },
+        {
+          "type": "DROP",
+          "player": "Colts D/ST"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0023",
+      "teamKey": "2021-t01",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1633652838775,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Kadarius Toney"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0024",
+      "teamKey": "2021-t10",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1633725052544,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Brandon Bolden"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0025",
+      "teamKey": "2021-t10",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1633604144335,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Alex Collins"
+        },
+        {
+          "type": "DROP",
+          "player": "Dolphins D/ST"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0026",
+      "teamKey": "2021-t03",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1633810415331,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Cameron Brate"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0027",
+      "teamKey": "2021-t10",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1633878497171,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Ravens D/ST"
+        },
+        {
+          "type": "DROP",
+          "player": "Steelers D/ST"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0028",
+      "teamKey": "2021-t09",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1633608114668,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Jared Cook"
+        },
+        {
+          "type": "DROP",
+          "player": "Mark Ingram II"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0029",
+      "teamKey": "2021-t03",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1633810515805,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Tim Patrick"
+        }
+      ]
+    }
+  ]
+}

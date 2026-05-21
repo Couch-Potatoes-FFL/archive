@@ -1,0 +1,35 @@
+{
+  "name": "cpffl",
+  "version": "1.0.0",
+  "description": "Static-friendly ESPN fantasy football data export for a private league.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build:data": "node scripts/build_public_archive.mjs",
+    "verify:data": "node scripts/verify_public_archive.mjs",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run verify:data && npm run typecheck",
+    "check:local": "npm run build:data && npm run verify:data && npm run typecheck",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@tanstack/react-table": "^8.21.3",
+    "lucide-react": "^1.16.0",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "react-router-dom": "^7.15.1"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.15",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.2",
+    "typescript": "^6.0.3",
+    "vite": "^8.0.14"
+  }
+}

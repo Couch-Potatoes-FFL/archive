@@ -1,0 +1,347 @@
+{
+  "year": 2018,
+  "week": 16,
+  "scoreboard": [
+    {
+      "matchupKey": "2018-w16-m01",
+      "homeTeamKey": "2018-t12",
+      "awayTeamKey": "2018-t05",
+      "homeScore": 235,
+      "awayScore": 172,
+      "winnerTeamKey": "2018-t12",
+      "matchupType": "WINNERS_BRACKET",
+      "isPlayoff": true
+    },
+    {
+      "matchupKey": "2018-w16-m02",
+      "homeTeamKey": "2018-t02",
+      "awayTeamKey": "2018-t03",
+      "homeScore": 202,
+      "awayScore": 160,
+      "winnerTeamKey": "2018-t02",
+      "matchupType": "WINNERS_CONSOLATION_LADDER",
+      "isPlayoff": true
+    },
+    {
+      "matchupKey": "2018-w16-m03",
+      "homeTeamKey": "2018-t11",
+      "awayTeamKey": "2018-t10",
+      "homeScore": 126,
+      "awayScore": 201,
+      "winnerTeamKey": "2018-t10",
+      "matchupType": "WINNERS_CONSOLATION_LADDER",
+      "isPlayoff": true
+    },
+    {
+      "matchupKey": "2018-w16-m04",
+      "homeTeamKey": "2018-t04",
+      "awayTeamKey": "2018-t09",
+      "homeScore": 105,
+      "awayScore": 195,
+      "winnerTeamKey": "2018-t09",
+      "matchupType": "LOSERS_CONSOLATION_LADDER",
+      "isPlayoff": true
+    },
+    {
+      "matchupKey": "2018-w16-m05",
+      "homeTeamKey": "2018-t01",
+      "awayTeamKey": "2018-t06",
+      "homeScore": 138,
+      "awayScore": 139,
+      "winnerTeamKey": "2018-t06",
+      "matchupType": "LOSERS_CONSOLATION_LADDER",
+      "isPlayoff": true
+    }
+  ],
+  "boxScores": [],
+  "transactions": [
+    {
+      "transactionKey": "2018-w16-x0001",
+      "teamKey": "2018-t12",
+      "type": "WAIVER",
+      "status": "FAILED_MATCHUPACQUISITIONLIMIT",
+      "scoringPeriod": 16,
+      "date": 1545292800000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Jamaal Williams"
+        },
+        {
+          "type": "DROP",
+          "player": "Theo Riddick"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w16-x0002",
+      "teamKey": "2018-t05",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1545147198769,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Kenny Stills"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w16-x0003",
+      "type": "WAIVER",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1545292800000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Robby Anderson"
+        },
+        {
+          "type": "DROP",
+          "player": "Bruce Ellington"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w16-x0004",
+      "teamKey": "2018-t02",
+      "type": "WAIVER",
+      "status": "FAILED_MATCHUPACQUISITIONLIMIT",
+      "scoringPeriod": 16,
+      "date": 1545292800000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Jamaal Williams"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w16-x0005",
+      "teamKey": "2018-t02",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1545309160529,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Patriots D/ST"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w16-x0006",
+      "teamKey": "2018-t02",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1545276265491,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Chris Ivory"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w16-x0007",
+      "teamKey": "2018-t12",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1545410539640,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Cameron Brate"
+        },
+        {
+          "type": "ADD",
+          "player": "Kapri Bibbs"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w16-x0008",
+      "type": "WAIVER",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1545292800000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Kalen Ballage"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w16-x0009",
+      "type": "WAIVER",
+      "status": "PENDING",
+      "scoringPeriod": 16,
+      "date": 1545292800000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "John Kelly"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w16-x0010",
+      "teamKey": "2018-t02",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1545320604009,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Tim Patrick"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w16-x0011",
+      "type": "WAIVER",
+      "status": "PENDING",
+      "scoringPeriod": 16,
+      "date": 1545292800000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Jamaal Williams"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w16-x0012",
+      "teamKey": "2018-t06",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1545326264415,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Phillip Dorsett"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w16-x0013",
+      "type": "WAIVER",
+      "status": "PENDING",
+      "scoringPeriod": 16,
+      "date": 1545292800000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Jamaal Williams"
+        },
+        {
+          "type": "DROP",
+          "player": "Theo Riddick"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w16-x0014",
+      "teamKey": "2018-t05",
+      "type": "WAIVER",
+      "status": "FAILED_IRSLOT",
+      "scoringPeriod": 16,
+      "date": 1545292800000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "John Kelly"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w16-x0015",
+      "teamKey": "2018-t02",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1545320642114,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Kareem Hunt"
+        },
+        {
+          "type": "DROP",
+          "player": "Ravens D/ST"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w16-x0016",
+      "type": "WAIVER",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1545292800000,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Jamaal Williams"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w16-x0017",
+      "teamKey": "2018-t12",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1545507178311,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "player": "Jason Myers"
+        },
+        {
+          "type": "DROP",
+          "player": "Brett Maher"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w16-x0018",
+      "teamKey": "2018-t05",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1545141769120,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "player": "Ito Smith"
+        }
+      ]
+    }
+  ]
+}
