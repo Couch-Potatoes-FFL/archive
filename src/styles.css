@@ -92,6 +92,42 @@ main {
   padding: 28px;
 }
 
+.breadcrumbs {
+  margin: 2px 0 10px;
+  color: #687366;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.breadcrumbs li {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.breadcrumbs li:not(:last-child)::after {
+  color: #9aa595;
+  content: "/";
+}
+
+.breadcrumbs a {
+  color: #235c3b;
+}
+
+.breadcrumbs span[aria-current="page"] {
+  color: #172018;
+}
+
 .pageIntro {
   display: flex;
   align-items: flex-end;
@@ -380,7 +416,14 @@ select {
   gap: 12px;
 }
 
-.teamHistoryCard {
+.weekPickerGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.teamHistoryCard,
+.matchupWeekCard {
   display: grid;
   grid-template-columns: 42px minmax(0, 1fr);
   gap: 12px;
@@ -393,10 +436,19 @@ select {
   border-radius: 8px;
 }
 
-.teamHistoryCard:hover {
+.teamHistoryCard:hover,
+.matchupWeekCard:hover {
   border-color: #9fb39a;
   box-shadow: 0 10px 22px rgba(30, 48, 31, 0.08);
   text-decoration: none;
+}
+
+.textLink {
+  display: inline-flex;
+  margin-top: 2px;
+  color: #235c3b;
+  font-size: 0.88rem;
+  font-weight: 700;
 }
 
 .teamCardIcon {
@@ -443,6 +495,105 @@ select {
   overflow-wrap: anywhere;
 }
 
+.playerCardGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.playerResultCard {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  min-height: 112px;
+  padding: 14px;
+  color: #172018;
+  background: #ffffff;
+  border: 1px solid #dfe5d7;
+  border-radius: 8px;
+}
+
+.playerResultCard:hover {
+  border-color: #9fb39a;
+  box-shadow: 0 10px 22px rgba(30, 48, 31, 0.08);
+  text-decoration: none;
+}
+
+.playerAvatar,
+.playerAvatarPlaceholder {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  overflow: hidden;
+  color: #0f5237;
+  background: #e2eee6;
+  border: 1px solid #dfe5d7;
+  border-radius: 8px;
+}
+
+.playerAvatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.playerResultMain {
+  min-width: 0;
+}
+
+.playerResultMain small {
+  display: block;
+  margin-top: 6px;
+  color: #687366;
+  font-size: 0.82rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.playerResultNameLine {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  min-width: 0;
+}
+
+.playerResultNameLine strong {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.playerRankBadge {
+  flex: 0 0 auto;
+  color: #235c3b;
+  font-size: 0.78rem;
+  font-weight: 900;
+}
+
+.playerResultStats {
+  min-width: 74px;
+  text-align: right;
+}
+
+.playerResultStats strong,
+.playerResultStats small {
+  display: block;
+}
+
+.playerResultStats small {
+  margin-top: 5px;
+  color: #687366;
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+.numberText {
+  font-variant-numeric: tabular-nums;
+}
+
 .contentGrid {
   display: grid;
   grid-template-columns: minmax(280px, 0.9fr) minmax(320px, 1.4fr);
@@ -468,6 +619,43 @@ select {
   min-width: 0;
   padding-bottom: 10px;
   border-bottom: 1px solid #edf0e7;
+}
+
+.playerSummaryLayout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 150px;
+  gap: 16px;
+  align-items: center;
+}
+
+.playerSummaryLayout .definitionGrid {
+  min-width: 0;
+}
+
+.playerPhotoFrame,
+.playerPhotoPlaceholder {
+  justify-self: end;
+  width: 140px;
+  height: 140px;
+  overflow: hidden;
+  background: #f6f8f2;
+  border: 1px solid #dfe5d7;
+  border-radius: 8px;
+}
+
+.playerPhotoFrame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.playerPhotoPlaceholder {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #0f5237;
+  background: #e2eee6;
 }
 
 dt {
@@ -567,6 +755,88 @@ td {
 
 .pendingNote.active {
   color: #6e5b23;
+}
+
+.playerLineChart {
+  width: 100%;
+  margin: 0;
+}
+
+.playerLineChart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 240px;
+}
+
+.chartAxis {
+  stroke: #9fb39a;
+  stroke-width: 1.5;
+}
+
+.chartGridLine {
+  stroke: #edf0e7;
+  stroke-width: 1;
+}
+
+.chartLine {
+  fill: none;
+  stroke: #235c3b;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 4;
+}
+
+.chartPoint {
+  fill: #ffffff;
+  stroke: #174d34;
+  stroke-width: 3;
+}
+
+.chartPointGroup {
+  outline: 0;
+}
+
+.chartPointGroup:hover .chartPoint,
+.chartPointGroup:focus .chartPoint {
+  fill: #174d34;
+  stroke: #ffffff;
+}
+
+.chartTooltip {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 120ms ease;
+}
+
+.chartTooltip.active {
+  opacity: 1;
+}
+
+.chartTooltip rect {
+  fill: #102318;
+  stroke: rgba(255, 255, 255, 0.18);
+}
+
+.chartTooltip text {
+  fill: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.chartTick,
+.chartYear {
+  fill: #687366;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.chartTick {
+  text-anchor: end;
+}
+
+.chartYear {
+  text-anchor: middle;
 }
 
 .pill {
@@ -746,12 +1016,19 @@ pre {
   .controlBand,
   .categoryGrid,
   .contentGrid,
+  .playerCardGrid,
+  .playerSummaryLayout,
   .lineupColumns {
     grid-template-columns: 1fr;
   }
 
   .statRail {
     min-width: 0;
+  }
+
+  .playerPhotoFrame,
+  .playerPhotoPlaceholder {
+    justify-self: start;
   }
 
   main {

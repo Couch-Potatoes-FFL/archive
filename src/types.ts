@@ -14,6 +14,7 @@ export type ArchiveManifest = {
     teamCount: number;
     weekCount: number;
     matchupCount: number;
+    playerCount: number;
     hasBoxScores: boolean;
     hasTransactions: boolean;
   }>;
@@ -27,6 +28,7 @@ export type SearchRow = {
   teamKey?: string;
   teamName?: string;
   logoUrl?: string;
+  playerKey?: string;
   playerName?: string;
   transactionType?: string;
   transactionItemType?: string;
@@ -74,6 +76,8 @@ export type DraftPick = {
   roundPick?: number;
   teamKey?: string;
   nominatingTeamKey?: string;
+  playerKey?: string;
+  playerId?: number;
   playerName: string;
   bidAmount?: number;
   keeperStatus?: boolean;
@@ -122,6 +126,9 @@ export type Matchup = {
 };
 
 export type LineupPlayer = {
+  key?: string;
+  playerId?: number;
+  photoUrl?: string;
   name: string;
   position?: string;
   lineupSlot?: string;
@@ -146,7 +153,33 @@ export type Transaction = {
   scoringPeriod?: number;
   date?: number;
   bidAmount?: number;
-  items: Array<{ type?: string; player: string }>;
+  items: Array<{ type?: string; playerKey?: string; playerId?: number; player: string }>;
+};
+
+export type PlayerSeasonReport = {
+  year: number;
+  position?: string;
+  nflTeam?: string;
+  fantasyTeamKey?: string;
+  fantasyTeamName: string;
+  fantasyPoints: number;
+  playerRank: number;
+  positionRank: number;
+  gamesPlayed: number;
+  starts: number;
+  appearances: number;
+};
+
+export type PublicPlayer = {
+  key: string;
+  playerId?: number;
+  photoUrl?: string;
+  name: string;
+  primaryPosition?: string;
+  seasons: PlayerSeasonReport[];
+  totalFantasyPoints: number;
+  bestSeason?: PlayerSeasonReport;
+  latestSeason?: PlayerSeasonReport;
 };
 
 export type PublicWeek = {

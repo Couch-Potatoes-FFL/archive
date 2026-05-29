@@ -31,7 +31,9 @@ import {
   Matchup,
   PublicSeason,
   PublicTeam,
+  PublicPlayer,
   PublicWeek,
+  PlayerSeasonReport,
   LineupPlayer,
   SearchRow,
   SearchType,
@@ -40,17 +42,25 @@ import {
 import { useArchiveJson } from "./useArchiveJson";
 
 type BrowserFilterType = SearchType | "all";
+type BrowserView = "picker" | "all";
 
 type BrowserFilters = {
   query: string;
   type: BrowserFilterType;
   year: string;
+  view: BrowserView;
+};
+
+type BreadcrumbItem = {
+  label: string;
+  to?: string;
 };
 
 const defaultFilters: BrowserFilters = {
   query: "",
   type: "all",
   year: "all",
+  view: "picker",
 };
 
 const recordTypeOptions: Array<{ value: BrowserFilterType; label: string }> = [
@@ -153,7 +163,11 @@ const searchColumns: ColumnDef<SearchRow>[] = [
   {
     header: "Record",
     accessorKey: "label",
-    cell: ({ row }) => <Link to={row.original.href}>{row.original.label}</Link>,
+    cell: ({ row }) => (
+      <Link to={playerDetailHref(row.original) ?? row.original.href}>
+        {row.original.label}
+      </Link>
+    ),
   },
   {
     header: "Summary",
@@ -174,7 +188,7 @@ const draftSearchColumns: ColumnDef<SearchRow>[] = [
     header: "Player",
     accessorKey: "playerName",
     cell: ({ row }) => (
-      <Link to={row.original.href}>
+      <Link to={playerDetailHref(row.original) ?? row.original.href}>
         {row.original.playerName ?? row.original.label}
       </Link>
     ),
@@ -217,7 +231,7 @@ const transactionSearchColumns: ColumnDef<SearchRow>[] = [
     header: "Player",
     accessorKey: "playerName",
     cell: ({ row }) => (
-      <Link to={row.original.href}>
+      <Link to={playerDetailHref(row.original) ?? row.original.href}>
         {row.original.playerName ?? row.original.label}
       </Link>
     ),
@@ -226,6 +240,49 @@ const transactionSearchColumns: ColumnDef<SearchRow>[] = [
     header: "Status",
     accessorKey: "transactionStatus",
     cell: ({ row }) => row.original.transactionStatus ?? row.original.summary,
+  },
+];
+
+const playerSeasonColumns: ColumnDef<PlayerSeasonReport>[] = [
+  {
+    header: "Year",
+    accessorKey: "year",
+  },
+  {
+    header: "NFL Team",
+    accessorKey: "nflTeam",
+    cell: ({ row }) => row.original.nflTeam ?? "-",
+  },
+  {
+    header: "Fantasy Team",
+    accessorKey: "fantasyTeamName",
+    cell: ({ row }) => row.original.fantasyTeamName || "FA",
+  },
+  {
+    header: "Fantasy Points",
+    accessorKey: "fantasyPoints",
+    cell: ({ row }) => (
+      <span className="numberText">{formatNumber(row.original.fantasyPoints, 1)}</span>
+    ),
+  },
+  {
+    header: "Player Rank",
+    accessorKey: "playerRank",
+    cell: ({ row }) => `#${row.original.playerRank}`,
+  },
+  {
+    header: "Position Rank",
+    accessorKey: "positionRank",
+    cell: ({ row }) =>
+      `#${row.original.positionRank}${row.original.position ? ` ${row.original.position}` : ""}`,
+  },
+  {
+    header: "Games",
+    accessorKey: "gamesPlayed",
+  },
+  {
+    header: "Starts",
+    accessorKey: "starts",
   },
 ];
 
@@ -240,7 +297,7 @@ function App() {
         <nav aria-label="Primary navigation">
           <NavLink to="/" end>
             <Home size={16} aria-hidden />
-            Data Types
+            Home
           </NavLink>
           <NavLink to="/browse">
             <Search size={16} aria-hidden />
@@ -252,6 +309,7 @@ function App() {
         <Routes>
           <Route path="/" element={<DataLandingPage />} />
           <Route path="/browse" element={<BrowserPage />} />
+          <Route path="/player/:playerKey" element={<PlayerPage />} />
           <Route path="/season/:year" element={<SeasonPage />} />
           <Route path="/season/:year/week/:week" element={<WeekPage />} />
         </Routes>
@@ -374,6 +432,7 @@ function BrowserPage() {
         }
 
         const haystack = [
+          row.year,
           row.label,
           row.summary,
           row.playerName,
@@ -402,8 +461,31 @@ function BrowserPage() {
 
   const hasPendingFilters = !filtersMatch(draftFilters, appliedFilters);
   const resultColumns = resultColumnsForType(appliedFilters.type);
-  const showSeasonHistory = appliedFilters.type === "season";
+  const usesPickerView = appliedFilters.view !== "all";
+  const showSeasonHistory =
+    appliedFilters.type === "season" &&
+    appliedFilters.year === "all" &&
+    usesPickerView;
+  const showTeamYearPicker =
+    appliedFilters.type === "team" &&
+    appliedFilters.year === "all" &&
+    usesPickerView;
   const showTeamHistory = appliedFilters.type === "team";
+  const showWeekHistory =
+    appliedFilters.type === "week" &&
+    appliedFilters.year === "all" &&
+    usesPickerView;
+  const showMatchupHistory = appliedFilters.type === "matchup" && usesPickerView;
+  const showTransactionHistory =
+    appliedFilters.type === "transaction" &&
+    appliedFilters.year === "all" &&
+    usesPickerView;
+  const showPlayerHistory = appliedFilters.type === "player" && usesPickerView;
+  const showDraftHistory =
+    appliedFilters.type === "draft" &&
+    appliedFilters.year === "all" &&
+    usesPickerView;
+  const breadcrumbs = browserBreadcrumbItems(appliedFilters);
 
   function applyFilters(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -420,6 +502,7 @@ function BrowserPage() {
 
   return (
     <>
+      <Breadcrumbs items={breadcrumbs} />
       <section className="pageIntro">
         <div>
           <p className="eyebrow">Historical fantasy football data</p>
@@ -455,7 +538,17 @@ function BrowserPage() {
                 query: event.target.value,
               }))
             }
-            placeholder="Search teams, players, matchups, transactions"
+            placeholder={
+              draftFilters.type === "matchup"
+                ? draftFilters.year === "all"
+                  ? "Search seasons or enter a week number"
+                  : "Search week number"
+                : draftFilters.type === "player"
+                  ? draftFilters.year === "all"
+                    ? "Search seasons or enter a year"
+                    : "Search players, NFL teams, fantasy teams"
+                : "Search teams, players, matchups, transactions"
+            }
           />
         </label>
         <select
@@ -503,11 +596,70 @@ function BrowserPage() {
       {showSeasonHistory ? (
         <SeasonHistoryResults
           rows={filteredRows}
+          query={appliedFilters.query}
+          hasPendingFilters={hasPendingFilters}
+        />
+      ) : showTeamYearPicker ? (
+        <RecordSeasonResults
+          rows={filteredRows}
+          type="team"
+          title="Teams"
+          query={appliedFilters.query}
           hasPendingFilters={hasPendingFilters}
         />
       ) : showTeamHistory ? (
         <TeamHistoryResults
           rows={filteredRows}
+          hasPendingFilters={hasPendingFilters}
+        />
+      ) : showWeekHistory ? (
+        <RecordSeasonResults
+          rows={filteredRows}
+          type="week"
+          title="Weekly Results"
+          query={appliedFilters.query}
+          hasPendingFilters={hasPendingFilters}
+        />
+      ) : showPlayerHistory ? (
+        appliedFilters.year === "all" ? (
+          <PlayerSeasonResults
+            seasons={manifest.data.seasons}
+            query={appliedFilters.query}
+            hasPendingFilters={hasPendingFilters}
+          />
+        ) : (
+          <PlayerYearResults
+            year={Number(appliedFilters.year)}
+            query={appliedFilters.query}
+            hasPendingFilters={hasPendingFilters}
+          />
+        )
+      ) : showMatchupHistory ? (
+        appliedFilters.year === "all" ? (
+          <MatchupSeasonResults
+            seasons={manifest.data.seasons}
+            query={appliedFilters.query}
+            hasPendingFilters={hasPendingFilters}
+          />
+        ) : (
+          <MatchupWeekResults
+            year={Number(appliedFilters.year)}
+            query={appliedFilters.query}
+            hasPendingFilters={hasPendingFilters}
+          />
+        )
+      ) : showTransactionHistory ? (
+        <RecordSeasonResults
+          rows={filteredRows}
+          type="transaction"
+          title="Transactions"
+          query={appliedFilters.query}
+          hasPendingFilters={hasPendingFilters}
+        />
+      ) : showDraftHistory ? (
+        <DraftSeasonResults
+          rows={filteredRows}
+          query={appliedFilters.query}
           hasPendingFilters={hasPendingFilters}
         />
       ) : (
@@ -529,11 +681,403 @@ function BrowserPage() {
   );
 }
 
-function SeasonHistoryResults({
+function MatchupSeasonResults({
+  seasons,
+  query,
+  hasPendingFilters,
+}: {
+  seasons: ArchiveManifest["seasons"];
+  query: string;
+  hasPendingFilters: boolean;
+}) {
+  const normalizedQuery = query.trim().toLowerCase();
+  const filtersBySeasonYear = /^\d{3,4}$/.test(normalizedQuery);
+  const seasonRows = useMemo(
+    () =>
+      [...seasons]
+        .sort((left, right) => right.year - left.year)
+        .filter((season) =>
+          filtersBySeasonYear ? String(season.year).includes(normalizedQuery) : true,
+        ),
+    [filtersBySeasonYear, normalizedQuery, seasons],
+  );
+
+  return (
+    <section className="teamHistoryBand">
+      <div className="sectionHeader">
+        <h2>Matchups</h2>
+        <span className={hasPendingFilters ? "pendingNote active" : "pendingNote"}>
+          {hasPendingFilters
+            ? "Filter changes pending"
+            : `${formatNumber(seasonRows.length)} matching ${pluralizeSeason(
+                seasonRows.length,
+              )}`}
+        </span>
+      </div>
+
+      {seasonRows.length ? (
+        <div className="teamCardGrid">
+          <AllSeasonsCard type="matchup" query={query} />
+          {seasonRows.map((season) => (
+            <Link
+              className="teamHistoryCard"
+              key={season.year}
+              to={matchupYearBrowseHref(season.year, query)}
+            >
+              <span className="teamCardIcon" aria-hidden>
+                <CalendarDays size={20} aria-hidden />
+              </span>
+              <span className="teamCardText">
+                <strong>{season.year}</strong>
+                <small>
+                  {season.teamCount} teams, {season.weekCount}{" "}
+                  {pluralizeWeek(season.weekCount)}
+                </small>
+              </span>
+            </Link>
+          ))}
+        </div>
+      ) : (
+        <p className="emptyNote">No matchup seasons match these filters.</p>
+      )}
+    </section>
+  );
+}
+
+function MatchupWeekResults({
+  year,
+  query,
+  hasPendingFilters,
+}: {
+  year: number;
+  query: string;
+  hasPendingFilters: boolean;
+}) {
+  const season = useArchiveJson<PublicSeason>(`seasons/${year}.json`);
+  const normalizedQuery = query.trim().toLowerCase();
+
+  const weekRows = useMemo(() => {
+    if (season.status !== "loaded") {
+      return [];
+    }
+
+    return season.data.weeks
+      .filter((week) => matchesMatchupWeekQuery(week.week, normalizedQuery))
+      .sort((left, right) => left.week - right.week);
+  }, [normalizedQuery, season]);
+
+  if (season.status === "loading") {
+    return <StatusPanel label="Loading matchup weeks..." />;
+  }
+
+  if (season.status === "error") {
+    return <StatusPanel label="Unable to load matchup weeks." tone="danger" />;
+  }
+
+  return (
+    <section className="teamHistoryBand">
+      <div className="sectionHeader">
+        <div>
+          <h2>{year} Matchups</h2>
+          <Link className="textLink" to="/browse?type=matchup">
+            &larr; Back to Year Select
+          </Link>
+        </div>
+        <span className={hasPendingFilters ? "pendingNote active" : "pendingNote"}>
+          {hasPendingFilters
+            ? "Filter changes pending"
+            : `${formatNumber(weekRows.length)} matching ${pluralizeWeek(
+                weekRows.length,
+              )}`}
+        </span>
+      </div>
+
+      {weekRows.length ? (
+        <div className="weekPickerGrid">
+          {weekRows.map((week) => (
+            <Link className="matchupWeekCard" key={week.week} to={week.href}>
+              <span className="teamCardIcon" aria-hidden>
+                <CalendarDays size={20} aria-hidden />
+              </span>
+              <span className="teamCardText">
+                <strong>Week {week.week}</strong>
+                <small>
+                  {week.scoreboardCount} games, {week.boxScoreCount} box scores
+                </small>
+              </span>
+            </Link>
+          ))}
+        </div>
+      ) : (
+        <p className="emptyNote">No matchup weeks match these filters.</p>
+      )}
+    </section>
+  );
+}
+
+function PlayerSeasonResults({
+  seasons,
+  query,
+  hasPendingFilters,
+}: {
+  seasons: ArchiveManifest["seasons"];
+  query: string;
+  hasPendingFilters: boolean;
+}) {
+  const normalizedQuery = query.trim().toLowerCase();
+  const filtersBySeasonYear = /^\d{3,4}$/.test(normalizedQuery);
+  const seasonRows = useMemo(
+    () =>
+      [...seasons]
+        .sort((left, right) => right.year - left.year)
+        .filter((season) =>
+          filtersBySeasonYear ? String(season.year).includes(normalizedQuery) : true,
+        ),
+    [filtersBySeasonYear, normalizedQuery, seasons],
+  );
+
+  return (
+    <section className="teamHistoryBand">
+      <div className="sectionHeader">
+        <h2>Players</h2>
+        <span className={hasPendingFilters ? "pendingNote active" : "pendingNote"}>
+          {hasPendingFilters
+            ? "Filter changes pending"
+            : `${formatNumber(seasonRows.length)} matching ${pluralizeSeason(
+                seasonRows.length,
+              )}`}
+        </span>
+      </div>
+
+      {seasonRows.length ? (
+        <div className="teamCardGrid">
+          <AllSeasonsCard type="player" query={query} />
+          {seasonRows.map((season) => (
+            <Link
+              className="teamHistoryCard"
+              key={season.year}
+              to={playerYearBrowseHref(season.year, query)}
+            >
+              <span className="teamCardIcon" aria-hidden>
+                <Search size={20} aria-hidden />
+              </span>
+              <span className="teamCardText">
+                <strong>{season.year}</strong>
+                <small>
+                  {formatNumber(season.playerCount)}{" "}
+                  {pluralizePlayer(season.playerCount)}, {season.weekCount}{" "}
+                  {pluralizeWeek(season.weekCount)}
+                </small>
+              </span>
+            </Link>
+          ))}
+        </div>
+      ) : (
+        <p className="emptyNote">No player seasons match these filters.</p>
+      )}
+    </section>
+  );
+}
+
+function PlayerYearResults({
+  year,
+  query,
+  hasPendingFilters,
+}: {
+  year: number;
+  query: string;
+  hasPendingFilters: boolean;
+}) {
+  const players = useArchiveJson<PublicPlayer[]>("players.json");
+  const normalizedQuery = query.trim().toLowerCase();
+
+  const playerRows = useMemo(() => {
+    if (players.status !== "loaded") {
+      return [];
+    }
+
+    return players.data
+      .map((player) => {
+        const season = player.seasons.find((row) => row.year === year);
+        return season ? { player, season } : undefined;
+      })
+      .filter((row): row is { player: PublicPlayer; season: PlayerSeasonReport } =>
+        Boolean(row),
+      )
+      .filter(({ player, season }) => matchesPlayerYearQuery(player, season, normalizedQuery))
+      .sort(
+        (left, right) =>
+          right.season.fantasyPoints - left.season.fantasyPoints ||
+          left.player.name.localeCompare(right.player.name),
+      );
+  }, [normalizedQuery, players, year]);
+
+  if (players.status === "loading") {
+    return <StatusPanel label="Loading player index..." />;
+  }
+
+  if (players.status === "error") {
+    return <StatusPanel label="Unable to load player index." tone="danger" />;
+  }
+
+  return (
+    <section className="teamHistoryBand">
+      <div className="sectionHeader">
+        <div>
+          <h2>{year} Players</h2>
+          <Link className="textLink" to="/browse?type=player">
+            &larr; Back to Year Select
+          </Link>
+        </div>
+        <span className={hasPendingFilters ? "pendingNote active" : "pendingNote"}>
+          {hasPendingFilters
+            ? "Filter changes pending"
+            : `${formatNumber(playerRows.length)} matching ${pluralizePlayer(
+                playerRows.length,
+              )}`}
+        </span>
+      </div>
+
+      {playerRows.length ? (
+        <div className="playerCardGrid">
+          {playerRows.map(({ player, season }) => (
+            <Link
+              className="playerResultCard"
+              key={player.key}
+              to={`/player/${player.key}?fromYear=${year}`}
+            >
+              <PlayerAvatar player={player} />
+              <span className="playerResultMain">
+                <span className="playerResultNameLine">
+                  <span className="playerRankBadge">#{season.playerRank}</span>
+                  <strong>{player.name}</strong>
+                </span>
+                <small>
+                  {season.position ?? "Player"}, {season.nflTeam ?? "NFL"},{" "}
+                  {season.fantasyTeamName || "FA"}
+                </small>
+              </span>
+              <span className="playerResultStats">
+                <strong>{formatNumber(season.fantasyPoints, 1)}</strong>
+                <small>
+                  #{season.positionRank} {season.position ?? "pos"}
+                </small>
+              </span>
+            </Link>
+          ))}
+        </div>
+      ) : (
+        <p className="emptyNote">No players match these filters.</p>
+      )}
+    </section>
+  );
+}
+
+function DraftSeasonResults({
   rows,
+  query,
   hasPendingFilters,
 }: {
   rows: SearchRow[];
+  query: string;
+  hasPendingFilters: boolean;
+}) {
+  const groupedDrafts = useMemo(() => groupRowsByYear(rows), [rows]);
+
+  return (
+    <section className="teamHistoryBand">
+      <div className="sectionHeader">
+        <h2>Drafts</h2>
+        <span className={hasPendingFilters ? "pendingNote active" : "pendingNote"}>
+          {hasPendingFilters
+            ? "Filter changes pending"
+            : `${formatNumber(groupedDrafts.length)} matching ${pluralizeSeason(
+                groupedDrafts.length,
+              )}`}
+        </span>
+      </div>
+
+      <div className="teamCardGrid">
+        <AllSeasonsCard type="draft" query={query} />
+        {groupedDrafts.map((group) => (
+          <Link
+            className="teamHistoryCard"
+            key={group.year}
+            to={draftYearBrowseHref(group.year, query)}
+          >
+            <span className="teamCardIcon" aria-hidden>
+              <Database size={20} aria-hidden />
+            </span>
+            <span className="teamCardText">
+              <strong>{group.year}</strong>
+              <small>
+                {formatNumber(group.rows.length)} {pluralizeDraftPick(group.rows.length)}
+              </small>
+            </span>
+          </Link>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function RecordSeasonResults({
+  rows,
+  type,
+  title,
+  query,
+  hasPendingFilters,
+}: {
+  rows: SearchRow[];
+  type: SearchType;
+  title: string;
+  query: string;
+  hasPendingFilters: boolean;
+}) {
+  const groupedRows = useMemo(() => groupRowsByYear(rows), [rows]);
+
+  return (
+    <section className="teamHistoryBand">
+      <div className="sectionHeader">
+        <h2>{title}</h2>
+        <span className={hasPendingFilters ? "pendingNote active" : "pendingNote"}>
+          {hasPendingFilters
+            ? "Filter changes pending"
+            : `${formatNumber(groupedRows.length)} matching ${pluralizeSeason(
+                groupedRows.length,
+              )}`}
+        </span>
+      </div>
+
+      <div className="teamCardGrid">
+        <AllSeasonsCard type={type} query={query} />
+        {groupedRows.map((group) => (
+          <Link
+            className="teamHistoryCard"
+            key={group.year}
+            to={yearBrowseHref(type, group.year, query)}
+          >
+            <span className="teamCardIcon" aria-hidden>
+              {recordTypeIcon(type)}
+            </span>
+            <span className="teamCardText">
+              <strong>{group.year}</strong>
+              <small>{recordYearSummary(type, group.rows.length)}</small>
+            </span>
+          </Link>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function SeasonHistoryResults({
+  rows,
+  query,
+  hasPendingFilters,
+}: {
+  rows: SearchRow[];
+  query: string;
   hasPendingFilters: boolean;
 }) {
   const seasonRows = useMemo(
@@ -554,6 +1098,7 @@ function SeasonHistoryResults({
 
       {seasonRows.length ? (
         <div className="teamCardGrid">
+          <AllSeasonsCard type="season" query={query} />
           {seasonRows.map((season) => (
             <Link className="teamHistoryCard" key={season.id} to={season.href}>
               <span className="teamCardIcon" aria-hidden>
@@ -652,6 +1197,346 @@ function TeamCardIcon({
   );
 }
 
+function AllSeasonsCard({
+  type,
+  query,
+}: {
+  type: SearchType;
+  query: string;
+}) {
+  return (
+    <Link className="teamHistoryCard" to={allSeasonsBrowseHref(type, query)}>
+      <span className="teamCardIcon" aria-hidden>
+        <Database size={20} aria-hidden />
+      </span>
+      <span className="teamCardText">
+        <strong>All Seasons</strong>
+        <small>Browse every matching row</small>
+      </span>
+    </Link>
+  );
+}
+
+function PlayerAvatar({ player }: { player: PublicPlayer }) {
+  const [failed, setFailed] = useState(false);
+  const photoUrl = archivePublicUrl(player.photoUrl);
+
+  if (!photoUrl || failed) {
+    return (
+      <span className="playerAvatarPlaceholder" aria-hidden>
+        <Shield size={22} />
+      </span>
+    );
+  }
+
+  return (
+    <span className="playerAvatar">
+      <img
+        src={photoUrl}
+        alt=""
+        loading="lazy"
+        onError={() => setFailed(true)}
+      />
+    </span>
+  );
+}
+
+function PlayerPage() {
+  const { playerKey = "" } = useParams();
+  const [searchParams] = useSearchParams();
+  const players = useArchiveJson<PublicPlayer[]>("players.json");
+
+  if (players.status === "loading") {
+    return <StatusPanel label="Loading player report..." />;
+  }
+
+  if (players.status === "error") {
+    return <StatusPanel label="Unable to load player report." tone="danger" />;
+  }
+
+  const player = players.data.find((row) => row.key === playerKey);
+  if (!player) {
+    return <StatusPanel label="Player report not found." tone="danger" />;
+  }
+
+  const seasons = [...player.seasons].sort((left, right) => right.year - left.year);
+  const latestSeason = player.latestSeason ?? seasons[0];
+  const fromYear = Number(searchParams.get("fromYear"));
+  const breadcrumbYear = seasons.some((season) => season.year === fromYear)
+    ? fromYear
+    : latestSeason?.year;
+  const bestSeason = player.bestSeason ?? [...seasons].sort(
+    (left, right) => right.fantasyPoints - left.fantasyPoints,
+  )[0];
+  const bestPositionRankSeason = [...seasons].sort(
+    (left, right) =>
+      left.positionRank - right.positionRank ||
+      right.fantasyPoints - left.fantasyPoints ||
+      right.year - left.year,
+  )[0];
+
+  return (
+    <>
+      <Breadcrumbs
+        items={[
+          { label: "Home", to: "/" },
+          { label: "Players", to: "/browse?type=player" },
+          breadcrumbYear
+            ? {
+                label: `${breadcrumbYear} Players`,
+                to: `/browse?type=player&year=${breadcrumbYear}`,
+              }
+            : undefined,
+          { label: player.name },
+        ]}
+      />
+      <section className="pageIntro">
+        <div>
+          <p className="eyebrow">
+            {player.primaryPosition ?? "Player"} career report
+          </p>
+          <h1>{player.name}</h1>
+        </div>
+        <div className="statRail">
+          <Metric
+            icon={<CalendarDays size={18} />}
+            label="Seasons"
+            value={String(seasons.length)}
+          />
+          <Metric
+            icon={<Trophy size={18} />}
+            label="Career Points"
+            value={formatNumber(player.totalFantasyPoints, 1)}
+          />
+          <Metric
+            icon={<Database size={18} />}
+            label="Latest Fantasy Team"
+            value={latestSeason?.fantasyTeamName || "FA"}
+          />
+        </div>
+      </section>
+
+      <section className="contentGrid">
+        <div className="panel">
+          <div className="sectionHeader">
+            <h2>Summary</h2>
+          </div>
+          <div className="playerSummaryLayout">
+            <dl className="definitionGrid">
+              <div>
+                <dt>Primary position</dt>
+                <dd>{player.primaryPosition ?? "-"}</dd>
+              </div>
+              <div>
+                <dt>Best season</dt>
+                <dd>
+                  {bestSeason
+                    ? `${bestSeason.year}, ${formatNumber(
+                        bestSeason.fantasyPoints,
+                        1,
+                      )} points`
+                    : "-"}
+                </dd>
+              </div>
+              <div>
+                <dt>Best overall rank</dt>
+                <dd>
+                  {bestSeason ? `#${bestSeason.playerRank} in ${bestSeason.year}` : "-"}
+                </dd>
+              </div>
+              <div>
+                <dt>Best position rank</dt>
+                <dd>
+                  {bestPositionRankSeason
+                    ? `#${bestPositionRankSeason.positionRank} ${
+                        bestPositionRankSeason.position ?? ""
+                      } in ${bestPositionRankSeason.year}`.trim()
+                    : "-"}
+                </dd>
+              </div>
+            </dl>
+            <PlayerPhoto player={player} />
+          </div>
+        </div>
+        <div className="panel">
+          <div className="sectionHeader">
+            <h2>Yearly Points</h2>
+          </div>
+          <PlayerPointChart seasons={seasons} />
+        </div>
+      </section>
+
+      <section className="contentBand">
+        <div className="sectionHeader">
+          <h2>Year By Year</h2>
+        </div>
+        <SimpleTable
+          data={seasons}
+          columns={playerSeasonColumns}
+          emptyLabel="No player seasons found."
+        />
+      </section>
+    </>
+  );
+}
+
+function PlayerPointChart({ seasons }: { seasons: PlayerSeasonReport[] }) {
+  const [activeTooltipYear, setActiveTooltipYear] = useState<number>();
+  const rows = [...seasons].sort((left, right) => left.year - right.year);
+  const maxPoints = Math.max(...rows.map((row) => row.fantasyPoints), 1);
+  const width = 720;
+  const height = 260;
+  const padding = { top: 20, right: 28, bottom: 40, left: 56 };
+  const chartWidth = width - padding.left - padding.right;
+  const chartHeight = height - padding.top - padding.bottom;
+  const xForIndex = (index: number) =>
+    rows.length === 1
+      ? padding.left + chartWidth / 2
+      : padding.left + (index / (rows.length - 1)) * chartWidth;
+  const yForPoints = (points: number) =>
+    padding.top + chartHeight - (points / maxPoints) * chartHeight;
+  const points = rows
+    .map((season, index) => `${xForIndex(index)},${yForPoints(season.fantasyPoints)}`)
+    .join(" ");
+  const activeTooltip = rows
+    .map((season, index) => ({ season, index }))
+    .find(({ season }) => season.year === activeTooltipYear);
+  const tooltipWidth = 190;
+  const tooltipHeight = 58;
+  const tooltipPosition = (season: PlayerSeasonReport, index: number) => {
+    const x = xForIndex(index);
+    const y = yForPoints(season.fantasyPoints);
+    return {
+      x: x + tooltipWidth + 16 > width ? x - tooltipWidth - 12 : x + 12,
+      y: Math.max(8, y - tooltipHeight - 12),
+    };
+  };
+
+  return (
+    <figure className="playerLineChart" aria-label="Player fantasy points by season">
+      <svg viewBox={`0 0 ${width} ${height}`} role="img">
+        <line
+          className="chartAxis"
+          x1={padding.left}
+          y1={padding.top + chartHeight}
+          x2={padding.left + chartWidth}
+          y2={padding.top + chartHeight}
+        />
+        <line
+          className="chartAxis"
+          x1={padding.left}
+          y1={padding.top}
+          x2={padding.left}
+          y2={padding.top + chartHeight}
+        />
+        {[0, 0.5, 1].map((tick) => {
+          const y = padding.top + chartHeight - tick * chartHeight;
+          return (
+            <g key={tick}>
+              <line
+                className="chartGridLine"
+                x1={padding.left}
+                y1={y}
+                x2={padding.left + chartWidth}
+                y2={y}
+              />
+              <text className="chartTick" x={padding.left - 10} y={y + 4}>
+                {formatNumber(maxPoints * tick, 0)}
+              </text>
+            </g>
+          );
+        })}
+        <polyline className="chartLine" points={points} />
+        {rows.map((season, index) => {
+          const x = xForIndex(index);
+          const y = yForPoints(season.fantasyPoints);
+          return (
+            <g
+              className="chartPointGroup"
+              key={season.year}
+              tabIndex={0}
+              aria-label={`${season.year}: ${formatNumber(
+                season.fantasyPoints,
+                1,
+              )} points, #${season.playerRank} overall, #${season.positionRank} ${
+                season.position ?? "position"
+              }`}
+              onMouseEnter={() => setActiveTooltipYear(season.year)}
+              onMouseLeave={() => setActiveTooltipYear(undefined)}
+              onFocus={() => setActiveTooltipYear(season.year)}
+              onBlur={() => setActiveTooltipYear(undefined)}
+            >
+              <circle className="chartPoint" cx={x} cy={y} r="5" />
+              <text className="chartYear" x={x} y={height - 14}>
+                {season.year}
+              </text>
+            </g>
+          );
+        })}
+        {activeTooltip ? (
+          <ChartTooltip
+            season={activeTooltip.season}
+            width={tooltipWidth}
+            height={tooltipHeight}
+            {...tooltipPosition(activeTooltip.season, activeTooltip.index)}
+          />
+        ) : null}
+      </svg>
+    </figure>
+  );
+}
+
+function ChartTooltip({
+  season,
+  x,
+  y,
+  width,
+  height,
+}: {
+  season: PlayerSeasonReport;
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}) {
+  return (
+    <g className="chartTooltip active" transform={`translate(${x} ${y})`}>
+      <rect width={width} height={height} rx="8" />
+      <text x="12" y="19">
+        {season.year}: {formatNumber(season.fantasyPoints, 1)} points
+      </text>
+      <text x="12" y="39">
+        #{season.playerRank} overall, #{season.positionRank}{" "}
+        {season.position ?? "position"}
+      </text>
+    </g>
+  );
+}
+
+function PlayerPhoto({ player }: { player: PublicPlayer }) {
+  const [failed, setFailed] = useState(false);
+  const photoUrl = archivePublicUrl(player.photoUrl);
+
+  if (!photoUrl || failed) {
+    return (
+      <div className="playerPhotoPlaceholder" aria-hidden>
+        <Shield size={42} />
+      </div>
+    );
+  }
+
+  return (
+    <div className="playerPhotoFrame">
+      <img
+        src={photoUrl}
+        alt=""
+        loading="lazy"
+        onError={() => setFailed(true)}
+      />
+    </div>
+  );
+}
+
 function SeasonPage() {
   const { year = "" } = useParams();
   const season = useArchiveJson<PublicSeason>(`seasons/${year}.json`);
@@ -727,6 +1612,13 @@ function SeasonPage() {
 
   return (
     <>
+      <Breadcrumbs
+        items={[
+          { label: "Home", to: "/" },
+          { label: "Seasons", to: "/browse?type=season" },
+          { label: `${season.data.year} Season` },
+        ]}
+      />
       <section className="pageIntro">
         <div>
           <p className="eyebrow">{season.data.settings.name}</p>
@@ -887,6 +1779,14 @@ function WeekPage() {
 
   return (
     <>
+      <Breadcrumbs
+        items={[
+          { label: "Home", to: "/" },
+          { label: "Seasons", to: "/browse?type=season" },
+          { label: `${season.data.year} Season`, to: `/season/${season.data.year}` },
+          { label: `Week ${weekData.data.week}` },
+        ]}
+      />
       <section className="pageIntro">
         <div>
           <p className="eyebrow">{season.data.year} Season</p>
@@ -934,10 +1834,12 @@ function WeekPage() {
                   <LineupTable
                     title={teamDisplay(boxScore.awayTeamKey, teamNames)}
                     players={boxScore.awayLineup}
+                    year={season.data.year}
                   />
                   <LineupTable
                     title={teamDisplay(boxScore.homeTeamKey, teamNames)}
                     players={boxScore.homeLineup}
+                    year={season.data.year}
                   />
                 </div>
               </article>
@@ -971,9 +1873,11 @@ function WeekPage() {
 function LineupTable({
   title,
   players,
+  year,
 }: {
   title: string;
   players: PublicWeek["boxScores"][number]["homeLineup"];
+  year: number;
 }) {
   const starterRows = orderLineupPlayers(
     players.filter((player) => lineupSection(player) === "starter"),
@@ -1001,19 +1905,19 @@ function LineupTable({
           </thead>
           <tbody>
             {starterRows.map((player, index) => (
-              <LineupRow player={player} key={lineupRowKey(player, index)} />
+              <LineupRow player={player} year={year} key={lineupRowKey(player, index)} />
             ))}
             {starterRows.length ? (
               <LineupSummaryRow label="Starters Total" players={starterRows} />
             ) : null}
             {benchRows.map((player, index) => (
-              <LineupRow player={player} key={lineupRowKey(player, index)} />
+              <LineupRow player={player} year={year} key={lineupRowKey(player, index)} />
             ))}
             {benchRows.length ? (
               <LineupSummaryRow label="Bench Total" players={benchRows} />
             ) : null}
             {irRows.map((player, index) => (
-              <LineupRow player={player} key={lineupRowKey(player, index)} />
+              <LineupRow player={player} year={year} key={lineupRowKey(player, index)} />
             ))}
             {!players.length ? (
               <tr>
@@ -1031,8 +1935,10 @@ function LineupTable({
 
 function LineupRow({
   player,
+  year,
 }: {
   player: LineupPlayer;
+  year: number;
 }) {
   const injuryLabel = displayInjuryStatus(player.injuryStatus);
   const section = lineupSection(player);
@@ -1042,7 +1948,13 @@ function LineupRow({
       <td className="slotCell">{displayLineupSlot(player)}</td>
       <td className="playerCell">
         <span className="lineupPlayerName">
-          <strong>{player.name}</strong>
+          {player.key ? (
+            <Link to={`/player/${player.key}?fromYear=${year}`}>
+              <strong>{player.name}</strong>
+            </Link>
+          ) : (
+            <strong>{player.name}</strong>
+          )}
           {injuryLabel ? (
             <span className="injuryBadge" title={player.injuryStatus}>
               {injuryLabel}
@@ -1184,6 +2096,41 @@ function StatusPanel({
   return <section className={`statusPanel ${tone}`}>{label}</section>;
 }
 
+function Breadcrumbs({
+  items,
+}: {
+  items: Array<BreadcrumbItem | undefined>;
+}) {
+  const visibleItems = items.filter(
+    (item): item is BreadcrumbItem => Boolean(item),
+  );
+
+  if (visibleItems.length < 2) {
+    return null;
+  }
+
+  return (
+    <nav className="breadcrumbs" aria-label="Breadcrumb">
+      <ol>
+        {visibleItems.map((item, index) => {
+          const isCurrent = index === visibleItems.length - 1;
+          return (
+            <li key={`${item.label}-${index}`}>
+              {item.to && !isCurrent ? (
+                <Link to={item.to}>{item.label}</Link>
+              ) : (
+                <span aria-current={isCurrent ? "page" : undefined}>
+                  {item.label}
+                </span>
+              )}
+            </li>
+          );
+        })}
+      </ol>
+    </nav>
+  );
+}
+
 function TeamLabel({ team }: { team: PublicTeam }) {
   const logoUrl = archivePublicUrl(team.logoUrl);
 
@@ -1274,6 +2221,169 @@ function pluralizeSeason(count: number): string {
   return count === 1 ? "season" : "seasons";
 }
 
+function pluralizeWeek(count: number): string {
+  return count === 1 ? "week" : "weeks";
+}
+
+function pluralizePlayer(count: number): string {
+  return count === 1 ? "player" : "players";
+}
+
+function pluralizeDraftPick(count: number): string {
+  return count === 1 ? "draft pick" : "draft picks";
+}
+
+function pluralizeRowType(type: SearchType, count: number): string {
+  if (type === "team") {
+    return pluralizeTeam(count);
+  }
+  if (type === "week") {
+    return pluralizeWeek(count);
+  }
+  if (type === "draft") {
+    return pluralizeDraftPick(count);
+  }
+  if (type === "player") {
+    return pluralizePlayer(count);
+  }
+  if (type === "season") {
+    return pluralizeSeason(count);
+  }
+  if (type === "transaction") {
+    return count === 1 ? "transaction" : "transactions";
+  }
+  return count === 1 ? "row" : "rows";
+}
+
+function recordYearSummary(type: SearchType, count: number): string {
+  return `${formatNumber(count)} ${pluralizeRowType(type, count)}`;
+}
+
+function recordTypeIcon(type: SearchType): React.ReactNode {
+  if (type === "team") {
+    return <Shield size={20} aria-hidden />;
+  }
+  if (type === "week") {
+    return <CalendarDays size={20} aria-hidden />;
+  }
+  if (type === "transaction") {
+    return <ArrowRight size={20} aria-hidden />;
+  }
+  if (type === "draft") {
+    return <Database size={20} aria-hidden />;
+  }
+  return <Search size={20} aria-hidden />;
+}
+
+function browserBreadcrumbItems(filters: BrowserFilters): BreadcrumbItem[] {
+  const items: BreadcrumbItem[] = [{ label: "Home", to: "/" }];
+
+  if (filters.type !== "all") {
+    const typeLabel =
+      recordTypeOptions.find((option) => option.value === filters.type)?.label ??
+      filters.type;
+    items.push({
+      label: typeLabel,
+      to: filters.year === "all" ? undefined : `/browse?type=${filters.type}`,
+    });
+  }
+
+  if (filters.year !== "all") {
+    items.push({ label: filters.year });
+  } else if (filters.view === "all" && filters.type !== "all") {
+    items.push({ label: "All Seasons" });
+  }
+
+  return items;
+}
+
+function playerDetailHref(row: SearchRow): string | undefined {
+  if (row.playerKey) {
+    return `/player/${row.playerKey}?fromYear=${row.year}`;
+  }
+  if (row.type === "player" && row.href.startsWith("/player/")) {
+    const separator = row.href.includes("?") ? "&" : "?";
+    return `${row.href}${separator}fromYear=${row.year}`;
+  }
+  return undefined;
+}
+
+function playerYearBrowseHref(year: number, query: string): string {
+  return yearBrowseHref("player", year, query);
+}
+
+function matchupYearBrowseHref(year: number, query: string): string {
+  return yearBrowseHref("matchup", year, query);
+}
+
+function draftYearBrowseHref(year: number, query: string): string {
+  return yearBrowseHref("draft", year, query);
+}
+
+function yearBrowseHref(type: SearchType, year: number, query: string): string {
+  const params = new URLSearchParams({
+    type,
+    year: String(year),
+  });
+  const normalizedQuery = query.trim();
+
+  if (normalizedQuery) {
+    params.set("q", normalizedQuery);
+  }
+
+  return `/browse?${params.toString()}`;
+}
+
+function allSeasonsBrowseHref(type: SearchType, query: string): string {
+  const params = new URLSearchParams({
+    type,
+    view: "all",
+  });
+  const normalizedQuery = query.trim();
+
+  if (normalizedQuery) {
+    params.set("q", normalizedQuery);
+  }
+
+  return `/browse?${params.toString()}`;
+}
+
+function matchesMatchupWeekQuery(week: number, query: string): boolean {
+  if (!query) {
+    return true;
+  }
+
+  const weekSearch = query.match(/\d+/)?.[0];
+  if (!weekSearch) {
+    return true;
+  }
+
+  return String(week).includes(weekSearch) || `week ${week}`.includes(query);
+}
+
+function matchesPlayerYearQuery(
+  player: PublicPlayer,
+  season: PlayerSeasonReport,
+  query: string,
+): boolean {
+  if (!query) {
+    return true;
+  }
+
+  const haystack = [
+    player.name,
+    player.primaryPosition,
+    season.position,
+    season.nflTeam,
+    season.fantasyTeamName,
+    season.year,
+    season.playerRank,
+    season.positionRank,
+  ].join(" ");
+
+  return haystack.toLowerCase().includes(query);
+}
+
 function filtersFromSearchParams(searchParams: URLSearchParams): BrowserFilters {
   const type = searchParams.get("type");
 
@@ -1281,6 +2391,7 @@ function filtersFromSearchParams(searchParams: URLSearchParams): BrowserFilters 
     query: searchParams.get("q") ?? "",
     type: isBrowserFilterType(type) ? type : "all",
     year: searchParams.get("year") ?? "all",
+    view: searchParams.get("view") === "all" ? "all" : "picker",
   });
 }
 
@@ -1297,6 +2408,9 @@ function paramsFromFilters(filters: BrowserFilters): URLSearchParams {
   if (normalizedFilters.year !== "all") {
     params.set("year", normalizedFilters.year);
   }
+  if (normalizedFilters.view === "all") {
+    params.set("view", "all");
+  }
 
   return params;
 }
@@ -1306,8 +2420,9 @@ function normalizeFilters(filters: BrowserFilters): BrowserFilters {
   const type = isBrowserFilterType(filters.type) ? filters.type : "all";
   const year =
     filters.year === "all" || /^\d{4}$/.test(filters.year) ? filters.year : "all";
+  const view = filters.view === "all" ? "all" : "picker";
 
-  return { query, type, year };
+  return { query, type, year, view };
 }
 
 function isBrowserFilterType(value: unknown): value is BrowserFilterType {
@@ -1324,7 +2439,8 @@ function filtersMatch(left: BrowserFilters, right: BrowserFilters): boolean {
   return (
     normalizedLeft.query === normalizedRight.query &&
     normalizedLeft.type === normalizedRight.type &&
-    normalizedLeft.year === normalizedRight.year
+    normalizedLeft.year === normalizedRight.year &&
+    normalizedLeft.view === normalizedRight.view
   );
 }
 
