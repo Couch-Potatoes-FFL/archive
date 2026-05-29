@@ -51,6 +51,17 @@ type BrowserFilters = {
   view: BrowserView;
 };
 
+type KeeperRow = {
+  id: string;
+  year: number;
+  auctionValue?: number;
+  position?: string;
+  name: string;
+  teamName: string;
+  playerKey?: string;
+  draftPick?: number;
+};
+
 type BreadcrumbItem = {
   label: string;
   to?: string;
@@ -142,6 +153,12 @@ const dataCategories: Array<{
     label: "Find historical draft picks, nominations, bids, and keepers.",
     to: "/browse?type=draft",
     icon: <Database size={20} aria-hidden />,
+  },
+  {
+    title: "Keepers",
+    label: "Review keeper players, auction values, positions, and teams by season.",
+    to: "/keepers",
+    icon: <Trophy size={20} aria-hidden />,
   },
 ];
 
@@ -299,6 +316,10 @@ function App() {
             <Home size={16} aria-hidden />
             Home
           </NavLink>
+          <NavLink to="/keepers">
+            <Trophy size={16} aria-hidden />
+            Keepers
+          </NavLink>
           <NavLink to="/browse">
             <Search size={16} aria-hidden />
             Browse
@@ -308,6 +329,7 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<DataLandingPage />} />
+          <Route path="/keepers" element={<KeepersPage />} />
           <Route path="/browse" element={<BrowserPage />} />
           <Route path="/player/:playerKey" element={<PlayerPage />} />
           <Route path="/season/:year" element={<SeasonPage />} />
@@ -338,7 +360,6 @@ function DataLandingPage() {
     <>
       <section className="pageIntro">
         <div>
-          <p className="eyebrow">Choose a data view</p>
           <h1>CPFFL Archive</h1>
         </div>
         <div className="statRail">
@@ -371,6 +392,157 @@ function DataLandingPage() {
             <ArrowRight size={18} aria-hidden />
           </Link>
         ))}
+      </section>
+    </>
+  );
+}
+
+function KeepersPage() {
+  const manifest = useArchiveJson<ArchiveManifest>("manifest.json");
+  const index = useArchiveJson<SearchRow[]>("search-index.json");
+  const players = useArchiveJson<PublicPlayer[]>("players.json");
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const years = useMemo(
+    () =>
+      manifest.status === "loaded"
+        ? [...manifest.data.seasons]
+            .sort((left, right) => right.year - left.year)
+            .map((season) => season.year)
+        : [],
+    [manifest],
+  );
+  const selectedYear = normalizeKeeperYear(searchParams.get("year"), years);
+  const showsAllSeasons = selectedYear === "all";
+
+  const keeperRows = useMemo(() => {
+    if (index.status !== "loaded" || players.status !== "loaded") {
+      return [];
+    }
+
+    const playerByKey = new Map(players.data.map((player) => [player.key, player]));
+
+    return index.data
+      .filter(
+        (row) =>
+          row.type === "draft" &&
+          row.keeperStatus &&
+          (selectedYear === "all" || row.year === Number(selectedYear)),
+      )
+      .map((row): KeeperRow => {
+        const player = row.playerKey ? playerByKey.get(row.playerKey) : undefined;
+        const playerSeason = player?.seasons.find((season) => season.year === row.year);
+
+        return {
+          id: row.id,
+          year: row.year,
+          auctionValue: row.bidAmount,
+          position: playerSeason?.position ?? player?.primaryPosition,
+          name: row.playerName ?? row.label,
+          teamName: row.teamName ?? row.teamKey ?? "Unknown",
+          playerKey: row.playerKey,
+          draftPick: row.draftPick,
+        };
+      })
+      .sort(sortKeeperRows);
+  }, [index, players, selectedYear]);
+
+  const keeperColumns = useMemo(
+    () => keeperColumnsForView(showsAllSeasons),
+    [showsAllSeasons],
+  );
+  const keeperSeasonCount = useMemo(
+    () => new Set(keeperRows.map((row) => row.year)).size,
+    [keeperRows],
+  );
+  const latestKeeperYear = keeperRows[0]?.year;
+
+  if (
+    manifest.status === "loading" ||
+    index.status === "loading" ||
+    players.status === "loading"
+  ) {
+    return <StatusPanel label="Loading keepers..." />;
+  }
+
+  if (
+    manifest.status === "error" ||
+    index.status === "error" ||
+    players.status === "error"
+  ) {
+    return <StatusPanel label="Unable to load keepers." tone="danger" />;
+  }
+
+  function updateSelectedYear(year: string) {
+    const params = new URLSearchParams();
+    if (year !== "all") {
+      params.set("year", year);
+    }
+    setSearchParams(params);
+  }
+
+  return (
+    <>
+      <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "Keepers" }]} />
+      <section className="pageIntro">
+        <div>
+          <p className="eyebrow">Draft auction history</p>
+          <h1>Keepers</h1>
+        </div>
+        <div className="statRail">
+          <Metric
+            icon={<Trophy size={18} />}
+            label="Keepers"
+            value={formatNumber(keeperRows.length)}
+          />
+          <Metric
+            icon={<CalendarDays size={18} />}
+            label="Seasons"
+            value={String(keeperSeasonCount)}
+          />
+          <Metric
+            icon={<Database size={18} />}
+            label="Latest"
+            value={latestKeeperYear ? String(latestKeeperYear) : "-"}
+          />
+        </div>
+      </section>
+
+      <section className="keeperControlBand" aria-label="Keeper filters">
+        <label>
+          <span>Season</span>
+          <select
+            aria-label="Filter keepers by season"
+            value={selectedYear}
+            onChange={(event) => updateSelectedYear(event.target.value)}
+          >
+            <option value="all">All seasons</option>
+            {years.map((seasonYear) => (
+              <option key={seasonYear} value={seasonYear}>
+                {seasonYear}
+              </option>
+            ))}
+          </select>
+        </label>
+      </section>
+
+      <section className="contentBand">
+        <div className="sectionHeader">
+          <h2>{showsAllSeasons ? "All Keepers" : `${selectedYear} Keepers`}</h2>
+          <span className="pendingNote">
+            {formatNumber(keeperRows.length)} matching{" "}
+            {keeperRows.length === 1 ? "keeper" : "keepers"}
+          </span>
+        </div>
+        <SimpleTable
+          data={keeperRows}
+          columns={keeperColumns}
+          emptyLabel="No keepers found for this season."
+          mobileCard={(row) => (
+            <KeeperMobileCard row={row} showsYear={showsAllSeasons} />
+          )}
+          mobileLabel="Keeper cards"
+        />
       </section>
     </>
   );
@@ -531,6 +703,7 @@ function BrowserPage() {
         <label className="searchField">
           <Search size={18} aria-hidden />
           <input
+            aria-label="Search archive records"
             value={draftFilters.query}
             onChange={(event) =>
               setDraftFilters((current) => ({
@@ -552,6 +725,7 @@ function BrowserPage() {
           />
         </label>
         <select
+          aria-label="Filter by season"
           value={draftFilters.year}
           onChange={(event) =>
             setDraftFilters((current) => ({
@@ -568,6 +742,7 @@ function BrowserPage() {
           ))}
         </select>
         <select
+          aria-label="Filter by record type"
           value={draftFilters.type}
           onChange={(event) =>
             setDraftFilters((current) => ({
@@ -674,7 +849,12 @@ function BrowserPage() {
                 : `${formatNumber(filteredRows.length)} matching rows`}
             </span>
           </div>
-          <SimpleTable data={filteredRows} columns={resultColumns} />
+          <SimpleTable
+            data={filteredRows}
+            columns={resultColumns}
+            mobileCard={(row) => <SearchResultMobileCard row={row} />}
+            mobileLabel="Archive result cards"
+          />
         </section>
       )}
     </>
@@ -1374,6 +1554,8 @@ function PlayerPage() {
           data={seasons}
           columns={playerSeasonColumns}
           emptyLabel="No player seasons found."
+          mobileCard={(season) => <PlayerSeasonMobileCard season={season} />}
+          mobileLabel="Player season cards"
         />
       </section>
     </>
@@ -1537,6 +1719,289 @@ function PlayerPhoto({ player }: { player: PublicPlayer }) {
   );
 }
 
+function SearchResultMobileCard({ row }: { row: SearchRow }) {
+  const href = playerDetailHref(row) ?? row.href;
+
+  return (
+    <article className="mobileDataCard">
+      <div className="mobileCardHeader">
+        <span className="pill">{row.type}</span>
+        <span className="mobileCardKicker">
+          {row.year}
+          {row.week ? `, Week ${row.week}` : ""}
+        </span>
+      </div>
+      <Link className="mobileCardTitle" to={href}>
+        {row.playerName ?? row.label}
+      </Link>
+      <p className="mobileCardSummary">{row.summary}</p>
+      <MobileFieldGrid
+        items={[
+          { label: "Team", value: row.teamName ?? row.teamKey },
+          { label: "Pick", value: row.draftPick },
+          {
+            label: "Bid",
+            value:
+              typeof row.bidAmount === "number"
+                ? `$${formatNumber(row.bidAmount)}`
+                : undefined,
+          },
+          { label: "Action", value: row.transactionActionType },
+          { label: "Status", value: row.transactionStatus },
+        ]}
+      />
+    </article>
+  );
+}
+
+function PlayerSeasonMobileCard({
+  season,
+}: {
+  season: PlayerSeasonReport;
+}) {
+  return (
+    <article className="mobileDataCard">
+      <div className="mobileCardHeader">
+        <strong className="mobileCardTitleText">{season.year}</strong>
+        <span className="mobileCardKicker">
+          #{season.playerRank} overall
+        </span>
+      </div>
+      <MobileFieldGrid
+        items={[
+          {
+            label: "Fantasy Points",
+            value: formatNumber(season.fantasyPoints, 1),
+          },
+          {
+            label: "Position Rank",
+            value: `#${season.positionRank}${
+              season.position ? ` ${season.position}` : ""
+            }`,
+          },
+          { label: "Fantasy Team", value: season.fantasyTeamName || "FA" },
+          { label: "NFL Team", value: season.nflTeam ?? "-" },
+          { label: "Games", value: season.gamesPlayed },
+          { label: "Starts", value: season.starts },
+        ]}
+      />
+    </article>
+  );
+}
+
+function KeeperMobileCard({
+  row,
+  showsYear,
+}: {
+  row: KeeperRow;
+  showsYear: boolean;
+}) {
+  return (
+    <article className="mobileDataCard">
+      <div className="mobileCardHeader">
+        {row.playerKey ? (
+          <Link className="mobileCardTitle" to={`/player/${row.playerKey}?fromYear=${row.year}`}>
+            {row.name}
+          </Link>
+        ) : (
+          <strong className="mobileCardTitleText">{row.name}</strong>
+        )}
+        <span className="mobileCardKicker">
+          {showsYear ? row.year : row.position ?? "-"}
+        </span>
+      </div>
+      <MobileFieldGrid
+        items={[
+          { label: "Year", value: showsYear ? row.year : undefined },
+          { label: "Auction Value", value: formatAuctionValue(row.auctionValue) },
+          { label: "Position", value: row.position ?? "-" },
+          { label: "Team", value: row.teamName },
+          { label: "Pick", value: row.draftPick },
+        ]}
+      />
+    </article>
+  );
+}
+
+function StandingsMobileCard({ team }: { team: PublicTeam }) {
+  return (
+    <article className="mobileDataCard">
+      <div className="mobileCardHeader">
+        <TeamLabel team={team} />
+        <span className="mobileCardKicker">
+          Finish {team.finalStanding ?? "-"}
+        </span>
+      </div>
+      <MobileFieldGrid
+        items={[
+          { label: "Owner", value: team.ownerNames.join(", ") || "-" },
+          { label: "Record", value: `${team.wins}-${team.losses}` },
+          { label: "PF", value: formatNumber(team.pointsFor) },
+          { label: "PA", value: formatNumber(team.pointsAgainst) },
+          { label: "Moves", value: team.transactions.acquisitions },
+        ]}
+      />
+    </article>
+  );
+}
+
+function DraftPickMobileCard({
+  pick,
+  teamNames,
+}: {
+  pick: DraftPick;
+  teamNames: Map<string, string>;
+}) {
+  return (
+    <article className="mobileDataCard">
+      <div className="mobileCardHeader">
+        <strong className="mobileCardTitleText">{pick.playerName}</strong>
+        <span className="mobileCardKicker">Pick {pick.pick}</span>
+      </div>
+      <MobileFieldGrid
+        items={[
+          { label: "Round", value: pick.round ?? "-" },
+          { label: "Team", value: teamDisplay(pick.teamKey, teamNames) },
+          {
+            label: "Bid",
+            value:
+              typeof pick.bidAmount === "number"
+                ? `$${formatNumber(pick.bidAmount)}`
+                : "-",
+          },
+          { label: "Keeper", value: pick.keeperStatus ? "Yes" : undefined },
+        ]}
+      />
+    </article>
+  );
+}
+
+function MatchupMobileCard({
+  matchup,
+  teamNames,
+}: {
+  matchup: Matchup;
+  teamNames: Map<string, string>;
+}) {
+  return (
+    <article className="mobileDataCard">
+      <div className="mobileScoreRows">
+        <MobileScoreRow
+          label="Away"
+          team={teamDisplay(matchup.awayTeamKey, teamNames)}
+          score={matchup.awayScore}
+          isWinner={matchup.winnerTeamKey === matchup.awayTeamKey}
+        />
+        <MobileScoreRow
+          label="Home"
+          team={teamDisplay(matchup.homeTeamKey, teamNames)}
+          score={matchup.homeScore}
+          isWinner={matchup.winnerTeamKey === matchup.homeTeamKey}
+        />
+      </div>
+      <MobileFieldGrid
+        items={[
+          {
+            label: "Winner",
+            value: teamDisplay(matchup.winnerTeamKey, teamNames),
+          },
+          { label: "Type", value: matchup.matchupType },
+          { label: "Playoff", value: matchup.isPlayoff ? "Yes" : undefined },
+        ]}
+      />
+    </article>
+  );
+}
+
+function TransactionMobileCard({
+  transaction,
+  teamNames,
+}: {
+  transaction: Transaction;
+  teamNames: Map<string, string>;
+}) {
+  return (
+    <article className="mobileDataCard">
+      <div className="mobileCardHeader">
+        <strong className="mobileCardTitleText">
+          {transaction.type || "Transaction"}
+        </strong>
+        <span className="mobileCardKicker">
+          {formatDate(transaction.date)}
+        </span>
+      </div>
+      <p className="mobileCardSummary">{transactionItemsLabel(transaction)}</p>
+      <MobileFieldGrid
+        items={[
+          { label: "Team", value: teamDisplay(transaction.teamKey, teamNames) },
+          {
+            label: "FAB",
+            value: formatTransactionFab(transaction.type, transaction.bidAmount),
+          },
+          { label: "Status", value: transaction.status },
+          { label: "Period", value: transaction.scoringPeriod },
+        ]}
+      />
+    </article>
+  );
+}
+
+function MobileScoreRow({
+  label,
+  team,
+  score,
+  isWinner,
+}: {
+  label: string;
+  team: string;
+  score?: number;
+  isWinner: boolean;
+}) {
+  return (
+    <div className={isWinner ? "mobileScoreRow winner" : "mobileScoreRow"}>
+      <span>
+        <small>{label}</small>
+        <strong>{team}</strong>
+      </span>
+      <strong className="mobileScoreValue">{formatNumber(score)}</strong>
+    </div>
+  );
+}
+
+function MobileFieldGrid({
+  items,
+}: {
+  items: Array<{ label: string; value: React.ReactNode }>;
+}) {
+  const visibleItems = items.filter(
+    (item) => item.value !== undefined && item.value !== null && item.value !== "",
+  );
+
+  if (!visibleItems.length) {
+    return null;
+  }
+
+  return (
+    <dl className="mobileFieldGrid">
+      {visibleItems.map((item) => (
+        <div key={item.label}>
+          <dt>{item.label}</dt>
+          <dd>{item.value}</dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
+
+function transactionItemsLabel(transaction: Transaction): string {
+  if (!transaction.items.length) {
+    return "No player details";
+  }
+  return transaction.items
+    .map((item) => (item.type ? `${item.type}: ${item.player}` : item.player))
+    .join(", ");
+}
+
 function SeasonPage() {
   const { year = "" } = useParams();
   const season = useArchiveJson<PublicSeason>(`seasons/${year}.json`);
@@ -1686,6 +2151,7 @@ function SeasonPage() {
           <label className="compactSearch">
             <Search size={16} aria-hidden />
             <input
+              aria-label="Filter standings"
               value={search}
               onChange={(event) => setSearch(event.target.value)}
               placeholder="Filter standings"
@@ -1696,6 +2162,8 @@ function SeasonPage() {
           data={season.data.standings}
           columns={standingsColumns}
           search={search}
+          mobileCard={(team) => <StandingsMobileCard team={team} />}
+          mobileLabel="Standings cards"
         />
       </section>
 
@@ -1703,7 +2171,14 @@ function SeasonPage() {
         <div className="sectionHeader">
           <h2>Drafts</h2>
         </div>
-        <SimpleTable data={season.data.draft} columns={draftColumns} />
+        <SimpleTable
+          data={season.data.draft}
+          columns={draftColumns}
+          mobileCard={(pick) => (
+            <DraftPickMobileCard pick={pick} teamNames={teamNames} />
+          )}
+          mobileLabel="Draft pick cards"
+        />
       </section>
     </>
   );
@@ -1815,7 +2290,14 @@ function WeekPage() {
         <div className="sectionHeader">
           <h2>Scoreboard</h2>
         </div>
-        <SimpleTable data={weekData.data.scoreboard} columns={matchupColumns} />
+        <SimpleTable
+          data={weekData.data.scoreboard}
+          columns={matchupColumns}
+          mobileCard={(matchup) => (
+            <MatchupMobileCard matchup={matchup} teamNames={teamNames} />
+          )}
+          mobileLabel="Scoreboard cards"
+        />
       </section>
 
       <section className="contentBand">
@@ -1857,6 +2339,13 @@ function WeekPage() {
         <SimpleTable
           data={weekData.data.transactions}
           columns={transactionColumns}
+          mobileCard={(transaction) => (
+            <TransactionMobileCard
+              transaction={transaction}
+              teamNames={teamNames}
+            />
+          )}
+          mobileLabel="Transaction cards"
         />
       </section>
 
@@ -2149,6 +2638,52 @@ function teamNameMap(teams: PublicTeam[]): Map<string, string> {
   return new Map(teams.map((team) => [team.key, team.name]));
 }
 
+function keeperColumnsForView(showsYear: boolean): ColumnDef<KeeperRow>[] {
+  const columns: ColumnDef<KeeperRow>[] = [
+    {
+      header: "Auction Value",
+      accessorKey: "auctionValue",
+      cell: ({ row }) => formatAuctionValue(row.original.auctionValue),
+    },
+    {
+      header: "Position",
+      accessorKey: "position",
+      cell: ({ row }) => row.original.position ?? "-",
+    },
+    {
+      header: "Name",
+      accessorKey: "name",
+      cell: ({ row }) =>
+        row.original.playerKey ? (
+          <Link to={`/player/${row.original.playerKey}?fromYear=${row.original.year}`}>
+            {row.original.name}
+          </Link>
+        ) : (
+          row.original.name
+        ),
+    },
+    {
+      header: "Team Name",
+      accessorKey: "teamName",
+    },
+  ];
+
+  if (showsYear) {
+    columns.unshift({
+      header: "Year",
+      accessorKey: "year",
+    });
+  }
+
+  return columns;
+}
+
+function formatAuctionValue(value: number | undefined): string {
+  return typeof value === "number" && Number.isFinite(value)
+    ? `$${formatNumber(value)}`
+    : "-";
+}
+
 function formatTransactionFab(type?: string, bidAmount?: number): string {
   if (type?.toUpperCase() === "FREEAGENT") {
     return "N/A";
@@ -2195,6 +2730,35 @@ function sortSearchRows(rows: SearchRow[]): SearchRow[] {
 
     return left.label.localeCompare(right.label);
   });
+}
+
+function sortKeeperRows(left: KeeperRow, right: KeeperRow): number {
+  if (left.year !== right.year) {
+    return right.year - left.year;
+  }
+
+  const teamCompare = left.teamName.localeCompare(right.teamName);
+  if (teamCompare !== 0) {
+    return teamCompare;
+  }
+
+  const leftPick = left.draftPick ?? Number.MAX_SAFE_INTEGER;
+  const rightPick = right.draftPick ?? Number.MAX_SAFE_INTEGER;
+  if (leftPick !== rightPick) {
+    return leftPick - rightPick;
+  }
+
+  return left.name.localeCompare(right.name);
+}
+
+function normalizeKeeperYear(
+  year: string | null,
+  availableYears: number[],
+): string {
+  if (year && availableYears.includes(Number(year))) {
+    return year;
+  }
+  return "all";
 }
 
 function groupRowsByYear(rows: SearchRow[]): Array<{ year: number; rows: SearchRow[] }> {

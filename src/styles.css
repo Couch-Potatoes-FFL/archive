@@ -12,6 +12,10 @@
   box-sizing: border-box;
 }
 
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   margin: 0;
   min-width: 320px;
@@ -38,6 +42,7 @@ select {
 
 .appShell {
   min-height: 100vh;
+  overflow-x: clip;
 }
 
 .topBar {
@@ -64,11 +69,13 @@ select {
 }
 
 .brand {
+  min-width: 0;
   font-weight: 800;
 }
 
 .topBar nav {
   display: inline-flex;
+  flex: 0 0 auto;
   align-items: center;
   gap: 4px;
 }
@@ -157,6 +164,7 @@ h1 {
   margin-bottom: 0;
   font-size: clamp(2rem, 4vw, 4rem);
   line-height: 1;
+  overflow-wrap: anywhere;
 }
 
 h2 {
@@ -180,6 +188,7 @@ h3 {
   display: flex;
   align-items: center;
   gap: 10px;
+  min-width: 0;
   min-height: 58px;
   padding: 10px 12px;
   background: #ffffff;
@@ -209,6 +218,7 @@ h3 {
 .metric strong {
   display: block;
   max-width: 230px;
+  min-width: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -222,7 +232,7 @@ h3 {
 
 .controlBand {
   display: grid;
-  grid-template-columns: minmax(280px, 1fr) 180px 220px auto;
+  grid-template-columns: minmax(260px, 1fr) minmax(150px, 180px) minmax(170px, 220px) auto;
   gap: 12px;
   align-items: center;
   padding: 14px;
@@ -231,10 +241,30 @@ h3 {
   border-radius: 8px;
 }
 
+.keeperControlBand {
+  display: grid;
+  grid-template-columns: minmax(180px, 260px);
+  gap: 10px;
+  align-items: end;
+  margin-top: 18px;
+  padding: 14px;
+  background: #e8eddf;
+  border: 1px solid #d6ddcc;
+  border-radius: 8px;
+}
+
+.keeperControlBand label {
+  display: grid;
+  gap: 6px;
+  color: #4e5d4d;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
 .categoryGrid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(260px, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
   margin-top: 18px;
 }
 
@@ -284,6 +314,7 @@ h3 {
   display: flex;
   align-items: center;
   gap: 8px;
+  min-width: 0;
   color: #50604f;
   background: #ffffff;
   border: 1px solid #d4dccb;
@@ -312,6 +343,7 @@ h3 {
 
 select {
   width: 100%;
+  min-width: 0;
   height: 42px;
   padding: 0 10px;
   color: #172018;
@@ -370,6 +402,7 @@ select {
 
 .contentBand,
 .panel {
+  min-width: 0;
   padding: 18px;
   background: #ffffff;
   border: 1px solid #dfe5d7;
@@ -412,13 +445,13 @@ select {
 
 .teamCardGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(240px, 100%), 1fr));
   gap: 12px;
 }
 
 .weekPickerGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr));
   gap: 12px;
 }
 
@@ -497,7 +530,7 @@ select {
 
 .playerCardGrid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
   gap: 12px;
 }
 
@@ -608,6 +641,10 @@ select {
   margin-bottom: 12px;
 }
 
+.sectionHeader h2 {
+  margin-bottom: 0;
+}
+
 .definitionGrid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -671,7 +708,7 @@ dd {
 
 .weekGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(120px, 100%), 1fr));
   gap: 10px;
 }
 
@@ -699,9 +736,15 @@ dd {
   color: #687366;
 }
 
+.simpleTable {
+  min-width: 0;
+}
+
 .tableWrap {
   width: 100%;
   overflow-x: auto;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 table {
@@ -745,6 +788,143 @@ td {
   padding-top: 14px;
   color: #687366;
   font-size: 0.9rem;
+}
+
+.mobileTableList {
+  display: none;
+}
+
+.mobileDataCard {
+  min-width: 0;
+  padding: 14px;
+  color: #172018;
+  background: #fbfcf8;
+  border: 1px solid #dfe5d7;
+  border-radius: 8px;
+}
+
+.mobileDataCard.generic {
+  display: grid;
+  gap: 10px;
+}
+
+.mobileCardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 0;
+  margin-bottom: 10px;
+}
+
+.mobileCardTitle,
+.mobileCardTitleText {
+  display: block;
+  min-width: 0;
+  color: #172018;
+  font-size: 1rem;
+  font-weight: 850;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.mobileCardTitle:hover {
+  color: #235c3b;
+}
+
+.mobileCardKicker {
+  flex: 0 0 auto;
+  color: #687366;
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1.35;
+  text-align: right;
+}
+
+.mobileCardSummary {
+  margin: 8px 0 0;
+  color: #4e5d4d;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.mobileField,
+.mobileFieldGrid div {
+  min-width: 0;
+}
+
+.mobileField {
+  display: grid;
+  gap: 3px;
+}
+
+.mobileField span,
+.mobileFieldGrid dt {
+  color: #687366;
+  font-size: 0.74rem;
+  font-weight: 800;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.mobileField strong,
+.mobileFieldGrid dd {
+  margin: 0;
+  color: #172018;
+  font-size: 0.92rem;
+  font-weight: 750;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.mobileFieldGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 12px 0 0;
+}
+
+.mobileScoreRows {
+  display: grid;
+  gap: 8px;
+}
+
+.mobileScoreRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  padding: 10px 12px;
+  background: #ffffff;
+  border: 1px solid #edf0e7;
+  border-radius: 8px;
+}
+
+.mobileScoreRow.winner {
+  background: #f3f8ed;
+  border-color: #9fb39a;
+}
+
+.mobileScoreRow small,
+.mobileScoreRow strong {
+  display: block;
+}
+
+.mobileScoreRow small {
+  color: #687366;
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.mobileScoreRow strong {
+  overflow-wrap: anywhere;
+}
+
+.mobileScoreValue {
+  font-size: 1.1rem;
+  font-variant-numeric: tabular-nums;
 }
 
 .pendingNote {
@@ -858,6 +1038,14 @@ td {
   min-width: 230px;
 }
 
+.teamLabel span {
+  min-width: 0;
+}
+
+.teamLabel strong {
+  overflow-wrap: anywhere;
+}
+
 .teamLabel img {
   width: 38px;
   height: 38px;
@@ -901,6 +1089,8 @@ td {
 
 .lineupScroll {
   overflow-x: auto;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
 }
 
 .boxScoreTable {
@@ -1014,7 +1204,7 @@ pre {
 
   .statRail,
   .controlBand,
-  .categoryGrid,
+  .keeperControlBand,
   .contentGrid,
   .playerCardGrid,
   .playerSummaryLayout,
@@ -1049,24 +1239,159 @@ pre {
   }
 }
 
+@media (max-width: 1100px) {
+  .categoryGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .simpleTable .tableWrap {
+    display: none;
+  }
+
+  .mobileTableList {
+    display: grid;
+    gap: 10px;
+  }
+
+  .mobileTableItem {
+    min-width: 0;
+  }
+
+  .mobileCardHeader .teamLabel {
+    min-width: 0;
+  }
+}
+
 @media (max-width: 620px) {
   .topBar {
-    padding: 0 16px;
+    gap: 8px;
+    min-height: 58px;
+    padding: 0 12px;
   }
 
   .brand span {
-    max-width: 160px;
+    max-width: 90px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
 
   .topBar nav a {
-    gap: 6px;
-    padding: 8px;
+    gap: 5px;
+    padding: 7px;
+    white-space: nowrap;
   }
 
   h1 {
     font-size: 2rem;
+  }
+
+  main {
+    padding: 14px 12px 22px;
+  }
+
+  .breadcrumbs {
+    margin-bottom: 6px;
+    font-size: 0.8rem;
+  }
+
+  .pageIntro {
+    gap: 14px;
+    padding: 18px 0 14px;
+  }
+
+  .statRail {
+    gap: 8px;
+  }
+
+  .categoryGrid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .metric {
+    min-height: 52px;
+    padding: 9px 10px;
+  }
+
+  .controlBand,
+  .contentBand,
+  .panel,
+  .boxScore {
+    padding: 12px;
+  }
+
+  .controlBand,
+  .keeperControlBand,
+  .contentBand,
+  .contentGrid,
+  .teamHistoryBand {
+    margin-top: 14px;
+  }
+
+  .searchField input,
+  .compactSearch input,
+  select {
+    min-height: 44px;
+  }
+
+  .compactSearch {
+    width: 100%;
+  }
+
+  .filterActions,
+  .pagerActions {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .teamHistoryCard,
+  .matchupWeekCard,
+  .categoryButton,
+  .playerResultCard {
+    min-height: 0;
+    padding: 12px;
+  }
+
+  .playerResultCard {
+    grid-template-columns: 50px minmax(0, 1fr) auto;
+  }
+
+  .playerAvatar,
+  .playerAvatarPlaceholder {
+    width: 50px;
+    height: 50px;
+  }
+
+  .definitionGrid,
+  .mobileFieldGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .playerPhotoFrame,
+  .playerPhotoPlaceholder {
+    width: 112px;
+    height: 112px;
+  }
+
+  .boxScoreList {
+    gap: 12px;
+  }
+
+  .boxScore h3 {
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+  }
+
+  .boxScoreTable {
+    min-width: 500px;
+    font-size: 0.84rem;
+  }
+
+  .boxScoreTable th,
+  .boxScoreTable td {
+    padding: 8px;
   }
 }

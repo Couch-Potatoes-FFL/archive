@@ -10,13 +10,15 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import { ArrowDownUp, ChevronLeft, ChevronRight } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
+import { type ReactNode, useEffect, useMemo, useState } from "react";
 
 type SimpleTableProps<T> = {
   data: T[];
   columns: ColumnDef<T>[];
   search?: string;
   emptyLabel?: string;
+  mobileCard?: (row: T) => ReactNode;
+  mobileLabel?: string;
 };
 
 export function SimpleTable<T>({
@@ -24,6 +26,8 @@ export function SimpleTable<T>({
   columns,
   search = "",
   emptyLabel = "No rows found.",
+  mobileCard,
+  mobileLabel = "Mobile table rows",
 }: SimpleTableProps<T>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [pagination, setPagination] = useState<PaginationState>({
@@ -61,7 +65,7 @@ export function SimpleTable<T>({
   );
 
   return (
-    <>
+    <div className="simpleTable">
       <div className="tableWrap">
         <table>
           <thead>
@@ -110,6 +114,30 @@ export function SimpleTable<T>({
           </tbody>
         </table>
       </div>
+      <div className="mobileTableList" aria-label={mobileLabel}>
+        {pageRows.length ? (
+          pageRows.map((row) => (
+            <div className="mobileTableItem" key={row.id}>
+              {mobileCard ? (
+                mobileCard(row.original)
+              ) : (
+                <div className="mobileDataCard generic">
+                  {row.getVisibleCells().map((cell) => (
+                    <div className="mobileField" key={cell.id}>
+                      <span>{mobileHeaderLabel(cell.column.columnDef.header)}</span>
+                      <strong>
+                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      </strong>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))
+        ) : (
+          <p className="emptyNote">{emptyLabel}</p>
+        )}
+      </div>
       <div className="tablePager" aria-label="Table pagination">
         <span>
           Showing {firstRow}-{lastRow} of {filteredCount.toLocaleString()} rows
@@ -135,6 +163,10 @@ export function SimpleTable<T>({
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
+}
+
+function mobileHeaderLabel<T>(header: ColumnDef<T>["header"]): string {
+  return typeof header === "string" ? header : "Value";
 }
