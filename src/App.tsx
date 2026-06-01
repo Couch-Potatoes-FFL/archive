@@ -2,6 +2,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import {
   ArrowRight,
   CalendarDays,
+  ChevronDown,
   Database,
   Home,
   Search,
@@ -19,6 +20,7 @@ import {
 } from "react-router-dom";
 import {
   archivePublicUrl,
+  fetchArchiveJson,
   formatDate,
   formatNumber,
   formatTimestamp,
@@ -27,6 +29,7 @@ import {
 import { SimpleTable } from "./SimpleTable";
 import {
   ArchiveManifest,
+  BoxScore,
   DraftPick,
   Matchup,
   PublicSeason,
@@ -58,9 +61,46 @@ type KeeperRow = {
   position?: string;
   name: string;
   teamName: string;
+  teamKey?: string;
   playerKey?: string;
   draftPick?: number;
 };
+
+type TeamMatchupRow = {
+  id: string;
+  week: number;
+  href: string;
+  opponentKey?: string;
+  opponentName: string;
+  location: "Home" | "Away" | "-";
+  teamScore?: number;
+  opponentScore?: number;
+  outcome?: string;
+  matchupType?: string;
+  isPlayoff: boolean;
+};
+
+type TeamRosterSnapshot = {
+  week: number;
+  players: LineupPlayer[];
+};
+
+type TeamRosterAggregateRow = {
+  id: string;
+  player: LineupPlayer;
+  positionRank?: number;
+  appearances: number;
+  starts: number;
+  totalProjected: number;
+  totalPoints: number;
+  averageProjected: number;
+  averagePoints: number;
+};
+
+type SeasonWeeksState =
+  | { status: "idle" | "loading"; data: PublicWeek[]; requestKey: string }
+  | { status: "loaded"; data: PublicWeek[]; requestKey: string }
+  | { status: "error"; data: PublicWeek[]; requestKey: string };
 
 type BreadcrumbItem = {
   label: string;
@@ -181,7 +221,7 @@ const searchColumns: ColumnDef<SearchRow>[] = [
     header: "Record",
     accessorKey: "label",
     cell: ({ row }) => (
-      <Link to={playerDetailHref(row.original) ?? row.original.href}>
+      <Link to={searchRowDetailHref(row.original)}>
         {row.original.label}
       </Link>
     ),
@@ -213,7 +253,7 @@ const draftSearchColumns: ColumnDef<SearchRow>[] = [
   {
     header: "Team",
     accessorKey: "teamName",
-    cell: ({ row }) => row.original.teamName ?? row.original.teamKey ?? "-",
+    cell: ({ row }) => <TeamSearchLink row={row.original} />,
   },
   {
     header: "Bid",
@@ -240,11 +280,6 @@ const transactionSearchColumns: ColumnDef<SearchRow>[] = [
       formatTransactionFab(row.original.transactionType, row.original.bidAmount),
   },
   {
-    header: "Team",
-    accessorKey: "teamName",
-    cell: ({ row }) => row.original.teamName ?? row.original.teamKey ?? "-",
-  },
-  {
     header: "Player",
     accessorKey: "playerName",
     cell: ({ row }) => (
@@ -252,6 +287,11 @@ const transactionSearchColumns: ColumnDef<SearchRow>[] = [
         {row.original.playerName ?? row.original.label}
       </Link>
     ),
+  },
+  {
+    header: "Team",
+    accessorKey: "teamName",
+    cell: ({ row }) => <TeamSearchLink row={row.original} />,
   },
   {
     header: "Status",
@@ -273,7 +313,7 @@ const playerSeasonColumns: ColumnDef<PlayerSeasonReport>[] = [
   {
     header: "Fantasy Team",
     accessorKey: "fantasyTeamName",
-    cell: ({ row }) => row.original.fantasyTeamName || "FA",
+    cell: ({ row }) => <FantasyTeamLink season={row.original} />,
   },
   {
     header: "Fantasy Points",
@@ -316,10 +356,6 @@ function App() {
             <Home size={16} aria-hidden />
             Home
           </NavLink>
-          <NavLink to="/keepers">
-            <Trophy size={16} aria-hidden />
-            Keepers
-          </NavLink>
           <NavLink to="/browse">
             <Search size={16} aria-hidden />
             Browse
@@ -333,6 +369,7 @@ function App() {
           <Route path="/browse" element={<BrowserPage />} />
           <Route path="/player/:playerKey" element={<PlayerPage />} />
           <Route path="/season/:year" element={<SeasonPage />} />
+          <Route path="/season/:year/team/:teamKey" element={<TeamPage />} />
           <Route path="/season/:year/week/:week" element={<WeekPage />} />
         </Routes>
       </main>
@@ -440,6 +477,7 @@ function KeepersPage() {
           position: playerSeason?.position ?? player?.primaryPosition,
           name: row.playerName ?? row.label,
           teamName: row.teamName ?? row.teamKey ?? "Unknown",
+          teamKey: row.teamKey,
           playerKey: row.playerKey,
           draftPick: row.draftPick,
         };
@@ -632,7 +670,10 @@ function BrowserPage() {
   }
 
   const hasPendingFilters = !filtersMatch(draftFilters, appliedFilters);
-  const resultColumns = resultColumnsForType(appliedFilters.type);
+  const resultColumns = resultColumnsForType(
+    appliedFilters.type,
+    appliedFilters.year === "all",
+  );
   const usesPickerView = appliedFilters.view !== "all";
   const showSeasonHistory =
     appliedFilters.type === "season" &&
@@ -1329,15 +1370,18 @@ function TeamHistoryResults({
                 </span>
               </div>
               <div className="teamCardGrid">
-                {group.rows.map((team) => (
-                  <Link className="teamHistoryCard" key={team.id} to={team.href}>
-                    <TeamCardIcon logoUrl={team.logoUrl} />
-                    <span className="teamCardText">
-                      <strong>{team.label}</strong>
-                      <small>{team.summary}</small>
-                    </span>
-                  </Link>
-                ))}
+                {group.rows.map((team) => {
+                  const href = searchRowTeamHref(team) ?? team.href;
+                  return (
+                    <Link className="teamHistoryCard" key={team.id} to={href}>
+                      <TeamCardIcon logoUrl={team.logoUrl} />
+                      <span className="teamCardText">
+                        <strong>{team.label}</strong>
+                        <small>{team.summary}</small>
+                      </span>
+                    </Link>
+                  );
+                })}
               </div>
             </section>
           ))}
@@ -1720,7 +1764,8 @@ function PlayerPhoto({ player }: { player: PublicPlayer }) {
 }
 
 function SearchResultMobileCard({ row }: { row: SearchRow }) {
-  const href = playerDetailHref(row) ?? row.href;
+  const href = searchRowDetailHref(row);
+  const teamLabel = searchRowTeamLabel(row);
 
   return (
     <article className="mobileDataCard">
@@ -1737,7 +1782,12 @@ function SearchResultMobileCard({ row }: { row: SearchRow }) {
       <p className="mobileCardSummary">{row.summary}</p>
       <MobileFieldGrid
         items={[
-          { label: "Team", value: row.teamName ?? row.teamKey },
+          {
+            label: "Team",
+            value: teamLabel ? (
+              <Link to={searchRowTeamHref(row) ?? row.href}>{teamLabel}</Link>
+            ) : undefined,
+          },
           { label: "Pick", value: row.draftPick },
           {
             label: "Bid",
@@ -1779,13 +1829,31 @@ function PlayerSeasonMobileCard({
               season.position ? ` ${season.position}` : ""
             }`,
           },
-          { label: "Fantasy Team", value: season.fantasyTeamName || "FA" },
+          { label: "Fantasy Team", value: <FantasyTeamLink season={season} /> },
           { label: "NFL Team", value: season.nflTeam ?? "-" },
           { label: "Games", value: season.gamesPlayed },
           { label: "Starts", value: season.starts },
         ]}
       />
     </article>
+  );
+}
+
+function FantasyTeamLink({ season }: { season: PlayerSeasonReport }) {
+  const label = season.fantasyTeamName || "FA";
+
+  if (!season.fantasyTeamName) {
+    return label;
+  }
+
+  if (season.fantasyTeamKey) {
+    return <Link to={teamPageHref(season.year, season.fantasyTeamKey)}>{label}</Link>;
+  }
+
+  return (
+    <Link to={yearBrowseHref("team", season.year, season.fantasyTeamName)}>
+      {label}
+    </Link>
   );
 }
 
@@ -1815,7 +1883,7 @@ function KeeperMobileCard({
           { label: "Year", value: showsYear ? row.year : undefined },
           { label: "Auction Value", value: formatAuctionValue(row.auctionValue) },
           { label: "Position", value: row.position ?? "-" },
-          { label: "Team", value: row.teamName },
+          { label: "Team", value: <KeeperTeamLink row={row} /> },
           { label: "Pick", value: row.draftPick },
         ]}
       />
@@ -1823,11 +1891,32 @@ function KeeperMobileCard({
   );
 }
 
-function StandingsMobileCard({ team }: { team: PublicTeam }) {
+function KeeperTeamLink({ row }: { row: KeeperRow }) {
+  if (row.teamName === "Unknown" && !row.teamKey) {
+    return row.teamName;
+  }
+
+  const href = row.teamKey
+    ? teamPageHref(row.year, row.teamKey)
+    : yearBrowseHref("team", row.year, row.teamName);
+
+  return <Link to={href}>{row.teamName}</Link>;
+}
+
+function StandingsMobileCard({
+  team,
+  year,
+}: {
+  team: PublicTeam;
+  year?: number;
+}) {
   return (
     <article className="mobileDataCard">
       <div className="mobileCardHeader">
-        <TeamLabel team={team} />
+        <TeamLabel
+          team={team}
+          href={year ? teamPageHref(year, team.key) : undefined}
+        />
         <span className="mobileCardKicker">
           Finish {team.finalStanding ?? "-"}
         </span>
@@ -1946,6 +2035,42 @@ function TransactionMobileCard({
   );
 }
 
+function TeamMatchupMobileCard({
+  matchup,
+  year,
+  teamNames,
+}: {
+  matchup: TeamMatchupRow;
+  year: number;
+  teamNames: Map<string, string>;
+}) {
+  return (
+    <article className="mobileDataCard">
+      <div className="mobileCardHeader">
+        <strong className="mobileCardTitleText">{matchup.week}</strong>
+        <OutcomePill outcome={matchup.outcome} />
+      </div>
+      <MobileFieldGrid
+        items={[
+          {
+            label: "Opponent",
+            value: matchup.opponentKey ? (
+              <Link to={teamPageHref(year, matchup.opponentKey)}>
+                {teamDisplay(matchup.opponentKey, teamNames)}
+              </Link>
+            ) : (
+              matchup.opponentName
+            ),
+          },
+          { label: "Site", value: matchup.location },
+          { label: "Score", value: <Link to={matchup.href}>{teamScoreline(matchup)}</Link> },
+          { label: "Type", value: displayMatchupType(matchup) },
+        ]}
+      />
+    </article>
+  );
+}
+
 function MobileScoreRow({
   label,
   team,
@@ -2029,7 +2154,12 @@ function SeasonPage() {
     {
       header: "Team",
       accessorKey: "name",
-      cell: ({ row }) => <TeamLabel team={row.original} />,
+      cell: ({ row }) => (
+        <TeamLabel
+          team={row.original}
+          href={teamPageHref(season.data.year, row.original.key)}
+        />
+      ),
     },
     {
       header: "Owner",
@@ -2056,22 +2186,6 @@ function SeasonPage() {
     {
       header: "Moves",
       accessorFn: (team) => team.transactions.acquisitions,
-    },
-  ];
-
-  const draftColumns: ColumnDef<DraftPick>[] = [
-    { header: "Pick", accessorKey: "pick" },
-    { header: "Round", accessorKey: "round" },
-    {
-      header: "Team",
-      accessorKey: "teamKey",
-      cell: ({ row }) => teamDisplay(row.original.teamKey, teamNames),
-    },
-    { header: "Player", accessorKey: "playerName" },
-    {
-      header: "Bid",
-      accessorKey: "bidAmount",
-      cell: ({ row }) => row.original.bidAmount ?? "-",
     },
   ];
 
@@ -2162,22 +2276,222 @@ function SeasonPage() {
           data={season.data.standings}
           columns={standingsColumns}
           search={search}
-          mobileCard={(team) => <StandingsMobileCard team={team} />}
+          mobileCard={(team) => (
+            <StandingsMobileCard team={team} year={season.data.year} />
+          )}
           mobileLabel="Standings cards"
+        />
+      </section>
+    </>
+  );
+}
+
+function TeamPage() {
+  const { year = "", teamKey = "" } = useParams();
+  const season = useArchiveJson<PublicSeason>(`seasons/${year}.json`);
+  const players = useArchiveJson<PublicPlayer[]>("players.json");
+  const weeks = useSeasonWeeks(
+    year,
+    season.status === "loaded" ? season.data.weeks : [],
+  );
+  const isWaitingForWeeks =
+    season.status === "loaded" &&
+    season.data.weeks.length > 0 &&
+    weeks.data.length === 0 &&
+    weeks.status !== "error";
+
+  if (
+    season.status === "loading" ||
+    players.status === "loading" ||
+    weeks.status === "idle" ||
+    weeks.status === "loading" ||
+    isWaitingForWeeks
+  ) {
+    return <StatusPanel label="Loading team report..." />;
+  }
+
+  if (
+    season.status === "error" ||
+    players.status === "error" ||
+    weeks.status === "error"
+  ) {
+    return <StatusPanel label="Unable to load this team report." tone="danger" />;
+  }
+
+  if (season.status !== "loaded" || players.status !== "loaded") {
+    return <StatusPanel label="Loading team report..." />;
+  }
+
+  const team = season.data.teams.find((row) => row.key === teamKey);
+  if (!team) {
+    return <StatusPanel label="Team report not found." tone="danger" />;
+  }
+
+  const teamNames = teamNameMap(season.data.teams);
+  const matchupRows = buildTeamMatchupRows(team, season.data, weeks.data);
+  const rosterSnapshot = finalRosterSnapshot(team.key, weeks.data);
+  const positionRanks = positionRankMap(players.data, season.data.year);
+  const rosterRows = rosterSnapshot
+    ? buildTeamRosterAggregateRows(
+        team.key,
+        rosterSnapshot.players,
+        weeks.data,
+        positionRanks,
+      )
+    : [];
+  const draftPicks = season.data.draft
+    .filter((pick) => pick.teamKey === team.key)
+    .sort((left, right) => left.pick - right.pick);
+  const matchupColumns = teamMatchupColumns(season.data.year, teamNames);
+  const draftColumns = draftPickColumnsForTeam(teamNames, season.data.year);
+  const averageScore = average(team.scores);
+  const highScore = team.scores.length ? Math.max(...team.scores) : undefined;
+  const lowScore = team.scores.length ? Math.min(...team.scores) : undefined;
+
+  return (
+    <>
+      <Breadcrumbs
+        items={[
+          { label: "Home", to: "/" },
+          { label: "Teams", to: "/browse?type=team" },
+          {
+            label: `${season.data.year} Teams`,
+            to: `/browse?type=team&year=${season.data.year}`,
+          },
+          { label: team.name },
+        ]}
+      />
+      <section className="pageIntro">
+        <div>
+          <p className="eyebrow">{season.data.year} team report</p>
+          <h1>{team.name}</h1>
+        </div>
+        <div className="statRail">
+          <Metric
+            icon={<Shield size={18} />}
+            label="Record"
+            value={teamRecord(team)}
+          />
+          <Metric
+            icon={<Trophy size={18} />}
+            label="Final Finish"
+            value={team.finalStanding ? `#${team.finalStanding}` : "-"}
+          />
+          <Metric
+            icon={<Database size={18} />}
+            label="Points For"
+            value={formatScore(team.pointsFor)}
+          />
+        </div>
+      </section>
+
+      <section className="contentGrid">
+        <div className="panel">
+          <div className="sectionHeader">
+            <h2>Summary</h2>
+          </div>
+          <div className="teamDetailSummary">
+            <TeamCardIcon logoUrl={team.logoUrl} />
+            <dl className="definitionGrid">
+              <div>
+                <dt>Owner</dt>
+                <dd>{team.ownerNames.join(", ") || "-"}</dd>
+              </div>
+              <div>
+                <dt>Abbrev</dt>
+                <dd>{team.abbrev || "-"}</dd>
+              </div>
+              <div>
+                <dt>Division</dt>
+                <dd>{team.divisionName ?? "-"}</dd>
+              </div>
+              <div>
+                <dt>Points Against</dt>
+                <dd>{formatScore(team.pointsAgainst)}</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+        <div className="panel">
+          <div className="sectionHeader">
+            <h2>Season Totals</h2>
+          </div>
+          <dl className="definitionGrid">
+            <div>
+              <dt>Average score</dt>
+              <dd>{formatScore(averageScore)}</dd>
+            </div>
+            <div>
+              <dt>High score</dt>
+              <dd>{formatScore(highScore)}</dd>
+            </div>
+            <div>
+              <dt>Low score</dt>
+              <dd>{formatScore(lowScore)}</dd>
+            </div>
+            <div>
+              <dt>Acquisitions</dt>
+              <dd>{formatNumber(team.transactions.acquisitions)}</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <section className="contentBand">
+        <div className="sectionHeader">
+          <h2>Final Roster</h2>
+          <span className="pendingNote">
+            {rosterSnapshot ? "Season totals and averages" : "No roster snapshot"}
+          </span>
+        </div>
+        {rosterSnapshot ? (
+          <SeasonRosterTable
+            title={team.name}
+            rows={rosterRows}
+            year={season.data.year}
+          />
+        ) : (
+          <p className="emptyNote">No box score roster was found for this team.</p>
+        )}
+      </section>
+
+      <section className="contentBand">
+        <div className="sectionHeader">
+          <h2>Scores &amp; Matchups</h2>
+          <span className="pendingNote">
+            {formatNumber(matchupRows.length)} {pluralizeWeek(matchupRows.length)}
+          </span>
+        </div>
+        <SimpleTable
+          data={matchupRows}
+          columns={matchupColumns}
+          emptyLabel="No matchups found for this team."
+          mobileCard={(matchup) => (
+            <TeamMatchupMobileCard
+              matchup={matchup}
+              year={season.data.year}
+              teamNames={teamNames}
+            />
+          )}
+          mobileLabel="Team matchup cards"
         />
       </section>
 
       <section className="contentBand">
         <div className="sectionHeader">
-          <h2>Drafts</h2>
+          <h2>Draft Picks</h2>
+          <span className="pendingNote">
+            {formatNumber(draftPicks.length)} {pluralizeDraftPick(draftPicks.length)}
+          </span>
         </div>
         <SimpleTable
-          data={season.data.draft}
+          data={draftPicks}
           columns={draftColumns}
+          emptyLabel="No draft picks found for this team."
           mobileCard={(pick) => (
             <DraftPickMobileCard pick={pick} teamNames={teamNames} />
           )}
-          mobileLabel="Draft pick cards"
+          mobileLabel="Team draft pick cards"
         />
       </section>
     </>
@@ -2307,24 +2621,12 @@ function WeekPage() {
         {weekData.data.boxScores.length ? (
           <div className="boxScoreList">
             {weekData.data.boxScores.map((boxScore) => (
-              <article className="boxScore" key={boxScore.matchupKey}>
-                <h3>
-                  {teamDisplay(boxScore.awayTeamKey, teamNames)} at{" "}
-                  {teamDisplay(boxScore.homeTeamKey, teamNames)}
-                </h3>
-                <div className="lineupColumns">
-                  <LineupTable
-                    title={teamDisplay(boxScore.awayTeamKey, teamNames)}
-                    players={boxScore.awayLineup}
-                    year={season.data.year}
-                  />
-                  <LineupTable
-                    title={teamDisplay(boxScore.homeTeamKey, teamNames)}
-                    players={boxScore.homeLineup}
-                    year={season.data.year}
-                  />
-                </div>
-              </article>
+              <BoxScoreCard
+                boxScore={boxScore}
+                key={boxScore.matchupKey}
+                teamNames={teamNames}
+                year={season.data.year}
+              />
             ))}
           </div>
         ) : (
@@ -2359,6 +2661,54 @@ function WeekPage() {
   );
 }
 
+function BoxScoreCard({
+  boxScore,
+  teamNames,
+  year,
+}: {
+  boxScore: BoxScore;
+  teamNames: Map<string, string>;
+  year: number;
+}) {
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  const awayTeamName = teamDisplay(boxScore.awayTeamKey, teamNames);
+  const homeTeamName = teamDisplay(boxScore.homeTeamKey, teamNames);
+  const title = `${awayTeamName} at ${homeTeamName}`;
+  const contentId = `box-score-${boxScore.matchupKey}`;
+
+  return (
+    <article className="boxScore">
+      <h3 className="boxScoreTitle">
+        <button
+          aria-controls={contentId}
+          aria-expanded={!isCollapsed}
+          className="boxScoreToggle"
+          type="button"
+          onClick={() => setIsCollapsed((current) => !current)}
+        >
+          <span>{title}</span>
+          <span className="boxScoreToggleMeta">
+            <span>{isCollapsed ? "Show" : "Hide"}</span>
+            <ChevronDown
+              aria-hidden
+              className={
+                isCollapsed ? "boxScoreChevron collapsed" : "boxScoreChevron"
+              }
+              size={18}
+            />
+          </span>
+        </button>
+      </h3>
+      {!isCollapsed ? (
+        <div className="lineupColumns" id={contentId}>
+          <LineupTable title={awayTeamName} players={boxScore.awayLineup} year={year} />
+          <LineupTable title={homeTeamName} players={boxScore.homeLineup} year={year} />
+        </div>
+      ) : null}
+    </article>
+  );
+}
+
 function LineupTable({
   title,
   players,
@@ -2386,18 +2736,25 @@ function LineupTable({
           <thead>
             <tr>
               <th>Slot</th>
-              <th>Player, Team Pos</th>
+              <th aria-label="Player image" />
+              <th>Player</th>
               <th>Opp</th>
               <th>Proj</th>
               <th>FPTS</th>
             </tr>
           </thead>
           <tbody>
+            {starterRows.length ? (
+              <LineupSectionHeaderRow label="Starters" colSpan={8} />
+            ) : null}
             {starterRows.map((player, index) => (
               <LineupRow player={player} year={year} key={lineupRowKey(player, index)} />
             ))}
             {starterRows.length ? (
               <LineupSummaryRow label="Starters Total" players={starterRows} />
+            ) : null}
+            {benchRows.length ? (
+              <LineupSectionHeaderRow label="Bench" colSpan={8} />
             ) : null}
             {benchRows.map((player, index) => (
               <LineupRow player={player} year={year} key={lineupRowKey(player, index)} />
@@ -2405,12 +2762,15 @@ function LineupTable({
             {benchRows.length ? (
               <LineupSummaryRow label="Bench Total" players={benchRows} />
             ) : null}
+            {irRows.length ? (
+              <LineupSectionHeaderRow label="IR" colSpan={8} />
+            ) : null}
             {irRows.map((player, index) => (
               <LineupRow player={player} year={year} key={lineupRowKey(player, index)} />
             ))}
             {!players.length ? (
               <tr>
-                <td className="emptyCell" colSpan={5}>
+                <td className="emptyCell" colSpan={6}>
                   No lineup players found.
                 </td>
               </tr>
@@ -2422,19 +2782,66 @@ function LineupTable({
   );
 }
 
-function LineupRow({
-  player,
+function SeasonRosterTable({
+  title,
+  rows,
   year,
 }: {
-  player: LineupPlayer;
+  title: string;
+  rows: TeamRosterAggregateRow[];
   year: number;
 }) {
-  const injuryLabel = displayInjuryStatus(player.injuryStatus);
-  const section = lineupSection(player);
+  return (
+    <div className="lineupTable seasonRosterTable">
+      <h4>{title}</h4>
+      <div className="lineupScroll">
+        <table className="boxScoreTable seasonRosterStatsTable">
+          <thead>
+            <tr>
+              <th>Slot</th>
+              <th aria-label="Player image" />
+              <th>Player</th>
+              <th>PRK</th>
+              <th>GP</th>
+              <th>Starts</th>
+              <th>Avg Proj</th>
+              <th>Avg FPTS</th>
+              <th>Total FPTS</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row) => (
+              <SeasonRosterRow row={row} year={year} key={row.id} />
+            ))}
+            {!rows.length ? (
+              <tr>
+                <td className="emptyCell" colSpan={9}>
+                  No roster players found.
+                </td>
+              </tr>
+            ) : null}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+function SeasonRosterRow({
+  row,
+  year,
+}: {
+  row: TeamRosterAggregateRow;
+  year: number;
+}) {
+  const { player } = row;
 
   return (
-    <tr className={`boxScorePlayerRow ${section}`}>
+    <tr className="boxScorePlayerRow">
       <td className="slotCell">{displayLineupSlot(player)}</td>
+      <td className="playerIconCell">
+        <LineupPlayerIcon player={player} />
+      </td>
       <td className="playerCell">
         <span className="lineupPlayerName">
           {player.key ? (
@@ -2444,11 +2851,59 @@ function LineupRow({
           ) : (
             <strong>{player.name}</strong>
           )}
-          {injuryLabel ? (
-            <span className="injuryBadge" title={player.injuryStatus}>
-              {injuryLabel}
-            </span>
-          ) : null}
+        </span>
+        <small>
+          {player.proTeam ?? "-"} {player.position ?? "-"}
+        </small>
+      </td>
+      <td className="numberCell">{row.positionRank ?? "-"}</td>
+      <td className="numberCell">{formatNumber(row.appearances)}</td>
+      <td className="numberCell">{formatNumber(row.starts)}</td>
+      <td className="numberCell">{formatNumber(row.averageProjected, 1)}</td>
+      <td className="numberCell">{formatNumber(row.averagePoints, 1)}</td>
+      <td className="numberCell">{formatNumber(row.totalPoints, 1)}</td>
+    </tr>
+  );
+}
+
+function LineupSectionHeaderRow({
+  label,
+  colSpan = 6,
+}: {
+  label: string;
+  colSpan?: number;
+}) {
+  return (
+    <tr className="lineupSectionHeaderRow">
+      <td colSpan={colSpan}>{label}</td>
+    </tr>
+  );
+}
+
+function LineupRow({
+  player,
+  year,
+}: {
+  player: LineupPlayer;
+  year: number;
+}) {
+  const section = lineupSection(player);
+
+  return (
+    <tr className={`boxScorePlayerRow ${section}`}>
+      <td className="slotCell">{displayLineupSlot(player)}</td>
+      <td className="playerIconCell">
+        <LineupPlayerIcon player={player} />
+      </td>
+      <td className="playerCell">
+        <span className="lineupPlayerName">
+          {player.key ? (
+            <Link to={`/player/${player.key}?fromYear=${year}`}>
+              <strong>{player.name}</strong>
+            </Link>
+          ) : (
+            <strong>{player.name}</strong>
+          )}
         </span>
         <small>
           {player.proTeam ?? "-"} {player.position ?? "-"}
@@ -2470,7 +2925,7 @@ function LineupSummaryRow({
 }) {
   return (
     <tr className="lineupSummaryRow">
-      <td colSpan={3}>{label}</td>
+      <td colSpan={4}>{label}</td>
       <td className="numberCell">
         {formatNumber(sumLineupValue(players, "projectedPoints"), 1)}
       </td>
@@ -2478,6 +2933,40 @@ function LineupSummaryRow({
         {formatNumber(sumLineupValue(players, "points"), 1)}
       </td>
     </tr>
+  );
+}
+
+function LineupPlayerIcon({ player }: { player: LineupPlayer }) {
+  const [failedPhoto, setFailedPhoto] = useState(false);
+  const [failedTeamLogo, setFailedTeamLogo] = useState(false);
+  const photoUrl = !failedPhoto ? lineupPlayerPhotoUrl(player) : undefined;
+  const teamLogoUrl = !failedTeamLogo ? nflTeamLogoUrl(player.proTeam) : undefined;
+  const imageUrl = photoUrl ?? teamLogoUrl;
+  const isTeamLogo = Boolean(!photoUrl && teamLogoUrl);
+
+  if (!imageUrl) {
+    return (
+      <span className="lineupPlayerIcon placeholder" aria-hidden>
+        <Shield size={18} />
+      </span>
+    );
+  }
+
+  return (
+    <span className={isTeamLogo ? "lineupPlayerIcon teamLogo" : "lineupPlayerIcon"}>
+      <img
+        src={imageUrl}
+        alt=""
+        loading="lazy"
+        onError={() => {
+          if (photoUrl) {
+            setFailedPhoto(true);
+          } else {
+            setFailedTeamLogo(true);
+          }
+        }}
+      />
+    </span>
   );
 }
 
@@ -2520,27 +3009,6 @@ function displayLineupSlot(player: LineupPlayer): string {
   return slot || "-";
 }
 
-function displayInjuryStatus(status: string | undefined): string | undefined {
-  if (!status) {
-    return undefined;
-  }
-
-  const normalized = status.toUpperCase();
-  if (normalized === "ACTIVE" || normalized === "NORMAL") {
-    return undefined;
-  }
-
-  const labels: Record<string, string> = {
-    QUESTIONABLE: "Q",
-    DOUBTFUL: "D",
-    OUT: "O",
-    INJURED_RESERVE: "IR",
-    SUSPENSION: "S",
-  };
-
-  return labels[normalized] ?? normalized[0];
-}
-
 function sumLineupValue(
   players: LineupPlayer[],
   field: "points" | "projectedPoints",
@@ -2553,6 +3021,511 @@ function sumLineupValue(
 
 function lineupRowKey(player: LineupPlayer, index: number): string {
   return `${rawLineupSlot(player)}-${player.name}-${index}`;
+}
+
+function lineupPlayerPhotoUrl(player: LineupPlayer): string | undefined {
+  const archivedPhotoUrl = archivePublicUrl(player.photoUrl);
+  if (archivedPhotoUrl) {
+    return archivedPhotoUrl;
+  }
+
+  const playerId = Number(player.playerId);
+  if (Number.isInteger(playerId) && playerId > 0) {
+    return `https://a.espncdn.com/i/headshots/nfl/players/full/${playerId}.png`;
+  }
+
+  return undefined;
+}
+
+function nflTeamLogoUrl(team: string | undefined): string | undefined {
+  const code = nflTeamLogoCode(team);
+  return code ? `https://a.espncdn.com/i/teamlogos/nfl/500/${code}.png` : undefined;
+}
+
+function nflTeamLogoCode(team: string | undefined): string | undefined {
+  if (!team) {
+    return undefined;
+  }
+
+  const normalized = team.toUpperCase();
+  const codeMap: Record<string, string> = {
+    ARI: "ari",
+    ATL: "atl",
+    BAL: "bal",
+    BUF: "buf",
+    CAR: "car",
+    CHI: "chi",
+    CIN: "cin",
+    CLE: "cle",
+    DAL: "dal",
+    DEN: "den",
+    DET: "det",
+    GB: "gb",
+    HOU: "hou",
+    IND: "ind",
+    JAC: "jax",
+    JAX: "jax",
+    KC: "kc",
+    LAC: "lac",
+    LAR: "lar",
+    LV: "lv",
+    MIA: "mia",
+    MIN: "min",
+    NE: "ne",
+    NO: "no",
+    NYG: "nyg",
+    NYJ: "nyj",
+    PHI: "phi",
+    PIT: "pit",
+    SEA: "sea",
+    SF: "sf",
+    TB: "tb",
+    TEN: "ten",
+    WSH: "wsh",
+    WAS: "wsh",
+  };
+
+  return codeMap[normalized];
+}
+
+function useSeasonWeeks(
+  year: string,
+  weeks: PublicSeason["weeks"],
+): SeasonWeeksState {
+  const weekKey = weeks
+    .map((week) => week.week)
+    .sort((left, right) => left - right)
+    .join(",");
+  const weekNumbers = useMemo(
+    () => (weekKey ? weekKey.split(",").map((week) => Number(week)) : []),
+    [weekKey],
+  );
+  const requestKey = `${year}:${weekKey}`;
+  const [state, setState] = useState<SeasonWeeksState>({
+    status: "idle",
+    data: [],
+    requestKey: "",
+  });
+
+  useEffect(() => {
+    if (!year || !weekNumbers.length) {
+      setState({ status: "loaded", data: [], requestKey });
+      return;
+    }
+
+    let cancelled = false;
+    setState((current) => ({ status: "loading", data: current.data, requestKey }));
+
+    Promise.all(
+      weekNumbers.map((week) =>
+        fetchArchiveJson<PublicWeek>(
+          `seasons/${year}/weeks/${String(week).padStart(2, "0")}.json`,
+        ),
+      ),
+    )
+      .then((loadedWeeks) => {
+        if (!cancelled) {
+          setState({
+            status: "loaded",
+            data: loadedWeeks.sort((left, right) => left.week - right.week),
+            requestKey,
+          });
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setState((current) => ({
+            status: "error",
+            data: current.data,
+            requestKey,
+          }));
+        }
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [weekKey, year]);
+
+  if (state.requestKey !== requestKey) {
+    return {
+      status: weekNumbers.length ? "loading" : "loaded",
+      data: [],
+      requestKey,
+    };
+  }
+
+  return state;
+}
+
+function teamMatchupColumns(
+  year: number,
+  teamNames: Map<string, string>,
+): ColumnDef<TeamMatchupRow>[] {
+  return [
+    {
+      header: "Week",
+      accessorKey: "week",
+      cell: ({ row }) => row.original.week,
+    },
+    {
+      header: "Opponent",
+      accessorKey: "opponentName",
+      cell: ({ row }) =>
+        row.original.opponentKey ? (
+          <Link to={teamPageHref(year, row.original.opponentKey)}>
+            {teamDisplay(row.original.opponentKey, teamNames)}
+          </Link>
+        ) : (
+          row.original.opponentName
+        ),
+    },
+    {
+      header: "Site",
+      accessorKey: "location",
+    },
+    {
+      header: "Result",
+      accessorKey: "outcome",
+      cell: ({ row }) => <OutcomePill outcome={row.original.outcome} />,
+    },
+    {
+      header: "Score",
+      accessorFn: (row) => row.teamScore ?? 0,
+      cell: ({ row }) => (
+        <Link to={row.original.href}>{teamScoreline(row.original)}</Link>
+      ),
+    },
+    {
+      header: "Type",
+      accessorKey: "matchupType",
+      cell: ({ row }) => displayMatchupType(row.original),
+    },
+  ];
+}
+
+function draftPickColumnsForTeam(
+  teamNames: Map<string, string>,
+  year: number,
+): ColumnDef<DraftPick>[] {
+  return [
+    {
+      header: "Pick",
+      accessorKey: "pick",
+    },
+    {
+      header: "Round",
+      accessorKey: "round",
+      cell: ({ row }) => row.original.round ?? "-",
+    },
+    {
+      header: "Player",
+      accessorKey: "playerName",
+      cell: ({ row }) =>
+        row.original.playerKey ? (
+          <Link to={`/player/${row.original.playerKey}?fromYear=${year}`}>
+            {row.original.playerName}
+          </Link>
+        ) : (
+          row.original.playerName
+        ),
+    },
+    {
+      header: "Team",
+      accessorKey: "teamKey",
+      cell: ({ row }) =>
+        row.original.teamKey ? (
+          <Link to={teamPageHref(year, row.original.teamKey)}>
+            {teamDisplay(row.original.teamKey, teamNames)}
+          </Link>
+        ) : (
+          teamDisplay(row.original.teamKey, teamNames)
+        ),
+    },
+    {
+      header: "Bid",
+      accessorKey: "bidAmount",
+      cell: ({ row }) => formatAuctionValue(row.original.bidAmount),
+    },
+    {
+      header: "Keeper",
+      accessorKey: "keeperStatus",
+      cell: ({ row }) => (row.original.keeperStatus ? "Yes" : "-"),
+    },
+  ];
+}
+
+function buildTeamMatchupRows(
+  team: PublicTeam,
+  season: PublicSeason,
+  weeks: PublicWeek[],
+): TeamMatchupRow[] {
+  const weekDataByNumber = new Map(weeks.map((week) => [week.week, week]));
+  const teamByKey = new Map(season.teams.map((row) => [row.key, row]));
+  const teamNames = teamNameMap(season.teams);
+
+  return season.weeks.map((weekSummary, index) => {
+    const weekData = weekDataByNumber.get(weekSummary.week);
+    const matchup = weekData?.scoreboard.find(
+      (row) => row.homeTeamKey === team.key || row.awayTeamKey === team.key,
+    );
+    const isHome = matchup?.homeTeamKey === team.key;
+    const isAway = matchup?.awayTeamKey === team.key;
+    const opponentKey = matchup
+      ? isHome
+        ? matchup.awayTeamKey
+        : matchup.homeTeamKey
+      : team.schedule[index];
+    const opponent = opponentKey ? teamByKey.get(opponentKey) : undefined;
+    const teamScore = matchup
+      ? isHome
+        ? matchup.homeScore
+        : matchup.awayScore
+      : team.scores[index];
+    const opponentScore = matchup
+      ? isHome
+        ? matchup.awayScore
+        : matchup.homeScore
+      : opponent?.scores[index];
+
+    return {
+      id: `${team.key}-week-${weekSummary.week}`,
+      week: weekSummary.week,
+      href: weekSummary.href,
+      opponentKey,
+      opponentName: opponent?.name ?? teamDisplay(opponentKey, teamNames),
+      location: isHome ? "Home" : isAway ? "Away" : "-",
+      teamScore,
+      opponentScore,
+      outcome: matchupOutcome(matchup, team.key) ?? team.outcomes[index],
+      matchupType: matchup?.matchupType,
+      isPlayoff: Boolean(matchup?.isPlayoff),
+    };
+  });
+}
+
+function buildTeamRosterAggregateRows(
+  teamKey: string,
+  rosterPlayers: LineupPlayer[],
+  weeks: PublicWeek[],
+  positionRanks: Map<string, number>,
+): TeamRosterAggregateRow[] {
+  const aggregates = new Map<
+    string,
+    {
+      appearances: number;
+      starts: number;
+      totalProjected: number;
+      totalPoints: number;
+    }
+  >();
+
+  weeks.forEach((week) => {
+    const players = teamWeekLineup(teamKey, week);
+    players.forEach((player) => {
+      const key = lineupPlayerAggregateKey(player);
+      const current = aggregates.get(key) ?? {
+        appearances: 0,
+        starts: 0,
+        totalProjected: 0,
+        totalPoints: 0,
+      };
+      current.appearances += 1;
+      if (lineupSection(player) === "starter") {
+        current.starts += 1;
+      }
+      current.totalProjected += finiteLineupValue(player.projectedPoints);
+      current.totalPoints += finiteLineupValue(player.points);
+      aggregates.set(key, current);
+    });
+  });
+
+  return orderLineupPlayers(rosterPlayers).map((player, index) => {
+    const aggregate = aggregates.get(lineupPlayerAggregateKey(player)) ?? {
+      appearances: 0,
+      starts: 0,
+      totalProjected: 0,
+      totalPoints: 0,
+    };
+    const appearances = aggregate.appearances;
+
+    return {
+      id: `${lineupPlayerAggregateKey(player)}-${index}`,
+      player,
+      positionRank: positionRanks.get(lineupPlayerAggregateKey(player)),
+      appearances,
+      starts: aggregate.starts,
+      totalProjected: aggregate.totalProjected,
+      totalPoints: aggregate.totalPoints,
+      averageProjected: appearances ? aggregate.totalProjected / appearances : 0,
+      averagePoints: appearances ? aggregate.totalPoints / appearances : 0,
+    };
+  });
+}
+
+function teamWeekLineup(teamKey: string, week: PublicWeek): LineupPlayer[] {
+  const boxScore = week.boxScores.find(
+    (row) => row.homeTeamKey === teamKey || row.awayTeamKey === teamKey,
+  );
+  if (boxScore?.homeTeamKey === teamKey) {
+    return boxScore.homeLineup;
+  }
+  if (boxScore?.awayTeamKey === teamKey) {
+    return boxScore.awayLineup;
+  }
+  return [];
+}
+
+function positionRankMap(players: PublicPlayer[], year: number): Map<string, number> {
+  const ranks = new Map<string, number>();
+
+  players.forEach((player) => {
+    const season = player.seasons.find((row) => row.year === year);
+    if (!season) {
+      return;
+    }
+    ranks.set(player.key, season.positionRank);
+    if (player.playerId !== undefined) {
+      ranks.set(`player-${player.playerId}`, season.positionRank);
+    }
+  });
+
+  return ranks;
+}
+
+function lineupPlayerAggregateKey(player: LineupPlayer): string {
+  if (player.key) {
+    return player.key;
+  }
+  if (player.playerId !== undefined) {
+    return `player-${player.playerId}`;
+  }
+  return `name-${player.name.toLowerCase()}`;
+}
+
+function finiteLineupValue(value: number | undefined): number {
+  return typeof value === "number" && Number.isFinite(value) ? value : 0;
+}
+
+function finalRosterSnapshot(
+  teamKey: string,
+  weeks: PublicWeek[],
+): TeamRosterSnapshot | undefined {
+  for (const week of [...weeks].sort((left, right) => right.week - left.week)) {
+    const boxScore = week.boxScores.find(
+      (row) => row.homeTeamKey === teamKey || row.awayTeamKey === teamKey,
+    );
+    const players =
+      boxScore?.homeTeamKey === teamKey
+        ? boxScore.homeLineup
+        : boxScore?.awayTeamKey === teamKey
+          ? boxScore.awayLineup
+          : undefined;
+
+    if (players?.length) {
+      return { week: week.week, players };
+    }
+  }
+
+  return undefined;
+}
+
+function matchupOutcome(
+  matchup: Matchup | undefined,
+  teamKey: string,
+): string | undefined {
+  if (!matchup) {
+    return undefined;
+  }
+  if (
+    typeof matchup.homeScore === "number" &&
+    typeof matchup.awayScore === "number" &&
+    matchup.homeScore === matchup.awayScore
+  ) {
+    return "T";
+  }
+  if (!matchup.winnerTeamKey) {
+    return undefined;
+  }
+  return matchup.winnerTeamKey === teamKey ? "W" : "L";
+}
+
+function OutcomePill({ outcome }: { outcome?: string }) {
+  const label = normalizeOutcome(outcome);
+
+  if (!label) {
+    return <span className="pill">-</span>;
+  }
+
+  return <span className={`outcomePill ${outcomeClass(label)}`}>{label}</span>;
+}
+
+function normalizeOutcome(outcome: string | undefined): string | undefined {
+  const normalized = outcome?.trim().toUpperCase();
+  if (!normalized) {
+    return undefined;
+  }
+  if (normalized.startsWith("W")) {
+    return "W";
+  }
+  if (normalized.startsWith("L")) {
+    return "L";
+  }
+  if (normalized.startsWith("T")) {
+    return "T";
+  }
+  return normalized;
+}
+
+function outcomeClass(outcome: string): string {
+  if (outcome === "W") {
+    return "win";
+  }
+  if (outcome === "L") {
+    return "loss";
+  }
+  if (outcome === "T") {
+    return "tie";
+  }
+  return "neutral";
+}
+
+function displayMatchupType(matchup: TeamMatchupRow): string {
+  if (matchup.isPlayoff) {
+    return matchup.matchupType && matchup.matchupType !== "NONE"
+      ? `Playoff, ${matchup.matchupType}`
+      : "Playoff";
+  }
+  return matchup.matchupType && matchup.matchupType !== "NONE"
+    ? matchup.matchupType
+    : "Regular";
+}
+
+function teamScoreline(matchup: TeamMatchupRow): string {
+  if (matchup.teamScore === undefined && matchup.opponentScore === undefined) {
+    return "-";
+  }
+  return `${formatScore(matchup.teamScore)} - ${formatScore(matchup.opponentScore)}`;
+}
+
+function formatScore(value: number | undefined): string {
+  if (value === undefined || Number.isNaN(value)) {
+    return "-";
+  }
+  return value.toLocaleString(undefined, {
+    maximumFractionDigits: 1,
+  });
+}
+
+function average(values: number[]): number | undefined {
+  if (!values.length) {
+    return undefined;
+  }
+  return values.reduce((total, value) => total + value, 0) / values.length;
+}
+
+function teamRecord(team: PublicTeam): string {
+  return `${team.wins}-${team.losses}-${team.ties}`;
 }
 
 function Metric({
@@ -2620,22 +3593,68 @@ function Breadcrumbs({
   );
 }
 
-function TeamLabel({ team }: { team: PublicTeam }) {
+function TeamLabel({ team, href }: { team: PublicTeam; href?: string }) {
   const logoUrl = archivePublicUrl(team.logoUrl);
-
-  return (
-    <span className="teamLabel">
+  const content = (
+    <>
       {logoUrl ? <img src={logoUrl} alt="" loading="lazy" /> : null}
       <span>
         <strong>{team.name}</strong>
         <small>{team.abbrev}</small>
       </span>
+    </>
+  );
+
+  if (href) {
+    return (
+      <Link className="teamLabel" to={href}>
+        {content}
+      </Link>
+    );
+  }
+
+  return (
+    <span className="teamLabel">
+      {content}
     </span>
   );
 }
 
 function teamNameMap(teams: PublicTeam[]): Map<string, string> {
   return new Map(teams.map((team) => [team.key, team.name]));
+}
+
+function TeamSearchLink({ row }: { row: SearchRow }) {
+  const label = searchRowTeamLabel(row);
+
+  if (!label) {
+    return "-";
+  }
+
+  return <Link to={searchRowTeamHref(row) ?? row.href}>{label}</Link>;
+}
+
+function searchRowTeamLabel(row: SearchRow): string | undefined {
+  return row.teamName ?? row.teamKey;
+}
+
+function searchRowDetailHref(row: SearchRow): string {
+  return (
+    playerDetailHref(row) ??
+    (row.type === "team" ? searchRowTeamHref(row) : undefined) ??
+    row.href
+  );
+}
+
+function searchRowTeamHref(row: SearchRow): string | undefined {
+  if (row.teamKey) {
+    return teamPageHref(row.year, row.teamKey);
+  }
+  return undefined;
+}
+
+function teamPageHref(year: number, teamKey: string): string {
+  return `/season/${year}/team/${encodeURIComponent(teamKey)}`;
 }
 
 function keeperColumnsForView(showsYear: boolean): ColumnDef<KeeperRow>[] {
@@ -2665,6 +3684,7 @@ function keeperColumnsForView(showsYear: boolean): ColumnDef<KeeperRow>[] {
     {
       header: "Team Name",
       accessorKey: "teamName",
+      cell: ({ row }) => <KeeperTeamLink row={row.original} />,
     },
   ];
 
@@ -2694,14 +3714,22 @@ function formatTransactionFab(type?: string, bidAmount?: number): string {
   return "N/A";
 }
 
-function resultColumnsForType(type: BrowserFilterType): ColumnDef<SearchRow>[] {
-  if (type === "draft") {
-    return draftSearchColumns;
+function resultColumnsForType(
+  type: BrowserFilterType,
+  showsYear: boolean,
+): ColumnDef<SearchRow>[] {
+  const columns =
+    type === "draft"
+      ? draftSearchColumns
+      : type === "transaction"
+        ? transactionSearchColumns
+        : searchColumns;
+
+  if (!showsYear) {
+    return columns.filter((column) => column.header !== "Season");
   }
-  if (type === "transaction") {
-    return transactionSearchColumns;
-  }
-  return searchColumns;
+
+  return columns;
 }
 
 function sortSearchRows(rows: SearchRow[]): SearchRow[] {
@@ -2848,7 +3876,7 @@ function browserBreadcrumbItems(filters: BrowserFilters): BreadcrumbItem[] {
       filters.type;
     items.push({
       label: typeLabel,
-      to: filters.year === "all" ? undefined : `/browse?type=${filters.type}`,
+      to: typeBrowseHref(filters.type, filters.query),
     });
   }
 
@@ -2889,6 +3917,17 @@ function yearBrowseHref(type: SearchType, year: number, query: string): string {
     type,
     year: String(year),
   });
+  const normalizedQuery = query.trim();
+
+  if (normalizedQuery) {
+    params.set("q", normalizedQuery);
+  }
+
+  return `/browse?${params.toString()}`;
+}
+
+function typeBrowseHref(type: SearchType, query: string): string {
+  const params = new URLSearchParams({ type });
   const normalizedQuery = query.trim();
 
   if (normalizedQuery) {

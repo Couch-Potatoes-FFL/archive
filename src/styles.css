@@ -400,10 +400,17 @@ select {
   background: #f0f3eb;
 }
 
-.contentBand,
-.panel {
+.contentBand {
   min-width: 0;
   padding: 18px;
+  background: #ffffff;
+  border: 1px solid #dfe5d7;
+  border-radius: 8px;
+}
+
+.panel {
+  min-width: 0;
+  padding: 24px 28px;
   background: #ffffff;
   border: 1px solid #dfe5d7;
   border-radius: 8px;
@@ -660,9 +667,21 @@ select {
 
 .playerSummaryLayout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 150px;
+  grid-template-columns: 150px minmax(0, 1fr);
   gap: 16px;
   align-items: center;
+}
+
+.teamDetailSummary {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.teamDetailSummary .teamCardIcon {
+  width: 58px;
+  height: 58px;
 }
 
 .playerSummaryLayout .definitionGrid {
@@ -671,7 +690,8 @@ select {
 
 .playerPhotoFrame,
 .playerPhotoPlaceholder {
-  justify-self: end;
+  order: -1;
+  justify-self: start;
   width: 140px;
   height: 140px;
   overflow: hidden;
@@ -1031,11 +1051,46 @@ td {
   border-radius: 999px;
 }
 
+.outcomePill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 34px;
+  min-height: 24px;
+  padding: 3px 8px;
+  color: #172018;
+  font-size: 0.78rem;
+  font-weight: 900;
+  background: #edf0e7;
+  border-radius: 999px;
+}
+
+.outcomePill.win {
+  color: #104127;
+  background: #dbece2;
+}
+
+.outcomePill.loss {
+  color: #7f2020;
+  background: #f8dddd;
+}
+
+.outcomePill.tie,
+.outcomePill.neutral {
+  color: #5f5122;
+  background: #eee6c7;
+}
+
 .teamLabel {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   min-width: 230px;
+  color: #172018;
+}
+
+a.teamLabel:hover {
+  color: #235c3b;
 }
 
 .teamLabel span {
@@ -1066,6 +1121,60 @@ td {
   border-radius: 8px;
 }
 
+.boxScoreToggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  width: 100%;
+  margin: 0;
+  padding: 10px 12px;
+  color: #172018;
+  font-weight: inherit;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.boxScoreToggle:hover {
+  background: #f0f5eb;
+}
+
+.boxScoreToggle:focus-visible {
+  outline: 2px solid #235c3b;
+  outline-offset: 2px;
+}
+
+.boxScoreTitle {
+  margin: 0 0 12px;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.boxScoreToggleMeta {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 6px;
+  color: #687366;
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.boxScoreChevron {
+  transition: transform 150ms ease;
+}
+
+.boxScoreChevron.collapsed {
+  transform: rotate(-90deg);
+}
+
+.boxScore .boxScoreTitle:last-child {
+  margin-bottom: 0;
+}
+
 .lineupColumns {
   display: grid;
   grid-template-columns: repeat(2, minmax(280px, 1fr));
@@ -1081,7 +1190,7 @@ td {
 
 .lineupTable h4 {
   margin: 0;
-  padding: 10px 12px;
+  padding: 16px 18px;
   background: #edf3e7;
   border-bottom: 1px solid #dfe5d7;
   border-radius: 8px 8px 0 0;
@@ -1094,19 +1203,47 @@ td {
 }
 
 .boxScoreTable {
-  min-width: 560px;
+  min-width: 640px;
   font-size: 0.9rem;
+}
+
+.seasonRosterStatsTable {
+  min-width: 840px;
 }
 
 .boxScoreTable th,
 .boxScoreTable td {
-  padding: 9px 10px;
+  padding: 10px 12px;
 }
 
-.boxScoreTable th:nth-child(4),
 .boxScoreTable th:nth-child(5),
+.boxScoreTable th:nth-child(6),
 .numberCell {
   text-align: right;
+}
+
+.seasonRosterStatsTable th:nth-child(n + 4) {
+  text-align: right;
+}
+
+.boxScoreTable th {
+  letter-spacing: 0;
+}
+
+.lineupSectionHeaderRow td {
+  height: 34px;
+  padding: 8px 18px;
+  color: #474b49;
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-align: center;
+  text-transform: uppercase;
+  background: #ffffff;
+  border-bottom: 1px solid #d8ddd4;
+}
+
+.boxScorePlayerRow td {
+  height: 66px;
 }
 
 .boxScorePlayerRow.bench {
@@ -1118,14 +1255,56 @@ td {
 }
 
 .slotCell {
-  width: 72px;
-  color: #6e5b23;
-  font-size: 0.78rem;
-  font-weight: 800;
+  width: 92px;
+  padding-left: 18px;
+  color: #787d7a;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 .playerCell {
-  min-width: 190px;
+  min-width: 210px;
+  padding-left: 0;
+}
+
+.playerIconCell {
+  width: 68px;
+  padding-right: 8px;
+  padding-left: 4px;
+}
+
+.lineupPlayerIcon {
+  display: inline-flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  overflow: hidden;
+  color: #0f5237;
+  background: #f2f4f1;
+  border-radius: 6px;
+}
+
+.lineupPlayerIcon img {
+  max-width: 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+}
+
+.lineupPlayerIcon:not(.teamLogo) img {
+  object-fit: cover;
+  object-position: top center;
+}
+
+.lineupPlayerIcon.teamLogo {
+  background: #ffffff;
+}
+
+.lineupPlayerIcon.placeholder {
+  align-items: center;
+  background: #e2eee6;
 }
 
 .lineupPlayerName {
@@ -1141,15 +1320,20 @@ td {
 
 .playerCell small {
   margin-top: 2px;
-  color: #687366;
-  font-size: 0.78rem;
+  color: #737875;
+  font-size: 0.95rem;
+  line-height: 1.2;
 }
 
-.injuryBadge {
-  color: #d11212;
-  font-size: 0.75rem;
-  font-weight: 900;
-  line-height: 1;
+.playerCell a {
+  color: #0968d8;
+}
+
+.playerCell strong {
+  color: inherit;
+  font-size: 1.02rem;
+  font-weight: 500;
+  line-height: 1.18;
 }
 
 .lineupSummaryRow {
@@ -1208,6 +1392,7 @@ pre {
   .contentGrid,
   .playerCardGrid,
   .playerSummaryLayout,
+  .teamDetailSummary,
   .lineupColumns {
     grid-template-columns: 1fr;
   }
@@ -1386,8 +1571,12 @@ pre {
   }
 
   .boxScoreTable {
-    min-width: 500px;
+    min-width: 560px;
     font-size: 0.84rem;
+  }
+
+  .seasonRosterStatsTable {
+    min-width: 760px;
   }
 
   .boxScoreTable th,
