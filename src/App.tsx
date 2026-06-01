@@ -2346,7 +2346,6 @@ function TeamPage() {
   const draftColumns = draftPickColumnsForTeam(teamNames, season.data.year);
   const averageScore = average(team.scores);
   const highScore = team.scores.length ? Math.max(...team.scores) : undefined;
-  const lowScore = team.scores.length ? Math.min(...team.scores) : undefined;
 
   return (
     <>
@@ -2365,23 +2364,6 @@ function TeamPage() {
         <div>
           <p className="eyebrow">{season.data.year} team report</p>
           <h1>{team.name}</h1>
-        </div>
-        <div className="statRail">
-          <Metric
-            icon={<Shield size={18} />}
-            label="Record"
-            value={teamRecord(team)}
-          />
-          <Metric
-            icon={<Trophy size={18} />}
-            label="Final Finish"
-            value={team.finalStanding ? `#${team.finalStanding}` : "-"}
-          />
-          <Metric
-            icon={<Database size={18} />}
-            label="Points For"
-            value={formatScore(team.pointsFor)}
-          />
         </div>
       </section>
 
@@ -2406,8 +2388,8 @@ function TeamPage() {
                 <dd>{team.divisionName ?? "-"}</dd>
               </div>
               <div>
-                <dt>Points Against</dt>
-                <dd>{formatScore(team.pointsAgainst)}</dd>
+                <dt>Final Finish</dt>
+                <dd>{team.finalStanding ? `#${team.finalStanding}` : "-"}</dd>
               </div>
             </dl>
           </div>
@@ -2418,20 +2400,20 @@ function TeamPage() {
           </div>
           <dl className="definitionGrid">
             <div>
+              <dt>Points For</dt>
+              <dd>{formatScore(team.pointsFor, false)}</dd>
+            </div>
+            <div>
+              <dt>Points Against</dt>
+              <dd>{formatScore(team.pointsAgainst, false)}</dd>
+            </div>
+            <div>
               <dt>Average score</dt>
               <dd>{formatScore(averageScore)}</dd>
             </div>
             <div>
               <dt>High score</dt>
               <dd>{formatScore(highScore)}</dd>
-            </div>
-            <div>
-              <dt>Low score</dt>
-              <dd>{formatScore(lowScore)}</dd>
-            </div>
-            <div>
-              <dt>Acquisitions</dt>
-              <dd>{formatNumber(team.transactions.acquisitions)}</dd>
             </div>
           </dl>
         </div>
@@ -2440,9 +2422,6 @@ function TeamPage() {
       <section className="contentBand">
         <div className="sectionHeader">
           <h2>Final Roster</h2>
-          <span className="pendingNote">
-            {rosterSnapshot ? "Season totals and averages" : "No roster snapshot"}
-          </span>
         </div>
         {rosterSnapshot ? (
           <SeasonRosterTable
@@ -2796,6 +2775,17 @@ function SeasonRosterTable({
       <h4>{title}</h4>
       <div className="lineupScroll">
         <table className="boxScoreTable seasonRosterStatsTable">
+          <colgroup>
+            <col className="seasonRosterSlotColumn" />
+            <col className="seasonRosterIconColumn" />
+            <col className="seasonRosterPlayerColumn" />
+            <col className="seasonRosterStatColumn" />
+            <col className="seasonRosterStatColumn" />
+            <col className="seasonRosterStatColumn" />
+            <col className="seasonRosterStatColumn" />
+            <col className="seasonRosterStatColumn" />
+            <col className="seasonRosterStatColumn" />
+          </colgroup>
           <thead>
             <tr>
               <th>Slot</th>
@@ -3508,12 +3498,13 @@ function teamScoreline(matchup: TeamMatchupRow): string {
   return `${formatScore(matchup.teamScore)} - ${formatScore(matchup.opponentScore)}`;
 }
 
-function formatScore(value: number | undefined): string {
+function formatScore(value: number | undefined, useGrouping = true): string {
   if (value === undefined || Number.isNaN(value)) {
     return "-";
   }
   return value.toLocaleString(undefined, {
     maximumFractionDigits: 1,
+    useGrouping,
   });
 }
 

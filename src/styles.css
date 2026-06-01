@@ -1209,6 +1209,23 @@ a.teamLabel:hover {
 
 .seasonRosterStatsTable {
   min-width: 840px;
+  table-layout: fixed;
+}
+
+.seasonRosterSlotColumn {
+  width: 8%;
+}
+
+.seasonRosterIconColumn {
+  width: 6%;
+}
+
+.seasonRosterPlayerColumn {
+  width: 32%;
+}
+
+.seasonRosterStatColumn {
+  width: 9%;
 }
 
 .boxScoreTable th,
