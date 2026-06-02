@@ -1965,6 +1965,127 @@ function DraftPickMobileCard({
   );
 }
 
+function ScoreboardGrid({
+  matchups,
+  teams,
+  year,
+}: {
+  matchups: Matchup[];
+  teams: PublicTeam[];
+  year: number;
+}) {
+  const teamsByKey = new Map(teams.map((team) => [team.key, team]));
+
+  if (!matchups.length) {
+    return <p className="emptyNote">No scoreboard results found for this week.</p>;
+  }
+
+  return (
+    <div className="scoreboardGrid">
+      {matchups.map((matchup, index) => {
+        const awayTeam = matchup.awayTeamKey
+          ? teamsByKey.get(matchup.awayTeamKey)
+          : undefined;
+        const homeTeam = matchup.homeTeamKey
+          ? teamsByKey.get(matchup.homeTeamKey)
+          : undefined;
+        const winnerTeam = matchup.winnerTeamKey
+          ? teamsByKey.get(matchup.winnerTeamKey)
+          : undefined;
+
+        return (
+          <article className="scoreGameCard" key={matchup.matchupKey}>
+            <div className="scoreGameTopline">
+              <span>Matchup {index + 1}</span>
+              <span className="scoreGameType">{displayMatchupType(matchup)}</span>
+            </div>
+            <div className="scoreGameTeams">
+              <ScoreboardTeamRow
+                label="Away"
+                score={matchup.awayScore}
+                team={awayTeam}
+                teamKey={matchup.awayTeamKey}
+                year={year}
+                isWinner={matchup.winnerTeamKey === matchup.awayTeamKey}
+              />
+              <ScoreboardTeamRow
+                label="Home"
+                score={matchup.homeScore}
+                team={homeTeam}
+                teamKey={matchup.homeTeamKey}
+                year={year}
+                isWinner={matchup.winnerTeamKey === matchup.homeTeamKey}
+              />
+            </div>
+            <div className="scoreGameFooter">
+              <span className="scoreboardWinner">
+                {matchup.winnerTeamKey
+                  ? `Winner: ${winnerTeam?.name ?? matchup.winnerTeamKey}`
+                  : "Result pending"}
+              </span>
+              <strong>{scoreMarginLabel(matchup)}</strong>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  );
+}
+
+function ScoreboardTeamRow({
+  label,
+  score,
+  team,
+  teamKey,
+  year,
+  isWinner,
+}: {
+  label: "Away" | "Home";
+  score?: number;
+  team?: PublicTeam;
+  teamKey?: string;
+  year: number;
+  isWinner: boolean;
+}) {
+  const logoUrl = archivePublicUrl(team?.logoUrl);
+  const teamName = team?.name ?? teamKey ?? "Unknown team";
+  const teamAbbrev = team?.abbrev ?? label;
+  const content = (
+    <>
+      <span className="scoreboardTeamLogo">
+        {logoUrl ? <img src={logoUrl} alt="" loading="lazy" /> : <Shield size={20} />}
+      </span>
+      <span className="scoreboardTeamText">
+        <small>{label}</small>
+        <strong>{teamName}</strong>
+        <span>{teamAbbrev}</span>
+      </span>
+    </>
+  );
+
+  return (
+    <div className={isWinner ? "scoreboardTeamRow winner" : "scoreboardTeamRow"}>
+      {teamKey ? (
+        <Link className="scoreboardTeamIdentity" to={teamPageHref(year, teamKey)}>
+          {content}
+        </Link>
+      ) : (
+        <span className="scoreboardTeamIdentity">{content}</span>
+      )}
+      <strong className="scoreboardScore">{formatNumber(score, 2)}</strong>
+    </div>
+  );
+}
+
+function scoreMarginLabel(matchup: Matchup): string {
+  if (matchup.awayScore === undefined || matchup.homeScore === undefined) {
+    return "No margin";
+  }
+
+  const margin = Math.abs(matchup.homeScore - matchup.awayScore);
+  return margin === 0 ? "Tie game" : `${formatNumber(margin, 2)} margin`;
+}
+
 function MatchupMobileCard({
   matchup,
   teamNames,
@@ -2491,33 +2612,6 @@ function WeekPage() {
   }
 
   const teamNames = teamNameMap(season.data.teams);
-  const matchupColumns: ColumnDef<Matchup>[] = [
-    {
-      header: "Away",
-      accessorKey: "awayTeamKey",
-      cell: ({ row }) => teamDisplay(row.original.awayTeamKey, teamNames),
-    },
-    {
-      header: "Away score",
-      accessorKey: "awayScore",
-      cell: ({ row }) => formatNumber(row.original.awayScore),
-    },
-    {
-      header: "Home",
-      accessorKey: "homeTeamKey",
-      cell: ({ row }) => teamDisplay(row.original.homeTeamKey, teamNames),
-    },
-    {
-      header: "Home score",
-      accessorKey: "homeScore",
-      cell: ({ row }) => formatNumber(row.original.homeScore),
-    },
-    {
-      header: "Winner",
-      accessorKey: "winnerTeamKey",
-      cell: ({ row }) => teamDisplay(row.original.winnerTeamKey, teamNames),
-    },
-  ];
 
   const transactionColumns: ColumnDef<Transaction>[] = [
     {
@@ -2579,17 +2673,18 @@ function WeekPage() {
         </div>
       </section>
 
-      <section className="contentBand">
+      <section className="contentBand scoreboardBand">
         <div className="sectionHeader">
           <h2>Scoreboard</h2>
+          <span className="pendingNote">
+            {formatNumber(weekData.data.scoreboard.length)}{" "}
+            {weekData.data.scoreboard.length === 1 ? "game" : "games"}
+          </span>
         </div>
-        <SimpleTable
-          data={weekData.data.scoreboard}
-          columns={matchupColumns}
-          mobileCard={(matchup) => (
-            <MatchupMobileCard matchup={matchup} teamNames={teamNames} />
-          )}
-          mobileLabel="Scoreboard cards"
+        <ScoreboardGrid
+          matchups={weekData.data.scoreboard}
+          teams={season.data.teams}
+          year={season.data.year}
         />
       </section>
 
@@ -3480,7 +3575,7 @@ function outcomeClass(outcome: string): string {
   return "neutral";
 }
 
-function displayMatchupType(matchup: TeamMatchupRow): string {
+function displayMatchupType(matchup: { isPlayoff: boolean; matchupType?: string }): string {
   if (matchup.isPlayoff) {
     return matchup.matchupType && matchup.matchupType !== "NONE"
       ? `Playoff, ${matchup.matchupType}`
