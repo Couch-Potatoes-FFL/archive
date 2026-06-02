@@ -2724,13 +2724,6 @@ function WeekPage() {
           mobileLabel="Transaction cards"
         />
       </section>
-
-      <section className="contentBand">
-        <details className="jsonDetails">
-          <summary>Sanitized JSON</summary>
-          <pre>{JSON.stringify(weekData.data, null, 2)}</pre>
-        </details>
-      </section>
     </>
   );
 }

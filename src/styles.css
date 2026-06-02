@@ -1541,20 +1541,6 @@ a.teamLabel:hover {
   border-color: #f0c1bd;
 }
 
-.jsonDetails summary {
-  cursor: pointer;
-  font-weight: 800;
-}
-
-pre {
-  max-height: 520px;
-  overflow: auto;
-  padding: 14px;
-  color: #dce9de;
-  background: #121815;
-  border-radius: 8px;
-}
-
 @media (max-width: 960px) {
   .pageIntro,
   .sectionHeader {
