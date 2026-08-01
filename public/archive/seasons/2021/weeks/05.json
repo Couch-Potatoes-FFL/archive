@@ -674,8 +674,8 @@
           "position": "WR",
           "lineupSlot": "BE",
           "slotPosition": "BE",
-          "proTeam": "CLE",
-          "proOpponent": "LAC",
+          "proTeam": "LAR",
+          "proOpponent": "SEA",
           "points": 4,
           "projectedPoints": 13.62,
           "injuryStatus": "DOUBTFUL"
@@ -765,8 +765,8 @@
           "position": "WR",
           "lineupSlot": "OP",
           "slotPosition": "OP",
-          "proTeam": "TB",
-          "proOpponent": "MIA",
+          "proTeam": "None",
+          "proOpponent": "None",
           "points": 37.4,
           "projectedPoints": 13.8,
           "injuryStatus": "QUESTIONABLE"
@@ -1171,8 +1171,8 @@
           "position": "WR",
           "lineupSlot": "RB/WR/TE",
           "slotPosition": "RB/WR/TE",
-          "proTeam": "LV",
-          "proOpponent": "CHI",
+          "proTeam": "None",
+          "proOpponent": "None",
           "points": 8.1,
           "projectedPoints": 12.01,
           "injuryStatus": "ACTIVE"
@@ -2647,6 +2647,23 @@
   "transactions": [
     {
       "transactionKey": "2021-w05-x0001",
+      "teamKey": "2021-t10",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1633451165557,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "playerKey": "name-tim-patrick",
+          "playerId": null,
+          "player": "Tim Patrick"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0002",
       "teamKey": "2021-t04",
       "type": "WAIVER",
       "status": "EXECUTED",
@@ -2656,20 +2673,37 @@
       "items": [
         {
           "type": "ADD",
-          "playerKey": "espn--16022",
-          "playerId": -16022,
+          "playerKey": "name-cardinals-d-st",
+          "playerId": null,
           "player": "Cardinals D/ST"
         },
         {
           "type": "DROP",
-          "playerKey": "espn--16033",
-          "playerId": -16033,
+          "playerKey": "name-ravens-d-st",
+          "playerId": null,
           "player": "Ravens D/ST"
         }
       ]
     },
     {
-      "transactionKey": "2021-w05-x0002",
+      "transactionKey": "2021-w05-x0003",
+      "teamKey": "2021-t12",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1633430976055,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "playerKey": "name-panthers-d-st",
+          "playerId": null,
+          "player": "Panthers D/ST"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0004",
       "teamKey": "2021-t10",
       "type": "WAIVER",
       "status": "EXECUTED",
@@ -2679,14 +2713,14 @@
       "items": [
         {
           "type": "ADD",
-          "playerKey": "espn-4360310",
-          "playerId": 4360310,
+          "playerKey": "name-trevor-lawrence",
+          "playerId": null,
           "player": "Trevor Lawrence"
         }
       ]
     },
     {
-      "transactionKey": "2021-w05-x0003",
+      "transactionKey": "2021-w05-x0005",
       "teamKey": "2021-t04",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -2696,14 +2730,14 @@
       "items": [
         {
           "type": "ADD",
-          "playerKey": "espn--16006",
-          "playerId": -16006,
+          "playerKey": "name-cowboys-d-st",
+          "playerId": null,
           "player": "Cowboys D/ST"
         }
       ]
     },
     {
-      "transactionKey": "2021-w05-x0004",
+      "transactionKey": "2021-w05-x0006",
       "teamKey": "2021-t11",
       "type": "WAIVER",
       "status": "FAILED_INVALIDPLAYERSOURCE",
@@ -2713,20 +2747,20 @@
       "items": [
         {
           "type": "ADD",
-          "playerKey": "espn-4360310",
-          "playerId": 4360310,
+          "playerKey": "name-trevor-lawrence",
+          "playerId": null,
           "player": "Trevor Lawrence"
         },
         {
           "type": "DROP",
-          "playerKey": "espn-16760",
-          "playerId": 16760,
+          "playerKey": "name-jimmy-garoppolo",
+          "playerId": null,
           "player": "Jimmy Garoppolo"
         }
       ]
     },
     {
-      "transactionKey": "2021-w05-x0005",
+      "transactionKey": "2021-w05-x0007",
       "teamKey": "2021-t05",
       "type": "WAIVER",
       "status": "PENDING",
@@ -2736,20 +2770,20 @@
       "items": [
         {
           "type": "ADD",
-          "playerKey": "espn-17359",
-          "playerId": 17359,
+          "playerKey": "name-damien-williams",
+          "playerId": null,
           "player": "Damien Williams"
         },
         {
           "type": "DROP",
-          "playerKey": "espn-3886818",
-          "playerId": 3886818,
+          "playerKey": "name-myles-gaskin",
+          "playerId": null,
           "player": "Myles Gaskin"
         }
       ]
     },
     {
-      "transactionKey": "2021-w05-x0006",
+      "transactionKey": "2021-w05-x0008",
       "teamKey": "2021-t03",
       "type": "WAIVER",
       "status": "FAILED_INVALIDPLAYERSOURCE",
@@ -2759,14 +2793,14 @@
       "items": [
         {
           "type": "ADD",
-          "playerKey": "espn-17359",
-          "playerId": 17359,
+          "playerKey": "name-damien-williams",
+          "playerId": null,
           "player": "Damien Williams"
         }
       ]
     },
     {
-      "transactionKey": "2021-w05-x0007",
+      "transactionKey": "2021-w05-x0009",
       "teamKey": "2021-t02",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -2776,14 +2810,14 @@
       "items": [
         {
           "type": "ADD",
-          "playerKey": "espn--16009",
-          "playerId": -16009,
+          "playerKey": "name-packers-d-st",
+          "playerId": null,
           "player": "Packers D/ST"
         }
       ]
     },
     {
-      "transactionKey": "2021-w05-x0008",
+      "transactionKey": "2021-w05-x0010",
       "teamKey": "2021-t10",
       "type": "WAIVER",
       "status": "FAILED_INVALIDPLAYERSOURCE",
@@ -2793,14 +2827,14 @@
       "items": [
         {
           "type": "ADD",
-          "playerKey": "espn-17359",
-          "playerId": 17359,
+          "playerKey": "name-damien-williams",
+          "playerId": null,
           "player": "Damien Williams"
         }
       ]
     },
     {
-      "transactionKey": "2021-w05-x0009",
+      "transactionKey": "2021-w05-x0011",
       "teamKey": "2021-t11",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -2810,20 +2844,20 @@
       "items": [
         {
           "type": "ADD",
-          "playerKey": "espn-4361259",
-          "playerId": 4361259,
+          "playerKey": "name-zach-wilson",
+          "playerId": null,
           "player": "Zach Wilson"
         },
         {
           "type": "DROP",
-          "playerKey": "espn-16760",
-          "playerId": 16760,
+          "playerKey": "name-jimmy-garoppolo",
+          "playerId": null,
           "player": "Jimmy Garoppolo"
         }
       ]
     },
     {
-      "transactionKey": "2021-w05-x0010",
+      "transactionKey": "2021-w05-x0012",
       "teamKey": "2021-t10",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -2833,14 +2867,37 @@
       "items": [
         {
           "type": "ADD",
-          "playerKey": "espn--16023",
-          "playerId": -16023,
+          "playerKey": "name-steelers-d-st",
+          "playerId": null,
           "player": "Steelers D/ST"
         }
       ]
     },
     {
-      "transactionKey": "2021-w05-x0011",
+      "transactionKey": "2021-w05-x0013",
+      "teamKey": "2021-t10",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1633451082337,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "name-tee-higgins",
+          "playerId": null,
+          "player": "Tee Higgins"
+        },
+        {
+          "type": "DROP",
+          "playerKey": "name-nick-westbrook-ikhine",
+          "playerId": null,
+          "player": "Nick Westbrook-Ikhine"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0014",
       "teamKey": "2021-t06",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -2850,14 +2907,14 @@
       "items": [
         {
           "type": "ADD",
-          "playerKey": "espn-3886818",
-          "playerId": 3886818,
+          "playerKey": "name-myles-gaskin",
+          "playerId": null,
           "player": "Myles Gaskin"
         }
       ]
     },
     {
-      "transactionKey": "2021-w05-x0012",
+      "transactionKey": "2021-w05-x0015",
       "teamKey": "2021-t12",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -2867,14 +2924,14 @@
       "items": [
         {
           "type": "ADD",
-          "playerKey": "espn-2576716",
-          "playerId": 2576716,
+          "playerKey": "name-jamison-crowder",
+          "playerId": null,
           "player": "Jamison Crowder"
         }
       ]
     },
     {
-      "transactionKey": "2021-w05-x0013",
+      "transactionKey": "2021-w05-x0016",
       "teamKey": "2021-t02",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -2884,14 +2941,31 @@
       "items": [
         {
           "type": "ADD",
-          "playerKey": "espn--16017",
-          "playerId": -16017,
+          "playerKey": "name-patriots-d-st",
+          "playerId": null,
           "player": "Patriots D/ST"
         }
       ]
     },
     {
-      "transactionKey": "2021-w05-x0014",
+      "transactionKey": "2021-w05-x0017",
+      "teamKey": "2021-t02",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1633566413698,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "playerKey": "name-k-j-osborn",
+          "playerId": null,
+          "player": "K.J. Osborn"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0018",
       "teamKey": "2021-t11",
       "type": "WAIVER",
       "status": "FAILED_INVALIDPLAYERSOURCE",
@@ -2901,20 +2975,37 @@
       "items": [
         {
           "type": "ADD",
-          "playerKey": "espn-17359",
-          "playerId": 17359,
+          "playerKey": "name-damien-williams",
+          "playerId": null,
           "player": "Damien Williams"
         },
         {
           "type": "DROP",
-          "playerKey": "espn-16760",
-          "playerId": 16760,
+          "playerKey": "name-jimmy-garoppolo",
+          "playerId": null,
           "player": "Jimmy Garoppolo"
         }
       ]
     },
     {
-      "transactionKey": "2021-w05-x0015",
+      "transactionKey": "2021-w05-x0019",
+      "teamKey": "2021-t02",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1633566373374,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "playerKey": "name-bengals-d-st",
+          "playerId": null,
+          "player": "Bengals D/ST"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0020",
       "teamKey": "2021-t12",
       "type": "WAIVER",
       "status": "FAILED_INVALIDPLAYERSOURCE",
@@ -2924,14 +3015,14 @@
       "items": [
         {
           "type": "ADD",
-          "playerKey": "espn-17359",
-          "playerId": 17359,
+          "playerKey": "name-damien-williams",
+          "playerId": null,
           "player": "Damien Williams"
         }
       ]
     },
     {
-      "transactionKey": "2021-w05-x0016",
+      "transactionKey": "2021-w05-x0021",
       "teamKey": "2021-t01",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -2941,106 +3032,9 @@
       "items": [
         {
           "type": "ADD",
-          "playerKey": "espn-4239934",
-          "playerId": 4239934,
+          "playerKey": "name-aj-dillon",
+          "playerId": null,
           "player": "AJ Dillon"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2021-w05-x0017",
-      "teamKey": "2021-t05",
-      "type": "WAIVER",
-      "status": "EXECUTED",
-      "scoringPeriod": 5,
-      "date": 1633590645581,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn-17359",
-          "playerId": 17359,
-          "player": "Damien Williams"
-        },
-        {
-          "type": "DROP",
-          "playerKey": "espn-3886818",
-          "playerId": 3886818,
-          "player": "Myles Gaskin"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2021-w05-x0018",
-      "teamKey": "2021-t10",
-      "type": "WAIVER",
-      "status": "CANCELED",
-      "scoringPeriod": 5,
-      "date": 1633451228257,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn-4360310",
-          "playerId": 4360310,
-          "player": "Trevor Lawrence"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2021-w05-x0019",
-      "teamKey": "2021-t05",
-      "type": "WAIVER",
-      "status": "PENDING",
-      "scoringPeriod": 5,
-      "date": 1633591516171,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn--16029",
-          "playerId": -16029,
-          "player": "Panthers D/ST"
-        },
-        {
-          "type": "DROP",
-          "playerKey": "espn--16011",
-          "playerId": -16011,
-          "player": "Colts D/ST"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2021-w05-x0020",
-      "teamKey": "2021-t06",
-      "type": "FREEAGENT",
-      "status": "EXECUTED",
-      "scoringPeriod": 5,
-      "date": 1633885039224,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn--16003",
-          "playerId": -16003,
-          "player": "Bears D/ST"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2021-w05-x0021",
-      "teamKey": "2021-t12",
-      "type": "FREEAGENT",
-      "status": "EXECUTED",
-      "scoringPeriod": 5,
-      "date": 1633591917846,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn-3116389",
-          "playerId": 3116389,
-          "player": "Samaje Perine"
         }
       ]
     },
@@ -3050,25 +3044,173 @@
       "type": "WAIVER",
       "status": "EXECUTED",
       "scoringPeriod": 5,
-      "date": 1633679747503,
+      "date": 1633590645581,
       "bidAmount": 0,
       "items": [
         {
           "type": "ADD",
-          "playerKey": "espn--16029",
-          "playerId": -16029,
-          "player": "Panthers D/ST"
+          "playerKey": "name-damien-williams",
+          "playerId": null,
+          "player": "Damien Williams"
         },
         {
           "type": "DROP",
-          "playerKey": "espn--16011",
-          "playerId": -16011,
-          "player": "Colts D/ST"
+          "playerKey": "name-myles-gaskin",
+          "playerId": null,
+          "player": "Myles Gaskin"
         }
       ]
     },
     {
       "transactionKey": "2021-w05-x0023",
+      "teamKey": "2021-t12",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1633592504612,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "playerKey": "name-russell-gage",
+          "playerId": null,
+          "player": "Russell Gage"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0024",
+      "teamKey": "2021-t03",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1633810337317,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "playerKey": "name-dj-chark-jr",
+          "playerId": null,
+          "player": "DJ Chark Jr."
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0025",
+      "teamKey": "2021-t10",
+      "type": "WAIVER",
+      "status": "CANCELED",
+      "scoringPeriod": 5,
+      "date": 1633451228257,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "name-trevor-lawrence",
+          "playerId": null,
+          "player": "Trevor Lawrence"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0026",
+      "teamKey": "2021-t10",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1633451368663,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "playerKey": "name-titans-d-st",
+          "playerId": null,
+          "player": "Titans D/ST"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0027",
+      "teamKey": "2021-t05",
+      "type": "WAIVER",
+      "status": "PENDING",
+      "scoringPeriod": 5,
+      "date": 1633591516171,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "name-panthers-d-st",
+          "playerId": null,
+          "player": "Panthers D/ST"
+        },
+        {
+          "type": "DROP",
+          "playerKey": "name-colts-d-st",
+          "playerId": null,
+          "player": "Colts D/ST"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0028",
+      "teamKey": "2021-t06",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1633885039224,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "name-bears-d-st",
+          "playerId": null,
+          "player": "Bears D/ST"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0029",
+      "teamKey": "2021-t12",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1633591917846,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "name-samaje-perine",
+          "playerId": null,
+          "player": "Samaje Perine"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0030",
+      "teamKey": "2021-t05",
+      "type": "WAIVER",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1633679747503,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "name-panthers-d-st",
+          "playerId": null,
+          "player": "Panthers D/ST"
+        },
+        {
+          "type": "DROP",
+          "playerKey": "name-colts-d-st",
+          "playerId": null,
+          "player": "Colts D/ST"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0031",
       "teamKey": "2021-t01",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3078,14 +3220,14 @@
       "items": [
         {
           "type": "ADD",
-          "playerKey": "espn-4240600",
-          "playerId": 4240600,
+          "playerKey": "name-kadarius-toney",
+          "playerId": null,
           "player": "Kadarius Toney"
         }
       ]
     },
     {
-      "transactionKey": "2021-w05-x0024",
+      "transactionKey": "2021-w05-x0032",
       "teamKey": "2021-t10",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3095,14 +3237,14 @@
       "items": [
         {
           "type": "ADD",
-          "playerKey": "espn-15478",
-          "playerId": 15478,
+          "playerKey": "name-brandon-bolden",
+          "playerId": null,
           "player": "Brandon Bolden"
         }
       ]
     },
     {
-      "transactionKey": "2021-w05-x0025",
+      "transactionKey": "2021-w05-x0033",
       "teamKey": "2021-t10",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3112,20 +3254,37 @@
       "items": [
         {
           "type": "ADD",
-          "playerKey": "espn-3046409",
-          "playerId": 3046409,
+          "playerKey": "name-alex-collins",
+          "playerId": null,
           "player": "Alex Collins"
         },
         {
           "type": "DROP",
-          "playerKey": "espn--16015",
-          "playerId": -16015,
+          "playerKey": "name-dolphins-d-st",
+          "playerId": null,
           "player": "Dolphins D/ST"
         }
       ]
     },
     {
-      "transactionKey": "2021-w05-x0026",
+      "transactionKey": "2021-w05-x0034",
+      "teamKey": "2021-t01",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1633652933637,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "playerKey": "name-j-j-taylor",
+          "playerId": null,
+          "player": "J.J. Taylor"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0035",
       "teamKey": "2021-t03",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3135,14 +3294,31 @@
       "items": [
         {
           "type": "ADD",
-          "playerKey": "espn-17453",
-          "playerId": 17453,
+          "playerKey": "name-cameron-brate",
+          "playerId": null,
           "player": "Cameron Brate"
         }
       ]
     },
     {
-      "transactionKey": "2021-w05-x0027",
+      "transactionKey": "2021-w05-x0036",
+      "teamKey": "2021-t06",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1633493109791,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "playerKey": "name-robert-tonyan",
+          "playerId": null,
+          "player": "Robert Tonyan"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0037",
       "teamKey": "2021-t10",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3152,20 +3328,20 @@
       "items": [
         {
           "type": "ADD",
-          "playerKey": "espn--16033",
-          "playerId": -16033,
+          "playerKey": "name-ravens-d-st",
+          "playerId": null,
           "player": "Ravens D/ST"
         },
         {
           "type": "DROP",
-          "playerKey": "espn--16023",
-          "playerId": -16023,
+          "playerKey": "name-steelers-d-st",
+          "playerId": null,
           "player": "Steelers D/ST"
         }
       ]
     },
     {
-      "transactionKey": "2021-w05-x0028",
+      "transactionKey": "2021-w05-x0038",
       "teamKey": "2021-t09",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3175,20 +3351,20 @@
       "items": [
         {
           "type": "ADD",
-          "playerKey": "espn-12537",
-          "playerId": 12537,
+          "playerKey": "name-jared-cook",
+          "playerId": null,
           "player": "Jared Cook"
         },
         {
           "type": "DROP",
-          "playerKey": "espn-13981",
-          "playerId": 13981,
+          "playerKey": "name-mark-ingram-ii",
+          "playerId": null,
           "player": "Mark Ingram II"
         }
       ]
     },
     {
-      "transactionKey": "2021-w05-x0029",
+      "transactionKey": "2021-w05-x0039",
       "teamKey": "2021-t03",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3198,9 +3374,26 @@
       "items": [
         {
           "type": "ADD",
-          "playerKey": "espn-3134353",
-          "playerId": 3134353,
+          "playerKey": "name-tim-patrick",
+          "playerId": null,
           "player": "Tim Patrick"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2021-w05-x0040",
+      "teamKey": "2021-t01",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1633652928413,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "playerKey": "name-ronald-jones-ii",
+          "playerId": null,
+          "player": "Ronald Jones II"
         }
       ]
     }

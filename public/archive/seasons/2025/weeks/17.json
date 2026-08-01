@@ -1693,8 +1693,8 @@
           "position": "WR",
           "lineupSlot": "IR",
           "slotPosition": "IR",
-          "proTeam": "MIA",
-          "proOpponent": "TB",
+          "proTeam": "None",
+          "proOpponent": "None",
           "points": 0,
           "projectedPoints": 0,
           "injuryStatus": "QUESTIONABLE"
@@ -2138,8 +2138,8 @@
           "position": "RB",
           "lineupSlot": "BE",
           "slotPosition": "BE",
-          "proTeam": "DET",
-          "proOpponent": "MIN",
+          "proTeam": "HOU",
+          "proOpponent": "LAC",
           "points": 6,
           "projectedPoints": 8.73,
           "injuryStatus": "ACTIVE"
@@ -2812,14 +2812,14 @@
       "items": [
         {
           "type": "ADD",
-          "playerKey": "espn-2468609",
-          "playerId": 2468609,
+          "playerKey": "name-taysom-hill",
+          "playerId": null,
           "player": "Taysom Hill"
         },
         {
           "type": "DROP",
-          "playerKey": "espn-4242557",
-          "playerId": 4242557,
+          "playerKey": "name-colby-parkinson",
+          "playerId": null,
           "player": "Colby Parkinson"
         }
       ]
@@ -2835,14 +2835,31 @@
       "items": [
         {
           "type": "ADD",
-          "playerKey": "espn-4242512",
-          "playerId": 4242512,
+          "playerKey": "name-malik-willis",
+          "playerId": null,
           "player": "Malik Willis"
         }
       ]
     },
     {
       "transactionKey": "2025-w17-x0003",
+      "teamKey": "2025-t02",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 17,
+      "date": 1766580935531,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "playerKey": "name-kimani-vidal",
+          "playerId": null,
+          "player": "Kimani Vidal"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2025-w17-x0004",
       "teamKey": "2025-t02",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -2852,20 +2869,20 @@
       "items": [
         {
           "type": "ADD",
-          "playerKey": "espn-4432620",
-          "playerId": 4432620,
+          "playerKey": "name-parker-washington",
+          "playerId": null,
           "player": "Parker Washington"
         },
         {
           "type": "DROP",
-          "playerKey": "espn--16021",
-          "playerId": -16021,
+          "playerKey": "name-eagles-d-st",
+          "playerId": null,
           "player": "Eagles D/ST"
         }
       ]
     },
     {
-      "transactionKey": "2025-w17-x0004",
+      "transactionKey": "2025-w17-x0005",
       "teamKey": "2025-t12",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -2875,14 +2892,14 @@
       "items": [
         {
           "type": "ADD",
-          "playerKey": "espn-15864",
-          "playerId": 15864,
+          "playerKey": "name-geno-smith",
+          "playerId": null,
           "player": "Geno Smith"
         }
       ]
     },
     {
-      "transactionKey": "2025-w17-x0005",
+      "transactionKey": "2025-w17-x0006",
       "teamKey": "2025-t02",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -2892,32 +2909,9 @@
       "items": [
         {
           "type": "ADD",
-          "playerKey": "espn-4241457",
-          "playerId": 4241457,
+          "playerKey": "name-najee-harris",
+          "playerId": null,
           "player": "Najee Harris"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2025-w17-x0006",
-      "teamKey": "2025-t13",
-      "type": "WAIVER",
-      "status": "EXECUTED",
-      "scoringPeriod": 17,
-      "date": 1766568055990,
-      "bidAmount": 20,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn-4428718",
-          "playerId": 4428718,
-          "player": "Tre Tucker"
-        },
-        {
-          "type": "DROP",
-          "playerKey": "espn-4695883",
-          "playerId": 4695883,
-          "player": "Jalen Coker"
         }
       ]
     },
@@ -2932,20 +2926,43 @@
       "items": [
         {
           "type": "ADD",
-          "playerKey": "espn-2468609",
-          "playerId": 2468609,
-          "player": "Taysom Hill"
+          "playerKey": "name-tre-tucker",
+          "playerId": null,
+          "player": "Tre Tucker"
         },
         {
           "type": "DROP",
-          "playerKey": "espn-4429148",
-          "playerId": 4429148,
-          "player": "Theo Johnson"
+          "playerKey": "name-jalen-coker",
+          "playerId": null,
+          "player": "Jalen Coker"
         }
       ]
     },
     {
       "transactionKey": "2025-w17-x0008",
+      "teamKey": "2025-t13",
+      "type": "WAIVER",
+      "status": "EXECUTED",
+      "scoringPeriod": 17,
+      "date": 1766568055990,
+      "bidAmount": 20,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "name-taysom-hill",
+          "playerId": null,
+          "player": "Taysom Hill"
+        },
+        {
+          "type": "DROP",
+          "playerKey": "name-theo-johnson",
+          "playerId": null,
+          "player": "Theo Johnson"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2025-w17-x0009",
       "teamKey": "2025-t02",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -2955,14 +2972,31 @@
       "items": [
         {
           "type": "ADD",
-          "playerKey": "espn--16019",
-          "playerId": -16019,
+          "playerKey": "name-giants-d-st",
+          "playerId": null,
           "player": "Giants D/ST"
         }
       ]
     },
     {
-      "transactionKey": "2025-w17-x0009",
+      "transactionKey": "2025-w17-x0010",
+      "teamKey": "2025-t11",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 17,
+      "date": 1766580766873,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "playerKey": "name-jordan-mason",
+          "playerId": null,
+          "player": "Jordan Mason"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2025-w17-x0011",
       "teamKey": "2025-t06",
       "type": "WAIVER",
       "status": "EXECUTED",
@@ -2972,20 +3006,20 @@
       "items": [
         {
           "type": "ADD",
-          "playerKey": "espn--16017",
-          "playerId": -16017,
+          "playerKey": "name-patriots-d-st",
+          "playerId": null,
           "player": "Patriots D/ST"
         },
         {
           "type": "DROP",
-          "playerKey": "espn-4040761",
-          "playerId": 4040761,
+          "playerKey": "name-devin-singletary",
+          "playerId": null,
           "player": "Devin Singletary"
         }
       ]
     },
     {
-      "transactionKey": "2025-w17-x0010",
+      "transactionKey": "2025-w17-x0012",
       "teamKey": "2025-t11",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -2995,20 +3029,20 @@
       "items": [
         {
           "type": "ADD",
-          "playerKey": "espn-4613202",
-          "playerId": 4613202,
+          "playerKey": "name-kyle-williams",
+          "playerId": null,
           "player": "Kyle Williams"
         },
         {
           "type": "DROP",
-          "playerKey": "espn-4567096",
-          "playerId": 4567096,
+          "playerKey": "name-john-metchie-iii",
+          "playerId": null,
           "player": "John Metchie III"
         }
       ]
     },
     {
-      "transactionKey": "2025-w17-x0011",
+      "transactionKey": "2025-w17-x0013",
       "teamKey": "2025-t10",
       "type": "WAIVER",
       "status": "EXECUTED",
@@ -3018,20 +3052,37 @@
       "items": [
         {
           "type": "ADD",
-          "playerKey": "espn-5081397",
-          "playerId": 5081397,
+          "playerKey": "name-dylan-sampson",
+          "playerId": null,
           "player": "Dylan Sampson"
         },
         {
           "type": "DROP",
-          "playerKey": "espn-4569682",
-          "playerId": 4569682,
+          "playerKey": "name-audric-estime",
+          "playerId": null,
           "player": "Audric Estime"
         }
       ]
     },
     {
-      "transactionKey": "2025-w17-x0012",
+      "transactionKey": "2025-w17-x0014",
+      "teamKey": "2025-t12",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 17,
+      "date": 1766504732909,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "playerKey": "name-gardner-minshew",
+          "playerId": null,
+          "player": "Gardner Minshew"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2025-w17-x0015",
       "teamKey": "2025-t10",
       "type": "WAIVER",
       "status": "FAILED_INVALIDPLAYERSOURCE",
@@ -3041,20 +3092,54 @@
       "items": [
         {
           "type": "ADD",
-          "playerKey": "espn--16017",
-          "playerId": -16017,
+          "playerKey": "name-patriots-d-st",
+          "playerId": null,
           "player": "Patriots D/ST"
         },
         {
           "type": "DROP",
-          "playerKey": "espn--16018",
-          "playerId": -16018,
+          "playerKey": "name-saints-d-st",
+          "playerId": null,
           "player": "Saints D/ST"
         }
       ]
     },
     {
-      "transactionKey": "2025-w17-x0013",
+      "transactionKey": "2025-w17-x0016",
+      "teamKey": "2025-t02",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 17,
+      "date": 1766793932088,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "playerKey": "name-najee-harris",
+          "playerId": null,
+          "player": "Najee Harris"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2025-w17-x0017",
+      "teamKey": "2025-t02",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 17,
+      "date": 1766581074753,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "playerKey": "name-jawhar-jordan",
+          "playerId": null,
+          "player": "Jawhar Jordan"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2025-w17-x0018",
       "teamKey": "2025-t12",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3064,14 +3149,14 @@
       "items": [
         {
           "type": "ADD",
-          "playerKey": "espn-11394",
-          "playerId": 11394,
+          "playerKey": "name-josh-johnson",
+          "playerId": null,
           "player": "Josh Johnson"
         }
       ]
     },
     {
-      "transactionKey": "2025-w17-x0014",
+      "transactionKey": "2025-w17-x0019",
       "teamKey": "2025-t13",
       "type": "WAIVER",
       "status": "EXECUTED",
@@ -3081,20 +3166,20 @@
       "items": [
         {
           "type": "ADD",
-          "playerKey": "espn--16008",
-          "playerId": -16008,
+          "playerKey": "name-lions-d-st",
+          "playerId": null,
           "player": "Lions D/ST"
         },
         {
           "type": "DROP",
-          "playerKey": "espn--16014",
-          "playerId": -16014,
+          "playerKey": "name-rams-d-st",
+          "playerId": null,
           "player": "Rams D/ST"
         }
       ]
     },
     {
-      "transactionKey": "2025-w17-x0015",
+      "transactionKey": "2025-w17-x0020",
       "teamKey": "2025-t13",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3104,118 +3189,15 @@
       "items": [
         {
           "type": "ADD",
-          "playerKey": "espn-4574716",
-          "playerId": 4574716,
+          "playerKey": "name-harrison-mevis",
+          "playerId": null,
           "player": "Harrison Mevis"
         },
         {
           "type": "DROP",
-          "playerKey": "espn-4697745",
-          "playerId": 4697745,
+          "playerKey": "name-tyler-loop",
+          "playerId": null,
           "player": "Tyler Loop"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2025-w17-x0016",
-      "teamKey": "2025-t12",
-      "type": "FREEAGENT",
-      "status": "EXECUTED",
-      "scoringPeriod": 17,
-      "date": 1766619754739,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn--16006",
-          "playerId": -16006,
-          "player": "Cowboys D/ST"
-        },
-        {
-          "type": "DROP",
-          "playerKey": "espn--16002",
-          "playerId": -16002,
-          "player": "Bills D/ST"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2025-w17-x0017",
-      "teamKey": "2025-t11",
-      "type": "FREEAGENT",
-      "status": "EXECUTED",
-      "scoringPeriod": 17,
-      "date": 1766580801167,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn--16027",
-          "playerId": -16027,
-          "player": "Buccaneers D/ST"
-        },
-        {
-          "type": "DROP",
-          "playerKey": "espn--16016",
-          "playerId": -16016,
-          "player": "Vikings D/ST"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2025-w17-x0018",
-      "teamKey": "2025-t05",
-      "type": "FREEAGENT",
-      "status": "EXECUTED",
-      "scoringPeriod": 17,
-      "date": 1766583951777,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn-3116406",
-          "playerId": 3116406,
-          "player": "Tyreek Hill"
-        },
-        {
-          "type": "DROP",
-          "playerKey": "espn-4429205",
-          "playerId": 4429205,
-          "player": "Jordan Addison"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2025-w17-x0019",
-      "teamKey": "2025-t10",
-      "type": "WAIVER",
-      "status": "EXECUTED",
-      "scoringPeriod": 17,
-      "date": 1766568055998,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn-4601080",
-          "playerId": 4601080,
-          "player": "Raheim Sanders"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2025-w17-x0020",
-      "teamKey": "2025-t05",
-      "type": "FREEAGENT",
-      "status": "EXECUTED",
-      "scoringPeriod": 17,
-      "date": 1766584165164,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn-4241985",
-          "playerId": 4241985,
-          "player": "J.K. Dobbins"
         }
       ]
     },
@@ -3225,19 +3207,122 @@
       "type": "FREEAGENT",
       "status": "EXECUTED",
       "scoringPeriod": 17,
+      "date": 1766619754739,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "name-cowboys-d-st",
+          "playerId": null,
+          "player": "Cowboys D/ST"
+        },
+        {
+          "type": "DROP",
+          "playerKey": "name-bills-d-st",
+          "playerId": null,
+          "player": "Bills D/ST"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2025-w17-x0022",
+      "teamKey": "2025-t11",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 17,
+      "date": 1766580801167,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "name-buccaneers-d-st",
+          "playerId": null,
+          "player": "Buccaneers D/ST"
+        },
+        {
+          "type": "DROP",
+          "playerKey": "name-vikings-d-st",
+          "playerId": null,
+          "player": "Vikings D/ST"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2025-w17-x0023",
+      "teamKey": "2025-t05",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 17,
+      "date": 1766583951777,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "name-tyreek-hill",
+          "playerId": null,
+          "player": "Tyreek Hill"
+        },
+        {
+          "type": "DROP",
+          "playerKey": "name-jordan-addison",
+          "playerId": null,
+          "player": "Jordan Addison"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2025-w17-x0024",
+      "teamKey": "2025-t10",
+      "type": "WAIVER",
+      "status": "EXECUTED",
+      "scoringPeriod": 17,
+      "date": 1766568055998,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "name-raheim-sanders",
+          "playerId": null,
+          "player": "Raheim Sanders"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2025-w17-x0025",
+      "teamKey": "2025-t05",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 17,
+      "date": 1766584165164,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "name-j-k-dobbins",
+          "playerId": null,
+          "player": "J.K. Dobbins"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2025-w17-x0026",
+      "teamKey": "2025-t12",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 17,
       "date": 1766678315826,
       "bidAmount": 0,
       "items": [
         {
           "type": "ADD",
-          "playerKey": "espn-4035671",
-          "playerId": 4035671,
+          "playerKey": "name-tyler-huntley",
+          "playerId": null,
           "player": "Tyler Huntley"
         },
         {
           "type": "DROP",
-          "playerKey": "espn-2576980",
-          "playerId": 2576980,
+          "playerKey": "name-marcus-mariota",
+          "playerId": null,
           "player": "Marcus Mariota"
         }
       ]

@@ -28,6 +28,8 @@ DEFAULT_VIEWS = [
     "mTransactions2",
 ]
 
+TRANSACTION_TYPES = {"FREEAGENT", "WAIVER", "WAIVER_ERROR", "ROSTER"}
+
 
 @dataclass(frozen=True)
 class Config:
@@ -468,7 +470,6 @@ def build_structured_season(config: Config, year: int) -> Dict[str, Any]:
     )
     final_week = max(1, min(final_week, config.max_week))
 
-    player_team_cache: Dict[int, int] = {}
     weeks = []
     for week in range(1, final_week + 1):
         weeks.append(
@@ -479,12 +480,12 @@ def build_structured_season(config: Config, year: int) -> Dict[str, Any]:
                     league.box_scores,
                     compact_box_score,
                     week,
-                    player_team_cache=player_team_cache,
                 ),
                 "transactions": maybe_compact(
                     league.transactions,
                     compact_transaction,
                     scoring_period=week,
+                    types=TRANSACTION_TYPES,
                 ),
             }
         )

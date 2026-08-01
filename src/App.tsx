@@ -768,12 +768,14 @@ function BrowserPage() {
         <select
           aria-label="Filter by season"
           value={draftFilters.year}
-          onChange={(event) =>
+          onChange={(event) => {
+            const year = event.target.value;
             setDraftFilters((current) => ({
               ...current,
-              year: event.target.value,
-            }))
-          }
+              year,
+              view: year === "all" ? "all" : "picker",
+            }));
+          }}
         >
           <option value="all">All seasons</option>
           {years.map((seasonYear) => (
