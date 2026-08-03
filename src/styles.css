@@ -177,51 +177,11 @@ h3 {
   font-size: 1rem;
 }
 
-.statRail {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(150px, 1fr));
-  gap: 10px;
-  min-width: min(620px, 100%);
-}
-
-.metric {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  min-width: 0;
-  min-height: 58px;
-  padding: 10px 12px;
-  background: #ffffff;
-  border: 1px solid #dfe5d7;
-  border-radius: 8px;
-}
-
-.metricIcon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 34px;
-  height: 34px;
-  color: #0f5237;
-  background: #e2eee6;
-  border-radius: 8px;
-}
-
-.metric small,
 .teamLabel small,
 .lineupRow small {
   display: block;
   color: #687366;
   font-size: 0.78rem;
-}
-
-.metric strong {
-  display: block;
-  max-width: 230px;
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .controlBand,
@@ -1548,7 +1508,6 @@ a.teamLabel:hover {
     flex-direction: column;
   }
 
-  .statRail,
   .controlBand,
   .keeperControlBand,
   .contentGrid,
@@ -1557,10 +1516,6 @@ a.teamLabel:hover {
   .teamDetailSummary,
   .lineupColumns {
     grid-template-columns: 1fr;
-  }
-
-  .statRail {
-    min-width: 0;
   }
 
   .playerPhotoFrame,
@@ -1649,18 +1604,9 @@ a.teamLabel:hover {
     padding: 18px 0 14px;
   }
 
-  .statRail {
-    gap: 8px;
-  }
-
   .categoryGrid {
     grid-template-columns: 1fr;
     gap: 12px;
-  }
-
-  .metric {
-    min-height: 52px;
-    padding: 9px 10px;
   }
 
   .controlBand,

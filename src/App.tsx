@@ -23,7 +23,6 @@ import {
   fetchArchiveJson,
   formatDate,
   formatNumber,
-  formatTimestamp,
   teamDisplay,
 } from "./data";
 import { SimpleTable } from "./SimpleTable";
@@ -388,33 +387,11 @@ function DataLandingPage() {
     return <StatusPanel label="Unable to load archive data." tone="danger" />;
   }
 
-  const matchupCount = manifest.data.seasons.reduce(
-    (total, season) => total + season.matchupCount,
-    0,
-  );
-
   return (
     <>
       <section className="pageIntro">
         <div>
           <h1>CPFFL Archive</h1>
-        </div>
-        <div className="statRail">
-          <Metric
-            icon={<CalendarDays size={18} />}
-            label="Available Seasons"
-            value={String(manifest.data.seasons.length)}
-          />
-          <Metric
-            icon={<Database size={18} />}
-            label="Total Matchups"
-            value={formatNumber(matchupCount)}
-          />
-          <Metric
-            icon={<Trophy size={18} />}
-            label="Last Modified"
-            value={formatTimestamp(manifest.data.exportedAt)}
-          />
         </div>
       </section>
 
@@ -489,12 +466,6 @@ function KeepersPage() {
     () => keeperColumnsForView(showsAllSeasons),
     [showsAllSeasons],
   );
-  const keeperSeasonCount = useMemo(
-    () => new Set(keeperRows.map((row) => row.year)).size,
-    [keeperRows],
-  );
-  const latestKeeperYear = keeperRows[0]?.year;
-
   if (
     manifest.status === "loading" ||
     index.status === "loading" ||
@@ -526,23 +497,6 @@ function KeepersPage() {
         <div>
           <p className="eyebrow">Draft auction history</p>
           <h1>Keepers</h1>
-        </div>
-        <div className="statRail">
-          <Metric
-            icon={<Trophy size={18} />}
-            label="Keepers"
-            value={formatNumber(keeperRows.length)}
-          />
-          <Metric
-            icon={<CalendarDays size={18} />}
-            label="Seasons"
-            value={String(keeperSeasonCount)}
-          />
-          <Metric
-            icon={<Database size={18} />}
-            label="Latest"
-            value={latestKeeperYear ? String(latestKeeperYear) : "-"}
-          />
         </div>
       </section>
 
@@ -720,23 +674,6 @@ function BrowserPage() {
         <div>
           <p className="eyebrow">Historical fantasy football data</p>
           <h1>League Archive Browser</h1>
-        </div>
-        <div className="statRail">
-          <Metric
-            icon={<CalendarDays size={18} />}
-            label="Seasons"
-            value={String(manifest.data.seasons.length)}
-          />
-          <Metric
-            icon={<Database size={18} />}
-            label="Indexed rows"
-            value={formatNumber(index.data.length)}
-          />
-          <Metric
-            icon={<Trophy size={18} />}
-            label="Latest"
-            value={String(Math.max(...years))}
-          />
         </div>
       </section>
 
@@ -1523,23 +1460,6 @@ function PlayerPage() {
           </p>
           <h1>{player.name}</h1>
         </div>
-        <div className="statRail">
-          <Metric
-            icon={<CalendarDays size={18} />}
-            label="Seasons"
-            value={String(seasons.length)}
-          />
-          <Metric
-            icon={<Trophy size={18} />}
-            label="Career Points"
-            value={formatNumber(player.totalFantasyPoints, 1)}
-          />
-          <Metric
-            icon={<Database size={18} />}
-            label="Latest Fantasy Team"
-            value={latestSeason?.fantasyTeamName || "FA"}
-          />
-        </div>
       </section>
 
       <section className="contentGrid">
@@ -2263,10 +2183,6 @@ function SeasonPage() {
     return <StatusPanel label="Unable to load this season." tone="danger" />;
   }
 
-  const champion = [...season.data.standings].sort(
-    (a, b) => (a.finalStanding ?? 999) - (b.finalStanding ?? 999),
-  )[0];
-
   const teamNames = teamNameMap(season.data.teams);
   const standingsColumns: ColumnDef<PublicTeam>[] = [
     {
@@ -2325,23 +2241,6 @@ function SeasonPage() {
         <div>
           <p className="eyebrow">{season.data.settings.name}</p>
           <h1>{season.data.year} Season</h1>
-        </div>
-        <div className="statRail">
-          <Metric
-            icon={<Trophy size={18} />}
-            label="Champion"
-            value={champion?.name ?? "-"}
-          />
-          <Metric
-            icon={<Database size={18} />}
-            label="Teams"
-            value={String(season.data.settings.teamCount)}
-          />
-          <Metric
-            icon={<CalendarDays size={18} />}
-            label="Weeks"
-            value={String(season.data.weeks.length)}
-          />
         </div>
       </section>
 
@@ -2655,23 +2554,6 @@ function WeekPage() {
         <div>
           <p className="eyebrow">{season.data.year} Season</p>
           <h1>Week {weekData.data.week}</h1>
-        </div>
-        <div className="statRail">
-          <Metric
-            icon={<Database size={18} />}
-            label="Games"
-            value={String(weekData.data.scoreboard.length)}
-          />
-          <Metric
-            icon={<CalendarDays size={18} />}
-            label="Box scores"
-            value={String(weekData.data.boxScores.length)}
-          />
-          <Metric
-            icon={<Search size={18} />}
-            label="Transactions"
-            value={String(weekData.data.transactions.length)}
-          />
         </div>
       </section>
 
@@ -3607,26 +3489,6 @@ function average(values: number[]): number | undefined {
 
 function teamRecord(team: PublicTeam): string {
   return `${team.wins}-${team.losses}-${team.ties}`;
-}
-
-function Metric({
-  icon,
-  label,
-  value,
-}: {
-  icon: React.ReactNode;
-  label: string;
-  value: string;
-}) {
-  return (
-    <div className="metric">
-      <span className="metricIcon">{icon}</span>
-      <span>
-        <small>{label}</small>
-        <strong>{value}</strong>
-      </span>
-    </div>
-  );
 }
 
 function StatusPanel({
