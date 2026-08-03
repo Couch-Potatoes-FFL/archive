@@ -139,6 +139,32 @@ const browserRecordTypeOptions = recordTypeOptions.filter(
   (option) => option.value !== "draft",
 );
 
+enum TransactionTypeLabel {
+  FREEAGENT = "Free Agent",
+  ROSTER = "Roster",
+  WAIVER = "Waiver",
+}
+
+enum TransactionStatusLabel {
+  CANCELED = "Canceled",
+  EXECUTED = "Executed",
+  FAILED_AUCTIONBUDGETEXCEEDED = "Failed: Auction Budget Exceeded",
+  FAILED_INVALIDPLAYERSOURCE = "Failed: Invalid Player Source",
+  FAILED_IRSLOT = "Failed: IR Slot",
+  FAILED_MATCHUPACQUISITIONLIMIT = "Failed: Matchup Acquisition Limit",
+  FAILED_PLAYERALREADYDROPPED = "Failed: Player Already Dropped",
+  FAILED_POSITIONLIMIT = "Failed: Position Limit",
+  FAILED_ROSTERLIMIT = "Failed: Roster Limit",
+  FAILED_ROSTERLOCK = "Failed: Roster Lock",
+  PENDING = "Pending",
+}
+
+enum TransactionItemTypeLabel {
+  ADD = "Add",
+  DROP = "Drop",
+  LINEUP = "Lineup",
+}
+
 const starterSlotOrder = new Map(
   [
     "QB",
@@ -243,6 +269,7 @@ const searchColumns: ColumnDef<SearchRow>[] = [
   {
     header: "Summary",
     accessorKey: "summary",
+    cell: ({ row }) => displaySearchRowSummary(row.original),
   },
 ];
 
@@ -284,7 +311,7 @@ const transactionSearchColumns: ColumnDef<SearchRow>[] = [
   {
     header: "Type",
     accessorKey: "transactionActionType",
-    cell: ({ row }) => row.original.transactionActionType || "Transaction",
+    cell: ({ row }) => displaySearchTransactionAction(row.original) ?? "Transaction",
   },
   {
     header: "FAB",
@@ -309,7 +336,9 @@ const transactionSearchColumns: ColumnDef<SearchRow>[] = [
   {
     header: "Status",
     accessorKey: "transactionStatus",
-    cell: ({ row }) => row.original.transactionStatus ?? row.original.summary,
+    cell: ({ row }) =>
+      displayTransactionStatus(row.original.transactionStatus) ??
+      row.original.summary,
   },
 ];
 
@@ -874,7 +903,7 @@ function DraftBrowserPage() {
 
     const normalizedQuery = appliedFilters.query.trim().toLowerCase();
 
-    return sortSearchRows(
+    return sortDraftSearchRows(
       index.data.filter((row) => {
         if (row.type !== "draft") {
           return false;
@@ -1866,7 +1895,7 @@ function SearchResultMobileCard({ row }: { row: SearchRow }) {
       <Link className="mobileCardTitle" to={href}>
         {row.playerName ?? row.label}
       </Link>
-      <p className="mobileCardSummary">{row.summary}</p>
+      <p className="mobileCardSummary">{displaySearchRowSummary(row)}</p>
       <MobileFieldGrid
         items={[
           {
@@ -1883,8 +1912,8 @@ function SearchResultMobileCard({ row }: { row: SearchRow }) {
                 ? `$${formatNumber(row.bidAmount)}`
                 : undefined,
           },
-          { label: "Action", value: row.transactionActionType },
-          { label: "Status", value: row.transactionStatus },
+          { label: "Action", value: displaySearchTransactionAction(row) },
+          { label: "Status", value: displayTransactionStatus(row.transactionStatus) },
         ]}
       />
     </article>
@@ -2232,7 +2261,7 @@ function TransactionMobileCard({
     <article className="mobileDataCard">
       <div className="mobileCardHeader">
         <strong className="mobileCardTitleText">
-          {transaction.type || "Transaction"}
+          {displayTransactionType(transaction.type)}
         </strong>
         <span className="mobileCardKicker">
           {formatDate(transaction.date)}
@@ -2246,7 +2275,7 @@ function TransactionMobileCard({
             label: "FAB",
             value: formatTransactionFab(transaction.type, transaction.bidAmount),
           },
-          { label: "Status", value: transaction.status },
+          { label: "Status", value: displayTransactionStatus(transaction.status) },
           { label: "Period", value: transaction.scoringPeriod },
         ]}
       />
@@ -2342,7 +2371,9 @@ function transactionItemsLabel(transaction: Transaction): string {
     return "No player details";
   }
   return transaction.items
-    .map((item) => (item.type ? `${item.type}: ${item.player}` : item.player))
+    .map((item) =>
+      item.type ? `${displayTransactionItemType(item.type)}: ${item.player}` : item.player,
+    )
     .join(", ");
 }
 
@@ -2775,18 +2806,32 @@ function WeekPage() {
       accessorKey: "teamKey",
       cell: ({ row }) => teamDisplay(row.original.teamKey, teamNames),
     },
-    { header: "Type", accessorKey: "type" },
+    {
+      header: "Type",
+      accessorKey: "type",
+      cell: ({ row }) => displayTransactionType(row.original.type),
+    },
     {
       header: "FAB",
       accessorKey: "bidAmount",
       cell: ({ row }) =>
         formatTransactionFab(row.original.type, row.original.bidAmount),
     },
-    { header: "Status", accessorKey: "status" },
+    {
+      header: "Status",
+      accessorKey: "status",
+      cell: ({ row }) => displayTransactionStatus(row.original.status) ?? "-",
+    },
     {
       header: "Players",
       accessorFn: (transaction) =>
-        transaction.items.map((item) => `${item.type}: ${item.player}`).join(", "),
+        transaction.items
+          .map((item) =>
+            item.type
+              ? `${displayTransactionItemType(item.type)}: ${item.player}`
+              : item.player,
+          )
+          .join(", "),
     },
   ];
 
@@ -4035,6 +4080,102 @@ function formatTransactionFab(type?: string, bidAmount?: number): string {
   return "N/A";
 }
 
+function displaySearchTransactionAction(row: SearchRow): string | undefined {
+  if (
+    row.type !== "transaction" &&
+    !row.transactionType &&
+    !row.transactionItemType &&
+    !row.transactionActionType
+  ) {
+    return undefined;
+  }
+
+  return displayTransactionAction(
+    row.transactionType,
+    row.transactionItemType,
+    row.transactionActionType,
+  );
+}
+
+function displayTransactionAction(
+  type?: string,
+  itemType?: string,
+  actionType?: string,
+): string {
+  const parts = [
+    displayTransactionType(type, ""),
+    displayTransactionItemType(itemType, ""),
+  ].filter(Boolean);
+
+  if (parts.length) {
+    return parts.join(" ");
+  }
+
+  if (!actionType) {
+    return "Transaction";
+  }
+
+  return (
+    actionType
+      .split(/\s+/)
+      .filter(Boolean)
+      .map(
+        (part) =>
+          displayTransactionType(part, "") ||
+          displayTransactionItemType(part, "") ||
+          displayCodeLabel(part),
+      )
+      .join(" ") || "Transaction"
+  );
+}
+
+function displayTransactionType(type?: string, fallback = "Transaction"): string {
+  return displayEnumCode(TransactionTypeLabel, type) ?? fallback;
+}
+
+function displayTransactionStatus(status?: string): string | undefined {
+  return displayEnumCode(TransactionStatusLabel, status);
+}
+
+function displayTransactionItemType(itemType?: string, fallback = ""): string {
+  return displayEnumCode(TransactionItemTypeLabel, itemType) ?? fallback;
+}
+
+function displayEnumCode(
+  labels: Record<string, string>,
+  value?: string,
+): string | undefined {
+  if (!value) {
+    return undefined;
+  }
+  return labels[value.toUpperCase()] ?? displayCodeLabel(value);
+}
+
+function displayCodeLabel(value: string): string {
+  return value
+    .split(/[\s_]+/)
+    .filter(Boolean)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase())
+    .join(" ");
+}
+
+function displaySearchRowSummary(row: SearchRow): string {
+  if (row.type !== "transaction") {
+    return row.summary;
+  }
+
+  const parts = [displayTransactionStatus(row.transactionStatus)];
+  if (
+    typeof row.bidAmount === "number" &&
+    Number.isFinite(row.bidAmount) &&
+    row.bidAmount > 0
+  ) {
+    parts.push(`$${formatNumber(row.bidAmount)}`);
+  }
+
+  return parts.filter(Boolean).join(", ") || row.summary || "Transaction";
+}
+
 function resultColumnsForType(
   type: BrowserFilterType,
   showsYear: boolean,
@@ -4054,31 +4195,45 @@ function resultColumnsForType(
 }
 
 function sortSearchRows(rows: SearchRow[]): SearchRow[] {
+  return [...rows].sort(compareSearchRows);
+}
+
+function sortDraftSearchRows(rows: SearchRow[]): SearchRow[] {
   return [...rows].sort((left, right) => {
-    if (left.year !== right.year) {
-      return right.year - left.year;
+    const leftAmount = Number.isFinite(left.bidAmount) ? left.bidAmount! : -1;
+    const rightAmount = Number.isFinite(right.bidAmount) ? right.bidAmount! : -1;
+    if (leftAmount !== rightAmount) {
+      return rightAmount - leftAmount;
     }
 
-    if (left.type !== right.type) {
-      return left.type.localeCompare(right.type);
-    }
-
-    const leftWeek = left.week ?? -1;
-    const rightWeek = right.week ?? -1;
-    if (leftWeek !== rightWeek) {
-      return rightWeek - leftWeek;
-    }
-
-    if (left.type === "draft" && right.type === "draft") {
-      const leftPick = left.draftPick ?? Number.MAX_SAFE_INTEGER;
-      const rightPick = right.draftPick ?? Number.MAX_SAFE_INTEGER;
-      if (leftPick !== rightPick) {
-        return leftPick - rightPick;
-      }
-    }
-
-    return left.label.localeCompare(right.label);
+    return compareSearchRows(left, right);
   });
+}
+
+function compareSearchRows(left: SearchRow, right: SearchRow): number {
+  if (left.year !== right.year) {
+    return right.year - left.year;
+  }
+
+  if (left.type !== right.type) {
+    return left.type.localeCompare(right.type);
+  }
+
+  const leftWeek = left.week ?? -1;
+  const rightWeek = right.week ?? -1;
+  if (leftWeek !== rightWeek) {
+    return rightWeek - leftWeek;
+  }
+
+  if (left.type === "draft" && right.type === "draft") {
+    const leftPick = left.draftPick ?? Number.MAX_SAFE_INTEGER;
+    const rightPick = right.draftPick ?? Number.MAX_SAFE_INTEGER;
+    if (leftPick !== rightPick) {
+      return leftPick - rightPick;
+    }
+  }
+
+  return left.label.localeCompare(right.label);
 }
 
 function sortKeeperRows(left: KeeperRow, right: KeeperRow): number {
@@ -4348,6 +4503,9 @@ function matchesSearchRowQuery(
     row.teamName,
     row.transactionActionType,
     row.transactionStatus,
+    displaySearchTransactionAction(row),
+    displayTransactionStatus(row.transactionStatus),
+    displaySearchRowSummary(row),
   ]
     .filter(Boolean)
     .join(" ");

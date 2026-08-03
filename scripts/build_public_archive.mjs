@@ -9,6 +9,32 @@ const rootDir = path.resolve(__dirname, "..");
 const sourceDir = path.join(rootDir, "data", "espn");
 const outputDir = path.join(rootDir, "public", "archive");
 
+const TRANSACTION_TYPE_LABELS = Object.freeze({
+  FREEAGENT: "Free Agent",
+  ROSTER: "Roster",
+  WAIVER: "Waiver",
+});
+
+const TRANSACTION_STATUS_LABELS = Object.freeze({
+  CANCELED: "Canceled",
+  EXECUTED: "Executed",
+  FAILED_AUCTIONBUDGETEXCEEDED: "Failed: Auction Budget Exceeded",
+  FAILED_INVALIDPLAYERSOURCE: "Failed: Invalid Player Source",
+  FAILED_IRSLOT: "Failed: IR Slot",
+  FAILED_MATCHUPACQUISITIONLIMIT: "Failed: Matchup Acquisition Limit",
+  FAILED_PLAYERALREADYDROPPED: "Failed: Player Already Dropped",
+  FAILED_POSITIONLIMIT: "Failed: Position Limit",
+  FAILED_ROSTERLIMIT: "Failed: Roster Limit",
+  FAILED_ROSTERLOCK: "Failed: Roster Lock",
+  PENDING: "Pending",
+});
+
+const TRANSACTION_ITEM_TYPE_LABELS = Object.freeze({
+  ADD: "Add",
+  DROP: "Drop",
+  LINEUP: "Lineup",
+});
+
 function readJson(filePath) {
   return readFile(filePath, "utf8").then((text) => JSON.parse(text));
 }
@@ -418,14 +444,42 @@ function draftSearchSummary(teamNames, pick) {
   return parts.join(", ");
 }
 
+function displayCodeLabel(value) {
+  return String(value)
+    .split(/[\s_]+/)
+    .filter(Boolean)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1).toLowerCase())
+    .join(" ");
+}
+
+function displayEnumCode(labels, value) {
+  return value ? labels[String(value).toUpperCase()] || displayCodeLabel(value) : undefined;
+}
+
+function displayTransactionType(type) {
+  return displayEnumCode(TRANSACTION_TYPE_LABELS, type);
+}
+
+function displayTransactionStatus(status) {
+  return displayEnumCode(TRANSACTION_STATUS_LABELS, status);
+}
+
+function displayTransactionItemType(itemType) {
+  return displayEnumCode(TRANSACTION_ITEM_TYPE_LABELS, itemType);
+}
+
 function transactionActionType(transaction, item) {
-  return [transaction.type, item?.type].filter(Boolean).join(" ") || "Transaction";
+  return (
+    [displayTransactionType(transaction.type), displayTransactionItemType(item?.type)]
+      .filter(Boolean)
+      .join(" ") || "Transaction"
+  );
 }
 
 function transactionSearchSummary(transaction) {
   const parts = [];
   if (transaction.status) {
-    parts.push(transaction.status);
+    parts.push(displayTransactionStatus(transaction.status));
   }
   if (
     typeof transaction.bidAmount === "number" &&
@@ -755,7 +809,7 @@ async function buildSeason(year) {
               transactionType: transaction.type,
               transactionItemType: item?.type,
               transactionActionType: actionType,
-              transactionStatus: transaction.status,
+              transactionStatus: displayTransactionStatus(transaction.status),
               bidAmount: transaction.bidAmount,
             },
           ),
