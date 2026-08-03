@@ -462,6 +462,11 @@ function KeepersPage() {
   const index = useArchiveJson<SearchRow[]>("search-index.json");
   const players = useArchiveJson<PublicPlayer[]>("players.json");
   const [searchParams, setSearchParams] = useSearchParams();
+  const searchParamString = searchParams.toString();
+  const [keeperFilters, setKeeperFilters] = useState(() => ({
+    query: searchParams.get("q") ?? "",
+    year: searchParams.get("year") ?? "all",
+  }));
 
   const years = useMemo(
     () =>
@@ -473,7 +478,17 @@ function KeepersPage() {
     [manifest],
   );
   const selectedYear = normalizeKeeperYear(searchParams.get("year"), years);
+  const appliedQuery = searchParams.get("q")?.trim() ?? "";
+  const normalizedQuery = normalizeSearchText(appliedQuery);
   const showsAllSeasons = selectedYear === "all";
+
+  useEffect(() => {
+    const params = new URLSearchParams(searchParamString);
+    setKeeperFilters({
+      query: params.get("q") ?? "",
+      year: normalizeKeeperYear(params.get("year"), years),
+    });
+  }, [searchParamString, years]);
 
   const keeperRows = useMemo(() => {
     if (index.status !== "loaded" || players.status !== "loaded") {
@@ -487,7 +502,8 @@ function KeepersPage() {
         (row) =>
           row.type === "draft" &&
           row.keeperStatus &&
-          (selectedYear === "all" || row.year === Number(selectedYear)),
+          (selectedYear === "all" || row.year === Number(selectedYear)) &&
+          matchesDraftSearchRowQuery(row, normalizedQuery),
       )
       .map((row): KeeperRow => {
         const player = row.playerKey ? playerByKey.get(row.playerKey) : undefined;
@@ -506,7 +522,7 @@ function KeepersPage() {
         };
       })
       .sort(sortKeeperRows);
-  }, [index, players, selectedYear]);
+  }, [index, normalizedQuery, players, selectedYear]);
 
   const keeperColumns = useMemo(
     () => keeperColumnsForView(showsAllSeasons),
@@ -528,12 +544,30 @@ function KeepersPage() {
     return <StatusPanel label="Unable to load keepers." tone="danger" />;
   }
 
-  function updateSelectedYear(year: string) {
+  const hasPendingFilters =
+    keeperFilters.query.trim() !== appliedQuery ||
+    normalizeKeeperYear(keeperFilters.year, years) !== selectedYear;
+
+  function applyFilters(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const query = keeperFilters.query.trim();
+    const year = normalizeKeeperYear(keeperFilters.year, years);
     const params = new URLSearchParams();
+
+    if (query) {
+      params.set("q", query);
+    }
     if (year !== "all") {
       params.set("year", year);
     }
+
+    setKeeperFilters({ query, year });
     setSearchParams(params);
+  }
+
+  function clearFilters() {
+    setKeeperFilters({ query: "", year: "all" });
+    setSearchParams({});
   }
 
   return (
@@ -546,13 +580,35 @@ function KeepersPage() {
         </div>
       </section>
 
-      <section className="keeperControlBand" aria-label="Keeper filters">
-        <label>
-          <span>Season</span>
+      <form
+        className="controlBand keeperControlBand"
+        aria-label="Keeper filters"
+        onSubmit={applyFilters}
+      >
+        <label className="searchField">
+          <Search size={18} aria-hidden />
+          <input
+            aria-label="Search keeper records"
+            value={keeperFilters.query}
+            onChange={(event) =>
+              setKeeperFilters((current) => ({
+                ...current,
+                query: event.target.value,
+              }))
+            }
+            placeholder="Search keeper players"
+          />
+        </label>
+        <label className="fieldLabel">
           <select
             aria-label="Filter keepers by season"
-            value={selectedYear}
-            onChange={(event) => updateSelectedYear(event.target.value)}
+            value={keeperFilters.year}
+            onChange={(event) =>
+              setKeeperFilters((current) => ({
+                ...current,
+                year: event.target.value,
+              }))
+            }
           >
             <option value="all">All seasons</option>
             {years.map((seasonYear) => (
@@ -562,14 +618,26 @@ function KeepersPage() {
             ))}
           </select>
         </label>
-      </section>
+        <div className="filterActions">
+          <button className="primaryButton" type="submit">
+            <Search size={16} aria-hidden />
+            Update
+          </button>
+          <button className="ghostButton" type="button" onClick={clearFilters}>
+            Clear
+          </button>
+        </div>
+      </form>
 
       <section className="contentBand">
         <div className="sectionHeader">
           <h2>{showsAllSeasons ? "All Keepers" : `${selectedYear} Keepers`}</h2>
-          <span className="pendingNote">
-            {formatNumber(keeperRows.length)} matching{" "}
-            {keeperRows.length === 1 ? "keeper" : "keepers"}
+          <span className={hasPendingFilters ? "pendingNote active" : "pendingNote"}>
+            {hasPendingFilters
+              ? "Filter changes pending"
+              : `${formatNumber(keeperRows.length)} matching ${
+                  keeperRows.length === 1 ? "keeper" : "keepers"
+                }`}
           </span>
         </div>
         <SimpleTable
@@ -2007,29 +2075,32 @@ function KeeperMobileCard({
   row: KeeperRow;
   showsYear: boolean;
 }) {
+  const playerHref = row.playerKey
+    ? `/player/${row.playerKey}?fromYear=${row.year}`
+    : undefined;
+  const metaPrefix = [showsYear ? String(row.year) : undefined, row.position]
+    .filter(Boolean)
+    .join(" · ");
+
   return (
-    <article className="mobileDataCard">
-      <div className="mobileCardHeader">
-        {row.playerKey ? (
-          <Link className="mobileCardTitle" to={`/player/${row.playerKey}?fromYear=${row.year}`}>
+    <article className="mobileDataCard compact">
+      <div className="keeperMobileTitleRow">
+        {playerHref ? (
+          <Link className="mobileCardTitle" to={playerHref}>
             {row.name}
           </Link>
         ) : (
           <strong className="mobileCardTitleText">{row.name}</strong>
         )}
-        <span className="mobileCardKicker">
-          {showsYear ? row.year : row.position ?? "-"}
-        </span>
+        <strong className="keeperMobileValue">
+          {formatAuctionValue(row.auctionValue)}
+        </strong>
       </div>
-      <MobileFieldGrid
-        items={[
-          { label: "Year", value: showsYear ? row.year : undefined },
-          { label: "Auction Value", value: formatAuctionValue(row.auctionValue) },
-          { label: "Position", value: row.position ?? "-" },
-          { label: "Team", value: <KeeperTeamLink row={row} /> },
-          { label: "Pick", value: row.draftPick },
-        ]}
-      />
+      <p className="keeperMobileTeamLine">
+        {metaPrefix ? `${metaPrefix} · ` : ""}
+        {row.draftPick ? `Pick ${row.draftPick}: ` : ""}
+        <KeeperTeamLink row={row} />
+      </p>
     </article>
   );
 }

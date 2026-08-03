@@ -211,18 +211,12 @@ h3 {
 }
 
 .keeperControlBand {
-  display: grid;
-  grid-template-columns: minmax(180px, 260px);
+  grid-template-columns: minmax(260px, 1fr) minmax(150px, 180px) auto;
   gap: 10px;
-  align-items: end;
   margin-top: 18px;
-  padding: 14px;
-  background: #e8eddf;
-  border: 1px solid #d6ddcc;
-  border-radius: 8px;
 }
 
-.keeperControlBand label {
+.keeperControlBand .fieldLabel {
   display: grid;
   gap: 6px;
   color: #4e5d4d;
@@ -964,7 +958,8 @@ td {
   gap: 10px;
 }
 
-.draftMobileTitleRow {
+.draftMobileTitleRow,
+.keeperMobileTitleRow {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
@@ -972,11 +967,14 @@ td {
   min-width: 0;
 }
 
-.draftMobileTitleRow .mobileCardTitle {
+.draftMobileTitleRow .mobileCardTitle,
+.keeperMobileTitleRow .mobileCardTitle,
+.keeperMobileTitleRow .mobileCardTitleText {
   flex: 1 1 auto;
 }
 
-.draftMobileAmount {
+.draftMobileAmount,
+.keeperMobileValue {
   flex: 0 0 auto;
   color: #172018;
   font-size: 0.98rem;
@@ -984,7 +982,8 @@ td {
   line-height: 1.25;
 }
 
-.draftMobileTeamLine {
+.draftMobileTeamLine,
+.keeperMobileTeamLine {
   margin: 8px 0 0;
   color: #4e5d4d;
   font-size: 0.9rem;
@@ -993,7 +992,8 @@ td {
   overflow-wrap: anywhere;
 }
 
-.draftMobileTeamLine a {
+.draftMobileTeamLine a,
+.keeperMobileTeamLine a {
   font-weight: 800;
 }
 
