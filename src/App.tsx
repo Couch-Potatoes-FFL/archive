@@ -1280,10 +1280,7 @@ function PlayerYearResults({
                   <span className="playerRankBadge">#{season.playerRank}</span>
                   <strong>{player.name}</strong>
                 </span>
-                <small>
-                  {season.position ?? "Player"}, {season.nflTeam ?? "NFL"},{" "}
-                  {season.fantasyTeamName || "FA"}
-                </small>
+                <small>{season.fantasyTeamName || "FA"}</small>
               </span>
               <span className="playerResultStats">
                 <strong>{formatNumber(season.fantasyPoints, 1)}</strong>
