@@ -12,9 +12,11 @@ import {
 import { type FormEvent, useEffect, useMemo, useState } from "react";
 import {
   Link,
+  Navigate,
   NavLink,
   Route,
   Routes,
+  useLocation,
   useParams,
   useSearchParams,
 } from "react-router-dom";
@@ -96,6 +98,15 @@ type TeamRosterAggregateRow = {
   averagePoints: number;
 };
 
+type TeamDraftSummaryRow = {
+  id: string;
+  pick: DraftPick;
+  player: LineupPlayer;
+  auctionValue?: number;
+  positionRank?: number;
+  totalFantasyPoints?: number;
+};
+
 type SeasonWeeksState =
   | { status: "idle" | "loading"; data: PublicWeek[]; requestKey: string }
   | { status: "loaded"; data: PublicWeek[]; requestKey: string }
@@ -124,6 +135,10 @@ const recordTypeOptions: Array<{ value: BrowserFilterType; label: string }> = [
   { value: "player", label: "Players" },
 ];
 
+const browserRecordTypeOptions = recordTypeOptions.filter(
+  (option) => option.value !== "draft",
+);
+
 const starterSlotOrder = new Map(
   [
     "QB",
@@ -147,7 +162,7 @@ const dataCategories: Array<{
 }> = [
   {
     title: "Full Archive Search",
-    label: "Search teams, players, matchups, transactions, drafts, and seasons.",
+    label: "Search teams, players, matchups, transactions, weeks, and seasons.",
     to: "/browse",
     icon: <Search size={20} aria-hidden />,
   },
@@ -171,7 +186,7 @@ const dataCategories: Array<{
   },
   {
     title: "Players",
-    label: "Search player rows across lineups, transactions, and draft records.",
+    label: "Search player rows across weekly lineups and season reports.",
     to: "/browse?type=player",
     icon: <Search size={20} aria-hidden />,
   },
@@ -190,7 +205,7 @@ const dataCategories: Array<{
   {
     title: "Drafts",
     label: "Find historical draft picks, nominations, bids, and keepers.",
-    to: "/browse?type=draft",
+    to: "/drafts",
     icon: <Database size={20} aria-hidden />,
   },
   {
@@ -232,7 +247,6 @@ const searchColumns: ColumnDef<SearchRow>[] = [
 ];
 
 const draftSearchColumns: ColumnDef<SearchRow>[] = [
-  searchColumns[0],
   searchColumns[1],
   searchColumns[2],
   {
@@ -255,7 +269,7 @@ const draftSearchColumns: ColumnDef<SearchRow>[] = [
     cell: ({ row }) => <TeamSearchLink row={row.original} />,
   },
   {
-    header: "Bid",
+    header: "Draft Amount",
     accessorKey: "bidAmount",
     cell: ({ row }) =>
       typeof row.original.bidAmount === "number"
@@ -366,8 +380,10 @@ function App() {
           <Route path="/" element={<DataLandingPage />} />
           <Route path="/keepers" element={<KeepersPage />} />
           <Route path="/browse" element={<BrowserPage />} />
+          <Route path="/drafts" element={<DraftBrowserPage />} />
           <Route path="/player/:playerKey" element={<PlayerPage />} />
           <Route path="/season/:year" element={<SeasonPage />} />
+          <Route path="/season/:year/team/:teamKey/draft" element={<TeamDraftPage />} />
           <Route path="/season/:year/team/:teamKey" element={<TeamPage />} />
           <Route path="/season/:year/week/:week" element={<WeekPage />} />
         </Routes>
@@ -582,11 +598,15 @@ function BrowserPage() {
       appliedFilters.type === "all" &&
       appliedFilters.year === "all"
     ) {
-      return sortSearchRows(index.data);
+      return sortSearchRows(index.data.filter((row) => row.type !== "draft"));
     }
 
     return sortSearchRows(
       index.data.filter((row) => {
+        if (row.type === "draft") {
+          return false;
+        }
+
         const matchesType =
           appliedFilters.type === "all" || row.type === appliedFilters.type;
         const matchesYear =
@@ -595,25 +615,14 @@ function BrowserPage() {
           return false;
         }
 
-        const haystack = [
-          row.year,
-          row.label,
-          row.summary,
-          row.playerName,
-          row.teamName,
-          row.transactionActionType,
-          row.transactionStatus,
-        ]
-          .filter(Boolean)
-          .join(" ");
-        const matchesQuery =
-          normalizedQuery.length === 0 ||
-          haystack.toLowerCase().includes(normalizedQuery);
-
-        return matchesType && matchesYear && matchesQuery;
+        return matchesSearchRowQuery(row, normalizedQuery);
       }),
     );
   }, [appliedFilters, index]);
+
+  if (appliedFilters.type === "draft") {
+    return <Navigate replace to={draftsHrefFromFilters(appliedFilters)} />;
+  }
 
   if (manifest.status === "loading" || index.status === "loading") {
     return <StatusPanel label="Loading archive index..." />;
@@ -648,10 +657,6 @@ function BrowserPage() {
     appliedFilters.year === "all" &&
     usesPickerView;
   const showPlayerHistory = appliedFilters.type === "player" && usesPickerView;
-  const showDraftHistory =
-    appliedFilters.type === "draft" &&
-    appliedFilters.year === "all" &&
-    usesPickerView;
   const breadcrumbs = browserBreadcrumbItems(appliedFilters);
 
   function applyFilters(event: FormEvent<HTMLFormElement>) {
@@ -677,7 +682,11 @@ function BrowserPage() {
         </div>
       </section>
 
-      <form className="controlBand" aria-label="Archive filters" onSubmit={applyFilters}>
+      <form
+        className="controlBand browseControlBand"
+        aria-label="Archive filters"
+        onSubmit={applyFilters}
+      >
         <label className="searchField">
           <Search size={18} aria-hidden />
           <input
@@ -689,17 +698,7 @@ function BrowserPage() {
                 query: event.target.value,
               }))
             }
-            placeholder={
-              draftFilters.type === "matchup"
-                ? draftFilters.year === "all"
-                  ? "Search seasons or enter a week number"
-                  : "Search week number"
-                : draftFilters.type === "player"
-                  ? draftFilters.year === "all"
-                    ? "Search seasons or enter a year"
-                    : "Search players, NFL teams, fantasy teams"
-                : "Search teams, players, matchups, transactions"
-            }
+            placeholder={searchPlaceholder(draftFilters)}
           />
         </label>
         <select
@@ -731,7 +730,7 @@ function BrowserPage() {
             }))
           }
         >
-          {recordTypeOptions.map((option) => (
+          {browserRecordTypeOptions.map((option) => (
             <option key={option.value} value={option.value}>
               {option.label}
             </option>
@@ -811,12 +810,6 @@ function BrowserPage() {
           query={appliedFilters.query}
           hasPendingFilters={hasPendingFilters}
         />
-      ) : showDraftHistory ? (
-        <DraftSeasonResults
-          rows={filteredRows}
-          query={appliedFilters.query}
-          hasPendingFilters={hasPendingFilters}
-        />
       ) : (
         <section className="contentBand">
           <div className="sectionHeader">
@@ -834,6 +827,181 @@ function BrowserPage() {
             columns={resultColumns}
             mobileCard={(row) => <SearchResultMobileCard row={row} />}
             mobileLabel="Archive result cards"
+          />
+        </section>
+      )}
+    </>
+  );
+}
+
+function DraftBrowserPage() {
+  const manifest = useArchiveJson<ArchiveManifest>("manifest.json");
+  const index = useArchiveJson<SearchRow[]>("search-index.json");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchParamString = searchParams.toString();
+  const [draftFilters, setDraftFilters] = useState<BrowserFilters>(() => ({
+    ...filtersFromSearchParams(searchParams),
+    type: "draft",
+  }));
+  const [appliedFilters, setAppliedFilters] = useState<BrowserFilters>(() => ({
+    ...filtersFromSearchParams(searchParams),
+    type: "draft",
+  }));
+
+  useEffect(() => {
+    const nextFilters = {
+      ...filtersFromSearchParams(new URLSearchParams(searchParamString)),
+      type: "draft" as const,
+    };
+    setDraftFilters(nextFilters);
+    setAppliedFilters(nextFilters);
+  }, [searchParamString]);
+
+  const years = useMemo(
+    () =>
+      manifest.status === "loaded"
+        ? [...manifest.data.seasons]
+            .sort((left, right) => right.year - left.year)
+            .map((season) => season.year)
+        : [],
+    [manifest],
+  );
+
+  const filteredRows = useMemo(() => {
+    if (index.status !== "loaded") {
+      return [];
+    }
+
+    const normalizedQuery = appliedFilters.query.trim().toLowerCase();
+
+    return sortSearchRows(
+      index.data.filter((row) => {
+        if (row.type !== "draft") {
+          return false;
+        }
+        if (
+          appliedFilters.year !== "all" &&
+          row.year !== Number(appliedFilters.year)
+        ) {
+          return false;
+        }
+        return matchesDraftSearchRowQuery(row, normalizedQuery);
+      }),
+    );
+  }, [appliedFilters, index]);
+
+  if (manifest.status === "loading" || index.status === "loading") {
+    return <StatusPanel label="Loading draft index..." />;
+  }
+
+  if (manifest.status === "error" || index.status === "error") {
+    return <StatusPanel label="Unable to load draft data." tone="danger" />;
+  }
+
+  const hasPendingFilters = !filtersMatch(draftFilters, appliedFilters);
+  const showDraftHistory =
+    !appliedFilters.query &&
+    appliedFilters.year === "all" &&
+    appliedFilters.view !== "all";
+  const resultColumns = resultColumnsForType("draft", appliedFilters.year === "all");
+
+  function applyFilters(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const nextFilters = normalizeFilters({ ...draftFilters, type: "draft" });
+    setAppliedFilters(nextFilters);
+    setSearchParams(draftParamsFromFilters(nextFilters));
+  }
+
+  function clearFilters() {
+    const nextFilters = { ...defaultFilters, type: "draft" as const };
+    setDraftFilters(nextFilters);
+    setAppliedFilters(nextFilters);
+    setSearchParams({});
+  }
+
+  return (
+    <>
+      <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "Drafts" }]} />
+      <section className="pageIntro">
+        <div>
+          <p className="eyebrow">Draft auction history</p>
+          <h1>Draft Browser</h1>
+        </div>
+      </section>
+
+      <form
+        className="controlBand draftControlBand"
+        aria-label="Draft filters"
+        onSubmit={applyFilters}
+      >
+        <label className="searchField">
+          <Search size={18} aria-hidden />
+          <input
+            aria-label="Search draft records"
+            value={draftFilters.query}
+            onChange={(event) =>
+              setDraftFilters((current) => ({
+                ...current,
+                query: event.target.value,
+              }))
+            }
+            placeholder="Search drafted players"
+          />
+        </label>
+        <select
+          aria-label="Filter drafts by season"
+          value={draftFilters.year}
+          onChange={(event) => {
+            const year = event.target.value;
+            setDraftFilters((current) => ({
+              ...current,
+              year,
+              view: year === "all" ? "all" : "picker",
+            }));
+          }}
+        >
+          <option value="all">All seasons</option>
+          {years.map((seasonYear) => (
+            <option key={seasonYear} value={seasonYear}>
+              {seasonYear}
+            </option>
+          ))}
+        </select>
+        <div className="filterActions">
+          <button className="primaryButton" type="submit">
+            <Search size={16} aria-hidden />
+            Update
+          </button>
+          <button className="ghostButton" type="button" onClick={clearFilters}>
+            Clear
+          </button>
+        </div>
+      </form>
+
+      {showDraftHistory ? (
+        <DraftSeasonResults
+          rows={filteredRows}
+          query={appliedFilters.query}
+          hasPendingFilters={hasPendingFilters}
+        />
+      ) : (
+        <section className="contentBand">
+          <div className="sectionHeader">
+            <h2>Draft Results</h2>
+            <span
+              className={hasPendingFilters ? "pendingNote active" : "pendingNote"}
+            >
+              {hasPendingFilters
+                ? "Filter changes pending"
+                : `${formatNumber(filteredRows.length)} matching rows`}
+            </span>
+          </div>
+          <SimpleTable
+            data={filteredRows}
+            columns={resultColumns}
+            emptyLabel="No draft records found."
+            mobileCard={(row) => <SearchResultMobileCard row={row} />}
+            mobileLabel="Draft result cards"
           />
         </section>
       )}
@@ -1692,7 +1860,7 @@ function SearchResultMobileCard({ row }: { row: SearchRow }) {
   return (
     <article className="mobileDataCard">
       <div className="mobileCardHeader">
-        <span className="pill">{row.type}</span>
+        {row.type === "draft" ? null : <span className="pill">{row.type}</span>}
         <span className="mobileCardKicker">
           {row.year}
           {row.week ? `, Week ${row.week}` : ""}
@@ -1712,7 +1880,7 @@ function SearchResultMobileCard({ row }: { row: SearchRow }) {
           },
           { label: "Pick", value: row.draftPick },
           {
-            label: "Bid",
+            label: row.type === "draft" ? "Draft Amount" : "Bid",
             value:
               typeof row.bidAmount === "number"
                 ? `$${formatNumber(row.bidAmount)}`
@@ -1859,9 +2027,11 @@ function StandingsMobileCard({
 function DraftPickMobileCard({
   pick,
   teamNames,
+  year,
 }: {
   pick: DraftPick;
   teamNames: Map<string, string>;
+  year: number;
 }) {
   return (
     <article className="mobileDataCard">
@@ -1872,9 +2042,18 @@ function DraftPickMobileCard({
       <MobileFieldGrid
         items={[
           { label: "Round", value: pick.round ?? "-" },
-          { label: "Team", value: teamDisplay(pick.teamKey, teamNames) },
           {
-            label: "Bid",
+            label: "Team",
+            value: pick.teamKey ? (
+              <Link to={teamDraftHref(year, pick.teamKey)}>
+                {teamDisplay(pick.teamKey, teamNames)}
+              </Link>
+            ) : (
+              teamDisplay(pick.teamKey, teamNames)
+            ),
+          },
+          {
+            label: "Draft Amount",
             value:
               typeof pick.bidAmount === "number"
                 ? `$${formatNumber(pick.bidAmount)}`
@@ -2308,8 +2487,70 @@ function SeasonPage() {
   );
 }
 
+function TeamDraftPage() {
+  const { year = "", teamKey = "" } = useParams();
+  const season = useArchiveJson<PublicSeason>(`seasons/${year}.json`);
+  const players = useArchiveJson<PublicPlayer[]>("players.json");
+
+  if (season.status === "loading" || players.status === "loading") {
+    return <StatusPanel label="Loading team draft..." />;
+  }
+
+  if (season.status === "error" || players.status === "error") {
+    return <StatusPanel label="Unable to load this team draft." tone="danger" />;
+  }
+
+  if (season.status !== "loaded" || players.status !== "loaded") {
+    return <StatusPanel label="Loading team draft..." />;
+  }
+
+  const team = season.data.teams.find((row) => row.key === teamKey);
+  if (!team) {
+    return <StatusPanel label="Team draft not found." tone="danger" />;
+  }
+
+  const draftRows = buildTeamDraftSummaryRows(
+    season.data.draft
+      .filter((pick) => pick.teamKey === team.key)
+      .sort((left, right) => left.pick - right.pick),
+    players.data,
+    season.data.year,
+  );
+
+  return (
+    <>
+      <Breadcrumbs
+        items={[
+          { label: "Home", to: "/" },
+          { label: "Drafts", to: "/drafts" },
+          {
+            label: `${season.data.year} Draft`,
+            to: `/drafts?year=${season.data.year}`,
+          },
+          { label: team.name },
+        ]}
+      />
+      <section className="pageIntro">
+        <div>
+          <p className="eyebrow">{season.data.year} draft summary</p>
+          <h1>{team.name}</h1>
+        </div>
+      </section>
+
+      <section className="contentBand">
+        <TeamDraftSummaryTable
+          title={`${team.name} Draft`}
+          rows={draftRows}
+          year={season.data.year}
+        />
+      </section>
+    </>
+  );
+}
+
 function TeamPage() {
   const { year = "", teamKey = "" } = useParams();
+  const location = useLocation();
   const season = useArchiveJson<PublicSeason>(`seasons/${year}.json`);
   const players = useArchiveJson<PublicPlayer[]>("players.json");
   const weeks = useSeasonWeeks(
@@ -2321,6 +2562,16 @@ function TeamPage() {
     season.data.weeks.length > 0 &&
     weeks.data.length === 0 &&
     weeks.status !== "error";
+
+  useEffect(() => {
+    if (location.hash !== "#draft-picks" || season.status !== "loaded") {
+      return;
+    }
+
+    requestAnimationFrame(() => {
+      document.getElementById("draft-picks")?.scrollIntoView();
+    });
+  }, [location.hash, season.status, teamKey]);
 
   if (
     season.status === "loading" ||
@@ -2478,7 +2729,7 @@ function TeamPage() {
         />
       </section>
 
-      <section className="contentBand">
+      <section className="contentBand" id="draft-picks">
         <div className="sectionHeader">
           <h2>Draft Picks</h2>
           <span className="pendingNote">
@@ -2490,7 +2741,11 @@ function TeamPage() {
           columns={draftColumns}
           emptyLabel="No draft picks found for this team."
           mobileCard={(pick) => (
-            <DraftPickMobileCard pick={pick} teamNames={teamNames} />
+            <DraftPickMobileCard
+              pick={pick}
+              teamNames={teamNames}
+              year={season.data.year}
+            />
           )}
           mobileLabel="Team draft pick cards"
         />
@@ -2824,6 +3079,92 @@ function SeasonRosterRow({
       <td className="numberCell">{formatNumber(row.averageProjected, 1)}</td>
       <td className="numberCell">{formatNumber(row.averagePoints, 1)}</td>
       <td className="numberCell">{formatNumber(row.totalPoints, 1)}</td>
+    </tr>
+  );
+}
+
+function TeamDraftSummaryTable({
+  title,
+  rows,
+  year,
+}: {
+  title: string;
+  rows: TeamDraftSummaryRow[];
+  year: number;
+}) {
+  return (
+    <div className="lineupTable seasonRosterTable">
+      <h4>{title}</h4>
+      <div className="lineupScroll">
+        <table className="boxScoreTable teamDraftSummaryTable">
+          <colgroup>
+            <col className="teamDraftPickColumn" />
+            <col className="teamDraftIconColumn" />
+            <col className="teamDraftPlayerColumn" />
+            <col className="teamDraftStatColumn" />
+            <col className="teamDraftStatColumn" />
+            <col className="teamDraftStatColumn" />
+          </colgroup>
+          <thead>
+            <tr>
+              <th>Pick</th>
+              <th aria-label="Player image" />
+              <th>Player</th>
+              <th>Auction</th>
+              <th>PRK</th>
+              <th>Total FPTS</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((row) => (
+              <TeamDraftSummaryTableRow row={row} year={year} key={row.id} />
+            ))}
+            {!rows.length ? (
+              <tr>
+                <td className="emptyCell" colSpan={6}>
+                  No draft picks found for this team.
+                </td>
+              </tr>
+            ) : null}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+function TeamDraftSummaryTableRow({
+  row,
+  year,
+}: {
+  row: TeamDraftSummaryRow;
+  year: number;
+}) {
+  const { player } = row;
+
+  return (
+    <tr className="boxScorePlayerRow">
+      <td className="slotCell">{row.pick.pick}</td>
+      <td className="playerIconCell">
+        <LineupPlayerIcon player={player} />
+      </td>
+      <td className="playerCell">
+        <span className="lineupPlayerName">
+          {player.key ? (
+            <Link to={`/player/${player.key}?fromYear=${year}`}>
+              <strong>{player.name}</strong>
+            </Link>
+          ) : (
+            <strong>{player.name}</strong>
+          )}
+        </span>
+        <small>
+          {player.proTeam ?? "-"} {player.position ?? "-"}
+        </small>
+      </td>
+      <td className="numberCell">{formatAuctionValue(row.auctionValue)}</td>
+      <td className="numberCell">{row.positionRank ?? "-"}</td>
+      <td className="numberCell">{formatNumber(row.totalFantasyPoints, 1)}</td>
     </tr>
   );
 }
@@ -3197,7 +3538,7 @@ function draftPickColumnsForTeam(
       accessorKey: "teamKey",
       cell: ({ row }) =>
         row.original.teamKey ? (
-          <Link to={teamPageHref(year, row.original.teamKey)}>
+          <Link to={teamDraftHref(year, row.original.teamKey)}>
             {teamDisplay(row.original.teamKey, teamNames)}
           </Link>
         ) : (
@@ -3205,7 +3546,7 @@ function draftPickColumnsForTeam(
         ),
     },
     {
-      header: "Bid",
+      header: "Draft Amount",
       accessorKey: "bidAmount",
       cell: ({ row }) => formatAuctionValue(row.original.bidAmount),
     },
@@ -3321,6 +3662,42 @@ function buildTeamRosterAggregateRows(
       totalPoints: aggregate.totalPoints,
       averageProjected: appearances ? aggregate.totalProjected / appearances : 0,
       averagePoints: appearances ? aggregate.totalPoints / appearances : 0,
+    };
+  });
+}
+
+function buildTeamDraftSummaryRows(
+  draftPicks: DraftPick[],
+  players: PublicPlayer[],
+  year: number,
+): TeamDraftSummaryRow[] {
+  const playerByKey = new Map(players.map((player) => [player.key, player]));
+  const playerById = new Map(
+    players
+      .filter((player) => player.playerId !== undefined)
+      .map((player) => [player.playerId, player]),
+  );
+
+  return draftPicks.map((pick) => {
+    const player =
+      (pick.playerKey ? playerByKey.get(pick.playerKey) : undefined) ??
+      (pick.playerId !== undefined ? playerById.get(pick.playerId) : undefined);
+    const report = player?.seasons.find((season) => season.year === year);
+
+    return {
+      id: `${year}-${pick.pick}-${pick.playerKey ?? pick.playerId ?? pick.playerName}`,
+      pick,
+      player: {
+        key: pick.playerKey ?? player?.key,
+        playerId: pick.playerId ?? player?.playerId,
+        photoUrl: player?.photoUrl,
+        name: pick.playerName,
+        position: report?.position ?? player?.primaryPosition,
+        proTeam: report?.nflTeam,
+      },
+      auctionValue: pick.bidAmount,
+      positionRank: report?.positionRank,
+      totalFantasyPoints: report?.fantasyPoints,
     };
   });
 }
@@ -3591,13 +3968,19 @@ function searchRowDetailHref(row: SearchRow): string {
 
 function searchRowTeamHref(row: SearchRow): string | undefined {
   if (row.teamKey) {
-    return teamPageHref(row.year, row.teamKey);
+    return row.type === "draft"
+      ? teamDraftHref(row.year, row.teamKey)
+      : teamPageHref(row.year, row.teamKey);
   }
   return undefined;
 }
 
 function teamPageHref(year: number, teamKey: string): string {
   return `/season/${year}/team/${encodeURIComponent(teamKey)}`;
+}
+
+function teamDraftHref(year: number, teamKey: string): string {
+  return `${teamPageHref(year, teamKey)}/draft`;
 }
 
 function keeperColumnsForView(showsYear: boolean): ColumnDef<KeeperRow>[] {
@@ -3852,10 +4235,23 @@ function matchupYearBrowseHref(year: number, query: string): string {
 }
 
 function draftYearBrowseHref(year: number, query: string): string {
-  return yearBrowseHref("draft", year, query);
+  const params = new URLSearchParams({
+    year: String(year),
+  });
+  const normalizedQuery = query.trim();
+
+  if (normalizedQuery) {
+    params.set("q", normalizedQuery);
+  }
+
+  return `/drafts?${params.toString()}`;
 }
 
 function yearBrowseHref(type: SearchType, year: number, query: string): string {
+  if (type === "draft") {
+    return draftYearBrowseHref(year, query);
+  }
+
   const params = new URLSearchParams({
     type,
     year: String(year),
@@ -3870,6 +4266,17 @@ function yearBrowseHref(type: SearchType, year: number, query: string): string {
 }
 
 function typeBrowseHref(type: SearchType, query: string): string {
+  if (type === "draft") {
+    const params = new URLSearchParams();
+    const normalizedQuery = query.trim();
+
+    if (normalizedQuery) {
+      params.set("q", normalizedQuery);
+    }
+
+    return params.size ? `/drafts?${params.toString()}` : "/drafts";
+  }
+
   const params = new URLSearchParams({ type });
   const normalizedQuery = query.trim();
 
@@ -3881,6 +4288,17 @@ function typeBrowseHref(type: SearchType, query: string): string {
 }
 
 function allSeasonsBrowseHref(type: SearchType, query: string): string {
+  if (type === "draft") {
+    const params = new URLSearchParams({ view: "all" });
+    const normalizedQuery = query.trim();
+
+    if (normalizedQuery) {
+      params.set("q", normalizedQuery);
+    }
+
+    return `/drafts?${params.toString()}`;
+  }
+
   const params = new URLSearchParams({
     type,
     view: "all",
@@ -3892,6 +4310,62 @@ function allSeasonsBrowseHref(type: SearchType, query: string): string {
   }
 
   return `/browse?${params.toString()}`;
+}
+
+function draftsHrefFromFilters(filters: BrowserFilters): string {
+  const params = draftParamsFromFilters({ ...filters, type: "draft" });
+  return params.size ? `/drafts?${params.toString()}` : "/drafts";
+}
+
+function draftParamsFromFilters(filters: BrowserFilters): URLSearchParams {
+  const params = paramsFromFilters({ ...filters, type: "draft" });
+  params.delete("type");
+  return params;
+}
+
+function searchPlaceholder(filters: BrowserFilters): string {
+  if (filters.type === "matchup") {
+    return filters.year === "all"
+      ? "Search seasons or enter a week number"
+      : "Search week number";
+  }
+  if (filters.type === "player") {
+    return filters.year === "all"
+      ? "Search seasons or enter a year"
+      : "Search players, NFL teams, fantasy teams";
+  }
+  return "Search teams, players, matchups, transactions";
+}
+
+function matchesSearchRowQuery(
+  row: SearchRow,
+  query: string,
+): boolean {
+  if (!query) {
+    return true;
+  }
+
+  const haystack = [
+    row.year,
+    row.label,
+    row.summary,
+    row.playerName,
+    row.teamName,
+    row.transactionActionType,
+    row.transactionStatus,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  return haystack.toLowerCase().includes(query);
+}
+
+function matchesDraftSearchRowQuery(row: SearchRow, query: string): boolean {
+  if (!query) {
+    return true;
+  }
+
+  return (row.playerName ?? row.label).toLowerCase().includes(query);
 }
 
 function matchesMatchupWeekQuery(week: number, query: string): boolean {
@@ -3966,7 +4440,12 @@ function normalizeFilters(filters: BrowserFilters): BrowserFilters {
   const type = isBrowserFilterType(filters.type) ? filters.type : "all";
   const year =
     filters.year === "all" || /^\d{4}$/.test(filters.year) ? filters.year : "all";
-  const view = filters.view === "all" ? "all" : "picker";
+  const view =
+    query && year === "all"
+      ? "all"
+      : filters.view === "all"
+        ? "all"
+        : "picker";
 
   return { query, type, year, view };
 }

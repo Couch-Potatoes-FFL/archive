@@ -192,13 +192,20 @@ h3 {
 
 .controlBand {
   display: grid;
-  grid-template-columns: minmax(260px, 1fr) minmax(150px, 180px) minmax(170px, 220px) auto;
   gap: 12px;
   align-items: center;
   padding: 14px;
   background: #e8eddf;
   border: 1px solid #d6ddcc;
   border-radius: 8px;
+}
+
+.browseControlBand {
+  grid-template-columns: minmax(260px, 1fr) minmax(150px, 180px) minmax(170px, 220px) auto;
+}
+
+.draftControlBand {
+  grid-template-columns: minmax(260px, 1fr) minmax(150px, 180px) auto;
 }
 
 .keeperControlBand {
@@ -366,6 +373,10 @@ select {
   background: #ffffff;
   border: 1px solid #dfe5d7;
   border-radius: 8px;
+}
+
+#draft-picks {
+  scroll-margin-top: 82px;
 }
 
 .panel {
@@ -1331,6 +1342,11 @@ a.teamLabel:hover {
   table-layout: fixed;
 }
 
+.teamDraftSummaryTable {
+  min-width: 620px;
+  table-layout: fixed;
+}
+
 .seasonRosterSlotColumn {
   width: 8%;
 }
@@ -1347,6 +1363,22 @@ a.teamLabel:hover {
   width: 9%;
 }
 
+.teamDraftPickColumn {
+  width: 8%;
+}
+
+.teamDraftIconColumn {
+  width: 7%;
+}
+
+.teamDraftPlayerColumn {
+  width: 37%;
+}
+
+.teamDraftStatColumn {
+  width: 16%;
+}
+
 .boxScoreTable th,
 .boxScoreTable td {
   padding: 10px 12px;
@@ -1359,6 +1391,10 @@ a.teamLabel:hover {
 }
 
 .seasonRosterStatsTable th:nth-child(n + 4) {
+  text-align: right;
+}
+
+.teamDraftSummaryTable th:nth-child(n + 4) {
   text-align: right;
 }
 
@@ -1718,6 +1754,42 @@ a.teamLabel:hover {
 
   .seasonRosterStatsTable {
     min-width: 760px;
+  }
+
+  .teamDraftSummaryTable {
+    min-width: 0;
+    width: 100%;
+    font-size: 0.78rem;
+  }
+
+  .teamDraftSummaryTable .teamDraftPickColumn {
+    width: 10%;
+  }
+
+  .teamDraftSummaryTable .teamDraftIconColumn {
+    display: none;
+  }
+
+  .teamDraftSummaryTable .teamDraftPlayerColumn {
+    width: 39%;
+  }
+
+  .teamDraftSummaryTable .teamDraftStatColumn {
+    width: 17%;
+  }
+
+  .teamDraftSummaryTable th:nth-child(2),
+  .teamDraftSummaryTable td:nth-child(2) {
+    display: none;
+  }
+
+  .teamDraftSummaryTable .slotCell {
+    width: auto;
+    padding-left: 8px;
+  }
+
+  .teamDraftSummaryTable .playerCell {
+    min-width: 0;
   }
 
   .boxScoreTable th,
