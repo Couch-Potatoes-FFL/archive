@@ -44,6 +44,7 @@ import {
   Transaction,
 } from "./types";
 import { useArchiveJson } from "./useArchiveJson";
+import { includesSearchText, normalizeSearchText } from "./search";
 
 type BrowserFilterType = SearchType | "all";
 type BrowserView = "picker" | "all";
@@ -193,16 +194,16 @@ const dataCategories: Array<{
     icon: <Search size={20} aria-hidden />,
   },
   {
-    title: "Season Pages",
-    label: "Open season summaries, standings, draft data, settings, and week links.",
-    to: "/browse?type=season",
-    icon: <Trophy size={20} aria-hidden />,
+    title: "Drafts",
+    label: "Find historical draft picks, nominations, bids, and keepers.",
+    to: "/drafts",
+    icon: <Database size={20} aria-hidden />,
   },
   {
-    title: "Weekly Results",
-    label: "Jump into weekly scoreboards, box scores, and transaction logs.",
-    to: "/browse?type=week",
-    icon: <CalendarDays size={20} aria-hidden />,
+    title: "Keepers",
+    label: "Review keeper players, auction values, positions, and teams by season.",
+    to: "/keepers",
+    icon: <Trophy size={20} aria-hidden />,
   },
   {
     title: "Teams",
@@ -229,16 +230,16 @@ const dataCategories: Array<{
     icon: <ArrowRight size={20} aria-hidden />,
   },
   {
-    title: "Drafts",
-    label: "Find historical draft picks, nominations, bids, and keepers.",
-    to: "/drafts",
-    icon: <Database size={20} aria-hidden />,
+    title: "Season Pages",
+    label: "Open season summaries, standings, draft data, settings, and week links.",
+    to: "/browse?type=season",
+    icon: <Trophy size={20} aria-hidden />,
   },
   {
-    title: "Keepers",
-    label: "Review keeper players, auction values, positions, and teams by season.",
-    to: "/keepers",
-    icon: <Trophy size={20} aria-hidden />,
+    title: "Weekly Results",
+    label: "Jump into weekly scoreboards, box scores, and transaction logs.",
+    to: "/browse?type=week",
+    icon: <CalendarDays size={20} aria-hidden />,
   },
 ];
 
@@ -620,7 +621,7 @@ function BrowserPage() {
       return [];
     }
 
-    const normalizedQuery = appliedFilters.query.trim().toLowerCase();
+    const normalizedQuery = normalizeSearchText(appliedFilters.query);
 
     if (
       normalizedQuery.length === 0 &&
@@ -901,7 +902,7 @@ function DraftBrowserPage() {
       return [];
     }
 
-    const normalizedQuery = appliedFilters.query.trim().toLowerCase();
+    const normalizedQuery = normalizeSearchText(appliedFilters.query);
 
     return sortDraftSearchRows(
       index.data.filter((row) => {
@@ -1047,7 +1048,7 @@ function MatchupSeasonResults({
   query: string;
   hasPendingFilters: boolean;
 }) {
-  const normalizedQuery = query.trim().toLowerCase();
+  const normalizedQuery = normalizeSearchText(query);
   const filtersBySeasonYear = /^\d{3,4}$/.test(normalizedQuery);
   const seasonRows = useMemo(
     () =>
@@ -1111,7 +1112,7 @@ function MatchupWeekResults({
   hasPendingFilters: boolean;
 }) {
   const season = useArchiveJson<PublicSeason>(`seasons/${year}.json`);
-  const normalizedQuery = query.trim().toLowerCase();
+  const normalizedQuery = normalizeSearchText(query);
 
   const weekRows = useMemo(() => {
     if (season.status !== "loaded") {
@@ -1181,7 +1182,7 @@ function PlayerSeasonResults({
   query: string;
   hasPendingFilters: boolean;
 }) {
-  const normalizedQuery = query.trim().toLowerCase();
+  const normalizedQuery = normalizeSearchText(query);
   const filtersBySeasonYear = /^\d{3,4}$/.test(normalizedQuery);
   const seasonRows = useMemo(
     () =>
@@ -1246,7 +1247,7 @@ function PlayerYearResults({
   hasPendingFilters: boolean;
 }) {
   const players = useArchiveJson<PublicPlayer[]>("players.json");
-  const normalizedQuery = query.trim().toLowerCase();
+  const normalizedQuery = normalizeSearchText(query);
 
   const playerRows = useMemo(() => {
     if (players.status !== "loaded") {
@@ -1568,7 +1569,7 @@ function AllSeasonsCard({
       </span>
       <span className="teamCardText">
         <strong>All Seasons</strong>
-        <small>Browse every matching row</small>
+        <small>Browse all results</small>
       </span>
     </Link>
   );
@@ -1882,11 +1883,37 @@ function PlayerPhoto({ player }: { player: PublicPlayer }) {
 function SearchResultMobileCard({ row }: { row: SearchRow }) {
   const href = searchRowDetailHref(row);
   const teamLabel = searchRowTeamLabel(row);
+  const isDraftRow = row.type === "draft";
+  const draftAmount =
+    typeof row.bidAmount === "number" ? `$${formatNumber(row.bidAmount)}` : null;
+
+  if (isDraftRow) {
+    return (
+      <article className="mobileDataCard compact">
+        <div className="draftMobileTitleRow">
+          <Link className="mobileCardTitle" to={href}>
+            {row.playerName ?? row.label}
+          </Link>
+          {draftAmount ? (
+            <strong className="draftMobileAmount">{draftAmount}</strong>
+          ) : null}
+        </div>
+        {row.draftPick || teamLabel ? (
+          <p className="draftMobileTeamLine">
+            {row.draftPick ? `Pick ${row.draftPick}${teamLabel ? ": " : ""}` : ""}
+            {teamLabel ? (
+              <Link to={searchRowTeamHref(row) ?? row.href}>{teamLabel}</Link>
+            ) : null}
+          </p>
+        ) : null}
+      </article>
+    );
+  }
 
   return (
     <article className="mobileDataCard">
       <div className="mobileCardHeader">
-        {row.type === "draft" ? null : <span className="pill">{row.type}</span>}
+        <span className="pill">{row.type}</span>
         <span className="mobileCardKicker">
           {row.year}
           {row.week ? `, Week ${row.week}` : ""}
@@ -1906,7 +1933,7 @@ function SearchResultMobileCard({ row }: { row: SearchRow }) {
           },
           { label: "Pick", value: row.draftPick },
           {
-            label: row.type === "draft" ? "Draft Amount" : "Bid",
+            label: "Bid",
             value:
               typeof row.bidAmount === "number"
                 ? `$${formatNumber(row.bidAmount)}`
@@ -4510,7 +4537,7 @@ function matchesSearchRowQuery(
     .filter(Boolean)
     .join(" ");
 
-  return haystack.toLowerCase().includes(query);
+  return includesSearchText(haystack, query);
 }
 
 function matchesDraftSearchRowQuery(row: SearchRow, query: string): boolean {
@@ -4518,7 +4545,7 @@ function matchesDraftSearchRowQuery(row: SearchRow, query: string): boolean {
     return true;
   }
 
-  return (row.playerName ?? row.label).toLowerCase().includes(query);
+  return includesSearchText(row.playerName ?? row.label, query);
 }
 
 function matchesMatchupWeekQuery(week: number, query: string): boolean {
@@ -4531,7 +4558,7 @@ function matchesMatchupWeekQuery(week: number, query: string): boolean {
     return true;
   }
 
-  return String(week).includes(weekSearch) || `week ${week}`.includes(query);
+  return String(week).includes(weekSearch) || includesSearchText(`week ${week}`, query);
 }
 
 function matchesPlayerYearQuery(
@@ -4554,7 +4581,7 @@ function matchesPlayerYearQuery(
     season.positionRank,
   ].join(" ");
 
-  return haystack.toLowerCase().includes(query);
+  return includesSearchText(haystack, query);
 }
 
 function filtersFromSearchParams(searchParams: URLSearchParams): BrowserFilters {

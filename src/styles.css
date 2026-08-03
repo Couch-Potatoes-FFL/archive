@@ -206,6 +206,8 @@ h3 {
 
 .draftControlBand {
   grid-template-columns: minmax(260px, 1fr) minmax(150px, 180px) auto;
+  gap: 10px;
+  padding: 12px;
 }
 
 .keeperControlBand {
@@ -953,9 +955,46 @@ td {
   border-radius: 8px;
 }
 
+.mobileDataCard.compact {
+  padding: 12px 14px;
+}
+
 .mobileDataCard.generic {
   display: grid;
   gap: 10px;
+}
+
+.draftMobileTitleRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 0;
+}
+
+.draftMobileTitleRow .mobileCardTitle {
+  flex: 1 1 auto;
+}
+
+.draftMobileAmount {
+  flex: 0 0 auto;
+  color: #172018;
+  font-size: 0.98rem;
+  font-weight: 850;
+  line-height: 1.25;
+}
+
+.draftMobileTeamLine {
+  margin: 8px 0 0;
+  color: #4e5d4d;
+  font-size: 0.9rem;
+  font-weight: 650;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.draftMobileTeamLine a {
+  font-weight: 800;
 }
 
 .mobileCardHeader {
@@ -1569,6 +1608,15 @@ a.teamLabel:hover {
     flex-direction: column;
   }
 
+  .filterActions {
+    flex-direction: row;
+  }
+
+  .filterActions button {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
   .filterActions,
   .filterActions button,
   .pagerActions,
@@ -1706,6 +1754,10 @@ a.teamLabel:hover {
   .filterActions,
   .pagerActions {
     display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .pagerActions {
     grid-template-columns: 1fr;
   }
 

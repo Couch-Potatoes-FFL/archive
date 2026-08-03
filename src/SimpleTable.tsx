@@ -7,10 +7,12 @@ import {
   getSortedRowModel,
   PaginationState,
   SortingState,
+  type FilterFn,
   useReactTable,
 } from "@tanstack/react-table";
 import { ArrowDownUp, ChevronLeft, ChevronRight } from "lucide-react";
 import { type ReactNode, useEffect, useMemo, useState } from "react";
+import { includesSearchText } from "./search";
 
 type SimpleTableProps<T> = {
   data: T[];
@@ -35,6 +37,11 @@ export function SimpleTable<T>({
     pageSize: 50,
   });
   const memoColumns = useMemo(() => columns, [columns]);
+  const globalFilterFn = useMemo<FilterFn<T>>(
+    () => (row, columnId, filterValue) =>
+      includesSearchText(row.getValue(columnId), filterValue),
+    [],
+  );
 
   useEffect(() => {
     setPagination((current) => ({ ...current, pageIndex: 0 }));
@@ -54,6 +61,7 @@ export function SimpleTable<T>({
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    globalFilterFn,
   });
 
   const filteredCount = table.getFilteredRowModel().rows.length;
