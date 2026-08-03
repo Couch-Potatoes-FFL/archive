@@ -2448,9 +2448,7 @@ function SeasonPage() {
             {season.data.weeks.map((week) => (
               <Link key={week.week} className="weekTile" to={week.href}>
                 <span>Week {week.week}</span>
-                <small>
-                  {week.scoreboardCount} games, {week.transactionCount} moves
-                </small>
+                <small>{week.transactionCount} moves</small>
               </Link>
             ))}
           </div>
