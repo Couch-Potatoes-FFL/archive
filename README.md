@@ -5,7 +5,7 @@ Static-friendly ESPN fantasy football data export for a private league.
 ## Archive Site
 
 This repo includes a Vite/React archive browser that publishes to GitHub Pages
-as a project site at `/cpffl/`.
+as a project site, currently at `/archive/`.
 
 ```bash
 npm install
