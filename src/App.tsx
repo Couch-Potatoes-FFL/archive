@@ -524,7 +524,7 @@ function App() {
       <header className="topBar">
         <Link className="brand" to="/">
           <Shield size={24} aria-hidden />
-          <span>CPFFL Archive</span>
+          <span>CPFFL</span>
         </Link>
         <nav aria-label="Primary navigation">
           <NavLink to="/" end>
