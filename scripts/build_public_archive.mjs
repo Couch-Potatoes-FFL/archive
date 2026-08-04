@@ -672,6 +672,66 @@ function finalizePlayerSeasons(players) {
   return rows.sort((left, right) => left.name.localeCompare(right.name));
 }
 
+function draftPickPlayerRow(rowByKey, pick) {
+  return (
+    rowByKey.get(pick.playerKey) ||
+    rowByKey.get(playerKeyFromParts(pick.playerId, pick.playerName)) ||
+    rowByKey.get(`name-${slugify(pick.playerName)}`)
+  );
+}
+
+function addReplacementPoints(rows, draft, teamCount) {
+  if (!teamCount || !draft?.length) {
+    return rows;
+  }
+
+  const rowByKey = new Map();
+  rows.forEach((row) => {
+    rowByKey.set(row.key, row);
+    rowByKey.set(playerKeyFromParts(row.playerId, row.name), row);
+    rowByKey.set(`name-${slugify(row.name)}`, row);
+  });
+
+  const draftedByPosition = new Map();
+  draft.forEach((pick) => {
+    const position = draftPickPlayerRow(rowByKey, pick)?.position;
+    incrementCount(draftedByPosition, position);
+  });
+
+  const byPosition = new Map();
+  rows.forEach((row) => {
+    if (!row.position) {
+      return;
+    }
+    byPosition.set(row.position, [...(byPosition.get(row.position) || []), row]);
+  });
+
+  byPosition.forEach((positionRows, position) => {
+    const draftedCount = draftedByPosition.get(position) || 0;
+    const replacementRows = [...positionRows]
+      .sort(
+        (left, right) =>
+          right.fantasyPoints - left.fantasyPoints || left.name.localeCompare(right.name),
+      )
+      .slice(draftedCount, draftedCount + teamCount);
+    if (!replacementRows.length) {
+      return;
+    }
+
+    const replacementPoints =
+      Math.round(
+        (replacementRows.reduce((total, row) => total + row.fantasyPoints, 0) /
+          replacementRows.length) *
+          100,
+      ) / 100;
+    positionRows.forEach((row) => {
+      row.replacementPoints = replacementPoints;
+    });
+  });
+
+  return rows;
+}
+
 function mergePlayerSeasons(seasons) {
   const players = new Map();
   seasons.forEach((season) => {
@@ -695,6 +755,7 @@ function mergePlayerSeasons(seasons) {
       fantasyTeamName: season.fantasyTeamName,
       fantasyPoints: season.fantasyPoints,
       draftValue: season.draftValue,
+      replacementPoints: season.replacementPoints,
       playerRank: season.playerRank,
       positionRank: season.positionRank,
       gamesPlayed: season.gamesPlayed,
@@ -945,7 +1006,11 @@ async function buildSeason(year) {
   };
   await writeJson(`seasons/${year}.json`, seasonPayload);
 
-  const playerSeasonRows = finalizePlayerSeasons(playerSeasons);
+  const playerSeasonRows = addReplacementPoints(
+    finalizePlayerSeasons(playerSeasons),
+    draft,
+    seasonPayload.settings.teamCount,
+  );
 
   return {
     season: {

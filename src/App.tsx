@@ -2495,7 +2495,13 @@ function PlayerPage() {
 function PlayerPointChart({ seasons }: { seasons: PlayerSeasonReport[] }) {
   const [activeTooltipYear, setActiveTooltipYear] = useState<number>();
   const rows = [...seasons].sort((left, right) => left.year - right.year);
-  const maxPoints = Math.max(...rows.map((row) => row.fantasyPoints), 1);
+  const replacementRows = rows
+    .map((season, index) => ({ season, index }))
+    .filter(({ season }) => typeof season.replacementPoints === "number");
+  const maxPoints = Math.max(
+    ...rows.flatMap((row) => [row.fantasyPoints, row.replacementPoints ?? 0]),
+    1,
+  );
   const width = 720;
   const height = 260;
   const padding = { top: 20, right: 28, bottom: 40, left: 56 };
@@ -2510,11 +2516,18 @@ function PlayerPointChart({ seasons }: { seasons: PlayerSeasonReport[] }) {
   const points = rows
     .map((season, index) => `${xForIndex(index)},${yForPoints(season.fantasyPoints)}`)
     .join(" ");
+  const replacementPoints = replacementRows
+    .map(
+      ({ season, index }) =>
+        `${xForIndex(index)},${yForPoints(season.replacementPoints ?? 0)}`,
+    )
+    .join(" ");
+  const replacementLabel = replacementRows[replacementRows.length - 1];
   const activeTooltip = rows
     .map((season, index) => ({ season, index }))
     .find(({ season }) => season.year === activeTooltipYear);
-  const tooltipWidth = 190;
-  const tooltipHeight = 58;
+  const tooltipWidth = 210;
+  const tooltipHeight = 76;
   const tooltipPosition = (season: PlayerSeasonReport, index: number) => {
     const x = xForIndex(index);
     const y = yForPoints(season.fantasyPoints);
@@ -2558,6 +2571,26 @@ function PlayerPointChart({ seasons }: { seasons: PlayerSeasonReport[] }) {
             </g>
           );
         })}
+        {replacementRows.length === 1 ? (
+          <line
+            className="chartReplacementLine"
+            x1={padding.left}
+            y1={yForPoints(replacementRows[0].season.replacementPoints ?? 0)}
+            x2={padding.left + chartWidth}
+            y2={yForPoints(replacementRows[0].season.replacementPoints ?? 0)}
+          />
+        ) : replacementPoints ? (
+          <polyline className="chartReplacementLine" points={replacementPoints} />
+        ) : null}
+        {replacementLabel ? (
+          <text
+            className="chartReplacementLabel"
+            x={padding.left + chartWidth - 6}
+            y={yForPoints(replacementLabel.season.replacementPoints ?? 0) - 6}
+          >
+            VORP
+          </text>
+        ) : null}
         <polyline className="chartLine" points={points} />
         {rows.map((season, index) => {
           const x = xForIndex(index);
@@ -2570,7 +2603,14 @@ function PlayerPointChart({ seasons }: { seasons: PlayerSeasonReport[] }) {
               aria-label={`${season.year}: ${formatNumber(
                 season.fantasyPoints,
                 1,
-              )} points, #${season.playerRank} overall, #${season.positionRank} ${
+              )} points${
+                typeof season.replacementPoints === "number"
+                  ? `, VORP ${formatNumber(
+                      season.fantasyPoints - season.replacementPoints,
+                      1,
+                    )}`
+                  : ""
+              }, #${season.playerRank} overall, #${season.positionRank} ${
                 season.position ?? "position"
               }`}
               onMouseEnter={() => setActiveTooltipYear(season.year)}
@@ -2621,6 +2661,11 @@ function ChartTooltip({
         #{season.playerRank} overall, #{season.positionRank}{" "}
         {season.position ?? "position"}
       </text>
+      {typeof season.replacementPoints === "number" ? (
+        <text x="12" y="59">
+          VORP: {formatNumber(season.fantasyPoints - season.replacementPoints, 1)}
+        </text>
+      ) : null}
     </g>
   );
 }

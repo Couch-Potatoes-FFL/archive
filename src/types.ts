@@ -188,6 +188,7 @@ export type PlayerSeasonReport = {
   fantasyTeamName: string;
   fantasyPoints: number;
   draftValue?: number;
+  replacementPoints?: number;
   playerRank: number;
   positionRank: number;
   gamesPlayed: number;

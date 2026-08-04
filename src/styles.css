@@ -1785,6 +1785,22 @@ tbody tr:hover {
   stroke-width: 4;
 }
 
+.chartReplacementLine {
+  fill: none;
+  stroke: #a5671e;
+  stroke-dasharray: 8 7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.5;
+}
+
+.chartReplacementLabel {
+  fill: #89531c;
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-anchor: end;
+}
+
 .chartPoint {
   fill: #fffdf8;
   stroke: #174d34;
