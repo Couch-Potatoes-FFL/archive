@@ -138,6 +138,20 @@ type LeagueRecordDataState =
   | { status: "loaded"; data: LeagueRecordData[]; requestKey: string }
   | { status: "error"; data: LeagueRecordData[]; requestKey: string };
 
+type ScoredMatchup = Matchup & { homeScore: number; awayScore: number };
+
+type FeaturedBroadcastScore = {
+  year: number;
+  matchup: ScoredMatchup;
+  homeTeam?: PublicTeam;
+  awayTeam?: PublicTeam;
+};
+
+type FeaturedBroadcastScoreState =
+  | { status: "loading"; data?: undefined }
+  | { status: "loaded"; data?: FeaturedBroadcastScore }
+  | { status: "error"; data?: undefined };
+
 type LeagueRecordCard = {
   id: string;
   title: string;
@@ -549,6 +563,16 @@ function App() {
 function DataLandingPage() {
   const manifest = useArchiveJson<ArchiveManifest>("manifest.json");
   const leagueAge = yearsSinceLeagueOrigin();
+  const sortedSeasonSummaries = useMemo(
+    () =>
+      manifest.status === "loaded"
+        ? [...manifest.data.seasons].sort((left, right) => left.year - right.year)
+        : [],
+    [manifest],
+  );
+  const firstSeason = sortedSeasonSummaries.at(0)?.year;
+  const latestSeason = sortedSeasonSummaries.at(-1)?.year;
+  const featuredBroadcastScore = useFeaturedBroadcastScore(latestSeason);
 
   if (manifest.status === "loading") {
     return <StatusPanel label="Loading archive summary..." />;
@@ -558,11 +582,6 @@ function DataLandingPage() {
     return <StatusPanel label="Unable to load archive data." tone="danger" />;
   }
 
-  const sortedSeasons = [...manifest.data.seasons].sort(
-    (left, right) => left.year - right.year,
-  );
-  const firstSeason = sortedSeasons.at(0)?.year;
-  const latestSeason = sortedSeasons.at(-1)?.year;
   const matchupCount = manifest.data.seasons.reduce(
     (total, season) => total + season.matchupCount,
     0,
@@ -571,22 +590,23 @@ function DataLandingPage() {
     (total, season) => total + season.playerCount,
     0,
   );
+  const broadcastScore =
+    featuredBroadcastScore.status === "loaded"
+      ? featuredBroadcastScore.data
+      : undefined;
 
   return (
     <>
       <section className="landingHero">
         <div className="heroCopy">
-          <p className="eyebrow">Live from the archive booth</p>
           <h1>Couch Potatoes x{leagueAge}</h1>
           <p>
-            A broadcast-ready fantasy football record room for seasons,
-            scoreboards, drafts, keepers, players, and every chaotic matchup in
-            between.
+            A backup data archive of the CPFFL ESPN based fantasy football league, for when Disney inevitably decides to offload more data from their servers and our hard earned championships are forever lost.
           </p>
           <div className="heroActions" aria-label="Primary archive actions">
-            <Link className="primaryButton" to="/browse">
+            <Link className="primaryButton" to="/players">
               <Search size={16} aria-hidden />
-              Browse archive
+              Browse Players
             </Link>
             <Link className="ghostButton heroGhostButton" to="/records">
               <BarChart3 size={16} aria-hidden />
@@ -595,10 +615,74 @@ function DataLandingPage() {
           </div>
         </div>
         <div className="broadcastPanel" aria-label="Archive broadcast summary">
-          <div className="scorebug">
-            <span>CPFFL</span>
-            <strong>{latestSeason ?? "Archive"}</strong>
-            <span>FINAL</span>
+          <div
+            className={broadcastScore ? "scorebug hasScore" : "scorebug"}
+            aria-label={
+              broadcastScore
+                ? `${broadcastTeamLabel(
+                    broadcastScore.awayTeam,
+                    broadcastScore.matchup.awayTeamKey,
+                    "Away",
+                  )} ${formatNumber(
+                    broadcastScore.matchup.awayScore,
+                    2,
+                  )} at ${broadcastTeamLabel(
+                    broadcastScore.homeTeam,
+                    broadcastScore.matchup.homeTeamKey,
+                    "Home",
+                  )} ${formatNumber(
+                    broadcastScore.matchup.homeScore,
+                    2,
+                  )}, ${broadcastScore.year} final`
+                : "CPFFL archive final scorebug"
+            }
+          >
+            {broadcastScore ? (
+              <>
+                <span
+                  className={
+                    broadcastScore.matchup.winnerTeamKey ===
+                    broadcastScore.matchup.awayTeamKey
+                      ? "scorebugTeam winner"
+                      : "scorebugTeam"
+                  }
+                >
+                  <small>
+                    {broadcastTeamLabel(
+                      broadcastScore.awayTeam,
+                      broadcastScore.matchup.awayTeamKey,
+                      "Away",
+                    )}
+                  </small>
+                  <b>{formatNumber(broadcastScore.matchup.awayScore, 2)}</b>
+                </span>
+                <span
+                  className={
+                    broadcastScore.matchup.winnerTeamKey ===
+                    broadcastScore.matchup.homeTeamKey
+                      ? "scorebugTeam winner"
+                      : "scorebugTeam"
+                  }
+                >
+                  <small>
+                    {broadcastTeamLabel(
+                      broadcastScore.homeTeam,
+                      broadcastScore.matchup.homeTeamKey,
+                      "Home",
+                    )}
+                  </small>
+                  <b>{formatNumber(broadcastScore.matchup.homeScore, 2)}</b>
+                </span>
+                <strong>{broadcastScore.year}</strong>
+                <span>FINAL</span>
+              </>
+            ) : (
+              <>
+                <span>CPFFL</span>
+                <strong>{latestSeason ?? "Archive"}</strong>
+                <span>FINAL</span>
+              </>
+            )}
           </div>
           <div className="fieldGraphic" aria-hidden>
             <div className="yardNumbers top">
@@ -4385,6 +4469,81 @@ function useSeasonWeeks(
   return state;
 }
 
+function useFeaturedBroadcastScore(
+  year: number | undefined,
+): FeaturedBroadcastScoreState {
+  const [state, setState] = useState<FeaturedBroadcastScoreState>({
+    status: "loading",
+  });
+
+  useEffect(() => {
+    if (!year) {
+      setState({ status: "loaded" });
+      return;
+    }
+
+    const targetYear = year;
+    let cancelled = false;
+    setState({ status: "loading" });
+
+    async function loadFeaturedScore() {
+      const season = await fetchArchiveJson<PublicSeason>(
+        `seasons/${targetYear}.json`,
+      );
+      const latestWeek = [...season.weeks]
+        .sort((left, right) => left.week - right.week)
+        .at(-1);
+
+      if (!latestWeek) {
+        return undefined;
+      }
+
+      const week = await fetchArchiveJson<PublicWeek>(
+        `seasons/${targetYear}/weeks/${String(latestWeek.week).padStart(
+          2,
+          "0",
+        )}.json`,
+      );
+      const matchup = featuredBroadcastMatchup(week.scoreboard);
+
+      if (!matchup) {
+        return undefined;
+      }
+
+      const teamsByKey = new Map(season.teams.map((team) => [team.key, team]));
+
+      return {
+        year: targetYear,
+        matchup,
+        homeTeam: matchup.homeTeamKey
+          ? teamsByKey.get(matchup.homeTeamKey)
+          : undefined,
+        awayTeam: matchup.awayTeamKey
+          ? teamsByKey.get(matchup.awayTeamKey)
+          : undefined,
+      };
+    }
+
+    loadFeaturedScore()
+      .then((data) => {
+        if (!cancelled) {
+          setState({ status: "loaded", data });
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setState({ status: "error" });
+        }
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [year]);
+
+  return state;
+}
+
 function useLeagueRecordData(years: number[]): LeagueRecordDataState {
   const yearKey = useMemo(
     () => [...years].sort((left, right) => left - right).join(","),
@@ -5171,6 +5330,26 @@ function displayMatchupType(matchup: { isPlayoff: boolean; matchupType?: string 
     : "Regular";
 }
 
+function featuredBroadcastMatchup(matchups: Matchup[]): ScoredMatchup | undefined {
+  const scoredMatchups = matchups.filter(isScoredMatchup);
+
+  return (
+    scoredMatchups.find(
+      (matchup) => matchup.isPlayoff && matchup.matchupType === "WINNERS_BRACKET",
+    ) ??
+    scoredMatchups.find((matchup) => matchup.isPlayoff) ??
+    scoredMatchups[0]
+  );
+}
+
+function broadcastTeamLabel(
+  team: PublicTeam | undefined,
+  teamKey: string | undefined,
+  fallback: string,
+): string {
+  return team?.name.trim() || team?.abbrev || teamKey || fallback;
+}
+
 function teamScoreline(matchup: TeamMatchupRow): string {
   if (matchup.teamScore === undefined && matchup.opponentScore === undefined) {
     return "-";
@@ -5199,9 +5378,7 @@ function isRealTeamScore(value: unknown): value is number {
   return isFiniteNumber(value) && value !== 0;
 }
 
-function isScoredMatchup(
-  matchup: Matchup,
-): matchup is Matchup & { homeScore: number; awayScore: number } {
+function isScoredMatchup(matchup: Matchup): matchup is ScoredMatchup {
   return isRealTeamScore(matchup.homeScore) && isRealTeamScore(matchup.awayScore);
 }
 

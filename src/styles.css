@@ -237,7 +237,6 @@ main {
   background:
     radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.32), transparent 13rem),
     radial-gradient(circle at 78% 0%, rgba(228, 179, 64, 0.26), transparent 18rem),
-    linear-gradient(90deg, transparent 49.7%, rgba(255, 255, 255, 0.42) 49.7% 50.3%, transparent 50.3%),
     repeating-linear-gradient(90deg, transparent 0 8.5%, rgba(255, 255, 255, 0.2) 8.5% 8.7%, transparent 8.7% 9.09%);
 }
 
@@ -256,6 +255,7 @@ main {
   display: grid;
   align-content: center;
   justify-items: start;
+  min-width: 0;
   max-width: 760px;
 }
 
@@ -332,8 +332,12 @@ main {
   box-shadow: 0 12px 26px rgba(0, 0, 0, 0.28);
 }
 
-.scorebug span,
-.scorebug strong {
+.scorebug.hasScore {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.scorebug > span,
+.scorebug > strong {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -343,13 +347,13 @@ main {
   font-weight: 950;
 }
 
-.scorebug span:first-child {
+.scorebug > span:first-child {
   justify-content: flex-start;
   color: #07140f;
   background: var(--gold);
 }
 
-.scorebug strong {
+.scorebug > strong {
   min-width: 86px;
   color: #fffdf8;
   font-size: 1rem;
@@ -357,9 +361,42 @@ main {
   background: #123c2a;
 }
 
-.scorebug span:last-child {
+.scorebug > span:last-child {
   color: #fffdf8;
   background: var(--orange);
+}
+
+.scorebug.hasScore > strong {
+  min-width: 74px;
+}
+
+.scorebug.hasScore .scorebugTeam {
+  grid-column: 1 / -1;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  min-width: 0;
+  color: #07140f;
+  background: var(--gold);
+}
+
+.scorebug.hasScore .scorebugTeam.winner {
+  color: #fffdf8;
+  background: #155f3c;
+}
+
+.scorebugTeam small {
+  min-width: 0;
+  overflow: hidden;
+  font: inherit;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.scorebugTeam b {
+  flex: 0 0 auto;
+  font-size: 0.98rem;
+  font-variant-numeric: tabular-nums;
 }
 
 .fieldGraphic {
@@ -1414,6 +1451,7 @@ table {
 th {
   color: #405044;
   font-size: 0.78rem;
+  line-height: 1;
   text-align: left;
   text-transform: uppercase;
   background:
@@ -1422,7 +1460,8 @@ th {
 }
 
 td {
-  padding: 12px 10px;
+  height: 52px;
+  padding: 10px 12px;
   vertical-align: middle;
   border-bottom: 1px solid #edf0e7;
 }
@@ -1438,7 +1477,8 @@ tbody tr:hover {
   align-items: center;
   gap: 6px;
   width: 100%;
-  padding: 10px;
+  min-height: 30px;
+  padding: 6px 12px;
   color: inherit;
   text-align: left;
   background: transparent;
@@ -1975,12 +2015,12 @@ a.teamLabel:hover {
 
 .boxScore .boxScoreTable th:nth-child(1),
 .boxScore .boxScoreTable td:nth-child(1) {
-  width: 64px;
+  width: 72px;
 }
 
 .boxScore .boxScoreTable th:nth-child(2),
 .boxScore .boxScoreTable td:nth-child(2) {
-  width: 64px;
+  width: 70px;
 }
 
 .boxScore .boxScoreTable th:nth-child(4),
@@ -2039,7 +2079,7 @@ a.teamLabel:hover {
 
 .boxScoreTable th,
 .boxScoreTable td {
-  padding: 8px;
+  padding: 8px 12px;
 }
 
 .boxScoreTable th:nth-child(5),
@@ -2073,7 +2113,7 @@ a.teamLabel:hover {
 }
 
 .boxScorePlayerRow td {
-  height: 58px;
+  height: 82px;
 }
 
 .boxScorePlayerRow.bench {
@@ -2096,7 +2136,7 @@ a.teamLabel:hover {
 }
 
 .playerIconCell {
-  padding-right: 4px;
+  padding-right: 0;
   padding-left: 0;
 }
 
@@ -2104,8 +2144,8 @@ a.teamLabel:hover {
   display: inline-flex;
   align-items: flex-end;
   justify-content: center;
-  width: 46px;
-  height: 46px;
+  width: 58px;
+  height: 58px;
   overflow: hidden;
   color: #0f5237;
   background: #f2f4f1;
@@ -2138,6 +2178,7 @@ a.teamLabel:hover {
   display: inline-flex;
   align-items: center;
   gap: 5px;
+  min-width: 0;
 }
 
 .playerCell strong,
@@ -2328,11 +2369,23 @@ a.teamLabel:hover {
 
   .landingHero {
     gap: 18px;
+    width: calc(100vw - 24px);
+    max-width: calc(100vw - 24px);
     padding: 22px 16px 16px;
   }
 
+  .heroCopy,
+  .broadcastPanel {
+    width: 100%;
+    max-width: 100%;
+  }
+
   .heroCopy h1 {
-    font-size: clamp(2.7rem, 18vw, 4.4rem);
+    font-size: clamp(2.7rem, 16vw, 4rem);
+  }
+
+  .heroCopy p:not(.eyebrow) {
+    max-width: 29ch;
   }
 
   .heroActions,
@@ -2371,9 +2424,23 @@ a.teamLabel:hover {
     grid-template-columns: 1fr auto;
   }
 
-  .scorebug span:last-child {
+  .scorebug > span:last-child {
     grid-column: 1 / -1;
     min-height: 30px;
+  }
+
+  .scorebug.hasScore {
+    grid-template-columns: 1fr auto;
+  }
+
+  .scorebug.hasScore .scorebugTeam {
+    grid-column: 1 / -1;
+    min-height: 34px;
+    padding: 0 10px;
+  }
+
+  .scorebug.hasScore > strong {
+    min-width: 0;
   }
 
   .breadcrumbs {
