@@ -654,20 +654,6 @@ h3 {
   border-radius: 8px;
 }
 
-.recordCard::after {
-  position: absolute;
-  right: -22px;
-  bottom: -24px;
-  width: 92px;
-  height: 92px;
-  pointer-events: none;
-  content: "";
-  background:
-    radial-gradient(circle, transparent 0 35%, rgba(20, 98, 62, 0.12) 36% 38%, transparent 39%),
-    linear-gradient(90deg, transparent 49%, rgba(20, 98, 62, 0.16) 49% 51%, transparent 51%);
-  border-radius: 50%;
-}
-
 a.recordCard:hover {
   border-color: var(--line-strong);
   box-shadow: var(--shadow-soft);
