@@ -150,12 +150,12 @@ function espnPlayerPhotoUrl(playerId) {
   return `https://a.espncdn.com/i/headshots/nfl/players/full/${numeric}.png`;
 }
 
-function publicPlayer(player) {
+function publicPlayer(player, { includeTotalPoints = false } = {}) {
   if (!player || typeof player !== "object") {
     return undefined;
   }
   const key = playerKey(player);
-  return {
+  const row = {
     key,
     playerId: player.player_id ?? undefined,
     name: player.name || "Unknown player",
@@ -175,6 +175,10 @@ function publicPlayer(player) {
         : finiteNumber(player.projected_points),
     injuryStatus: player.injury_status || undefined,
   };
+  if (includeTotalPoints && player.total_points !== undefined && player.total_points !== null) {
+    row.totalPoints = finiteNumber(player.total_points);
+  }
+  return row;
 }
 
 function espnCookieHeader() {
@@ -264,6 +268,11 @@ function compactTeam(year, team) {
     divisionName: team.division_name || undefined,
     ownerNames: ownerNames(team.owners),
     logoUrl: team.logo_url || undefined,
+    roster: Array.isArray(team.roster)
+      ? team.roster
+          .map((player) => publicPlayer(player, { includeTotalPoints: true }))
+          .filter(Boolean)
+      : [],
     wins: finiteNumber(team.wins),
     losses: finiteNumber(team.losses),
     ties: finiteNumber(team.ties),
@@ -512,6 +521,8 @@ function playerSeasonSeed(year, key, player) {
     latestNflTeam: undefined,
     fantasyTeamKey: undefined,
     fantasyTeamName: "FA",
+    lineupTeamCounts: new Map(),
+    lineupTeamNames: new Map(),
     rosterTotalPoints: undefined,
     lineupPoints: 0,
     weeks: new Set(),
@@ -568,11 +579,15 @@ function recordRosterPlayer(players, year, player, team) {
   }
 }
 
-function recordLineupPlayer(players, year, week, player) {
+function recordLineupPlayer(players, year, week, player, team) {
   const season = getPlayerSeason(players, year, player);
   const points = optionalFiniteNumber(player?.points);
   if (points !== undefined) {
     season.lineupPoints += points;
+  }
+  if (team?.key) {
+    incrementCount(season.lineupTeamCounts, team.key);
+    season.lineupTeamNames.set(team.key, team.name || team.key);
   }
   season.weeks.add(week);
   season.appearances += 1;
@@ -602,6 +617,8 @@ function finalizePlayerSeasons(players) {
   const rows = [...players.values()].map((season) => {
     const position = mostCommonValue(season.positionCounts);
     const nflTeam = season.latestNflTeam || mostCommonValue(season.nflTeamCounts);
+    const lineupTeamKey = mostCommonValue(season.lineupTeamCounts);
+    const fantasyTeamKey = season.fantasyTeamKey ?? lineupTeamKey;
     const fantasyPoints = Math.max(season.rosterTotalPoints ?? 0, season.lineupPoints);
     return {
       key: season.key,
@@ -611,8 +628,13 @@ function finalizePlayerSeasons(players) {
       year: season.year,
       position,
       nflTeam,
-      fantasyTeamKey: season.fantasyTeamKey,
-      fantasyTeamName: season.fantasyTeamName,
+      fantasyTeamKey,
+      fantasyTeamName:
+        season.fantasyTeamName !== "FA"
+          ? season.fantasyTeamName
+          : lineupTeamKey
+            ? season.lineupTeamNames.get(lineupTeamKey)
+            : "FA",
       fantasyPoints,
       gamesPlayed: season.weeks.size,
       starts: season.starts,
@@ -824,8 +846,19 @@ async function buildSeason(year) {
     });
 
     (week.box_scores?.data || []).forEach((boxScore) => {
-      [...(boxScore.home_lineup || []), ...(boxScore.away_lineup || [])].forEach(
-        (player) => recordLineupPlayer(playerSeasons, year, week.week, player),
+      const homeTeamKey = teamKey(year, boxScore.home_team_id);
+      const awayTeamKey = teamKey(year, boxScore.away_team_id);
+      (boxScore.home_lineup || []).forEach((player) =>
+        recordLineupPlayer(playerSeasons, year, week.week, player, {
+          key: homeTeamKey,
+          name: teamName(names, homeTeamKey),
+        }),
+      );
+      (boxScore.away_lineup || []).forEach((player) =>
+        recordLineupPlayer(playerSeasons, year, week.week, player, {
+          key: awayTeamKey,
+          name: teamName(names, awayTeamKey),
+        }),
       );
     });
 

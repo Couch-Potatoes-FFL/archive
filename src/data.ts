@@ -1,3 +1,5 @@
+import { OWNER_DISPLAY_NAMES, type OwnerKey } from "./types";
+
 const archiveBase = `${import.meta.env.BASE_URL}archive/`;
 const absoluteUrlPattern = /^(?:[a-z][a-z\d+.-]*:)?\/\//i;
 
@@ -67,4 +69,13 @@ export function teamDisplay(
     return "Unknown";
   }
   return teamNames.get(teamKey) ?? teamKey;
+}
+
+export function formatOwnerName(ownerName: string): string {
+  return OWNER_DISPLAY_NAMES[ownerName as OwnerKey] ?? ownerName;
+}
+
+export function formatOwnerNames(ownerNames: string[], fallback = "-"): string {
+  const names = [...new Set(ownerNames.map(formatOwnerName))].filter(Boolean);
+  return names.join(", ") || fallback;
 }

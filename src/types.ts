@@ -7,6 +7,28 @@ export type SearchType =
   | "draft"
   | "player";
 
+export const OWNER_DISPLAY_NAMES = {
+  mjmac222: "Matt M",
+  Bisstits: "Nate B",
+  James_Gang777: "Ethan J",
+  The_Fitzgeralds: "Evan M",
+  AMurray248: "Andy M",
+  whaddupgangstahh: "Jordan P",
+  NotNate: "Nate S",
+  jcherry14: "George B",
+  "George Bissell": "George B",
+  patsfan421: "Mark M",
+  JMarcG333: "Marc G",
+  "Mr.Ricci": "Joey R",
+  johnth7847664: "John H",
+  ESPNFAN7070151013: "George B",
+  XxMrPigxX: "Gabe M",
+} as const;
+
+export type OwnerKey = keyof typeof OWNER_DISPLAY_NAMES;
+export type OwnerDisplayName = (typeof OWNER_DISPLAY_NAMES)[OwnerKey];
+export type OwnerDisplayNameMap = typeof OWNER_DISPLAY_NAMES;
+
 export type ArchiveManifest = {
   exportedAt: string;
   seasons: Array<{
@@ -50,6 +72,7 @@ export type PublicTeam = {
   divisionName?: string;
   ownerNames: string[];
   logoUrl?: string;
+  roster?: LineupPlayer[];
   wins: number;
   losses: number;
   ties: number;
@@ -137,6 +160,7 @@ export type LineupPlayer = {
   proOpponent?: string;
   points?: number;
   projectedPoints?: number;
+  totalPoints?: number;
   injuryStatus?: string;
 };
 

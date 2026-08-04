@@ -1,6 +1,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import {
   ArrowRight,
+  BarChart3,
   CalendarDays,
   ChevronDown,
   Database,
@@ -8,6 +9,7 @@ import {
   Search,
   Shield,
   Trophy,
+  X,
 } from "lucide-react";
 import { type FormEvent, useEffect, useMemo, useState } from "react";
 import {
@@ -25,6 +27,7 @@ import {
   fetchArchiveJson,
   formatDate,
   formatNumber,
+  formatOwnerNames,
   teamDisplay,
 } from "./data";
 import { SimpleTable } from "./SimpleTable";
@@ -106,6 +109,62 @@ type TeamDraftSummaryRow = {
   auctionValue?: number;
   positionRank?: number;
   totalFantasyPoints?: number;
+};
+
+type LeagueRecordData = {
+  season: PublicSeason;
+  weeks: PublicWeek[];
+};
+
+type LeagueRecordDataState =
+  | { status: "idle" | "loading"; data: LeagueRecordData[]; requestKey: string }
+  | { status: "loaded"; data: LeagueRecordData[]; requestKey: string }
+  | { status: "error"; data: LeagueRecordData[]; requestKey: string };
+
+type LeagueRecordCard = {
+  id: string;
+  title: string;
+  value: string;
+  subtitle: string;
+  meta: string;
+  href?: string;
+};
+
+type LeagueRecordCandidate = {
+  value: number;
+  subtitle: string;
+  meta: string;
+  href?: string;
+};
+
+type OwnerRecordRow = {
+  id: string;
+  owner: string;
+  seasons: number;
+  championships: number;
+  wins: number;
+  losses: number;
+  pointsFor: number;
+  pointsAgainst: number;
+  averagePointsFor: number;
+  averagePointsAgainst: number;
+};
+
+type ChampionRecordRow = {
+  id: string;
+  year: number;
+  owner: string;
+  teamName: string;
+  record: string;
+  pointsFor: number;
+  pointsAgainst: number;
+  href: string;
+};
+
+type LeagueRecords = {
+  highLowRecords: LeagueRecordCard[];
+  ownerRows: OwnerRecordRow[];
+  championRows: ChampionRecordRow[];
 };
 
 type SeasonWeeksState =
@@ -192,6 +251,12 @@ const dataCategories: Array<{
     label: "Search teams, players, matchups, transactions, weeks, and seasons.",
     to: "/browse",
     icon: <Search size={20} aria-hidden />,
+  },
+  {
+    title: "Records",
+    label: "See league records, championships, and lifetime owner scoring totals.",
+    to: "/records",
+    icon: <BarChart3 size={20} aria-hidden />,
   },
   {
     title: "Drafts",
@@ -403,11 +468,16 @@ function App() {
             <Search size={16} aria-hidden />
             Browse
           </NavLink>
+          <NavLink to="/records">
+            <BarChart3 size={16} aria-hidden />
+            Records
+          </NavLink>
         </nav>
       </header>
       <main>
         <Routes>
           <Route path="/" element={<DataLandingPage />} />
+          <Route path="/records" element={<RecordsPage />} />
           <Route path="/keepers" element={<KeepersPage />} />
           <Route path="/browse" element={<BrowserPage />} />
           <Route path="/drafts" element={<DraftBrowserPage />} />
@@ -454,6 +524,232 @@ function DataLandingPage() {
         ))}
       </section>
     </>
+  );
+}
+
+function RecordsPage() {
+  const manifest = useArchiveJson<ArchiveManifest>("manifest.json");
+  const players = useArchiveJson<PublicPlayer[]>("players.json");
+  const seasonYears = useMemo(
+    () =>
+      manifest.status === "loaded"
+        ? manifest.data.seasons.map((season) => season.year)
+        : [],
+    [manifest],
+  );
+  const recordData = useLeagueRecordData(seasonYears);
+  const records = useMemo(
+    () =>
+      recordData.status === "loaded" && players.status === "loaded"
+        ? buildLeagueRecords(recordData.data, players.data)
+        : undefined,
+    [players, recordData],
+  );
+
+  const championColumns = useMemo<ColumnDef<ChampionRecordRow>[]>(
+    () => [
+      {
+        header: "Year",
+        accessorKey: "year",
+      },
+      {
+        header: "Owner",
+        accessorKey: "owner",
+      },
+      {
+        header: "Team",
+        accessorKey: "teamName",
+        cell: ({ row }) => (
+          <Link to={row.original.href}>
+            {row.original.teamName} ({row.original.record})
+          </Link>
+        ),
+      },
+      {
+        header: "PF",
+        accessorKey: "pointsFor",
+        cell: ({ row }) => formatScore(row.original.pointsFor, false),
+      },
+      {
+        header: "PA",
+        accessorKey: "pointsAgainst",
+        cell: ({ row }) => formatScore(row.original.pointsAgainst, false),
+      },
+    ],
+    [],
+  );
+  const ownerColumns = useMemo<ColumnDef<OwnerRecordRow>[]>(
+    () => [
+      {
+        header: "Owner",
+        accessorKey: "owner",
+      },
+      {
+        header: "Championships",
+        accessorKey: "championships",
+      },
+      {
+        header: "Seasons",
+        accessorKey: "seasons",
+      },
+      {
+        header: "Wins",
+        accessorKey: "wins",
+      },
+      {
+        header: "Losses",
+        accessorKey: "losses",
+      },
+      {
+        header: "Points For",
+        accessorKey: "pointsFor",
+        cell: ({ row }) => formatScore(row.original.pointsFor, false),
+      },
+      {
+        header: "Points Against",
+        accessorKey: "pointsAgainst",
+        cell: ({ row }) => formatScore(row.original.pointsAgainst, false),
+      },
+      {
+        header: "Avg PF",
+        accessorKey: "averagePointsFor",
+        cell: ({ row }) => formatScore(row.original.averagePointsFor),
+      },
+      {
+        header: "Avg PA",
+        accessorKey: "averagePointsAgainst",
+        cell: ({ row }) => formatScore(row.original.averagePointsAgainst),
+      },
+    ],
+    [],
+  );
+
+  if (
+    manifest.status === "loading" ||
+    players.status === "loading" ||
+    recordData.status === "idle" ||
+    recordData.status === "loading"
+  ) {
+    return <StatusPanel label="Loading league records..." />;
+  }
+
+  if (
+    manifest.status === "error" ||
+    players.status === "error" ||
+    recordData.status === "error" ||
+    !records
+  ) {
+    return <StatusPanel label="Unable to load league records." tone="danger" />;
+  }
+
+  return (
+    <>
+      <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "Records" }]} />
+      <section className="pageIntro">
+        <div>
+          <p className="eyebrow">League history</p>
+          <h1>Records</h1>
+        </div>
+      </section>
+
+      <section className="recordsGrid" aria-label="League high and low records">
+        {records.highLowRecords.map((record) => (
+          <RecordStatCard record={record} key={record.id} />
+        ))}
+      </section>
+
+      <section className="contentBand">
+        <div className="sectionHeader">
+          <h2>Champions By Season</h2>
+          <span className="pendingNote">
+            {formatNumber(records.championRows.length)}{" "}
+            {records.championRows.length === 1 ? "champion" : "champions"}
+          </span>
+        </div>
+        <SimpleTable
+          data={records.championRows}
+          columns={championColumns}
+          emptyLabel="No champions found."
+          mobileCard={(row) => <ChampionMobileCard row={row} />}
+          mobileLabel="Champion cards"
+        />
+      </section>
+
+      <section className="contentBand">
+        <div className="sectionHeader">
+          <h2>Owner Totals</h2>
+          <span className="pendingNote">
+            {formatNumber(records.ownerRows.length)} owners
+          </span>
+        </div>
+        <SimpleTable
+          data={records.ownerRows}
+          columns={ownerColumns}
+          emptyLabel="No owner totals found."
+          mobileCard={(row) => <OwnerRecordMobileCard row={row} />}
+          mobileLabel="Owner total cards"
+        />
+      </section>
+    </>
+  );
+}
+
+function RecordStatCard({ record }: { record: LeagueRecordCard }) {
+  const content = (
+    <>
+      <span className="recordCardTitle">{record.title}</span>
+      <strong>{record.value}</strong>
+      <span className="recordCardSubtitle">{record.subtitle}</span>
+      <span className="recordCardMeta">{record.meta}</span>
+    </>
+  );
+
+  return record.href ? (
+    <Link className="recordCard" to={record.href}>
+      {content}
+    </Link>
+  ) : (
+    <article className="recordCard">{content}</article>
+  );
+}
+
+function ChampionMobileCard({ row }: { row: ChampionRecordRow }) {
+  return (
+    <article className="mobileDataCard compact">
+      <div className="keeperMobileTitleRow">
+        <Link className="mobileCardTitle" to={row.href}>
+          {row.teamName} ({row.record})
+        </Link>
+        <strong className="keeperMobileValue">{row.year}</strong>
+      </div>
+      <p className="keeperMobileTeamLine">
+        {row.owner} · {formatScore(row.pointsFor, false)} PF ·{" "}
+        {formatScore(row.pointsAgainst, false)} PA
+      </p>
+    </article>
+  );
+}
+
+function OwnerRecordMobileCard({ row }: { row: OwnerRecordRow }) {
+  return (
+    <article className="mobileDataCard">
+      <div className="mobileCardHeader">
+        <strong className="mobileCardTitleText">{row.owner}</strong>
+        <span className="mobileCardKicker">
+          {row.championships} {row.championships === 1 ? "title" : "titles"}
+        </span>
+      </div>
+      <MobileFieldGrid
+        items={[
+          { label: "Seasons", value: row.seasons },
+          { label: "Wins", value: row.wins },
+          { label: "Losses", value: row.losses },
+          { label: "Points For", value: formatScore(row.pointsFor, false) },
+          { label: "Points Against", value: formatScore(row.pointsAgainst, false) },
+          { label: "Avg PF", value: formatScore(row.averagePointsFor) },
+        ]}
+      />
+    </article>
   );
 }
 
@@ -2137,7 +2433,7 @@ function StandingsMobileCard({
       </div>
       <MobileFieldGrid
         items={[
-          { label: "Owner", value: team.ownerNames.join(", ") || "-" },
+          { label: "Owner", value: formatOwnerNames(team.ownerNames) },
           { label: "Record", value: `${team.wins}-${team.losses}` },
           { label: "PF", value: formatNumber(team.pointsFor) },
           { label: "PA", value: formatNumber(team.pointsAgainst) },
@@ -2200,14 +2496,15 @@ function ScoreboardGrid({
   year: number;
 }) {
   const teamsByKey = new Map(teams.map((team) => [team.key, team]));
+  const scoredMatchups = matchups.filter(isScoredMatchup);
 
-  if (!matchups.length) {
+  if (!scoredMatchups.length) {
     return <p className="emptyNote">No scoreboard results found for this week.</p>;
   }
 
   return (
     <div className="scoreboardGrid">
-      {matchups.map((matchup, index) => {
+      {scoredMatchups.map((matchup, index) => {
         const awayTeam = matchup.awayTeamKey
           ? teamsByKey.get(matchup.awayTeamKey)
           : undefined;
@@ -2385,10 +2682,12 @@ function TeamMatchupMobileCard({
   matchup,
   year,
   teamNames,
+  onShowBoxScore,
 }: {
   matchup: TeamMatchupRow;
   year: number;
   teamNames: Map<string, string>;
+  onShowBoxScore: (matchup: TeamMatchupRow) => void;
 }) {
   return (
     <article className="mobileDataCard">
@@ -2409,7 +2708,18 @@ function TeamMatchupMobileCard({
             ),
           },
           { label: "Site", value: matchup.location },
-          { label: "Score", value: <Link to={matchup.href}>{teamScoreline(matchup)}</Link> },
+          {
+            label: "Score",
+            value: (
+              <button
+                className="linkButton"
+                type="button"
+                onClick={() => onShowBoxScore(matchup)}
+              >
+                {teamScoreline(matchup)}
+              </button>
+            ),
+          },
           { label: "Type", value: displayMatchupType(matchup) },
         ]}
       />
@@ -2507,7 +2817,7 @@ function SeasonPage() {
     },
     {
       header: "Owner",
-      accessorFn: (team) => team.ownerNames.join(", "),
+      accessorFn: (team) => formatOwnerNames(team.ownerNames),
     },
     {
       header: "W",
@@ -2675,6 +2985,9 @@ function TeamDraftPage() {
 function TeamPage() {
   const { year = "", teamKey = "" } = useParams();
   const location = useLocation();
+  const [selectedMatchup, setSelectedMatchup] = useState<TeamMatchupRow | null>(
+    null,
+  );
   const season = useArchiveJson<PublicSeason>(`seasons/${year}.json`);
   const players = useArchiveJson<PublicPlayer[]>("players.json");
   const weeks = useSeasonWeeks(
@@ -2686,6 +2999,10 @@ function TeamPage() {
     season.data.weeks.length > 0 &&
     weeks.data.length === 0 &&
     weeks.status !== "error";
+
+  useEffect(() => {
+    setSelectedMatchup(null);
+  }, [teamKey, year]);
 
   useEffect(() => {
     if (location.hash !== "#draft-picks" || season.status !== "loaded") {
@@ -2726,12 +3043,16 @@ function TeamPage() {
 
   const teamNames = teamNameMap(season.data.teams);
   const matchupRows = buildTeamMatchupRows(team, season.data, weeks.data);
+  const selectedBoxScore = selectedMatchup
+    ? teamMatchupBoxScore(team.key, selectedMatchup, weeks.data)
+    : undefined;
   const rosterSnapshot = finalRosterSnapshot(team.key, weeks.data);
+  const rosterPlayers = rosterSnapshot?.players ?? team.roster ?? [];
   const positionRanks = positionRankMap(players.data, season.data.year);
-  const rosterRows = rosterSnapshot
+  const rosterRows = rosterPlayers.length
     ? buildTeamRosterAggregateRows(
         team.key,
-        rosterSnapshot.players,
+        rosterPlayers,
         weeks.data,
         positionRanks,
       )
@@ -2739,10 +3060,15 @@ function TeamPage() {
   const draftPicks = season.data.draft
     .filter((pick) => pick.teamKey === team.key)
     .sort((left, right) => left.pick - right.pick);
-  const matchupColumns = teamMatchupColumns(season.data.year, teamNames);
+  const matchupColumns = teamMatchupColumns(
+    season.data.year,
+    teamNames,
+    setSelectedMatchup,
+  );
   const draftColumns = draftPickColumnsForTeam(teamNames, season.data.year);
-  const averageScore = average(team.scores);
-  const highScore = team.scores.length ? Math.max(...team.scores) : undefined;
+  const realScores = team.scores.filter(isRealTeamScore);
+  const averageScore = average(realScores);
+  const highScore = realScores.length ? Math.max(...realScores) : undefined;
 
   return (
     <>
@@ -2774,7 +3100,7 @@ function TeamPage() {
             <dl className="definitionGrid">
               <div>
                 <dt>Owner</dt>
-                <dd>{team.ownerNames.join(", ") || "-"}</dd>
+                <dd>{formatOwnerNames(team.ownerNames)}</dd>
               </div>
               <div>
                 <dt>Abbrev</dt>
@@ -2820,14 +3146,14 @@ function TeamPage() {
         <div className="sectionHeader">
           <h2>Final Roster</h2>
         </div>
-        {rosterSnapshot ? (
+        {rosterRows.length ? (
           <SeasonRosterTable
             title={team.name}
             rows={rosterRows}
             year={season.data.year}
           />
         ) : (
-          <p className="emptyNote">No box score roster was found for this team.</p>
+          <p className="emptyNote">No roster was found for this team.</p>
         )}
       </section>
 
@@ -2847,6 +3173,7 @@ function TeamPage() {
               matchup={matchup}
               year={season.data.year}
               teamNames={teamNames}
+              onShowBoxScore={setSelectedMatchup}
             />
           )}
           mobileLabel="Team matchup cards"
@@ -2874,6 +3201,16 @@ function TeamPage() {
           mobileLabel="Team draft pick cards"
         />
       </section>
+
+      {selectedMatchup ? (
+        <BoxScoreModal
+          boxScore={selectedBoxScore}
+          matchup={selectedMatchup}
+          teamNames={teamNames}
+          year={season.data.year}
+          onClose={() => setSelectedMatchup(null)}
+        />
+      ) : null}
     </>
   );
 }
@@ -2892,6 +3229,7 @@ function WeekPage() {
   }
 
   const teamNames = teamNameMap(season.data.teams);
+  const scoredMatchups = weekData.data.scoreboard.filter(isScoredMatchup);
 
   const transactionColumns: ColumnDef<Transaction>[] = [
     {
@@ -2954,12 +3292,12 @@ function WeekPage() {
         <div className="sectionHeader">
           <h2>Scoreboard</h2>
           <span className="pendingNote">
-            {formatNumber(weekData.data.scoreboard.length)}{" "}
-            {weekData.data.scoreboard.length === 1 ? "game" : "games"}
+            {formatNumber(scoredMatchups.length)}{" "}
+            {scoredMatchups.length === 1 ? "game" : "games"}
           </span>
         </div>
         <ScoreboardGrid
-          matchups={weekData.data.scoreboard}
+          matchups={scoredMatchups}
           teams={season.data.teams}
           year={season.data.year}
         />
@@ -3050,6 +3388,82 @@ function BoxScoreCard({
         </div>
       ) : null}
     </article>
+  );
+}
+
+function BoxScoreModal({
+  boxScore,
+  matchup,
+  teamNames,
+  year,
+  onClose,
+}: {
+  boxScore?: BoxScore;
+  matchup: TeamMatchupRow;
+  teamNames: Map<string, string>;
+  year: number;
+  onClose: () => void;
+}) {
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [onClose]);
+
+  const titleId = "matchup-box-score-title";
+  const opponentName = matchup.opponentKey
+    ? teamDisplay(matchup.opponentKey, teamNames)
+    : matchup.opponentName;
+
+  return (
+    <div
+      className="modalBackdrop"
+      role="presentation"
+      onMouseDown={(event) => {
+        if (event.target === event.currentTarget) {
+          onClose();
+        }
+      }}
+    >
+      <section
+        aria-labelledby={titleId}
+        aria-modal="true"
+        className="matchupModal"
+        role="dialog"
+      >
+        <div className="modalHeader">
+          <div>
+            <p className="eyebrow">Week {matchup.week} box score</p>
+            <h2 id={titleId}>{opponentName}</h2>
+            <strong>{teamScoreline(matchup)}</strong>
+          </div>
+          <button
+            autoFocus
+            className="modalCloseButton"
+            type="button"
+            onClick={onClose}
+            title="Close box score"
+          >
+            <X size={20} aria-hidden />
+          </button>
+        </div>
+        {boxScore ? (
+          <BoxScoreCard boxScore={boxScore} teamNames={teamNames} year={year} />
+        ) : (
+          <p className="emptyNote">Box score is not available for this matchup.</p>
+        )}
+      </section>
+    </div>
   );
 }
 
@@ -3207,9 +3621,7 @@ function SeasonRosterRow({
             <strong>{player.name}</strong>
           )}
         </span>
-        <small>
-          {player.proTeam ?? "-"} {player.position ?? "-"}
-        </small>
+        <small>{player.proTeam ?? "-"}</small>
       </td>
       <td className="numberCell">{row.positionRank ?? "-"}</td>
       <td className="numberCell">{formatNumber(row.appearances)}</td>
@@ -3296,9 +3708,7 @@ function TeamDraftSummaryTableRow({
             <strong>{player.name}</strong>
           )}
         </span>
-        <small>
-          {player.proTeam ?? "-"} {player.position ?? "-"}
-        </small>
+        <small>{player.proTeam ?? "-"}</small>
       </td>
       <td className="numberCell">{formatAuctionValue(row.auctionValue)}</td>
       <td className="numberCell">{row.positionRank ?? "-"}</td>
@@ -3346,9 +3756,7 @@ function LineupRow({
             <strong>{player.name}</strong>
           )}
         </span>
-        <small>
-          {player.proTeam ?? "-"} {player.position ?? "-"}
-        </small>
+        <small>{player.proTeam ?? "-"}</small>
       </td>
       <td>{player.proOpponent ?? "-"}</td>
       <td className="numberCell">{formatNumber(player.projectedPoints, 1)}</td>
@@ -3599,9 +4007,392 @@ function useSeasonWeeks(
   return state;
 }
 
+function useLeagueRecordData(years: number[]): LeagueRecordDataState {
+  const yearKey = useMemo(
+    () => [...years].sort((left, right) => left - right).join(","),
+    [years],
+  );
+  const yearNumbers = useMemo(
+    () => (yearKey ? yearKey.split(",").map((year) => Number(year)) : []),
+    [yearKey],
+  );
+  const requestKey = yearKey;
+  const [state, setState] = useState<LeagueRecordDataState>({
+    status: "idle",
+    data: [],
+    requestKey: "",
+  });
+
+  useEffect(() => {
+    if (!yearNumbers.length) {
+      setState({ status: "loaded", data: [], requestKey });
+      return;
+    }
+
+    let cancelled = false;
+    setState((current) => ({ status: "loading", data: current.data, requestKey }));
+
+    Promise.all(
+      yearNumbers.map(async (year) => {
+        const season = await fetchArchiveJson<PublicSeason>(`seasons/${year}.json`);
+        const weeks = await Promise.all(
+          season.weeks.map((week) =>
+            fetchArchiveJson<PublicWeek>(
+              `seasons/${year}/weeks/${String(week.week).padStart(2, "0")}.json`,
+            ),
+          ),
+        );
+
+        return {
+          season,
+          weeks: weeks.sort((left, right) => left.week - right.week),
+        };
+      }),
+    )
+      .then((loadedSeasons) => {
+        if (!cancelled) {
+          setState({
+            status: "loaded",
+            data: loadedSeasons.sort(
+              (left, right) => right.season.year - left.season.year,
+            ),
+            requestKey,
+          });
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setState((current) => ({
+            status: "error",
+            data: current.data,
+            requestKey,
+          }));
+        }
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [requestKey, yearNumbers]);
+
+  if (state.requestKey !== requestKey) {
+    return {
+      status: yearNumbers.length ? "loading" : "loaded",
+      data: [],
+      requestKey,
+    };
+  }
+
+  return state;
+}
+
+function buildLeagueRecords(
+  seasons: LeagueRecordData[],
+  players: PublicPlayer[],
+): LeagueRecords {
+  const regularMatchupRecords: LeagueRecordCandidate[] = [];
+  const teamAverageRecords: LeagueRecordCandidate[] = [];
+  const weeklyPlayerRecords: LeagueRecordCandidate[] = [];
+  const lowWeeklyPlayerRecords: LeagueRecordCandidate[] = [];
+  const seasonPlayerRecords: LeagueRecordCandidate[] = [];
+  const lowSeasonPlayerRecords: LeagueRecordCandidate[] = [];
+  const ownerTotals = new Map<string, OwnerRecordRow>();
+  const championRows: ChampionRecordRow[] = [];
+
+  seasons.forEach(({ season, weeks }) => {
+    const teamNames = teamNameMap(season.teams);
+    const seasonStarterPlayerTotals = new Map<
+      string,
+      {
+        value: number;
+        name: string;
+        position?: string;
+        teamKey: string;
+        playerKey?: string;
+        starts: number;
+      }
+    >();
+
+    season.teams.forEach((team) => {
+      const owner = ownerLabel(team);
+      const current =
+        ownerTotals.get(owner) ??
+        {
+          id: owner,
+          owner,
+          seasons: 0,
+          championships: 0,
+          wins: 0,
+          losses: 0,
+          pointsFor: 0,
+          pointsAgainst: 0,
+          averagePointsFor: 0,
+          averagePointsAgainst: 0,
+        };
+
+      current.seasons += 1;
+      current.wins += finiteRecordValue(team.wins);
+      current.losses += finiteRecordValue(team.losses);
+      current.pointsFor += finiteRecordValue(team.pointsFor);
+      current.pointsAgainst += finiteRecordValue(team.pointsAgainst);
+      if (team.finalStanding === 1) {
+        current.championships += 1;
+      }
+      ownerTotals.set(owner, current);
+
+      const scores = team.scores.filter(isRealTeamScore);
+      if (scores.length) {
+        teamAverageRecords.push({
+          value: scores.reduce((total, score) => total + score, 0) / scores.length,
+          subtitle: team.name,
+          meta: `${owner} · ${season.year} · ${teamRecord(team)}`,
+          href: teamPageHref(season.year, team.key),
+        });
+      }
+    });
+
+    const champion = season.standings.find((team) => team.finalStanding === 1);
+    if (champion) {
+      championRows.push({
+        id: `${season.year}-${champion.key}`,
+        year: season.year,
+        owner: ownerLabel(champion),
+        teamName: champion.name,
+        record: teamRecord(champion),
+        pointsFor: champion.pointsFor,
+        pointsAgainst: champion.pointsAgainst,
+        href: teamPageHref(season.year, champion.key),
+      });
+    }
+
+    weeks.forEach((week) => {
+      week.scoreboard.forEach((matchup) => {
+        if (!isScoredMatchup(matchup)) {
+          return;
+        }
+
+        const record = {
+          value: matchup.homeScore + matchup.awayScore,
+          subtitle: `${teamDisplay(matchup.awayTeamKey, teamNames)} ${formatScore(
+            matchup.awayScore,
+          )} at ${teamDisplay(matchup.homeTeamKey, teamNames)} ${formatScore(
+            matchup.homeScore,
+          )}`,
+          meta: `${season.year} Week ${week.week} · ${displayMatchupType(matchup)}`,
+          href: weekPageHref(season.year, week.week),
+        };
+        if (isRegularMatchup(matchup)) {
+          regularMatchupRecords.push(record);
+        }
+      });
+
+      week.boxScores.forEach((boxScore) => {
+        [
+          { teamKey: boxScore.awayTeamKey, players: boxScore.awayLineup },
+          { teamKey: boxScore.homeTeamKey, players: boxScore.homeLineup },
+        ].forEach((lineup) => {
+          lineup.players.forEach((player) => {
+            if (!isFiniteNumber(player.points)) {
+              return;
+            }
+
+            weeklyPlayerRecords.push({
+              value: player.points,
+              subtitle: playerAwardSubtitle(player.name, player.position),
+              meta: `${season.year} Week ${week.week} · ${teamDisplay(
+                lineup.teamKey,
+                teamNames,
+              )} · ${displayLineupSlot(player)}`,
+              href: player.key
+                ? `/player/${player.key}?fromYear=${season.year}`
+                : weekPageHref(season.year, week.week),
+            });
+
+            if (isOffensiveSkillPosition(player.position)) {
+              lowWeeklyPlayerRecords.push({
+                value: player.points,
+                subtitle: playerAwardSubtitle(player.name, player.position),
+                meta: `${season.year} Week ${week.week} · ${teamDisplay(
+                  lineup.teamKey,
+                  teamNames,
+                )} · ${displayLineupSlot(player)}`,
+                href: player.key
+                  ? `/player/${player.key}?fromYear=${season.year}`
+                  : weekPageHref(season.year, week.week),
+              });
+
+              if (lineup.teamKey && lineupSection(player) === "starter") {
+                const key = `${lineup.teamKey}-${player.key ?? player.name}`;
+                const current = seasonStarterPlayerTotals.get(key) ?? {
+                  value: 0,
+                  name: player.name,
+                  position: player.position,
+                  teamKey: lineup.teamKey,
+                  playerKey: player.key,
+                  starts: 0,
+                };
+                current.value += player.points;
+                current.starts += 1;
+                seasonStarterPlayerTotals.set(key, current);
+              }
+            }
+          });
+        });
+      });
+    });
+
+    seasonStarterPlayerTotals.forEach((player) => {
+      if (player.starts < 3) {
+        return;
+      }
+
+      lowSeasonPlayerRecords.push({
+        value: player.value,
+        subtitle: playerAwardSubtitle(player.name, player.position),
+        meta: `${season.year} · ${teamDisplay(
+          player.teamKey,
+          teamNames,
+        )} · ${player.starts} fantasy starts`,
+        href: player.playerKey
+          ? `/player/${player.playerKey}?fromYear=${season.year}`
+          : teamPageHref(season.year, player.teamKey),
+      });
+    });
+  });
+
+  players.forEach((player) => {
+    player.seasons.forEach((season) => {
+      if (!isFiniteNumber(season.fantasyPoints) || season.appearances <= 0) {
+        return;
+      }
+
+      seasonPlayerRecords.push({
+        value: season.fantasyPoints,
+        subtitle: playerAwardSubtitle(player.name, season.position),
+        meta: `${season.year} · ${season.fantasyTeamName || "FA"} · ${
+          season.appearances
+        } ${season.appearances === 1 ? "appearance" : "appearances"}`,
+        href: `/player/${player.key}?fromYear=${season.year}`,
+      });
+    });
+  });
+
+  const ownerRows = [...ownerTotals.values()]
+    .map((row) => ({
+      ...row,
+      averagePointsFor: row.seasons ? row.pointsFor / row.seasons : 0,
+      averagePointsAgainst: row.seasons ? row.pointsAgainst / row.seasons : 0,
+    }))
+    .sort(
+      (left, right) =>
+        right.championships - left.championships ||
+        right.pointsFor - left.pointsFor ||
+        left.owner.localeCompare(right.owner),
+    );
+
+  return {
+    highLowRecords: [
+      recordCard(
+        "highest-matchup",
+        "Highest Scoring Matchup",
+        maxBy(regularMatchupRecords, (record) => record.value),
+      ),
+      recordCard(
+        "lowest-matchup",
+        "Lowest Scoring Matchup",
+        minBy(regularMatchupRecords, (record) => record.value),
+      ),
+      recordCard(
+        "highest-team-average",
+        "Highest Average Scoring Team",
+        maxBy(teamAverageRecords, (record) => record.value),
+      ),
+      recordCard(
+        "lowest-team-average",
+        "Lowest Average Scoring Team",
+        minBy(teamAverageRecords, (record) => record.value),
+      ),
+      recordCard(
+        "highest-week-player",
+        "Highest Single Week Scoring Player",
+        maxBy(weeklyPlayerRecords, (record) => record.value),
+      ),
+      recordCard(
+        "lowest-week-player",
+        "Lowest Single Week Scoring Player",
+        minBy(lowWeeklyPlayerRecords, (record) => record.value),
+      ),
+      recordCard(
+        "highest-season-player",
+        "Highest Season Scoring Player",
+        maxBy(seasonPlayerRecords, (record) => record.value),
+      ),
+      recordCard(
+        "lowest-season-player",
+        "Lowest Season Scoring Player",
+        minBy(lowSeasonPlayerRecords, (record) => record.value),
+      ),
+    ],
+    ownerRows,
+    championRows: championRows.sort((left, right) => right.year - left.year),
+  };
+}
+
+function recordCard(
+  id: string,
+  title: string,
+  candidate: LeagueRecordCandidate | undefined,
+): LeagueRecordCard {
+  return {
+    id,
+    title,
+    value: candidate ? formatScore(candidate.value, false) : "-",
+    subtitle: candidate?.subtitle ?? "No qualifying record found",
+    meta: candidate?.meta ?? "-",
+    href: candidate?.href,
+  };
+}
+
+function maxBy<T>(rows: T[], valueForRow: (row: T) => number): T | undefined {
+  return rows.reduce<T | undefined>(
+    (best, row) =>
+      best === undefined || valueForRow(row) > valueForRow(best) ? row : best,
+    undefined,
+  );
+}
+
+function minBy<T>(rows: T[], valueForRow: (row: T) => number): T | undefined {
+  return rows.reduce<T | undefined>(
+    (best, row) =>
+      best === undefined || valueForRow(row) < valueForRow(best) ? row : best,
+    undefined,
+  );
+}
+
+function ownerLabel(team: PublicTeam): string {
+  return formatOwnerNames(team.ownerNames, "Unknown owner");
+}
+
+function playerAwardSubtitle(name: string, position: string | undefined): string {
+  return position ? `${position} - ${name}` : name;
+}
+
+function weekPageHref(year: number, week: number): string {
+  return `/season/${year}/week/${String(week).padStart(2, "0")}`;
+}
+
+function isFiniteNumber(value: unknown): value is number {
+  return typeof value === "number" && Number.isFinite(value);
+}
+
+function finiteRecordValue(value: number | undefined): number {
+  return isFiniteNumber(value) ? value : 0;
+}
+
 function teamMatchupColumns(
   year: number,
   teamNames: Map<string, string>,
+  onShowBoxScore: (matchup: TeamMatchupRow) => void,
 ): ColumnDef<TeamMatchupRow>[] {
   return [
     {
@@ -3634,7 +4425,13 @@ function teamMatchupColumns(
       header: "Score",
       accessorFn: (row) => row.teamScore ?? 0,
       cell: ({ row }) => (
-        <Link to={row.original.href}>{teamScoreline(row.original)}</Link>
+        <button
+          className="linkButton"
+          type="button"
+          onClick={() => onShowBoxScore(row.original)}
+        >
+          {teamScoreline(row.original)}
+        </button>
       ),
     },
     {
@@ -3705,44 +4502,59 @@ function buildTeamMatchupRows(
   const teamByKey = new Map(season.teams.map((row) => [row.key, row]));
   const teamNames = teamNameMap(season.teams);
 
-  return season.weeks.map((weekSummary, index) => {
-    const weekData = weekDataByNumber.get(weekSummary.week);
-    const matchup = weekData?.scoreboard.find(
-      (row) => row.homeTeamKey === team.key || row.awayTeamKey === team.key,
-    );
-    const isHome = matchup?.homeTeamKey === team.key;
-    const isAway = matchup?.awayTeamKey === team.key;
-    const opponentKey = matchup
-      ? isHome
-        ? matchup.awayTeamKey
-        : matchup.homeTeamKey
-      : team.schedule[index];
-    const opponent = opponentKey ? teamByKey.get(opponentKey) : undefined;
-    const teamScore = matchup
-      ? isHome
-        ? matchup.homeScore
-        : matchup.awayScore
-      : team.scores[index];
-    const opponentScore = matchup
-      ? isHome
-        ? matchup.awayScore
-        : matchup.homeScore
-      : opponent?.scores[index];
+  return season.weeks
+    .map((weekSummary, index): TeamMatchupRow => {
+      const weekData = weekDataByNumber.get(weekSummary.week);
+      const matchup = weekData?.scoreboard.find(
+        (row) => row.homeTeamKey === team.key || row.awayTeamKey === team.key,
+      );
+      const isHome = matchup?.homeTeamKey === team.key;
+      const isAway = matchup?.awayTeamKey === team.key;
+      const opponentKey = matchup
+        ? isHome
+          ? matchup.awayTeamKey
+          : matchup.homeTeamKey
+        : team.schedule[index];
+      const opponent = opponentKey ? teamByKey.get(opponentKey) : undefined;
+      const teamScore = matchup
+        ? isHome
+          ? matchup.homeScore
+          : matchup.awayScore
+        : team.scores[index];
+      const opponentScore = matchup
+        ? isHome
+          ? matchup.awayScore
+          : matchup.homeScore
+        : opponent?.scores[index];
 
-    return {
-      id: `${team.key}-week-${weekSummary.week}`,
-      week: weekSummary.week,
-      href: weekSummary.href,
-      opponentKey,
-      opponentName: opponent?.name ?? teamDisplay(opponentKey, teamNames),
-      location: isHome ? "Home" : isAway ? "Away" : "-",
-      teamScore,
-      opponentScore,
-      outcome: matchupOutcome(matchup, team.key) ?? team.outcomes[index],
-      matchupType: matchup?.matchupType,
-      isPlayoff: Boolean(matchup?.isPlayoff),
-    };
-  });
+      return {
+        id: `${team.key}-week-${weekSummary.week}`,
+        week: weekSummary.week,
+        href: weekSummary.href,
+        opponentKey,
+        opponentName: opponent?.name ?? teamDisplay(opponentKey, teamNames),
+        location: isHome ? "Home" : isAway ? "Away" : "-",
+        teamScore,
+        opponentScore,
+        outcome: matchupOutcome(matchup, team.key) ?? team.outcomes[index],
+        matchupType: matchup?.matchupType,
+        isPlayoff: Boolean(matchup?.isPlayoff),
+      };
+    })
+    .filter(isRealTeamMatchupRow);
+}
+
+function teamMatchupBoxScore(
+  teamKey: string,
+  matchup: TeamMatchupRow,
+  weeks: PublicWeek[],
+): BoxScore | undefined {
+  return weeks
+    .find((week) => week.week === matchup.week)
+    ?.boxScores.find(
+      (boxScore) =>
+        boxScore.homeTeamKey === teamKey || boxScore.awayTeamKey === teamKey,
+    );
 }
 
 function buildTeamRosterAggregateRows(
@@ -3789,6 +4601,9 @@ function buildTeamRosterAggregateRows(
       totalPoints: 0,
     };
     const appearances = aggregate.appearances;
+    const totalPoints = appearances
+      ? aggregate.totalPoints
+      : finiteLineupValue(player.totalPoints);
 
     return {
       id: `${lineupPlayerAggregateKey(player)}-${index}`,
@@ -3797,9 +4612,9 @@ function buildTeamRosterAggregateRows(
       appearances,
       starts: aggregate.starts,
       totalProjected: aggregate.totalProjected,
-      totalPoints: aggregate.totalPoints,
+      totalPoints,
       averageProjected: appearances ? aggregate.totalProjected / appearances : 0,
-      averagePoints: appearances ? aggregate.totalPoints / appearances : 0,
+      averagePoints: appearances ? totalPoints / appearances : 0,
     };
   });
 }
@@ -4000,6 +4815,34 @@ function average(values: number[]): number | undefined {
     return undefined;
   }
   return values.reduce((total, value) => total + value, 0) / values.length;
+}
+
+function isRealTeamScore(value: unknown): value is number {
+  return isFiniteNumber(value) && value !== 0;
+}
+
+function isScoredMatchup(
+  matchup: Matchup,
+): matchup is Matchup & { homeScore: number; awayScore: number } {
+  return isRealTeamScore(matchup.homeScore) && isRealTeamScore(matchup.awayScore);
+}
+
+function isRegularMatchup(matchup: Matchup): boolean {
+  return (
+    !matchup.isPlayoff &&
+    (!matchup.matchupType || matchup.matchupType.toUpperCase() === "NONE")
+  );
+}
+
+function isRealTeamMatchupRow(row: TeamMatchupRow): boolean {
+  return (
+    isRealTeamScore(row.teamScore) &&
+    (row.opponentScore === undefined || isRealTeamScore(row.opponentScore))
+  );
+}
+
+function isOffensiveSkillPosition(position: string | undefined): boolean {
+  return position === "QB" || position === "RB" || position === "WR" || position === "TE";
 }
 
 function teamRecord(team: PublicTeam): string {
