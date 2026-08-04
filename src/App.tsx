@@ -2,15 +2,23 @@ import { ColumnDef } from "@tanstack/react-table";
 import {
   ArrowRight,
   BarChart3,
-  CalendarDays,
   ChevronDown,
-  Database,
   Home,
   Search,
   Shield,
-  Trophy,
   X,
 } from "lucide-react";
+import {
+  LiaArchiveSolid,
+  LiaCalendarAltSolid,
+  LiaChartBarSolid,
+  LiaClipboardListSolid,
+  LiaExchangeAltSolid,
+  LiaFootballBallSolid,
+  LiaSearchSolid,
+  LiaTrophySolid,
+  LiaUsersSolid,
+} from "react-icons/lia";
 import { type FormEvent, useEffect, useMemo, useState } from "react";
 import {
   Link,
@@ -117,6 +125,8 @@ type TeamDraftSummaryRow = {
   positionRank?: number;
   totalFantasyPoints?: number;
 };
+
+const LEAGUE_ORIGIN_DATE = { year: 2005, monthIndex: 6, day: 1 };
 
 type LeagueRecordData = {
   season: PublicSeason;
@@ -253,61 +263,61 @@ const dataCategories: Array<{
     title: "Records",
     label: "See league records, championships, and lifetime owner scoring totals.",
     to: "/records",
-    icon: <BarChart3 size={20} aria-hidden />,
+    icon: <LiaChartBarSolid size={22} aria-hidden />,
   },
   {
     title: "Drafts",
     label: "Find historical draft picks and auction values.",
     to: "/drafts",
-    icon: <Database size={20} aria-hidden />,
+    icon: <LiaClipboardListSolid size={22} aria-hidden />,
   },
   {
     title: "Keepers",
     label: "Review keeper auction values and teams by season.",
     to: "/keepers",
-    icon: <Trophy size={20} aria-hidden />,
+    icon: <LiaTrophySolid size={22} aria-hidden />,
   },
   {
     title: "Teams",
     label: "Find team records, owners, yearly results, and weekly scoring.",
     to: "/browse?type=team",
-    icon: <Shield size={20} aria-hidden />,
+    icon: <LiaUsersSolid size={22} aria-hidden />,
   },
   {
     title: "Players",
     label: "Browse player season rankings and fantasy point totals.",
     to: "/players",
-    icon: <Search size={20} aria-hidden />,
+    icon: <LiaFootballBallSolid size={22} aria-hidden />,
   },
   {
     title: "Matchups",
     label: "Browse historical head-to-head games.",
     to: "/browse?type=matchup",
-    icon: <Database size={20} aria-hidden />,
+    icon: <LiaCalendarAltSolid size={22} aria-hidden />,
   },
   {
     title: "Transactions",
     label: "Review waiver, roster, and trade records from past seasons.",
     to: "/browse?type=transaction",
-    icon: <ArrowRight size={20} aria-hidden />,
+    icon: <LiaExchangeAltSolid size={22} aria-hidden />,
   },
   {
     title: "Season Pages",
     label: "Open season summaries, standings, draft data, settings, and week links.",
     to: "/browse?type=season",
-    icon: <Trophy size={20} aria-hidden />,
+    icon: <LiaArchiveSolid size={22} aria-hidden />,
   },
   {
     title: "Weekly Results",
     label: "Jump into weekly scoreboards, box scores, and transaction logs.",
     to: "/browse?type=week",
-    icon: <CalendarDays size={20} aria-hidden />,
+    icon: <LiaCalendarAltSolid size={22} aria-hidden />,
   },
   {
     title: "Full Archive Search",
     label: "Search teams, matchups, transactions, weeks, and seasons.",
     to: "/browse",
-    icon: <Search size={20} aria-hidden />,
+    icon: <LiaSearchSolid size={22} aria-hidden />,
   },
 ];
 
@@ -538,6 +548,7 @@ function App() {
 
 function DataLandingPage() {
   const manifest = useArchiveJson<ArchiveManifest>("manifest.json");
+  const leagueAge = yearsSinceLeagueOrigin();
 
   if (manifest.status === "loading") {
     return <StatusPanel label="Loading archive summary..." />;
@@ -551,7 +562,7 @@ function DataLandingPage() {
     <>
       <section className="pageIntro">
         <div>
-          <h1>CPFFL Archive</h1>
+          <h1>Couch Potatoes x{leagueAge}</h1>
         </div>
       </section>
 
@@ -1674,7 +1685,7 @@ function MatchupSeasonResults({
               to={matchupYearBrowseHref(season.year, query)}
             >
               <span className="teamCardIcon" aria-hidden>
-                <CalendarDays size={20} aria-hidden />
+                <LiaCalendarAltSolid size={23} aria-hidden />
               </span>
               <span className="teamCardText">
                 <strong>{season.year}</strong>
@@ -1746,7 +1757,7 @@ function MatchupWeekResults({
           {weekRows.map((week) => (
             <Link className="matchupWeekCard" key={week.week} to={week.href}>
               <span className="teamCardIcon" aria-hidden>
-                <CalendarDays size={20} aria-hidden />
+                <LiaCalendarAltSolid size={23} aria-hidden />
               </span>
               <span className="teamCardText">
                 <strong>Week {week.week}</strong>
@@ -1952,7 +1963,7 @@ function DraftSeasonResults({
             to={draftYearBrowseHref(group.year, query)}
           >
             <span className="teamCardIcon" aria-hidden>
-              <Database size={20} aria-hidden />
+              <LiaClipboardListSolid size={23} aria-hidden />
             </span>
             <span className="teamCardText">
               <strong>{group.year}</strong>
@@ -2048,7 +2059,7 @@ function SeasonHistoryResults({
           {seasonRows.map((season) => (
             <Link className="teamHistoryCard" key={season.id} to={season.href}>
               <span className="teamCardIcon" aria-hidden>
-                <CalendarDays size={20} aria-hidden />
+                <LiaArchiveSolid size={23} aria-hidden />
               </span>
               <span className="teamCardText">
                 <strong>{season.year}</strong>
@@ -2156,7 +2167,7 @@ function AllSeasonsCard({
   return (
     <Link className="teamHistoryCard" to={allSeasonsBrowseHref(type, query)}>
       <span className="teamCardIcon" aria-hidden>
-        <Database size={20} aria-hidden />
+        <LiaArchiveSolid size={23} aria-hidden />
       </span>
       <span className="teamCardText">
         <strong>All Seasons</strong>
@@ -5556,18 +5567,24 @@ function recordYearSummary(type: SearchType, count: number): string {
 
 function recordTypeIcon(type: SearchType): React.ReactNode {
   if (type === "team") {
-    return <Shield size={20} aria-hidden />;
+    return <LiaUsersSolid size={23} aria-hidden />;
   }
   if (type === "week") {
-    return <CalendarDays size={20} aria-hidden />;
+    return <LiaCalendarAltSolid size={23} aria-hidden />;
   }
   if (type === "transaction") {
-    return <ArrowRight size={20} aria-hidden />;
+    return <LiaExchangeAltSolid size={23} aria-hidden />;
   }
   if (type === "draft") {
-    return <Database size={20} aria-hidden />;
+    return <LiaClipboardListSolid size={23} aria-hidden />;
   }
-  return <Search size={20} aria-hidden />;
+  if (type === "season") {
+    return <LiaArchiveSolid size={23} aria-hidden />;
+  }
+  if (type === "player") {
+    return <LiaFootballBallSolid size={23} aria-hidden />;
+  }
+  return <LiaSearchSolid size={23} aria-hidden />;
 }
 
 function browserBreadcrumbItems(filters: BrowserFilters): BreadcrumbItem[] {
@@ -5890,6 +5907,16 @@ function filtersMatch(left: BrowserFilters, right: BrowserFilters): boolean {
     normalizedLeft.year === normalizedRight.year &&
     normalizedLeft.view === normalizedRight.view
   );
+}
+
+function yearsSinceLeagueOrigin(today = new Date()): number {
+  const years = today.getFullYear() - LEAGUE_ORIGIN_DATE.year;
+  const anniversaryPassed =
+    today.getMonth() > LEAGUE_ORIGIN_DATE.monthIndex ||
+    (today.getMonth() === LEAGUE_ORIGIN_DATE.monthIndex &&
+      today.getDate() >= LEAGUE_ORIGIN_DATE.day);
+
+  return anniversaryPassed ? years : years - 1;
 }
 
 export default App;
