@@ -601,8 +601,28 @@ function DataLandingPage() {
             <span>FINAL</span>
           </div>
           <div className="fieldGraphic" aria-hidden>
-            <span className="yardLine fifty">50</span>
-            <span className="yardLine twenty">20</span>
+            <div className="yardNumbers top">
+              <span>10</span>
+              <span>20</span>
+              <span>30</span>
+              <span>40</span>
+              <span>50</span>
+              <span>40</span>
+              <span>30</span>
+              <span>20</span>
+              <span>10</span>
+            </div>
+            <div className="yardNumbers bottom">
+              <span>10</span>
+              <span>20</span>
+              <span>30</span>
+              <span>40</span>
+              <span>50</span>
+              <span>40</span>
+              <span>30</span>
+              <span>20</span>
+              <span>10</span>
+            </div>
             <LiaFootballBallSolid className="heroFootball" size={58} />
           </div>
           <dl className="heroStats">
