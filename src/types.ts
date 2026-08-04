@@ -189,6 +189,7 @@ export type PlayerSeasonReport = {
   fantasyPoints: number;
   draftValue?: number;
   replacementPoints?: number;
+  avgStarterPoints?: number;
   playerRank: number;
   positionRank: number;
   gamesPlayed: number;

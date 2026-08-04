@@ -14,6 +14,8 @@ import { ArrowDownUp, ChevronLeft, ChevronRight } from "lucide-react";
 import { type ReactNode, useEffect, useMemo, useState } from "react";
 import { includesSearchText } from "./search";
 
+const EMPTY_SORTING: SortingState = [];
+
 type SimpleTableProps<T> = {
   data: T[];
   columns: ColumnDef<T>[];
@@ -21,6 +23,7 @@ type SimpleTableProps<T> = {
   emptyLabel?: string;
   mobileCard?: (row: T) => ReactNode;
   mobileLabel?: string;
+  sortable?: boolean;
 };
 
 export function SimpleTable<T>({
@@ -30,6 +33,7 @@ export function SimpleTable<T>({
   emptyLabel = "No rows found.",
   mobileCard,
   mobileLabel = "Mobile table rows",
+  sortable = true,
 }: SimpleTableProps<T>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [pagination, setPagination] = useState<PaginationState>({
@@ -44,21 +48,24 @@ export function SimpleTable<T>({
   );
 
   useEffect(() => {
-    setPagination((current) => ({ ...current, pageIndex: 0 }));
+    setPagination((current) =>
+      current.pageIndex === 0 ? current : { ...current, pageIndex: 0 },
+    );
   }, [data, search]);
 
   const table = useReactTable({
     data,
     columns: memoColumns,
     state: {
-      sorting,
+      sorting: sortable ? sorting : EMPTY_SORTING,
       pagination,
       globalFilter: search,
     },
     onSortingChange: setSorting,
     onPaginationChange: setPagination,
+    enableSorting: sortable,
     getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
+    getSortedRowModel: sortable ? getSortedRowModel() : undefined,
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     globalFilterFn,
@@ -81,7 +88,7 @@ export function SimpleTable<T>({
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
                   <th key={header.id}>
-                    {header.isPlaceholder ? null : (
+                    {header.isPlaceholder ? null : sortable ? (
                       <button
                         className="thButton"
                         type="button"
@@ -96,6 +103,13 @@ export function SimpleTable<T>({
                         </span>
                         <ArrowDownUp size={14} aria-hidden />
                       </button>
+                    ) : (
+                      <span className="thLabel">
+                        {flexRender(
+                          header.column.columnDef.header,
+                          header.getContext(),
+                        )}
+                      </span>
                     )}
                   </th>
                 ))}

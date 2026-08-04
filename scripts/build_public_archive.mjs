@@ -35,6 +35,13 @@ const TRANSACTION_ITEM_TYPE_LABELS = Object.freeze({
   LINEUP: "Lineup",
 });
 
+const FIXED_STARTER_SLOTS = new Set(["QB", "RB", "WR", "TE", "K", "D/ST", "HC"]);
+const FLEX_STARTER_SLOTS = Object.freeze({
+  "RB/WR": ["RB", "WR"],
+  "RB/WR/TE": ["RB", "WR", "TE"],
+  OP: ["QB", "RB", "WR", "TE"],
+});
+
 function readJson(filePath) {
   return readFile(filePath, "utf8").then((text) => JSON.parse(text));
 }
@@ -680,8 +687,91 @@ function draftPickPlayerRow(rowByKey, pick) {
   );
 }
 
-function addReplacementPoints(rows, draft, teamCount) {
-  if (!teamCount || !draft?.length) {
+function sortedRowsByPosition(rows) {
+  const byPosition = new Map();
+  rows.forEach((row) => {
+    if (!row.position) {
+      return;
+    }
+    byPosition.set(row.position, [...(byPosition.get(row.position) || []), row]);
+  });
+
+  byPosition.forEach((positionRows, position) => {
+    byPosition.set(
+      position,
+      [...positionRows].sort(
+        (left, right) =>
+          right.fantasyPoints - left.fantasyPoints || left.name.localeCompare(right.name),
+      ),
+    );
+  });
+  return byPosition;
+}
+
+function averageFantasyPoints(rows) {
+  return (
+    Math.round(
+      (rows.reduce((total, row) => total + row.fantasyPoints, 0) / rows.length) * 100,
+    ) / 100
+  );
+}
+
+function starterSlotEligibility(slot) {
+  const normalized = String(slot || "").toUpperCase();
+  if (FIXED_STARTER_SLOTS.has(normalized)) {
+    return [normalized];
+  }
+  return FLEX_STARTER_SLOTS[normalized] || [];
+}
+
+function starterCountsByPosition(rowsByPosition, settings) {
+  const teamCount = settings.teamCount;
+  const starterCounts = new Map();
+  const flexSlots = [];
+
+  (settings.rosterSlots || []).forEach(({ slot, count }) => {
+    const eligibility = starterSlotEligibility(slot);
+    const leagueCount = count * teamCount;
+    if (!eligibility.length || !leagueCount) {
+      return;
+    }
+    if (eligibility.length === 1) {
+      starterCounts.set(
+        eligibility[0],
+        (starterCounts.get(eligibility[0]) || 0) + leagueCount,
+      );
+      return;
+    }
+    flexSlots.push({ eligibility, count: leagueCount });
+  });
+
+  flexSlots
+    .sort((left, right) => left.eligibility.length - right.eligibility.length)
+    .forEach(({ eligibility, count }) => {
+      for (let index = 0; index < count; index += 1) {
+        const position = eligibility
+          .map((candidate) => ({
+            position: candidate,
+            row: rowsByPosition.get(candidate)?.[starterCounts.get(candidate) || 0],
+          }))
+          .filter(({ row }) => row)
+          .sort(
+            (left, right) =>
+              right.row.fantasyPoints - left.row.fantasyPoints ||
+              left.position.localeCompare(right.position),
+          )[0]?.position;
+        if (!position) {
+          return;
+        }
+        starterCounts.set(position, (starterCounts.get(position) || 0) + 1);
+      }
+    });
+
+  return starterCounts;
+}
+
+function addPlayerBaselines(rows, draft, settings) {
+  if (!settings.teamCount) {
     return rows;
   }
 
@@ -692,40 +782,37 @@ function addReplacementPoints(rows, draft, teamCount) {
     rowByKey.set(`name-${slugify(row.name)}`, row);
   });
 
+  const rowsByPosition = sortedRowsByPosition(rows);
+
   const draftedByPosition = new Map();
   draft.forEach((pick) => {
     const position = draftPickPlayerRow(rowByKey, pick)?.position;
     incrementCount(draftedByPosition, position);
   });
 
-  const byPosition = new Map();
-  rows.forEach((row) => {
-    if (!row.position) {
-      return;
-    }
-    byPosition.set(row.position, [...(byPosition.get(row.position) || []), row]);
-  });
+  const starterCounts = starterCountsByPosition(rowsByPosition, settings);
 
-  byPosition.forEach((positionRows, position) => {
+  rowsByPosition.forEach((positionRows, position) => {
     const draftedCount = draftedByPosition.get(position) || 0;
-    const replacementRows = [...positionRows]
-      .sort(
-        (left, right) =>
-          right.fantasyPoints - left.fantasyPoints || left.name.localeCompare(right.name),
-      )
-      .slice(draftedCount, draftedCount + teamCount);
-    if (!replacementRows.length) {
+    const replacementRows = positionRows.slice(
+      draftedCount,
+      draftedCount + settings.teamCount,
+    );
+    const starterRows = positionRows.slice(0, starterCounts.get(position) || 0);
+    const replacementPoints = replacementRows.length
+      ? averageFantasyPoints(replacementRows)
+      : undefined;
+    const avgStarterPoints = starterRows.length
+      ? averageFantasyPoints(starterRows)
+      : undefined;
+
+    if (replacementPoints === undefined && avgStarterPoints === undefined) {
       return;
     }
 
-    const replacementPoints =
-      Math.round(
-        (replacementRows.reduce((total, row) => total + row.fantasyPoints, 0) /
-          replacementRows.length) *
-          100,
-      ) / 100;
     positionRows.forEach((row) => {
       row.replacementPoints = replacementPoints;
+      row.avgStarterPoints = avgStarterPoints;
     });
   });
 
@@ -756,6 +843,7 @@ function mergePlayerSeasons(seasons) {
       fantasyPoints: season.fantasyPoints,
       draftValue: season.draftValue,
       replacementPoints: season.replacementPoints,
+      avgStarterPoints: season.avgStarterPoints,
       playerRank: season.playerRank,
       positionRank: season.positionRank,
       gamesPlayed: season.gamesPlayed,
@@ -1006,10 +1094,10 @@ async function buildSeason(year) {
   };
   await writeJson(`seasons/${year}.json`, seasonPayload);
 
-  const playerSeasonRows = addReplacementPoints(
+  const playerSeasonRows = addPlayerBaselines(
     finalizePlayerSeasons(playerSeasons),
     draft,
-    seasonPayload.settings.teamCount,
+    seasonPayload.settings,
   );
 
   return {

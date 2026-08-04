@@ -1552,6 +1552,11 @@ tbody tr:hover {
   background: rgba(255, 253, 248, 0.48);
 }
 
+.thLabel {
+  display: block;
+  padding: 11px 10px;
+}
+
 .tablePager {
   display: flex;
   align-items: center;
@@ -1796,6 +1801,22 @@ tbody tr:hover {
 
 .chartReplacementLabel {
   fill: #89531c;
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-anchor: end;
+}
+
+.chartStarterLine {
+  fill: none;
+  stroke: #3f6284;
+  stroke-dasharray: 3 6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.5;
+}
+
+.chartStarterLabel {
+  fill: #2f567a;
   font-size: 0.68rem;
   font-weight: 800;
   text-anchor: end;

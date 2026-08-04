@@ -2498,8 +2498,15 @@ function PlayerPointChart({ seasons }: { seasons: PlayerSeasonReport[] }) {
   const replacementRows = rows
     .map((season, index) => ({ season, index }))
     .filter(({ season }) => typeof season.replacementPoints === "number");
+  const starterRows = rows
+    .map((season, index) => ({ season, index }))
+    .filter(({ season }) => typeof season.avgStarterPoints === "number");
   const maxPoints = Math.max(
-    ...rows.flatMap((row) => [row.fantasyPoints, row.replacementPoints ?? 0]),
+    ...rows.flatMap((row) => [
+      row.fantasyPoints,
+      row.replacementPoints ?? 0,
+      row.avgStarterPoints ?? 0,
+    ]),
     1,
   );
   const width = 720;
@@ -2522,12 +2529,19 @@ function PlayerPointChart({ seasons }: { seasons: PlayerSeasonReport[] }) {
         `${xForIndex(index)},${yForPoints(season.replacementPoints ?? 0)}`,
     )
     .join(" ");
+  const starterPoints = starterRows
+    .map(
+      ({ season, index }) =>
+        `${xForIndex(index)},${yForPoints(season.avgStarterPoints ?? 0)}`,
+    )
+    .join(" ");
   const replacementLabel = replacementRows[replacementRows.length - 1];
+  const starterLabel = starterRows[starterRows.length - 1];
   const activeTooltip = rows
     .map((season, index) => ({ season, index }))
     .find(({ season }) => season.year === activeTooltipYear);
-  const tooltipWidth = 210;
-  const tooltipHeight = 76;
+  const tooltipWidth = 230;
+  const tooltipHeight = 96;
   const tooltipPosition = (season: PlayerSeasonReport, index: number) => {
     const x = xForIndex(index);
     const y = yForPoints(season.fantasyPoints);
@@ -2582,13 +2596,39 @@ function PlayerPointChart({ seasons }: { seasons: PlayerSeasonReport[] }) {
         ) : replacementPoints ? (
           <polyline className="chartReplacementLine" points={replacementPoints} />
         ) : null}
+        {starterRows.length === 1 ? (
+          <line
+            className="chartStarterLine"
+            x1={padding.left}
+            y1={yForPoints(starterRows[0].season.avgStarterPoints ?? 0)}
+            x2={padding.left + chartWidth}
+            y2={yForPoints(starterRows[0].season.avgStarterPoints ?? 0)}
+          />
+        ) : starterPoints ? (
+          <polyline className="chartStarterLine" points={starterPoints} />
+        ) : null}
         {replacementLabel ? (
           <text
             className="chartReplacementLabel"
             x={padding.left + chartWidth - 6}
-            y={yForPoints(replacementLabel.season.replacementPoints ?? 0) - 6}
+            y={Math.min(
+              padding.top + chartHeight - 8,
+              yForPoints(replacementLabel.season.replacementPoints ?? 0) + 14,
+            )}
           >
             VORP
+          </text>
+        ) : null}
+        {starterLabel ? (
+          <text
+            className="chartStarterLabel"
+            x={padding.left + chartWidth - 6}
+            y={Math.max(
+              padding.top + 10,
+              yForPoints(starterLabel.season.avgStarterPoints ?? 0) - 6,
+            )}
+          >
+            Avg Starter
           </text>
         ) : null}
         <polyline className="chartLine" points={points} />
@@ -2609,6 +2649,10 @@ function PlayerPointChart({ seasons }: { seasons: PlayerSeasonReport[] }) {
                       season.fantasyPoints - season.replacementPoints,
                       1,
                     )}`
+                  : ""
+              }${
+                typeof season.avgStarterPoints === "number"
+                  ? `, average starter ${formatNumber(season.avgStarterPoints, 1)}`
                   : ""
               }, #${season.playerRank} overall, #${season.positionRank} ${
                 season.position ?? "position"
@@ -2664,6 +2708,11 @@ function ChartTooltip({
       {typeof season.replacementPoints === "number" ? (
         <text x="12" y="59">
           VORP: {formatNumber(season.fantasyPoints - season.replacementPoints, 1)}
+        </text>
+      ) : null}
+      {typeof season.avgStarterPoints === "number" ? (
+        <text x="12" y="79">
+          Avg starter: {formatNumber(season.avgStarterPoints, 1)}
         </text>
       ) : null}
     </g>
@@ -3125,7 +3174,7 @@ function MatchupMobileCard({
             label: "Winner",
             value: teamDisplay(matchup.winnerTeamKey, teamNames),
           },
-          { label: "Type", value: matchup.matchupType },
+          { label: "Type", value: displayMatchupType(matchup) },
           { label: "Playoff", value: matchup.isPlayoff ? "Yes" : undefined },
         ]}
       />
@@ -3492,6 +3541,54 @@ function TeamPage() {
     });
   }, [location.hash, season.status, teamKey]);
 
+  const loadedSeason = season.status === "loaded" ? season.data : undefined;
+  const loadedPlayers = players.status === "loaded" ? players.data : undefined;
+  const team = useMemo(
+    () => loadedSeason?.teams.find((row) => row.key === teamKey),
+    [loadedSeason, teamKey],
+  );
+  const teamNames = useMemo(
+    () =>
+      loadedSeason
+        ? teamNameMap(loadedSeason.teams)
+        : new Map<string, string>(),
+    [loadedSeason],
+  );
+  const matchupRows = useMemo(
+    () =>
+      loadedSeason && team
+        ? buildTeamMatchupRows(team, loadedSeason, weeks.data)
+        : [],
+    [loadedSeason, team, weeks.data],
+  );
+  const draftPicks = useMemo(
+    () =>
+      loadedSeason && team
+        ? loadedSeason.draft
+            .filter((pick) => pick.teamKey === team.key)
+            .sort((left, right) => left.pick - right.pick)
+        : [],
+    [loadedSeason, team],
+  );
+  const matchupColumns = useMemo<ColumnDef<TeamMatchupRow>[]>(
+    () =>
+      loadedSeason
+        ? teamMatchupColumns(
+            loadedSeason.year,
+            teamNames,
+            setSelectedMatchup,
+          )
+        : [],
+    [loadedSeason, teamNames],
+  );
+  const draftColumns = useMemo<ColumnDef<DraftPick>[]>(
+    () =>
+      loadedSeason
+        ? draftPickColumnsForTeam(teamNames, loadedSeason.year)
+        : [],
+    [loadedSeason, teamNames],
+  );
+
   if (
     season.status === "loading" ||
     players.status === "loading" ||
@@ -3514,13 +3611,10 @@ function TeamPage() {
     return <StatusPanel label="Loading team report..." />;
   }
 
-  const team = season.data.teams.find((row) => row.key === teamKey);
-  if (!team) {
+  if (!team || !loadedSeason || !loadedPlayers) {
     return <StatusPanel label="Team report not found." tone="danger" />;
   }
 
-  const teamNames = teamNameMap(season.data.teams);
-  const matchupRows = buildTeamMatchupRows(team, season.data, weeks.data);
   const selectedBoxScore = selectedMatchup
     ? teamMatchupBoxScore(team.key, selectedMatchup, weeks.data)
     : undefined;
@@ -3535,15 +3629,6 @@ function TeamPage() {
         positionRanks,
       )
     : [];
-  const draftPicks = season.data.draft
-    .filter((pick) => pick.teamKey === team.key)
-    .sort((left, right) => left.pick - right.pick);
-  const matchupColumns = teamMatchupColumns(
-    season.data.year,
-    teamNames,
-    setSelectedMatchup,
-  );
-  const draftColumns = draftPickColumnsForTeam(teamNames, season.data.year);
   const realScores = team.scores.filter(isRealTeamScore);
   const averageScore = average(realScores);
   const highScore = realScores.length ? Math.max(...realScores) : undefined;
@@ -3646,6 +3731,7 @@ function TeamPage() {
           data={matchupRows}
           columns={matchupColumns}
           emptyLabel="No matchups found for this team."
+          sortable={false}
           mobileCard={(matchup) => (
             <TeamMatchupMobileCard
               matchup={matchup}
@@ -5361,14 +5447,15 @@ function outcomeClass(outcome: string): string {
 }
 
 function displayMatchupType(matchup: { isPlayoff: boolean; matchupType?: string }): string {
+  const matchupType =
+    matchup.matchupType && matchup.matchupType.toUpperCase() !== "NONE"
+      ? displayCodeLabel(matchup.matchupType)
+      : undefined;
+
   if (matchup.isPlayoff) {
-    return matchup.matchupType && matchup.matchupType !== "NONE"
-      ? `Playoff, ${matchup.matchupType}`
-      : "Playoff";
+    return matchupType ? `Playoff: ${matchupType}` : "Playoff";
   }
-  return matchup.matchupType && matchup.matchupType !== "NONE"
-    ? matchup.matchupType
-    : "Regular";
+  return matchupType ?? "Regular";
 }
 
 function featuredBroadcastMatchup(matchups: Matchup[]): ScoredMatchup | undefined {
