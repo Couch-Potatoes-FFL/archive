@@ -491,6 +491,11 @@ const playerSeasonColumns: ColumnDef<PlayerSeasonReport>[] = [
     cell: ({ row }) => <FantasyTeamLink season={row.original} />,
   },
   {
+    header: "Draft Value",
+    accessorKey: "draftValue",
+    cell: ({ row }) => formatAuctionValue(row.original.draftValue),
+  },
+  {
     header: "Fantasy Points",
     accessorKey: "fantasyPoints",
     cell: ({ row }) => (
@@ -507,10 +512,6 @@ const playerSeasonColumns: ColumnDef<PlayerSeasonReport>[] = [
     accessorKey: "positionRank",
     cell: ({ row }) =>
       `#${row.original.positionRank}${row.original.position ? ` ${row.original.position}` : ""}`,
-  },
-  {
-    header: "Games",
-    accessorKey: "gamesPlayed",
   },
   {
     header: "Starts",
@@ -916,10 +917,14 @@ function RecordsPage() {
 function RecordStatCard({ record }: { record: LeagueRecordCard }) {
   const content = (
     <>
-      <span className="recordCardTitle">{record.title}</span>
-      <strong>{record.value}</strong>
-      <span className="recordCardSubtitle">{record.subtitle}</span>
-      <span className="recordCardMeta">{record.meta}</span>
+      <span className="recordCardTitle" role="heading" aria-level={2}>
+        {record.title}
+      </span>
+      <strong className="recordCardValue">{record.value}</strong>
+      <span className="recordCardDetails">
+        <span className="recordCardSubtitle">{record.subtitle}</span>
+        <span className="recordCardMeta">{record.meta}</span>
+      </span>
       <LiaFootballBallSolid className="recordCardIcon" size={62} aria-hidden />
     </>
   );
@@ -2050,9 +2055,6 @@ function PlayerYearResults({
       <div className="sectionHeader">
         <div>
           <h2>{year} Players</h2>
-          <Link className="textLink" to="/players">
-            &larr; Back to Year Select
-          </Link>
         </div>
         <span className={hasPendingFilters ? "pendingNote active" : "pendingNote"}>
           {hasPendingFilters
@@ -2432,17 +2434,17 @@ function PlayerPage() {
           <div className="playerSummaryLayout">
             <dl className="definitionGrid">
               <div>
-                <dt>Primary position</dt>
+                <dt>Position</dt>
                 <dd>{player.primaryPosition ?? "-"}</dd>
               </div>
               <div>
                 <dt>Best season</dt>
                 <dd>
                   {bestSeason
-                    ? `${bestSeason.year}, ${formatNumber(
+                    ? `${formatNumber(
                         bestSeason.fantasyPoints,
                         1,
-                      )} points`
+                      )} points in ${bestSeason.year} `
                     : "-"}
                 </dd>
               </div>
@@ -2756,6 +2758,10 @@ function PlayerSeasonMobileCard({
       <MobileFieldGrid
         items={[
           {
+            label: "Draft Value",
+            value: formatAuctionValue(season.draftValue),
+          },
+          {
             label: "Fantasy Points",
             value: formatNumber(season.fantasyPoints, 1),
           },
@@ -2767,7 +2773,6 @@ function PlayerSeasonMobileCard({
           },
           { label: "Fantasy Team", value: <FantasyTeamLink season={season} /> },
           { label: "NFL Team", value: season.nflTeam ?? "-" },
-          { label: "Games", value: season.gamesPlayed },
           { label: "Starts", value: season.starts },
         ]}
       />
@@ -2855,6 +2860,7 @@ function StandingsMobileCard({
         <TeamLabel
           team={team}
           href={year ? teamPageHref(year, team.key) : undefined}
+          isChampion={team.finalStanding === 1}
         />
         <span className="mobileCardKicker">
           Finish {team.finalStanding ?? "-"}
@@ -3225,7 +3231,6 @@ function transactionItemsLabel(transaction: Transaction): string {
 function SeasonPage() {
   const { year = "" } = useParams();
   const season = useArchiveJson<PublicSeason>(`seasons/${year}.json`);
-  const [search, setSearch] = useState("");
 
   if (season.status === "loading") {
     return <StatusPanel label="Loading season..." />;
@@ -3249,6 +3254,7 @@ function SeasonPage() {
         <TeamLabel
           team={row.original}
           href={teamPageHref(season.data.year, row.original.key)}
+          isChampion={row.original.finalStanding === 1}
         />
       ),
     },
@@ -3334,20 +3340,10 @@ function SeasonPage() {
       <section className="contentBand">
         <div className="sectionHeader">
           <h2>Standings</h2>
-          <label className="compactSearch">
-            <Search size={16} aria-hidden />
-            <input
-              aria-label="Filter standings"
-              value={search}
-              onChange={(event) => setSearch(event.target.value)}
-              placeholder="Filter standings"
-            />
-          </label>
         </div>
         <SimpleTable
           data={season.data.standings}
           columns={standingsColumns}
-          search={search}
           mobileCard={(team) => (
             <StandingsMobileCard team={team} year={season.data.year} />
           )}
@@ -5449,13 +5445,26 @@ function Breadcrumbs({
   );
 }
 
-function TeamLabel({ team, href }: { team: PublicTeam; href?: string }) {
+function TeamLabel({
+  team,
+  href,
+  isChampion = false,
+}: {
+  team: PublicTeam;
+  href?: string;
+  isChampion?: boolean;
+}) {
   const logoUrl = archivePublicUrl(team.logoUrl);
   const content = (
     <>
       {logoUrl ? <img src={logoUrl} alt="" loading="lazy" /> : null}
       <span>
-        <strong>{team.name}</strong>
+        <span className="teamNameLine">
+          <strong>{team.name}</strong>
+          {isChampion ? (
+            <LiaTrophySolid className="championTrophy" aria-label="Champion" />
+          ) : null}
+        </span>
         <small>{team.abbrev}</small>
       </span>
     </>

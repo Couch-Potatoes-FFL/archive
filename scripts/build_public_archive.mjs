@@ -524,6 +524,7 @@ function playerSeasonSeed(year, key, player) {
     lineupTeamCounts: new Map(),
     lineupTeamNames: new Map(),
     rosterTotalPoints: undefined,
+    draftValue: undefined,
     lineupPoints: 0,
     weeks: new Set(),
     starts: 0,
@@ -597,10 +598,11 @@ function recordLineupPlayer(players, year, week, player, team) {
 }
 
 function recordDraftPlayer(players, year, pick) {
-  getPlayerSeason(players, year, {
+  const season = getPlayerSeason(players, year, {
     player_id: pick.playerId,
     name: pick.playerName || pick.player?.name || "Unknown player",
   });
+  season.draftValue = optionalFiniteNumber(pick.bid_amount);
 }
 
 function recordTransactionPlayer(players, year, item) {
@@ -636,6 +638,7 @@ function finalizePlayerSeasons(players) {
             ? season.lineupTeamNames.get(lineupTeamKey)
             : "FA",
       fantasyPoints,
+      draftValue: season.draftValue,
       gamesPlayed: season.weeks.size,
       starts: season.starts,
       appearances: season.appearances,
@@ -691,6 +694,7 @@ function mergePlayerSeasons(seasons) {
       fantasyTeamKey: season.fantasyTeamKey,
       fantasyTeamName: season.fantasyTeamName,
       fantasyPoints: season.fantasyPoints,
+      draftValue: season.draftValue,
       playerRank: season.playerRank,
       positionRank: season.positionRank,
       gamesPlayed: season.gamesPlayed,
