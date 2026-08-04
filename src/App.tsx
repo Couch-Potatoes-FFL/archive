@@ -836,6 +836,7 @@ function RecordStatCard({ record }: { record: LeagueRecordCard }) {
       <strong>{record.value}</strong>
       <span className="recordCardSubtitle">{record.subtitle}</span>
       <span className="recordCardMeta">{record.meta}</span>
+      <LiaFootballBallSolid className="recordCardIcon" size={62} aria-hidden />
     </>
   );
 

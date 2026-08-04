@@ -654,6 +654,15 @@ h3 {
   border-radius: 8px;
 }
 
+.recordCardIcon {
+  position: absolute;
+  right: 18px;
+  bottom: 18px;
+  pointer-events: none;
+  color: rgba(20, 98, 62, 0.14);
+  transform: rotate(-18deg);
+}
+
 a.recordCard:hover {
   border-color: var(--line-strong);
   box-shadow: var(--shadow-soft);
