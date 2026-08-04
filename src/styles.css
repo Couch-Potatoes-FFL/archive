@@ -1,11 +1,24 @@
 :root {
-  color: #172018;
-  background: #f5f7f1;
+  color: #14201b;
+  background: #f4f6ef;
   font-family:
     Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
+  --ink: #14201b;
+  --muted: #667164;
+  --field: #155f3c;
+  --field-dark: #0d2d20;
+  --field-deep: #081812;
+  --gold: #e4b340;
+  --orange: #c55a24;
+  --paper: #fffdf8;
+  --paper-soft: #f5f7ee;
+  --line: #dce4d4;
+  --line-strong: #b9c8ae;
+  --shadow: 0 18px 42px rgba(10, 24, 17, 0.12);
+  --shadow-soft: 0 10px 24px rgba(10, 24, 17, 0.08);
 }
 
 * {
@@ -21,12 +34,14 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background:
-    linear-gradient(180deg, rgba(41, 75, 53, 0.08), transparent 320px),
-    #f5f7f1;
+    radial-gradient(circle at 16% 0%, rgba(228, 179, 64, 0.18), transparent 30rem),
+    radial-gradient(circle at 88% 6%, rgba(197, 90, 36, 0.11), transparent 28rem),
+    linear-gradient(180deg, rgba(13, 45, 32, 0.1), transparent 420px),
+    var(--paper-soft);
 }
 
 a {
-  color: #235c3b;
+  color: #14623e;
   text-decoration: none;
 }
 
@@ -40,9 +55,44 @@ select {
   font: inherit;
 }
 
+button,
+a,
+input,
+select {
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid rgba(228, 179, 64, 0.82);
+  outline-offset: 3px;
+}
+
 .appShell {
+  position: relative;
   min-height: 100vh;
   overflow-x: clip;
+}
+
+.appShell::before {
+  position: fixed;
+  inset: 64px 0 auto;
+  z-index: -1;
+  height: 310px;
+  pointer-events: none;
+  content: "";
+  background:
+    linear-gradient(90deg, transparent 49.6%, rgba(255, 255, 255, 0.55) 49.6% 50.4%, transparent 50.4%),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.18) 0 2px, transparent 2px 9.09%),
+    linear-gradient(180deg, rgba(15, 83, 52, 0.4), transparent);
+  mask-image: linear-gradient(180deg, #000, transparent);
 }
 
 .topBar {
@@ -55,9 +105,13 @@ select {
   gap: 16px;
   min-height: 64px;
   padding: 0 28px;
-  color: #f5f7f1;
-  background: #102318;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  color: #fffdf8;
+  background:
+    linear-gradient(90deg, rgba(228, 179, 64, 0.12), transparent 24%),
+    linear-gradient(180deg, #10291d, #07140f);
+  border-bottom: 1px solid rgba(228, 179, 64, 0.28);
+  box-shadow: 0 10px 30px rgba(7, 20, 15, 0.18);
+  backdrop-filter: blur(14px);
 }
 
 .brand,
@@ -70,7 +124,13 @@ select {
 
 .brand {
   min-width: 0;
-  font-weight: 800;
+  font-weight: 900;
+  letter-spacing: 0.01em;
+}
+
+.brand svg {
+  color: var(--gold);
+  filter: drop-shadow(0 0 12px rgba(228, 179, 64, 0.34));
 }
 
 .topBar nav {
@@ -82,26 +142,27 @@ select {
 
 .topBar nav a {
   padding: 8px 10px;
-  color: rgba(245, 247, 241, 0.82);
+  color: rgba(255, 253, 248, 0.82);
   border-radius: 8px;
 }
 
 .topBar nav a.active,
 .topBar nav a:hover {
-  color: #ffffff;
-  background: rgba(255, 255, 255, 0.1);
+  color: #fffdf8;
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 -2px 0 var(--gold);
   text-decoration: none;
 }
 
 main {
   width: min(1440px, 100%);
   margin: 0 auto;
-  padding: 28px;
+  padding: 30px 28px 48px;
 }
 
 .breadcrumbs {
   margin: 2px 0 10px;
-  color: #687366;
+  color: var(--muted);
   font-size: 0.88rem;
   font-weight: 700;
 }
@@ -128,11 +189,11 @@ main {
 }
 
 .breadcrumbs a {
-  color: #235c3b;
+  color: #14623e;
 }
 
 .breadcrumbs span[aria-current="page"] {
-  color: #172018;
+  color: var(--ink);
 }
 
 .pageIntro {
@@ -143,11 +204,259 @@ main {
   padding: 26px 0 22px;
 }
 
+.landingHero {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
+  gap: 28px;
+  align-items: stretch;
+  min-height: 420px;
+  padding: clamp(28px, 5vw, 56px);
+  overflow: hidden;
+  color: #fffdf8;
+  background:
+    linear-gradient(115deg, rgba(7, 20, 15, 0.94), rgba(12, 48, 32, 0.9) 58%, rgba(24, 85, 52, 0.82)),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0 2px, transparent 2px 64px),
+    var(--field-dark);
+  border: 1px solid rgba(228, 179, 64, 0.34);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  isolation: isolate;
+}
+
+.landingHero::before,
+.landingHero::after {
+  position: absolute;
+  pointer-events: none;
+  content: "";
+}
+
+.landingHero::before {
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.32), transparent 13rem),
+    radial-gradient(circle at 78% 0%, rgba(228, 179, 64, 0.26), transparent 18rem),
+    linear-gradient(90deg, transparent 49.7%, rgba(255, 255, 255, 0.42) 49.7% 50.3%, transparent 50.3%),
+    repeating-linear-gradient(90deg, transparent 0 8.5%, rgba(255, 255, 255, 0.2) 8.5% 8.7%, transparent 8.7% 9.09%);
+}
+
+.landingHero::after {
+  inset: auto -12% -34% -12%;
+  z-index: -1;
+  height: 54%;
+  background:
+    radial-gradient(ellipse at center, rgba(255, 255, 255, 0.16), transparent 68%),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.16) 0 1px, transparent 1px 42px);
+  transform: perspective(380px) rotateX(62deg);
+  transform-origin: top;
+}
+
+.heroCopy {
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  max-width: 760px;
+}
+
+.heroCopy .eyebrow {
+  color: var(--gold);
+}
+
+.heroCopy h1 {
+  max-width: 9ch;
+  margin-bottom: 18px;
+  font-size: clamp(3.2rem, 9vw, 8.2rem);
+  text-transform: uppercase;
+  text-shadow:
+    0 3px 0 rgba(0, 0, 0, 0.24),
+    0 18px 42px rgba(0, 0, 0, 0.32);
+}
+
+.heroCopy p:not(.eyebrow) {
+  max-width: 650px;
+  margin-bottom: 24px;
+  color: rgba(255, 253, 248, 0.84);
+  font-size: clamp(1rem, 1.5vw, 1.22rem);
+  line-height: 1.55;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.heroGhostButton {
+  color: #fffdf8;
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+.broadcastPanel {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto minmax(170px, 1fr) auto;
+  min-width: 0;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(255, 253, 248, 0.16), rgba(255, 253, 248, 0.06)),
+    rgba(4, 12, 9, 0.34);
+  border: 1px solid rgba(255, 253, 248, 0.22);
+  border-radius: 8px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+
+.broadcastPanel::before {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  content: "";
+  background: linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 100% 7px;
+  opacity: 0.26;
+  animation: broadcastScan 9s linear infinite;
+}
+
+.scorebug {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 1px;
+  margin: 14px;
+  overflow: hidden;
+  color: #fffdf8;
+  background: #07140f;
+  border: 1px solid rgba(228, 179, 64, 0.42);
+  border-radius: 8px;
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.28);
+}
+
+.scorebug span,
+.scorebug strong {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0 12px;
+  font-size: 0.82rem;
+  font-weight: 950;
+}
+
+.scorebug span:first-child {
+  justify-content: flex-start;
+  color: #07140f;
+  background: var(--gold);
+}
+
+.scorebug strong {
+  min-width: 86px;
+  color: #fffdf8;
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+  background: #123c2a;
+}
+
+.scorebug span:last-child {
+  color: #fffdf8;
+  background: var(--orange);
+}
+
+.fieldGraphic {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 210px;
+  margin: 0 14px;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, transparent 49.4%, rgba(255, 255, 255, 0.86) 49.4% 50.6%, transparent 50.6%),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.5) 0 2px, transparent 2px 10%),
+    linear-gradient(135deg, #1d7a4c, #0c3b29);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 8px;
+}
+
+.fieldGraphic::before,
+.fieldGraphic::after {
+  position: absolute;
+  inset: 18px;
+  pointer-events: none;
+  content: "";
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-right: 0;
+  border-left: 0;
+}
+
+.fieldGraphic::after {
+  inset: auto 12% 24px;
+  height: 62px;
+  border: 2px solid rgba(255, 253, 248, 0.65);
+  border-top: 0;
+  border-radius: 0 0 80px 80px;
+}
+
+.yardLine {
+  position: absolute;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.82rem;
+  font-weight: 950;
+}
+
+.yardLine.fifty {
+  top: 24px;
+}
+
+.yardLine.twenty {
+  right: 18px;
+  bottom: 18px;
+  transform: rotate(90deg);
+}
+
+.heroFootball {
+  color: #fffdf8;
+  filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.34));
+  animation: ballFloat 4.8s ease-in-out infinite;
+}
+
+.heroStats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  margin: 14px;
+  overflow: hidden;
+  background: rgba(255, 253, 248, 0.14);
+  border: 1px solid rgba(255, 253, 248, 0.16);
+  border-radius: 8px;
+}
+
+.heroStats div {
+  min-width: 0;
+  padding: 14px 12px;
+  background: rgba(7, 20, 15, 0.48);
+}
+
+.heroStats dt {
+  color: rgba(255, 253, 248, 0.68);
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.heroStats dd {
+  margin-top: 6px;
+  color: #fffdf8;
+  font-size: clamp(1.15rem, 2vw, 1.55rem);
+  font-variant-numeric: tabular-nums;
+  font-weight: 950;
+  line-height: 1;
+}
+
 .eyebrow {
   margin: 0 0 6px;
-  color: #6e5b23;
+  color: #89531c;
   font-size: 0.8rem;
-  font-weight: 800;
+  font-weight: 900;
   letter-spacing: 0;
   text-transform: uppercase;
 }
@@ -163,7 +472,8 @@ p {
 h1 {
   margin-bottom: 0;
   font-size: clamp(2rem, 4vw, 4rem);
-  line-height: 1;
+  line-height: 0.96;
+  letter-spacing: 0;
   overflow-wrap: anywhere;
 }
 
@@ -180,7 +490,7 @@ h3 {
 .teamLabel small,
 .lineupRow small {
   display: block;
-  color: #687366;
+  color: var(--muted);
   font-size: 0.78rem;
 }
 
@@ -195,9 +505,12 @@ h3 {
   gap: 12px;
   align-items: center;
   padding: 14px;
-  background: #e8eddf;
-  border: 1px solid #d6ddcc;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.82), rgba(245, 247, 238, 0.94)),
+    var(--paper-soft);
+  border: 1px solid var(--line);
   border-radius: 8px;
+  box-shadow: var(--shadow-soft);
 }
 
 .browseControlBand {
@@ -234,22 +547,42 @@ h3 {
 }
 
 .categoryButton {
+  position: relative;
   display: grid;
   grid-template-columns: 42px minmax(0, 1fr) 20px;
   gap: 12px;
   align-items: center;
   min-height: 128px;
   padding: 18px;
-  color: #172018;
-  background: #ffffff;
-  border: 1px solid #dfe5d7;
+  overflow: hidden;
+  color: var(--ink);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(250, 252, 245, 0.96)),
+    var(--paper);
+  border: 1px solid var(--line);
   border-radius: 8px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.categoryButton::before {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  content: "";
+  background: linear-gradient(180deg, var(--gold), var(--orange));
+  opacity: 0;
+  transition: opacity 160ms ease;
 }
 
 .categoryButton:hover {
-  border-color: #9fb39a;
-  box-shadow: 0 10px 22px rgba(30, 48, 31, 0.08);
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-soft);
   text-decoration: none;
+  transform: translateY(-2px);
+}
+
+.categoryButton:hover::before {
+  opacity: 1;
 }
 
 .categoryIcon {
@@ -258,9 +591,12 @@ h3 {
   justify-content: center;
   width: 42px;
   height: 42px;
-  color: #0f5237;
-  background: #e2eee6;
+  color: #fffdf8;
+  background:
+    radial-gradient(circle at 35% 25%, rgba(255, 255, 255, 0.28), transparent 34%),
+    linear-gradient(135deg, var(--field), var(--field-dark));
   border-radius: 8px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
 }
 
 .categoryButton strong,
@@ -270,7 +606,7 @@ h3 {
 
 .categoryButton small {
   margin-top: 5px;
-  color: #687366;
+  color: var(--muted);
   line-height: 1.35;
 }
 
@@ -282,25 +618,44 @@ h3 {
 }
 
 .recordCard {
+  position: relative;
   display: grid;
   gap: 7px;
   min-height: 154px;
   padding: 16px;
-  color: #172018;
-  background: #ffffff;
-  border: 1px solid #dfe5d7;
+  overflow: hidden;
+  color: var(--ink);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(250, 252, 245, 0.96)),
+    var(--paper);
+  border: 1px solid var(--line);
   border-radius: 8px;
 }
 
+.recordCard::after {
+  position: absolute;
+  right: -22px;
+  bottom: -24px;
+  width: 92px;
+  height: 92px;
+  pointer-events: none;
+  content: "";
+  background:
+    radial-gradient(circle, transparent 0 35%, rgba(20, 98, 62, 0.12) 36% 38%, transparent 39%),
+    linear-gradient(90deg, transparent 49%, rgba(20, 98, 62, 0.16) 49% 51%, transparent 51%);
+  border-radius: 50%;
+}
+
 a.recordCard:hover {
-  border-color: #9fb39a;
-  box-shadow: 0 10px 22px rgba(30, 48, 31, 0.08);
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-soft);
   text-decoration: none;
+  transform: translateY(-2px);
 }
 
 .recordCardTitle,
 .recordCardMeta {
-  color: #687366;
+  color: var(--muted);
   font-size: 0.78rem;
   font-weight: 850;
   line-height: 1.3;
@@ -308,13 +663,14 @@ a.recordCard:hover {
 }
 
 .recordCard strong {
+  color: #10291d;
   font-size: 1.8rem;
   font-variant-numeric: tabular-nums;
   line-height: 1;
 }
 
 .recordCardSubtitle {
-  color: #172018;
+  color: var(--ink);
   font-weight: 850;
   line-height: 1.25;
   overflow-wrap: anywhere;
@@ -332,9 +688,18 @@ a.recordCard:hover {
   gap: 8px;
   min-width: 0;
   color: #50604f;
-  background: #ffffff;
-  border: 1px solid #d4dccb;
+  background: #fffdf8;
+  border: 1px solid #cfd9c6;
   border-radius: 8px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.92);
+}
+
+.searchField:focus-within,
+.compactSearch:focus-within {
+  border-color: #92a983;
+  box-shadow:
+    0 0 0 4px rgba(228, 179, 64, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.92);
 }
 
 .searchField {
@@ -351,7 +716,7 @@ a.recordCard:hover {
   width: 100%;
   min-width: 0;
   height: 40px;
-  color: #172018;
+  color: var(--ink);
   background: transparent;
   border: 0;
   outline: 0;
@@ -362,9 +727,9 @@ select {
   min-width: 0;
   height: 42px;
   padding: 0 10px;
-  color: #172018;
-  background: #ffffff;
-  border: 1px solid #d4dccb;
+  color: var(--ink);
+  background: #fffdf8;
+  border: 1px solid #cfd9c6;
   border-radius: 8px;
 }
 
@@ -386,28 +751,36 @@ select {
   padding: 0 12px;
   border-radius: 8px;
   cursor: pointer;
+  font-weight: 850;
 }
 
 .primaryButton {
-  color: #ffffff;
-  background: #174d34;
-  border: 1px solid #174d34;
+  color: #fffdf8;
+  background:
+    linear-gradient(180deg, #1b7048, #12452e);
+  border: 1px solid #12452e;
+  box-shadow: 0 9px 18px rgba(18, 69, 46, 0.22);
 }
 
 .primaryButton:hover {
-  background: #0f3c27;
+  background:
+    linear-gradient(180deg, #218054, #0f3c27);
+  text-decoration: none;
+  transform: translateY(-1px);
 }
 
 .ghostButton,
 .tablePager button {
-  color: #174d34;
-  background: #ffffff;
+  color: #12452e;
+  background: #fffdf8;
   border: 1px solid #c8d2c0;
 }
 
 .ghostButton:hover,
 .tablePager button:hover:not(:disabled) {
   background: #f5f8f1;
+  text-decoration: none;
+  transform: translateY(-1px);
 }
 
 .tablePager button:disabled {
@@ -419,9 +792,12 @@ select {
 .contentBand {
   min-width: 0;
   padding: 18px;
-  background: #ffffff;
-  border: 1px solid #dfe5d7;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(252, 253, 248, 0.96)),
+    var(--paper);
+  border: 1px solid var(--line);
   border-radius: 8px;
+  box-shadow: var(--shadow-soft);
 }
 
 #draft-picks {
@@ -431,9 +807,10 @@ select {
 .panel {
   min-width: 0;
   padding: 24px 28px;
-  background: #ffffff;
-  border: 1px solid #dfe5d7;
+  background: var(--paper);
+  border: 1px solid var(--line);
   border-radius: 8px;
+  box-shadow: var(--shadow-soft);
 }
 
 .teamHistoryBand {
@@ -456,7 +833,7 @@ select {
   gap: 12px;
   margin-bottom: 10px;
   padding-bottom: 8px;
-  border-bottom: 1px solid #dfe5d7;
+  border-bottom: 1px solid var(--line);
 }
 
 .teamYearHeader h3 {
@@ -465,7 +842,7 @@ select {
 }
 
 .teamYearHeader span {
-  color: #687366;
+  color: var(--muted);
   font-size: 0.88rem;
   font-weight: 700;
 }
@@ -484,29 +861,32 @@ select {
 
 .teamHistoryCard,
 .matchupWeekCard {
+  position: relative;
   display: grid;
   grid-template-columns: 42px minmax(0, 1fr);
   gap: 12px;
   align-items: center;
   min-height: 96px;
   padding: 14px;
-  color: #172018;
-  background: #ffffff;
-  border: 1px solid #dfe5d7;
+  color: var(--ink);
+  background: #fffdf8;
+  border: 1px solid var(--line);
   border-radius: 8px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 .teamHistoryCard:hover,
 .matchupWeekCard:hover {
-  border-color: #9fb39a;
-  box-shadow: 0 10px 22px rgba(30, 48, 31, 0.08);
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-soft);
   text-decoration: none;
+  transform: translateY(-2px);
 }
 
 .textLink {
   display: inline-flex;
   margin-top: 2px;
-  color: #235c3b;
+  color: #14623e;
   font-size: 0.88rem;
   font-weight: 700;
 }
@@ -515,7 +895,7 @@ select {
   display: inline;
   margin: 0;
   padding: 0;
-  color: #235c3b;
+  color: #14623e;
   font: inherit;
   font-weight: inherit;
   text-align: left;
@@ -530,7 +910,7 @@ select {
 
 .linkButton:focus-visible {
   border-radius: 3px;
-  outline: 2px solid #0968d8;
+  outline: 2px solid var(--gold);
   outline-offset: 2px;
 }
 
@@ -540,15 +920,17 @@ select {
   justify-content: center;
   width: 42px;
   height: 42px;
-  color: #0f5237;
-  background: #e2eee6;
+  color: #fffdf8;
+  background:
+    radial-gradient(circle at 35% 25%, rgba(255, 255, 255, 0.28), transparent 34%),
+    linear-gradient(135deg, var(--field), var(--field-dark));
   border-radius: 8px;
   overflow: hidden;
 }
 
 .teamCardIcon.logo {
-  background: #ffffff;
-  border: 1px solid #dfe5d7;
+  background: #fffdf8;
+  border: 1px solid var(--line);
 }
 
 .teamCardIcon img {
@@ -572,7 +954,7 @@ select {
 
 .teamCardText small {
   margin-top: 5px;
-  color: #687366;
+  color: var(--muted);
   font-size: 0.82rem;
   line-height: 1.35;
   overflow-wrap: anywhere;
@@ -591,16 +973,17 @@ select {
   align-items: center;
   min-height: 112px;
   padding: 14px;
-  color: #172018;
-  background: #ffffff;
-  border: 1px solid #dfe5d7;
+  color: var(--ink);
+  background: #fffdf8;
+  border: 1px solid var(--line);
   border-radius: 8px;
 }
 
 .playerResultCard:hover {
-  border-color: #9fb39a;
-  box-shadow: 0 10px 22px rgba(30, 48, 31, 0.08);
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-soft);
   text-decoration: none;
+  transform: translateY(-2px);
 }
 
 .playerAvatar,
@@ -613,7 +996,7 @@ select {
   overflow: hidden;
   color: #0f5237;
   background: #e2eee6;
-  border: 1px solid #dfe5d7;
+  border: 1px solid var(--line);
   border-radius: 8px;
 }
 
@@ -631,7 +1014,7 @@ select {
 .playerResultMain small {
   display: block;
   margin-top: 6px;
-  color: #687366;
+  color: var(--muted);
   font-size: 0.82rem;
   line-height: 1.35;
   overflow-wrap: anywhere;
@@ -651,7 +1034,7 @@ select {
 
 .playerRankBadge {
   flex: 0 0 auto;
-  color: #235c3b;
+  color: #14623e;
   font-size: 0.78rem;
   font-weight: 900;
 }
@@ -668,7 +1051,7 @@ select {
 
 .playerResultStats small {
   margin-top: 5px;
-  color: #687366;
+  color: var(--muted);
   font-size: 0.78rem;
   line-height: 1.35;
 }
@@ -695,6 +1078,20 @@ select {
   margin-bottom: 0;
 }
 
+.sectionHeader h2 {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.sectionHeader h2::before {
+  width: 8px;
+  height: 20px;
+  content: "";
+  background: linear-gradient(180deg, var(--gold), var(--orange));
+  border-radius: 999px;
+}
+
 .scoreboardGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(360px, 100%), 1fr));
@@ -702,14 +1099,25 @@ select {
 }
 
 .scoreGameCard {
+  position: relative;
   display: grid;
   gap: 12px;
   min-width: 0;
   padding: 14px;
-  background: #f8faf5;
-  border: 1px solid #dfe5d7;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, #fffdf8, #f8faf5);
+  border: 1px solid var(--line);
   border-radius: 8px;
-  box-shadow: 0 10px 22px rgba(23, 32, 24, 0.06);
+  box-shadow: var(--shadow-soft);
+}
+
+.scoreGameCard::before {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  content: "";
+  background: linear-gradient(90deg, var(--gold), var(--field), var(--orange));
 }
 
 .scoreGameTopline,
@@ -721,7 +1129,7 @@ select {
 }
 
 .scoreGameTopline {
-  color: #687366;
+  color: var(--muted);
   font-size: 0.76rem;
   font-weight: 900;
   letter-spacing: 0;
@@ -731,8 +1139,8 @@ select {
 .scoreGameType {
   flex: 0 0 auto;
   padding: 4px 8px;
-  color: #13452f;
-  background: #dbece2;
+  color: #fffdf8;
+  background: #12452e;
   border-radius: 999px;
 }
 
@@ -749,16 +1157,17 @@ select {
   min-width: 0;
   min-height: 76px;
   padding: 10px;
-  background: #ffffff;
+  background: #fffdf8;
   border: 1px solid #e3e8dc;
   border-radius: 8px;
 }
 
 .scoreboardTeamRow.winner {
   background:
-    linear-gradient(90deg, rgba(35, 92, 59, 0.12), transparent 55%),
+    linear-gradient(90deg, rgba(228, 179, 64, 0.2), transparent 52%),
+    linear-gradient(90deg, rgba(35, 92, 59, 0.12), transparent 75%),
     #fbfdf8;
-  border-color: #9fb39a;
+  border-color: var(--line-strong);
 }
 
 .scoreboardTeamIdentity {
@@ -771,7 +1180,7 @@ select {
 }
 
 a.scoreboardTeamIdentity:hover {
-  color: #235c3b;
+  color: #14623e;
   text-decoration: none;
 }
 
@@ -782,7 +1191,7 @@ a.scoreboardTeamIdentity:hover {
   width: 44px;
   height: 44px;
   overflow: hidden;
-  color: #235c3b;
+  color: #14623e;
   background: #edf0e7;
   border: 1px solid #dfe5d7;
   border-radius: 8px;
@@ -805,7 +1214,7 @@ a.scoreboardTeamIdentity:hover {
 }
 
 .scoreboardTeamText small {
-  color: #687366;
+  color: var(--muted);
   font-size: 0.72rem;
   font-weight: 900;
   text-transform: uppercase;
@@ -819,13 +1228,13 @@ a.scoreboardTeamIdentity:hover {
 
 .scoreboardTeamText span {
   margin-top: 3px;
-  color: #687366;
+  color: var(--muted);
   font-size: 0.76rem;
   font-weight: 800;
 }
 
 .scoreboardScore {
-  color: #172018;
+  color: var(--ink);
   font-size: 1.65rem;
   font-variant-numeric: tabular-nums;
   font-weight: 950;
@@ -839,14 +1248,14 @@ a.scoreboardTeamIdentity:hover {
 
 .scoreGameFooter {
   padding-top: 2px;
-  color: #687366;
+  color: var(--muted);
   font-size: 0.84rem;
   font-weight: 800;
 }
 
 .scoreGameFooter strong {
   flex: 0 0 auto;
-  color: #172018;
+  color: var(--ink);
 }
 
 .scoreboardWinner {
@@ -898,7 +1307,7 @@ a.scoreboardTeamIdentity:hover {
   height: 140px;
   overflow: hidden;
   background: #f6f8f2;
-  border: 1px solid #dfe5d7;
+  border: 1px solid var(--line);
   border-radius: 8px;
 }
 
@@ -918,7 +1327,7 @@ a.scoreboardTeamIdentity:hover {
 }
 
 dt {
-  color: #687366;
+  color: var(--muted);
   font-size: 0.8rem;
   font-weight: 700;
 }
@@ -938,10 +1347,17 @@ dd {
   display: block;
   min-height: 70px;
   padding: 12px;
-  color: #172018;
+  color: var(--ink);
   background: #f6f8f2;
-  border: 1px solid #dfe5d7;
+  border: 1px solid var(--line);
   border-radius: 8px;
+}
+
+.weekTile:hover {
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-soft);
+  text-decoration: none;
+  transform: translateY(-2px);
 }
 
 .weekTile span,
@@ -955,7 +1371,7 @@ dd {
 
 .weekTile small {
   margin-top: 6px;
-  color: #687366;
+  color: var(--muted);
 }
 
 .simpleTable {
@@ -967,26 +1383,37 @@ dd {
   overflow-x: auto;
   overscroll-behavior-x: contain;
   -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--line);
+  border-radius: 8px;
 }
 
 table {
   width: 100%;
   min-width: 760px;
   border-collapse: collapse;
+  background: #fffdf8;
 }
 
 th {
-  color: #4e5d4d;
+  color: #405044;
   font-size: 0.78rem;
   text-align: left;
   text-transform: uppercase;
-  border-bottom: 1px solid #dfe5d7;
+  background:
+    linear-gradient(180deg, #eff4e9, #e5eddd);
+  border-bottom: 1px solid var(--line-strong);
 }
 
 td {
   padding: 12px 10px;
   vertical-align: middle;
   border-bottom: 1px solid #edf0e7;
+}
+
+tbody tr:hover {
+  background:
+    linear-gradient(90deg, rgba(228, 179, 64, 0.1), transparent 42%),
+    #fbfdf8;
 }
 
 .thButton {
@@ -1002,13 +1429,18 @@ td {
   cursor: pointer;
 }
 
+.thButton:hover {
+  color: #12452e;
+  background: rgba(255, 253, 248, 0.48);
+}
+
 .tablePager {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 14px;
   padding-top: 14px;
-  color: #687366;
+  color: var(--muted);
   font-size: 0.9rem;
 }
 
@@ -1019,10 +1451,11 @@ td {
 .mobileDataCard {
   min-width: 0;
   padding: 14px;
-  color: #172018;
-  background: #fbfcf8;
-  border: 1px solid #dfe5d7;
+  color: var(--ink);
+  background: #fffdf8;
+  border: 1px solid var(--line);
   border-radius: 8px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.86);
 }
 
 .mobileDataCard.compact {
@@ -1052,7 +1485,7 @@ td {
 .draftMobileAmount,
 .keeperMobileValue {
   flex: 0 0 auto;
-  color: #172018;
+  color: var(--ink);
   font-size: 0.98rem;
   font-weight: 850;
   line-height: 1.25;
@@ -1086,7 +1519,7 @@ td {
 .mobileCardTitleText {
   display: block;
   min-width: 0;
-  color: #172018;
+  color: var(--ink);
   font-size: 1rem;
   font-weight: 850;
   line-height: 1.25;
@@ -1094,12 +1527,12 @@ td {
 }
 
 .mobileCardTitle:hover {
-  color: #235c3b;
+  color: #14623e;
 }
 
 .mobileCardKicker {
   flex: 0 0 auto;
-  color: #687366;
+  color: var(--muted);
   font-size: 0.78rem;
   font-weight: 800;
   line-height: 1.35;
@@ -1126,7 +1559,7 @@ td {
 
 .mobileField span,
 .mobileFieldGrid dt {
-  color: #687366;
+  color: var(--muted);
   font-size: 0.74rem;
   font-weight: 800;
   line-height: 1.25;
@@ -1136,7 +1569,7 @@ td {
 .mobileField strong,
 .mobileFieldGrid dd {
   margin: 0;
-  color: #172018;
+  color: var(--ink);
   font-size: 0.92rem;
   font-weight: 750;
   line-height: 1.35;
@@ -1161,14 +1594,16 @@ td {
   gap: 12px;
   align-items: center;
   padding: 10px 12px;
-  background: #ffffff;
+  background: #fffdf8;
   border: 1px solid #edf0e7;
   border-radius: 8px;
 }
 
 .mobileScoreRow.winner {
-  background: #f3f8ed;
-  border-color: #9fb39a;
+  background:
+    linear-gradient(90deg, rgba(228, 179, 64, 0.2), transparent),
+    #f3f8ed;
+  border-color: var(--line-strong);
 }
 
 .mobileScoreRow small,
@@ -1177,7 +1612,7 @@ td {
 }
 
 .mobileScoreRow small {
-  color: #687366;
+  color: var(--muted);
   font-size: 0.74rem;
   font-weight: 800;
   text-transform: uppercase;
@@ -1193,13 +1628,13 @@ td {
 }
 
 .pendingNote {
-  color: #687366;
+  color: var(--muted);
   font-size: 0.9rem;
   font-weight: 700;
 }
 
 .pendingNote.active {
-  color: #6e5b23;
+  color: #89531c;
 }
 
 .playerLineChart {
@@ -1226,14 +1661,14 @@ td {
 
 .chartLine {
   fill: none;
-  stroke: #235c3b;
+  stroke: #14623e;
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 4;
 }
 
 .chartPoint {
-  fill: #ffffff;
+  fill: #fffdf8;
   stroke: #174d34;
   stroke-width: 3;
 }
@@ -1245,7 +1680,7 @@ td {
 .chartPointGroup:hover .chartPoint,
 .chartPointGroup:focus .chartPoint {
   fill: #174d34;
-  stroke: #ffffff;
+  stroke: #fffdf8;
 }
 
 .chartTooltip {
@@ -1264,14 +1699,14 @@ td {
 }
 
 .chartTooltip text {
-  fill: #ffffff;
+  fill: #fffdf8;
   font-size: 0.75rem;
   font-weight: 800;
 }
 
 .chartTick,
 .chartYear {
-  fill: #687366;
+  fill: var(--muted);
   font-size: 0.72rem;
   font-weight: 700;
 }
@@ -1289,10 +1724,12 @@ td {
   align-items: center;
   min-height: 24px;
   padding: 3px 8px;
-  color: #13452f;
+  color: #103c2a;
   font-size: 0.78rem;
   font-weight: 800;
-  background: #dbece2;
+  background:
+    linear-gradient(180deg, #e9f4df, #dbece2);
+  border: 1px solid rgba(20, 98, 62, 0.12);
   border-radius: 999px;
 }
 
@@ -1303,7 +1740,7 @@ td {
   min-width: 34px;
   min-height: 24px;
   padding: 3px 8px;
-  color: #172018;
+  color: var(--ink);
   font-size: 0.78rem;
   font-weight: 900;
   background: #edf0e7;
@@ -1331,11 +1768,11 @@ td {
   align-items: center;
   gap: 10px;
   min-width: 230px;
-  color: #172018;
+  color: var(--ink);
 }
 
 a.teamLabel:hover {
-  color: #235c3b;
+  color: #14623e;
 }
 
 .teamLabel span {
@@ -1364,6 +1801,7 @@ a.teamLabel:hover {
   background: #fbfcf8;
   border: 1px solid #e3e8dc;
   border-radius: 8px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.86);
 }
 
 .boxScoreToggle {
@@ -1374,7 +1812,7 @@ a.teamLabel:hover {
   width: 100%;
   margin: 0;
   padding: 10px 12px;
-  color: #172018;
+  color: var(--ink);
   font-weight: inherit;
   text-align: left;
   background: transparent;
@@ -1388,7 +1826,7 @@ a.teamLabel:hover {
 }
 
 .boxScoreToggle:focus-visible {
-  outline: 2px solid #235c3b;
+  outline: 2px solid var(--gold);
   outline-offset: 2px;
 }
 
@@ -1403,7 +1841,7 @@ a.teamLabel:hover {
   flex: 0 0 auto;
   align-items: center;
   gap: 6px;
-  color: #687366;
+  color: var(--muted);
   font-size: 0.86rem;
   font-weight: 800;
 }
@@ -1429,7 +1867,8 @@ a.teamLabel:hover {
   justify-items: center;
   padding: 36px 18px;
   overflow-y: auto;
-  background: rgba(12, 23, 16, 0.62);
+  background: rgba(7, 20, 15, 0.72);
+  backdrop-filter: blur(6px);
 }
 
 .matchupModal {
@@ -1437,8 +1876,8 @@ a.teamLabel:hover {
   max-height: calc(100vh - 72px);
   padding: 18px;
   overflow-y: auto;
-  background: #ffffff;
-  border: 1px solid #dfe5d7;
+  background: #fffdf8;
+  border: 1px solid var(--line);
   border-radius: 8px;
   box-shadow: 0 22px 60px rgba(12, 23, 16, 0.32);
 }
@@ -1456,7 +1895,7 @@ a.teamLabel:hover {
 }
 
 .modalHeader strong {
-  color: #235c3b;
+  color: #14623e;
   font-variant-numeric: tabular-nums;
 }
 
@@ -1467,7 +1906,7 @@ a.teamLabel:hover {
   justify-content: center;
   width: 40px;
   height: 40px;
-  color: #172018;
+  color: var(--ink);
   background: #f5f7f1;
   border: 1px solid #d6ddcc;
   border-radius: 8px;
@@ -1485,7 +1924,7 @@ a.teamLabel:hover {
 }
 
 .lineupTable {
-  background: #ffffff;
+  background: #fffdf8;
   border: 1px solid #e4e8dc;
   border-radius: 8px;
   overflow: hidden;
@@ -1494,8 +1933,9 @@ a.teamLabel:hover {
 .lineupTable h4 {
   margin: 0;
   padding: 16px 18px;
-  background: #edf3e7;
-  border-bottom: 1px solid #dfe5d7;
+  background:
+    linear-gradient(180deg, #edf3e7, #e3ecdb);
+  border-bottom: 1px solid var(--line);
   border-radius: 8px 8px 0 0;
 }
 
@@ -1696,7 +2136,7 @@ a.teamLabel:hover {
 }
 
 .playerCell a {
-  color: #0968d8;
+  color: #14623e;
 }
 
 .playerCell strong {
@@ -1714,7 +2154,7 @@ a.teamLabel:hover {
 
 .emptyCell,
 .emptyNote {
-  color: #687366;
+  color: var(--muted);
 }
 
 .emptyCell {
@@ -1724,9 +2164,10 @@ a.teamLabel:hover {
 .statusPanel {
   margin-top: 32px;
   padding: 24px;
-  background: #ffffff;
-  border: 1px solid #dfe5d7;
+  background: #fffdf8;
+  border: 1px solid var(--line);
   border-radius: 8px;
+  box-shadow: var(--shadow-soft);
 }
 
 .statusPanel.danger {
@@ -1735,11 +2176,41 @@ a.teamLabel:hover {
   border-color: #f0c1bd;
 }
 
+@keyframes ballFloat {
+  0%,
+  100% {
+    transform: translate3d(-4px, 4px, 0) rotate(-11deg);
+  }
+
+  50% {
+    transform: translate3d(7px, -8px, 0) rotate(8deg);
+  }
+}
+
+@keyframes broadcastScan {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 0 84px;
+  }
+}
+
 @media (max-width: 960px) {
   .pageIntro,
   .sectionHeader {
     align-items: stretch;
     flex-direction: column;
+  }
+
+  .landingHero {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .heroCopy h1 {
+    max-width: 11ch;
   }
 
   .controlBand,
@@ -1836,6 +2307,42 @@ a.teamLabel:hover {
 
   main {
     padding: 14px 12px 22px;
+  }
+
+  .landingHero {
+    gap: 18px;
+    padding: 22px 16px 16px;
+  }
+
+  .heroCopy h1 {
+    font-size: clamp(2.7rem, 18vw, 4.4rem);
+  }
+
+  .heroActions,
+  .heroActions .primaryButton,
+  .heroActions .ghostButton {
+    width: 100%;
+  }
+
+  .broadcastPanel {
+    grid-template-rows: auto 150px auto;
+  }
+
+  .fieldGraphic {
+    min-height: 150px;
+  }
+
+  .heroStats {
+    grid-template-columns: 1fr;
+  }
+
+  .scorebug {
+    grid-template-columns: 1fr auto;
+  }
+
+  .scorebug span:last-child {
+    grid-column: 1 / -1;
+    min-height: 30px;
   }
 
   .breadcrumbs {
@@ -2009,5 +2516,16 @@ a.teamLabel:hover {
   .boxScoreTable th,
   .boxScoreTable td {
     padding: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
   }
 }

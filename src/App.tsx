@@ -558,11 +558,71 @@ function DataLandingPage() {
     return <StatusPanel label="Unable to load archive data." tone="danger" />;
   }
 
+  const sortedSeasons = [...manifest.data.seasons].sort(
+    (left, right) => left.year - right.year,
+  );
+  const firstSeason = sortedSeasons.at(0)?.year;
+  const latestSeason = sortedSeasons.at(-1)?.year;
+  const matchupCount = manifest.data.seasons.reduce(
+    (total, season) => total + season.matchupCount,
+    0,
+  );
+  const playerCount = manifest.data.seasons.reduce(
+    (total, season) => total + season.playerCount,
+    0,
+  );
+
   return (
     <>
-      <section className="pageIntro">
-        <div>
+      <section className="landingHero">
+        <div className="heroCopy">
+          <p className="eyebrow">Live from the archive booth</p>
           <h1>Couch Potatoes x{leagueAge}</h1>
+          <p>
+            A broadcast-ready fantasy football record room for seasons,
+            scoreboards, drafts, keepers, players, and every chaotic matchup in
+            between.
+          </p>
+          <div className="heroActions" aria-label="Primary archive actions">
+            <Link className="primaryButton" to="/browse">
+              <Search size={16} aria-hidden />
+              Browse archive
+            </Link>
+            <Link className="ghostButton heroGhostButton" to="/records">
+              <BarChart3 size={16} aria-hidden />
+              View records
+            </Link>
+          </div>
+        </div>
+        <div className="broadcastPanel" aria-label="Archive broadcast summary">
+          <div className="scorebug">
+            <span>CPFFL</span>
+            <strong>{latestSeason ?? "Archive"}</strong>
+            <span>FINAL</span>
+          </div>
+          <div className="fieldGraphic" aria-hidden>
+            <span className="yardLine fifty">50</span>
+            <span className="yardLine twenty">20</span>
+            <LiaFootballBallSolid className="heroFootball" size={58} />
+          </div>
+          <dl className="heroStats">
+            <div>
+              <dt>Seasons</dt>
+              <dd>
+                {firstSeason && latestSeason
+                  ? `${firstSeason}-${latestSeason}`
+                  : formatNumber(manifest.data.seasons.length)}
+              </dd>
+            </div>
+            <div>
+              <dt>Matchups</dt>
+              <dd>{formatNumber(matchupCount)}</dd>
+            </div>
+            <div>
+              <dt>Players</dt>
+              <dd>{formatNumber(playerCount)}</dd>
+            </div>
+          </dl>
         </div>
       </section>
 
