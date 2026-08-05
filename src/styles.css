@@ -996,14 +996,7 @@ select {
   gap: 12px;
 }
 
-.weekPickerGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(min(220px, 100%), 1fr));
-  gap: 12px;
-}
-
-.teamHistoryCard,
-.matchupWeekCard {
+.teamHistoryCard {
   position: relative;
   display: grid;
   grid-template-columns: 42px minmax(0, 1fr);
@@ -1018,8 +1011,7 @@ select {
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
-.teamHistoryCard:hover,
-.matchupWeekCard:hover {
+.teamHistoryCard:hover {
   border-color: var(--line-strong);
   box-shadow: var(--shadow-soft);
   text-decoration: none;
@@ -2704,7 +2696,6 @@ a.teamLabel:hover {
   }
 
   .teamHistoryCard,
-  .matchupWeekCard,
   .categoryButton,
   .recordCard,
   .playerResultCard {

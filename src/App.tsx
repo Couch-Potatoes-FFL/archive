@@ -233,7 +233,6 @@ const recordTypeOptions: Array<{ value: BrowserFilterType; label: string }> = [
   { value: "season", label: "Seasons" },
   { value: "team", label: "Teams" },
   { value: "week", label: "Weeks" },
-  { value: "matchup", label: "Matchups" },
   { value: "transaction", label: "Transactions" },
   { value: "draft", label: "Drafts" },
   { value: "player", label: "Players" },
@@ -315,12 +314,6 @@ const dataCategories: Array<{
     label: "Browse player season rankings and fantasy point totals.",
     to: "/players",
     icon: <LiaFootballBallSolid size={22} aria-hidden />,
-  },
-  {
-    title: "Matchups",
-    label: "Browse historical head-to-head games.",
-    to: "/browse?type=matchup",
-    icon: <LiaCalendarAltSolid size={22} aria-hidden />,
   },
   {
     title: "Transactions",
@@ -1379,7 +1372,6 @@ function BrowserPage() {
     appliedFilters.type === "week" &&
     appliedFilters.year === "all" &&
     usesPickerView;
-  const showMatchupHistory = appliedFilters.type === "matchup" && usesPickerView;
   const showTransactionHistory =
     appliedFilters.type === "transaction" &&
     appliedFilters.year === "all" &&
@@ -1483,20 +1475,6 @@ function BrowserPage() {
           query={appliedFilters.query}
           hasPendingFilters={hasPendingFilters}
         />
-      ) : showMatchupHistory ? (
-        appliedFilters.year === "all" ? (
-          <MatchupSeasonResults
-            seasons={manifest.data.seasons}
-            query={appliedFilters.query}
-            hasPendingFilters={hasPendingFilters}
-          />
-        ) : (
-          <MatchupWeekResults
-            year={Number(appliedFilters.year)}
-            query={appliedFilters.query}
-            hasPendingFilters={hasPendingFilters}
-          />
-        )
       ) : showTransactionHistory ? (
         <RecordSeasonResults
           rows={filteredRows}
@@ -1967,140 +1945,6 @@ function PlayerBrowserPage() {
         </section>
       )}
     </>
-  );
-}
-
-function MatchupSeasonResults({
-  seasons,
-  query,
-  hasPendingFilters,
-}: {
-  seasons: ArchiveManifest["seasons"];
-  query: string;
-  hasPendingFilters: boolean;
-}) {
-  const normalizedQuery = normalizeSearchText(query);
-  const filtersBySeasonYear = /^\d{3,4}$/.test(normalizedQuery);
-  const seasonRows = useMemo(
-    () =>
-      [...seasons]
-        .sort((left, right) => right.year - left.year)
-        .filter((season) =>
-          filtersBySeasonYear ? String(season.year).includes(normalizedQuery) : true,
-        ),
-    [filtersBySeasonYear, normalizedQuery, seasons],
-  );
-
-  return (
-    <section className="teamHistoryBand">
-      <div className="sectionHeader">
-        <h2>Choose a Season</h2>
-        <span className={hasPendingFilters ? "pendingNote active" : "pendingNote"}>
-          {hasPendingFilters
-            ? "Filter changes pending"
-            : `${formatNumber(seasonRows.length)} matching ${pluralizeSeason(
-                seasonRows.length,
-              )}`}
-        </span>
-      </div>
-
-      {seasonRows.length ? (
-        <div className="teamCardGrid">
-          <AllSeasonsCard type="matchup" query={query} />
-          {seasonRows.map((season) => (
-            <Link
-              className="teamHistoryCard"
-              key={season.year}
-              to={matchupYearBrowseHref(season.year, query)}
-            >
-              <span className="teamCardIcon" aria-hidden>
-                <LiaCalendarAltSolid size={23} aria-hidden />
-              </span>
-              <span className="teamCardText">
-                <strong>{season.year}</strong>
-                <small>
-                  {season.teamCount} teams, {season.weekCount}{" "}
-                  {pluralizeWeek(season.weekCount)}
-                </small>
-              </span>
-            </Link>
-          ))}
-        </div>
-      ) : (
-        <p className="emptyNote">No matchup seasons match these filters.</p>
-      )}
-    </section>
-  );
-}
-
-function MatchupWeekResults({
-  year,
-  query,
-  hasPendingFilters,
-}: {
-  year: number;
-  query: string;
-  hasPendingFilters: boolean;
-}) {
-  const season = useArchiveJson<PublicSeason>(`seasons/${year}.json`);
-  const normalizedQuery = normalizeSearchText(query);
-
-  const weekRows = useMemo(() => {
-    if (season.status !== "loaded") {
-      return [];
-    }
-
-    return season.data.weeks
-      .filter((week) => matchesMatchupWeekQuery(week.week, normalizedQuery))
-      .sort((left, right) => left.week - right.week);
-  }, [normalizedQuery, season]);
-
-  if (season.status === "loading") {
-    return <StatusPanel label="Loading matchup weeks..." />;
-  }
-
-  if (season.status === "error") {
-    return <StatusPanel label="Unable to load matchup weeks." tone="danger" />;
-  }
-
-  return (
-    <section className="teamHistoryBand">
-      <div className="sectionHeader">
-        <div>
-          <h2>{year} Matchups</h2>
-          <Link className="textLink" to="/browse?type=matchup">
-            &larr; Back to Year Select
-          </Link>
-        </div>
-        <span className={hasPendingFilters ? "pendingNote active" : "pendingNote"}>
-          {hasPendingFilters
-            ? "Filter changes pending"
-            : `${formatNumber(weekRows.length)} matching ${pluralizeWeek(
-                weekRows.length,
-              )}`}
-        </span>
-      </div>
-
-      {weekRows.length ? (
-        <div className="weekPickerGrid">
-          {weekRows.map((week) => (
-            <Link className="matchupWeekCard" key={week.week} to={week.href}>
-              <span className="teamCardIcon" aria-hidden>
-                <LiaCalendarAltSolid size={23} aria-hidden />
-              </span>
-              <span className="teamCardText">
-                <strong>Week {week.week}</strong>
-                <small>
-                  {week.scoreboardCount} games, {week.boxScoreCount} box scores
-                </small>
-              </span>
-            </Link>
-          ))}
-        </div>
-      ) : (
-        <p className="emptyNote">No matchup weeks match these filters.</p>
-      )}
-    </section>
   );
 }
 
@@ -6293,10 +6137,6 @@ function playerYearBrowseHref(year: number, query: string): string {
   return `/players?${params.toString()}`;
 }
 
-function matchupYearBrowseHref(year: number, query: string): string {
-  return yearBrowseHref("matchup", year, query);
-}
-
 function draftYearBrowseHref(year: number, query: string): string {
   const params = new URLSearchParams({
     year: String(year),
@@ -6421,11 +6261,6 @@ function playerParamsFromFilters(filters: BrowserFilters): URLSearchParams {
 }
 
 function searchPlaceholder(filters: BrowserFilters): string {
-  if (filters.type === "matchup") {
-    return filters.year === "all"
-      ? "Search seasons or enter a week number"
-      : "Search week number";
-  }
   if (filters.type === "player") {
     return filters.year === "all"
       ? "Search players or enter a year"
@@ -6488,19 +6323,6 @@ function matchesPositionFilter(
     return isOffensiveSkillPosition(position);
   }
   return position === filter;
-}
-
-function matchesMatchupWeekQuery(week: number, query: string): boolean {
-  if (!query) {
-    return true;
-  }
-
-  const weekSearch = query.match(/\d+/)?.[0];
-  if (!weekSearch) {
-    return true;
-  }
-
-  return String(week).includes(weekSearch) || includesSearchText(`week ${week}`, query);
 }
 
 function matchesPlayerYearQuery(
