@@ -65,6 +65,15 @@ type BrowserFilters = {
   type: BrowserFilterType;
   year: string;
   view: BrowserView;
+  position: PositionFilter | "";
+};
+
+type PositionFilter = (typeof positionFilterOptions)[number];
+
+type KeeperFilters = {
+  query: string;
+  year: string;
+  position: PositionFilter | "";
 };
 
 type KeeperRow = {
@@ -213,7 +222,10 @@ const defaultFilters: BrowserFilters = {
   type: "all",
   year: "all",
   view: "picker",
+  position: "",
 };
+
+const positionFilterOptions = ["QB", "RB", "WR", "TE", "OP", "D/ST", "K", "HC"] as const;
 
 const recordTypeOptions: Array<{ value: BrowserFilterType; label: string }> = [
   { value: "all", label: "All record types" },
@@ -978,15 +990,52 @@ function OwnerRecordMobileCard({ row }: { row: OwnerRecordRow }) {
   );
 }
 
+function PositionFilterBadges({
+  selectedPosition,
+  onChange,
+}: {
+  selectedPosition: PositionFilter | "";
+  onChange: (position: PositionFilter | "") => void;
+}) {
+  return (
+    <div className="positionFilterBadges" aria-label="Position filters">
+      <button
+        className={selectedPosition ? "positionBadge" : "positionBadge active"}
+        type="button"
+        aria-pressed={!selectedPosition}
+        onClick={() => onChange("")}
+      >
+        ALL
+      </button>
+      {positionFilterOptions.map((position) => {
+        const isActive = selectedPosition === position;
+
+        return (
+          <button
+            className={isActive ? "positionBadge active" : "positionBadge"}
+            type="button"
+            aria-pressed={isActive}
+            key={position}
+            onClick={() => onChange(position)}
+          >
+            {position}
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
 function KeepersPage() {
   const manifest = useArchiveJson<ArchiveManifest>("manifest.json");
   const index = useArchiveJson<SearchRow[]>("search-index.json");
   const players = useArchiveJson<PublicPlayer[]>("players.json");
   const [searchParams, setSearchParams] = useSearchParams();
   const searchParamString = searchParams.toString();
-  const [keeperFilters, setKeeperFilters] = useState(() => ({
+  const [keeperFilters, setKeeperFilters] = useState<KeeperFilters>(() => ({
     query: searchParams.get("q") ?? "",
     year: searchParams.get("year") ?? "all",
+    position: normalizePositionFilter(searchParams.get("pos")),
   }));
 
   const years = useMemo(
@@ -999,6 +1048,7 @@ function KeepersPage() {
     [manifest],
   );
   const selectedYear = normalizeKeeperYear(searchParams.get("year"), years);
+  const selectedPosition = normalizePositionFilter(searchParams.get("pos"));
   const appliedQuery = searchParams.get("q")?.trim() ?? "";
   const normalizedQuery = normalizeSearchText(appliedQuery);
   const showsAllSeasons = selectedYear === "all";
@@ -1008,6 +1058,7 @@ function KeepersPage() {
     setKeeperFilters({
       query: params.get("q") ?? "",
       year: normalizeKeeperYear(params.get("year"), years),
+      position: normalizePositionFilter(params.get("pos")),
     });
   }, [searchParamString, years]);
 
@@ -1020,11 +1071,23 @@ function KeepersPage() {
 
     return index.data
       .filter(
-        (row) =>
-          row.type === "draft" &&
-          row.keeperStatus &&
-          (selectedYear === "all" || row.year === Number(selectedYear)) &&
-          matchesDraftSearchRowQuery(row, normalizedQuery),
+        (row) => {
+          if (
+            row.type !== "draft" ||
+            !row.keeperStatus ||
+            (selectedYear !== "all" && row.year !== Number(selectedYear)) ||
+            !matchesDraftSearchRowQuery(row, normalizedQuery)
+          ) {
+            return false;
+          }
+
+          const player = row.playerKey ? playerByKey.get(row.playerKey) : undefined;
+          const playerSeason = player?.seasons.find((season) => season.year === row.year);
+          return matchesPositionFilter(
+            playerSeason?.position ?? player?.primaryPosition,
+            selectedPosition,
+          );
+        },
       )
       .map((row): KeeperRow => {
         const player = row.playerKey ? playerByKey.get(row.playerKey) : undefined;
@@ -1043,7 +1106,7 @@ function KeepersPage() {
         };
       })
       .sort(sortKeeperRows);
-  }, [index, normalizedQuery, players, selectedYear]);
+  }, [index, normalizedQuery, players, selectedPosition, selectedYear]);
 
   const keeperColumns = useMemo(
     () => keeperColumnsForView(showsAllSeasons),
@@ -1067,12 +1130,14 @@ function KeepersPage() {
 
   const hasPendingFilters =
     keeperFilters.query.trim() !== appliedQuery ||
-    normalizeKeeperYear(keeperFilters.year, years) !== selectedYear;
+    normalizeKeeperYear(keeperFilters.year, years) !== selectedYear ||
+    keeperFilters.position !== selectedPosition;
 
   function applyFilters(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const query = keeperFilters.query.trim();
     const year = normalizeKeeperYear(keeperFilters.year, years);
+    const position = normalizePositionFilter(keeperFilters.position);
     const params = new URLSearchParams();
 
     if (query) {
@@ -1081,14 +1146,37 @@ function KeepersPage() {
     if (year !== "all") {
       params.set("year", year);
     }
+    if (position) {
+      params.set("pos", position);
+    }
 
-    setKeeperFilters({ query, year });
+    setKeeperFilters({ query, year, position });
     setSearchParams(params);
   }
 
   function clearFilters() {
-    setKeeperFilters({ query: "", year: "all" });
+    setKeeperFilters({ query: "", year: "all", position: "" });
     setSearchParams({});
+  }
+
+  function applyPositionFilter(position: PositionFilter | "") {
+    const query = keeperFilters.query.trim();
+    const year = normalizeKeeperYear(keeperFilters.year, years);
+    const nextPosition = selectedPosition === position ? "" : position;
+    const params = new URLSearchParams();
+
+    if (query) {
+      params.set("q", query);
+    }
+    if (year !== "all") {
+      params.set("year", year);
+    }
+    if (nextPosition) {
+      params.set("pos", nextPosition);
+    }
+
+    setKeeperFilters({ query, year, position: nextPosition });
+    setSearchParams(params);
   }
 
   return (
@@ -1148,6 +1236,10 @@ function KeepersPage() {
             Clear
           </button>
         </div>
+        <PositionFilterBadges
+          selectedPosition={selectedPosition}
+          onChange={applyPositionFilter}
+        />
       </form>
 
       <section className="contentBand">
@@ -1365,7 +1457,6 @@ function BrowserPage() {
         <RecordSeasonResults
           rows={filteredRows}
           type="team"
-          title="Teams"
           query={appliedFilters.query}
           hasPendingFilters={hasPendingFilters}
         />
@@ -1378,7 +1469,6 @@ function BrowserPage() {
         <RecordSeasonResults
           rows={filteredRows}
           type="week"
-          title="Weekly Results"
           query={appliedFilters.query}
           hasPendingFilters={hasPendingFilters}
         />
@@ -1400,7 +1490,6 @@ function BrowserPage() {
         <RecordSeasonResults
           rows={filteredRows}
           type="transaction"
-          title="Transactions"
           query={appliedFilters.query}
           hasPendingFilters={hasPendingFilters}
         />
@@ -1431,6 +1520,7 @@ function BrowserPage() {
 function DraftBrowserPage() {
   const manifest = useArchiveJson<ArchiveManifest>("manifest.json");
   const index = useArchiveJson<SearchRow[]>("search-index.json");
+  const players = useArchiveJson<PublicPlayer[]>("players.json");
   const [searchParams, setSearchParams] = useSearchParams();
   const searchParamString = searchParams.toString();
   const [draftFilters, setDraftFilters] = useState<BrowserFilters>(() => ({
@@ -1462,11 +1552,12 @@ function DraftBrowserPage() {
   );
 
   const filteredRows = useMemo(() => {
-    if (index.status !== "loaded") {
+    if (index.status !== "loaded" || players.status !== "loaded") {
       return [];
     }
 
     const normalizedQuery = normalizeSearchText(appliedFilters.query);
+    const playerByKey = new Map(players.data.map((player) => [player.key, player]));
 
     return sortDraftSearchRows(
       index.data.filter((row) => {
@@ -1479,22 +1570,39 @@ function DraftBrowserPage() {
         ) {
           return false;
         }
+        if (
+          !matchesPositionFilter(
+            draftSearchRowPosition(row, playerByKey),
+            appliedFilters.position,
+          )
+        ) {
+          return false;
+        }
         return matchesDraftSearchRowQuery(row, normalizedQuery);
       }),
     );
-  }, [appliedFilters, index]);
+  }, [appliedFilters, index, players]);
 
-  if (manifest.status === "loading" || index.status === "loading") {
+  if (
+    manifest.status === "loading" ||
+    index.status === "loading" ||
+    players.status === "loading"
+  ) {
     return <StatusPanel label="Loading draft index..." />;
   }
 
-  if (manifest.status === "error" || index.status === "error") {
+  if (
+    manifest.status === "error" ||
+    index.status === "error" ||
+    players.status === "error"
+  ) {
     return <StatusPanel label="Unable to load draft data." tone="danger" />;
   }
 
   const hasPendingFilters = !filtersMatch(draftFilters, appliedFilters);
   const showDraftHistory =
     !appliedFilters.query &&
+    !appliedFilters.position &&
     appliedFilters.year === "all" &&
     appliedFilters.view !== "all";
   const resultColumns = resultColumnsForType("draft", appliedFilters.year === "all");
@@ -1511,6 +1619,17 @@ function DraftBrowserPage() {
     setDraftFilters(nextFilters);
     setAppliedFilters(nextFilters);
     setSearchParams({});
+  }
+
+  function applyPositionFilter(position: PositionFilter | "") {
+    const nextFilters = normalizeFilters({
+      ...draftFilters,
+      type: "draft",
+      position: appliedFilters.position === position ? "" : position,
+    });
+    setDraftFilters(nextFilters);
+    setAppliedFilters(nextFilters);
+    setSearchParams(draftParamsFromFilters(nextFilters));
   }
 
   return (
@@ -1570,6 +1689,10 @@ function DraftBrowserPage() {
             Clear
           </button>
         </div>
+        <PositionFilterBadges
+          selectedPosition={appliedFilters.position}
+          onChange={applyPositionFilter}
+        />
       </form>
 
       {showDraftHistory ? (
@@ -1659,6 +1782,14 @@ function PlayerBrowserPage() {
         ) {
           return false;
         }
+        if (
+          !matchesPositionFilter(
+            season.position ?? player.primaryPosition,
+            appliedFilters.position,
+          )
+        ) {
+          return false;
+        }
 
         return matchesPlayerYearQuery(player, season, normalizedQuery);
       })
@@ -1681,10 +1812,12 @@ function PlayerBrowserPage() {
   const hasPendingFilters = !filtersMatch(draftFilters, appliedFilters);
   const showYearPicker =
     !appliedFilters.query &&
+    !appliedFilters.position &&
     appliedFilters.year === "all" &&
     appliedFilters.view !== "all";
   const showYearCards =
     !appliedFilters.query &&
+    !appliedFilters.position &&
     appliedFilters.year !== "all" &&
     appliedFilters.view !== "all";
   const resultColumns =
@@ -1704,6 +1837,17 @@ function PlayerBrowserPage() {
     setDraftFilters(nextFilters);
     setAppliedFilters(nextFilters);
     setSearchParams({});
+  }
+
+  function applyPositionFilter(position: PositionFilter | "") {
+    const nextFilters = normalizeFilters({
+      ...draftFilters,
+      type: "player",
+      position: appliedFilters.position === position ? "" : position,
+    });
+    setDraftFilters(nextFilters);
+    setAppliedFilters(nextFilters);
+    setSearchParams(playerParamsFromFilters(nextFilters));
   }
 
   return (
@@ -1772,6 +1916,10 @@ function PlayerBrowserPage() {
             Clear
           </button>
         </div>
+        <PositionFilterBadges
+          selectedPosition={appliedFilters.position}
+          onChange={applyPositionFilter}
+        />
       </form>
 
       {showYearPicker ? (
@@ -1835,7 +1983,7 @@ function MatchupSeasonResults({
   return (
     <section className="teamHistoryBand">
       <div className="sectionHeader">
-        <h2>Matchups</h2>
+        <h2>Choose a Season</h2>
         <span className={hasPendingFilters ? "pendingNote active" : "pendingNote"}>
           {hasPendingFilters
             ? "Filter changes pending"
@@ -1969,7 +2117,7 @@ function PlayerSeasonResults({
   return (
     <section className="teamHistoryBand">
       <div className="sectionHeader">
-        <h2>Players</h2>
+        <h2>Choose a Season</h2>
         <span className={hasPendingFilters ? "pendingNote active" : "pendingNote"}>
           {hasPendingFilters
             ? "Filter changes pending"
@@ -2111,7 +2259,7 @@ function DraftSeasonResults({
   return (
     <section className="teamHistoryBand">
       <div className="sectionHeader">
-        <h2>Drafts</h2>
+        <h2>Choose a Season</h2>
         <span className={hasPendingFilters ? "pendingNote active" : "pendingNote"}>
           {hasPendingFilters
             ? "Filter changes pending"
@@ -2148,13 +2296,11 @@ function DraftSeasonResults({
 function RecordSeasonResults({
   rows,
   type,
-  title,
   query,
   hasPendingFilters,
 }: {
   rows: SearchRow[];
   type: SearchType;
-  title: string;
   query: string;
   hasPendingFilters: boolean;
 }) {
@@ -2163,7 +2309,7 @@ function RecordSeasonResults({
   return (
     <section className="teamHistoryBand">
       <div className="sectionHeader">
-        <h2>{title}</h2>
+        <h2>Choose a Season</h2>
         <span className={hasPendingFilters ? "pendingNote active" : "pendingNote"}>
           {hasPendingFilters
             ? "Filter changes pending"
@@ -2212,7 +2358,7 @@ function SeasonHistoryResults({
   return (
     <section className="teamHistoryBand">
       <div className="sectionHeader">
-        <h2>Seasons</h2>
+        <h2>Choose a Season</h2>
         <span className={hasPendingFilters ? "pendingNote active" : "pendingNote"}>
           {hasPendingFilters
             ? "Filter changes pending"
@@ -6207,6 +6353,28 @@ function matchesDraftSearchRowQuery(row: SearchRow, query: string): boolean {
   return includesSearchText(row.playerName ?? row.label, query);
 }
 
+function draftSearchRowPosition(
+  row: SearchRow,
+  playerByKey: Map<string, PublicPlayer>,
+): string | undefined {
+  const player = row.playerKey ? playerByKey.get(row.playerKey) : undefined;
+  const season = player?.seasons.find((playerSeason) => playerSeason.year === row.year);
+  return season?.position ?? player?.primaryPosition;
+}
+
+function matchesPositionFilter(
+  position: string | undefined,
+  filter: PositionFilter | "",
+): boolean {
+  if (!filter) {
+    return position !== "HC";
+  }
+  if (filter === "OP") {
+    return isOffensiveSkillPosition(position);
+  }
+  return position === filter;
+}
+
 function matchesMatchupWeekQuery(week: number, query: string): boolean {
   if (!query) {
     return true;
@@ -6251,7 +6419,12 @@ function filtersFromSearchParams(searchParams: URLSearchParams): BrowserFilters 
     type: isBrowserFilterType(type) ? type : "all",
     year: searchParams.get("year") ?? "all",
     view: searchParams.get("view") === "all" ? "all" : "picker",
+    position: normalizePositionFilter(searchParams.get("pos")),
   });
+}
+
+function normalizePositionFilter(value: unknown): PositionFilter | "" {
+  return typeof value === "string" && isPositionFilter(value) ? value : "";
 }
 
 function paramsFromFilters(filters: BrowserFilters): URLSearchParams {
@@ -6270,6 +6443,9 @@ function paramsFromFilters(filters: BrowserFilters): URLSearchParams {
   if (normalizedFilters.view === "all") {
     params.set("view", "all");
   }
+  if (normalizedFilters.position) {
+    params.set("pos", normalizedFilters.position);
+  }
 
   return params;
 }
@@ -6279,6 +6455,7 @@ function normalizeFilters(filters: BrowserFilters): BrowserFilters {
   const type = isBrowserFilterType(filters.type) ? filters.type : "all";
   const year =
     filters.year === "all" || /^\d{4}$/.test(filters.year) ? filters.year : "all";
+  const position = normalizePositionFilter(filters.position);
   const view =
     query && year === "all"
       ? "all"
@@ -6286,7 +6463,7 @@ function normalizeFilters(filters: BrowserFilters): BrowserFilters {
         ? "all"
         : "picker";
 
-  return { query, type, year, view };
+  return { query, type, year, view, position };
 }
 
 function isBrowserFilterType(value: unknown): value is BrowserFilterType {
@@ -6294,6 +6471,10 @@ function isBrowserFilterType(value: unknown): value is BrowserFilterType {
     typeof value === "string" &&
     recordTypeOptions.some((option) => option.value === value)
   );
+}
+
+function isPositionFilter(value: string): value is PositionFilter {
+  return positionFilterOptions.some((position) => position === value);
 }
 
 function filtersMatch(left: BrowserFilters, right: BrowserFilters): boolean {
@@ -6304,7 +6485,8 @@ function filtersMatch(left: BrowserFilters, right: BrowserFilters): boolean {
     normalizedLeft.query === normalizedRight.query &&
     normalizedLeft.type === normalizedRight.type &&
     normalizedLeft.year === normalizedRight.year &&
-    normalizedLeft.view === normalizedRight.view
+    normalizedLeft.view === normalizedRight.view &&
+    normalizedLeft.position === normalizedRight.position
   );
 }
 
