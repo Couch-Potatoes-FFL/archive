@@ -502,6 +502,15 @@ const playerSeasonColumns: ColumnDef<PlayerSeasonReport>[] = [
     cell: ({ row }) => formatAuctionValue(row.original.draftValue),
   },
   {
+    header: "P:D",
+    id: "pointsPerDollar",
+    accessorFn: (season) => pointsPerDollar(season),
+    cell: ({ row }) => {
+      const ratio = pointsPerDollar(row.original);
+      return <span className="numberText">{formatNumber(ratio, 1)}</span>;
+    },
+  },
+  {
     header: "Fantasy Points",
     accessorKey: "fantasyPoints",
     cell: ({ row }) => (
@@ -2878,6 +2887,10 @@ function PlayerSeasonMobileCard({
           {
             label: "Draft Value",
             value: formatAuctionValue(season.draftValue),
+          },
+          {
+            label: "P:D",
+            value: formatNumber(pointsPerDollar(season), 1),
           },
           {
             label: "Fantasy Points",
@@ -5746,6 +5759,12 @@ function formatAuctionValue(value: number | undefined): string {
 function seasonPvoa(season: PlayerSeasonReport): number | undefined {
   return typeof season.avgStarterPoints === "number"
     ? season.fantasyPoints - season.avgStarterPoints
+    : undefined;
+}
+
+function pointsPerDollar(season: PlayerSeasonReport): number | undefined {
+  return typeof season.draftValue === "number" && season.draftValue > 0
+    ? season.fantasyPoints / season.draftValue
     : undefined;
 }
 
