@@ -48,6 +48,7 @@ const ESPN_POSITION_LABELS = Object.freeze({
   3: "WR",
   4: "TE",
   5: "K",
+  14: "HC",
   16: "D/ST",
 });
 const ESPN_PRO_TEAM_LABELS = Object.freeze({
@@ -305,25 +306,37 @@ function playerPoolBackfill(entry, year) {
 
 async function fetchPlayerPoolBackfills(year, leagueId, playerIds) {
   const cookie = espnCookieHeader();
-  if (!cookie || !leagueId || !playerIds.length || Number(year) < 2018) {
+  if (!cookie || !leagueId) {
     return new Map();
   }
 
   const rows = new Map();
-  const url = `https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/${year}/segments/0/leagues/${leagueId}?view=kona_player_info`;
+  const url =
+    Number(year) >= 2018
+      ? `https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/${year}/segments/0/leagues/${leagueId}?view=kona_player_info`
+      : `https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/leagueHistory/${leagueId}?seasonId=${year}&view=kona_player_info`;
+  const uniquePlayerIds = playerIds?.length ? [...new Set(playerIds)] : undefined;
+  const filters = uniquePlayerIds
+    ? chunk(uniquePlayerIds, 50).map((playerIdChunk) => ({
+        filterIds: { value: playerIdChunk },
+        limit: playerIdChunk.length,
+        sortPercOwned: { sortAsc: false, sortPriority: 1 },
+      }))
+    : undefined;
 
-  for (const playerIdChunk of chunk([...new Set(playerIds)], 50)) {
+  for (let offset = 0; ; offset += 500) {
+    const playersFilter = filters?.shift() || {
+      limit: 500,
+      offset,
+      sortPercOwned: { sortAsc: false, sortPriority: 1 },
+    };
     const response = await fetch(url, {
       headers: {
         Accept: "application/json",
         Cookie: cookie,
         "User-Agent": "cpffl-public-archive/1.0",
         "x-fantasy-filter": JSON.stringify({
-          players: {
-            filterIds: { value: playerIdChunk },
-            limit: playerIdChunk.length,
-            sortPercOwned: { sortAsc: false, sortPriority: 1 },
-          },
+          players: playersFilter,
         }),
       },
     });
@@ -336,12 +349,24 @@ async function fetchPlayerPoolBackfills(year, leagueId, playerIds) {
     }
 
     const payload = await response.json();
-    (payload.players || []).forEach((entry) => {
+    const leaguePayload = Array.isArray(payload) ? payload[0] : payload;
+    const entries = leaguePayload?.players || [];
+    entries.forEach((entry) => {
       const row = playerPoolBackfill(entry, year);
       if (row?.playerId) {
         rows.set(Number(row.playerId), row);
       }
     });
+
+    if (filters) {
+      if (!filters.length) {
+        break;
+      }
+      continue;
+    }
+    if (entries.length < playersFilter.limit) {
+      break;
+    }
   }
 
   return rows;
@@ -843,45 +868,37 @@ function canonicalizePlayerSeasons(players) {
   return aliases;
 }
 
-async function backfillPlayerSeasonStats(year, leagueId, players) {
-  const candidates = [...players.values()].filter(
-    (season) =>
-      Number(season.playerId) > 0 &&
-      season.rosterTotalPoints === undefined &&
-      (season.draftValue !== undefined || season.lineupPoints > 0),
-  );
-
-  if (!candidates.length) {
+function applyPlayerPoolBackfill(season, backfill) {
+  if (!season || !backfill) {
     return;
   }
 
-  const backfills = await fetchPlayerPoolBackfills(
-    year,
-    leagueId,
-    candidates.map((season) => Number(season.playerId)),
-  );
+  if (backfill.name && season.name === "Unknown player") {
+    season.name = backfill.name;
+  }
+  season.photoUrl = season.photoUrl || backfill.photoUrl;
+  incrementCount(season.positionCounts, backfill.position);
+  incrementCount(season.nflTeamCounts, backfill.nflTeam);
+  if (backfill.nflTeam && backfill.nflTeam !== "None") {
+    season.latestNflTeam = backfill.nflTeam;
+  }
+  if (backfill.fantasyPoints !== undefined) {
+    season.rosterTotalPoints =
+      season.rosterTotalPoints === undefined
+        ? backfill.fantasyPoints
+        : Math.max(season.rosterTotalPoints, backfill.fantasyPoints);
+  }
+}
 
-  candidates.forEach((season) => {
-    const backfill = backfills.get(Number(season.playerId));
-    if (!backfill) {
-      return;
-    }
-
-    if (backfill.name && season.name === "Unknown player") {
-      season.name = backfill.name;
-    }
-    season.photoUrl = season.photoUrl || backfill.photoUrl;
-    incrementCount(season.positionCounts, backfill.position);
-    incrementCount(season.nflTeamCounts, backfill.nflTeam);
-    if (backfill.nflTeam && backfill.nflTeam !== "None") {
-      season.latestNflTeam = backfill.nflTeam;
-    }
-    if (backfill.fantasyPoints !== undefined) {
-      season.rosterTotalPoints =
-        season.rosterTotalPoints === undefined
-          ? backfill.fantasyPoints
-          : Math.max(season.rosterTotalPoints, backfill.fantasyPoints);
-    }
+async function importPlayerPoolSeasons(year, leagueId, players) {
+  const backfills = await fetchPlayerPoolBackfills(year, leagueId);
+  backfills.forEach((backfill) => {
+    const season = getPlayerSeason(players, year, {
+      player_id: backfill.playerId,
+      name: backfill.name,
+      photoUrl: backfill.photoUrl,
+    });
+    applyPlayerPoolBackfill(season, backfill);
   });
 }
 
@@ -1341,7 +1358,7 @@ async function buildSeason(year) {
 
   let draft = compactDraft(year, source.draft || []);
   draft.forEach((pick) => recordDraftPlayer(playerSeasons, year, pick, names));
-  await backfillPlayerSeasonStats(
+  await importPlayerPoolSeasons(
     year,
     source.league_id || process.env.ESPN_LEAGUE_ID,
     playerSeasons,
