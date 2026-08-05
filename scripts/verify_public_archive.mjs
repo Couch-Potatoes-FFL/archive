@@ -37,9 +37,11 @@ async function jsonFiles(dir) {
   return files;
 }
 
-function verifyValue(value, trail, failures) {
+function verifyValue(value, trail, failures, playerKeys) {
   if (Array.isArray(value)) {
-    value.forEach((item, index) => verifyValue(item, `${trail}[${index}]`, failures));
+    value.forEach((item, index) =>
+      verifyValue(item, `${trail}[${index}]`, failures, playerKeys),
+    );
     return;
   }
 
@@ -59,16 +61,21 @@ function verifyValue(value, trail, failures) {
     ) {
       failures.push(`Invalid ownerNames value at ${nextTrail}`);
     }
-    verifyValue(child, nextTrail, failures);
+    if (key === "playerKey" && typeof child === "string" && !playerKeys.has(child)) {
+      failures.push(`Unknown playerKey ${child} at ${nextTrail}`);
+    }
+    verifyValue(child, nextTrail, failures, playerKeys);
   }
 }
 
 async function main() {
+  const players = JSON.parse(await readFile(path.join(archiveDir, "players.json"), "utf8"));
+  const playerKeys = new Set(players.map((player) => player.key));
   const files = await jsonFiles(archiveDir);
   const failures = [];
   for (const file of files) {
     const payload = JSON.parse(await readFile(file, "utf8"));
-    verifyValue(payload, path.relative(rootDir, file), failures);
+    verifyValue(payload, path.relative(rootDir, file), failures, playerKeys);
   }
 
   if (failures.length) {

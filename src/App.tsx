@@ -83,6 +83,7 @@ type KeeperRow = {
   position?: string;
   name: string;
   teamName: string;
+  keeperEligible: boolean;
   teamKey?: string;
   playerKey?: string;
   draftPick?: number;
@@ -513,6 +514,15 @@ const playerSeasonColumns: ColumnDef<PlayerSeasonReport>[] = [
     cell: ({ row }) => (
       <span className="numberText">{formatNumber(row.original.fantasyPoints, 1)}</span>
     ),
+  },
+  {
+    header: "PVOA",
+    id: "pvoa",
+    accessorFn: (season) => seasonPvoa(season),
+    cell: ({ row }) => {
+      const pvoa = seasonPvoa(row.original);
+      return <span className={pvoaClassName(pvoa)}>{formatPvoa(pvoa)}</span>;
+    },
   },
   {
     header: "Player Rank",
@@ -1068,6 +1078,7 @@ function KeepersPage() {
     }
 
     const playerByKey = new Map(players.data.map((player) => [player.key, player]));
+    const keeperEligibleByRowId = keeperEligibilityByRowId(index.data);
 
     return index.data
       .filter(
@@ -1100,6 +1111,7 @@ function KeepersPage() {
           position: playerSeason?.position ?? player?.primaryPosition,
           name: row.playerName ?? row.label,
           teamName: row.teamName ?? row.teamKey ?? "Unknown",
+          keeperEligible: keeperEligibleByRowId.get(row.id) ?? true,
           teamKey: row.teamKey,
           playerKey: row.playerKey,
           draftPick: row.draftPick,
@@ -2514,6 +2526,20 @@ function PlayerAvatar({ player }: { player: PublicPlayer }) {
   );
 }
 
+function playerByCanonicalOrLegacyKey(
+  players: PublicPlayer[],
+  playerKey: string,
+): PublicPlayer | undefined {
+  const exact = players.find((row) => row.key === playerKey);
+  if (exact || !playerKey.startsWith("name-")) {
+    return exact;
+  }
+
+  const legacyName = normalizeSearchText(playerKey.slice("name-".length));
+  const matches = players.filter((row) => normalizeSearchText(row.name) === legacyName);
+  return matches.length === 1 ? matches[0] : undefined;
+}
+
 function PlayerPage() {
   const { playerKey = "" } = useParams();
   const [searchParams] = useSearchParams();
@@ -2527,7 +2553,7 @@ function PlayerPage() {
     return <StatusPanel label="Unable to load player report." tone="danger" />;
   }
 
-  const player = players.data.find((row) => row.key === playerKey);
+  const player = playerByCanonicalOrLegacyKey(players.data, playerKey);
   if (!player) {
     return <StatusPanel label="Player report not found." tone="danger" />;
   }
@@ -2987,6 +3013,8 @@ function PlayerSeasonMobileCard({
 }: {
   season: PlayerSeasonReport;
 }) {
+  const pvoa = seasonPvoa(season);
+
   return (
     <article className="mobileDataCard">
       <div className="mobileCardHeader">
@@ -3004,6 +3032,10 @@ function PlayerSeasonMobileCard({
           {
             label: "Fantasy Points",
             value: formatNumber(season.fantasyPoints, 1),
+          },
+          {
+            label: "PVOA",
+            value: <span className={pvoaClassName(pvoa)}>{formatPvoa(pvoa)}</span>,
           },
           {
             label: "Position Rank",
@@ -3068,6 +3100,7 @@ function KeeperMobileCard({
       </div>
       <p className="keeperMobileTeamLine">
         {metaPrefix ? `${metaPrefix} · ` : ""}
+        Keeper Eligible: {formatBoolean(row.keeperEligible)} ·{" "}
         {row.draftPick ? `Pick ${row.draftPick}: ` : ""}
         <KeeperTeamLink row={row} />
       </p>
@@ -5835,6 +5868,11 @@ function keeperColumnsForView(showsYear: boolean): ColumnDef<KeeperRow>[] {
       accessorKey: "teamName",
       cell: ({ row }) => <KeeperTeamLink row={row.original} />,
     },
+    {
+      header: "Keeper Eligible",
+      accessorKey: "keeperEligible",
+      cell: ({ row }) => formatBoolean(row.original.keeperEligible),
+    },
   ];
 
   if (showsYear) {
@@ -5851,6 +5889,69 @@ function formatAuctionValue(value: number | undefined): string {
   return typeof value === "number" && Number.isFinite(value)
     ? `$${formatNumber(value)}`
     : "-";
+}
+
+function seasonPvoa(season: PlayerSeasonReport): number | undefined {
+  return typeof season.avgStarterPoints === "number"
+    ? season.fantasyPoints - season.avgStarterPoints
+    : undefined;
+}
+
+function formatPvoa(value: number | undefined): string {
+  const formatted = formatNumber(value, 1);
+  return typeof value === "number" && value > 0 ? `+${formatted}` : formatted;
+}
+
+function pvoaClassName(value: number | undefined): string {
+  if (typeof value !== "number" || value === 0) {
+    return "numberText pvoaNumber";
+  }
+
+  return `numberText pvoaNumber ${value > 0 ? "positive" : "negative"}`;
+}
+
+function formatBoolean(value: boolean): string {
+  return value ? "Yes" : "No";
+}
+
+function keeperEligibilityByRowId(rows: SearchRow[]): Map<string, boolean> {
+  const yearsByPlayer = new Map<string, Set<number>>();
+
+  rows.forEach((row) => {
+    const key = keeperIdentityKey(row);
+    if (!key) {
+      return;
+    }
+
+    const years = yearsByPlayer.get(key) ?? new Set<number>();
+    years.add(row.year);
+    yearsByPlayer.set(key, years);
+  });
+
+  return new Map(
+    rows.flatMap((row) => {
+      const key = keeperIdentityKey(row);
+      const years = key ? yearsByPlayer.get(key) : undefined;
+      if (!key || !years) {
+        return [];
+      }
+
+      let consecutiveYears = 1;
+      for (let year = row.year - 1; years.has(year); year -= 1) {
+        consecutiveYears += 1;
+      }
+
+      return [[row.id, consecutiveYears < 3]];
+    }),
+  );
+}
+
+function keeperIdentityKey(row: SearchRow): string | undefined {
+  if (row.type !== "draft" || !row.keeperStatus) {
+    return undefined;
+  }
+
+  return row.playerKey ?? normalizeSearchText(row.playerName ?? row.label);
 }
 
 function formatTransactionFab(type?: string, bidAmount?: number): string {

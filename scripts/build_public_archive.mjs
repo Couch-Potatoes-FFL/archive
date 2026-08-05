@@ -132,6 +132,10 @@ function playerKey(player) {
   return playerKeyFromParts(player?.player_id ?? player?.playerId, player?.name);
 }
 
+function canonicalPlayerKey(playerKeyValue, aliases) {
+  return aliases.get(playerKeyValue) || playerKeyValue;
+}
+
 function firstString(...values) {
   return values.find((value) => typeof value === "string" && value.trim())?.trim();
 }
@@ -303,6 +307,19 @@ function compactTeam(year, team) {
   };
 }
 
+function remapTeamRosterPlayerKeys(team, aliases) {
+  if (!team.roster?.length) {
+    return team;
+  }
+  return {
+    ...team,
+    roster: team.roster.map((player) => ({
+      ...player,
+      key: canonicalPlayerKey(player.key, aliases),
+    })),
+  };
+}
+
 function seasonSettings(settings = {}) {
   const rosterSlots = Object.entries(settings.position_slot_counts || {})
     .map(([slot, count]) => ({ slot: slot || "Unknown", count: finiteNumber(count) }))
@@ -339,6 +356,13 @@ function compactDraft(year, draft = []) {
     playerName: pick.playerName || pick.player?.name || "Unknown player",
     bidAmount: pick.bid_amount,
     keeperStatus: Boolean(pick.keeper_status),
+  }));
+}
+
+function remapDraftPlayerKeys(draft, aliases) {
+  return draft.map((pick) => ({
+    ...pick,
+    playerKey: canonicalPlayerKey(pick.playerKey, aliases),
   }));
 }
 
@@ -392,6 +416,20 @@ function compactBoxScore(year, weekNumber, boxScore, index) {
   };
 }
 
+function remapBoxScorePlayerKeys(boxScore, aliases) {
+  return {
+    ...boxScore,
+    homeLineup: boxScore.homeLineup.map((player) => ({
+      ...player,
+      key: canonicalPlayerKey(player.key, aliases),
+    })),
+    awayLineup: boxScore.awayLineup.map((player) => ({
+      ...player,
+      key: canonicalPlayerKey(player.key, aliases),
+    })),
+  };
+}
+
 function compactTransaction(year, weekNumber, transaction, index) {
   return {
     transactionKey: `${year}-w${String(weekNumber).padStart(2, "0")}-x${String(
@@ -411,6 +449,16 @@ function compactTransaction(year, weekNumber, transaction, index) {
           player: item.player || "Unknown player",
         }))
       : [],
+  };
+}
+
+function remapTransactionPlayerKeys(transaction, aliases) {
+  return {
+    ...transaction,
+    items: transaction.items.map((item) => ({
+      ...item,
+      playerKey: canonicalPlayerKey(item.playerKey, aliases),
+    })),
   };
 }
 
@@ -572,6 +620,70 @@ function getPlayerSeason(players, year, player) {
     season.latestNflTeam = player.pro_team;
   }
   return season;
+}
+
+function mergeCounts(target, source) {
+  source.forEach((count, value) => {
+    target.set(value, (target.get(value) || 0) + count);
+  });
+}
+
+function mergePlayerSeason(target, source) {
+  if (source.name && target.name === "Unknown player") {
+    target.name = source.name;
+  }
+  target.photoUrl = target.photoUrl || source.photoUrl;
+  target.latestNflTeam = target.latestNflTeam || source.latestNflTeam;
+  if (!target.fantasyTeamKey && source.fantasyTeamKey) {
+    target.fantasyTeamKey = source.fantasyTeamKey;
+    target.fantasyTeamName = source.fantasyTeamName;
+  }
+  mergeCounts(target.positionCounts, source.positionCounts);
+  mergeCounts(target.nflTeamCounts, source.nflTeamCounts);
+  mergeCounts(target.lineupTeamCounts, source.lineupTeamCounts);
+  source.lineupTeamNames.forEach((name, key) => {
+    if (!target.lineupTeamNames.has(key)) {
+      target.lineupTeamNames.set(key, name);
+    }
+  });
+  if (source.rosterTotalPoints !== undefined) {
+    target.rosterTotalPoints =
+      target.rosterTotalPoints === undefined
+        ? source.rosterTotalPoints
+        : Math.max(target.rosterTotalPoints, source.rosterTotalPoints);
+  }
+  target.draftValue ??= source.draftValue;
+  target.lineupPoints += source.lineupPoints;
+  source.weeks.forEach((week) => target.weeks.add(week));
+  target.starts += source.starts;
+  target.appearances += source.appearances;
+}
+
+function canonicalizePlayerSeasons(players) {
+  const idRowsByName = new Map();
+  players.forEach((season) => {
+    if (!season.playerId) {
+      return;
+    }
+    const nameKey = slugify(season.name);
+    idRowsByName.set(nameKey, [...(idRowsByName.get(nameKey) || []), season]);
+  });
+
+  const aliases = new Map();
+  players.forEach((season) => {
+    if (season.playerId || !season.key.startsWith("name-")) {
+      return;
+    }
+    const candidates = idRowsByName.get(slugify(season.name)) || [];
+    if (candidates.length !== 1) {
+      return;
+    }
+    const target = candidates[0];
+    mergePlayerSeason(target, season);
+    aliases.set(season.key, target.key);
+    players.delete(season.key);
+  });
+  return aliases;
 }
 
 function recordRosterPlayer(players, year, player, team) {
@@ -892,6 +1004,7 @@ async function buildSeason(year) {
   teams = teams.map(localizeLogo);
   standings = standings.map(localizeLogo);
   const weeks = [];
+  const weekPayloads = [];
   const searchRows = [];
   const names = teamNameLookup(teams);
   const playerSeasons = new Map();
@@ -925,8 +1038,7 @@ async function buildSeason(year) {
       boxScores,
       transactions,
     };
-    const weekFile = `seasons/${year}/weeks/${String(week.week).padStart(2, "0")}.json`;
-    await writeJson(weekFile, weekPayload);
+    weekPayloads.push(weekPayload);
 
     weeks.push({
       ...weekSummary({ ...week, year }),
@@ -961,37 +1073,6 @@ async function buildSeason(year) {
       );
     });
 
-    transactions.forEach((transaction) => {
-      const transactionItems = transaction.items.length ? transaction.items : [undefined];
-      const transactionTeamName = teamName(names, transaction.teamKey);
-
-      transactionItems.forEach((item, itemIndex) => {
-        const actionType = transactionActionType(transaction, item);
-        searchRows.push(
-          searchRow(
-            `${transaction.transactionKey}-i${String(itemIndex + 1).padStart(2, "0")}`,
-            "transaction",
-            year,
-            item?.player || actionType,
-            transactionSearchSummary(transaction),
-            `/season/${year}/week/${String(week.week).padStart(2, "0")}`,
-            {
-              week: week.week,
-              teamKey: transaction.teamKey,
-              teamName: transactionTeamName,
-              playerKey: item?.playerKey,
-              playerName: item?.player,
-              transactionType: transaction.type,
-              transactionItemType: item?.type,
-              transactionActionType: actionType,
-              transactionStatus: displayTransactionStatus(transaction.status),
-              bidAmount: transaction.bidAmount,
-            },
-          ),
-        );
-      });
-    });
-
     (week.transactions?.data || []).forEach((transaction) => {
       (transaction.items || []).forEach((item) =>
         recordTransactionPlayer(playerSeasons, year, item),
@@ -1014,6 +1095,58 @@ async function buildSeason(year) {
         }),
       );
     });
+  }
+
+  let draft = compactDraft(year, source.draft || []);
+  (source.draft || []).forEach((pick) => recordDraftPlayer(playerSeasons, year, pick));
+  const playerKeyAliases = canonicalizePlayerSeasons(playerSeasons);
+  teams = teams.map((team) => remapTeamRosterPlayerKeys(team, playerKeyAliases));
+  standings = standings.map((team) => remapTeamRosterPlayerKeys(team, playerKeyAliases));
+  draft = remapDraftPlayerKeys(draft, playerKeyAliases);
+
+  for (const weekPayload of weekPayloads) {
+    const boxScores = weekPayload.boxScores.map((boxScore) =>
+      remapBoxScorePlayerKeys(boxScore, playerKeyAliases),
+    );
+    const transactions = weekPayload.transactions.map((transaction) =>
+      remapTransactionPlayerKeys(transaction, playerKeyAliases),
+    );
+    const weekFile = `seasons/${year}/weeks/${String(weekPayload.week).padStart(
+      2,
+      "0",
+    )}.json`;
+    await writeJson(weekFile, { ...weekPayload, boxScores, transactions });
+
+    transactions.forEach((transaction) => {
+      const transactionItems = transaction.items.length ? transaction.items : [undefined];
+      const transactionTeamName = teamName(names, transaction.teamKey);
+
+      transactionItems.forEach((item, itemIndex) => {
+        const actionType = transactionActionType(transaction, item);
+        searchRows.push(
+          searchRow(
+            `${transaction.transactionKey}-i${String(itemIndex + 1).padStart(2, "0")}`,
+            "transaction",
+            year,
+            item?.player || actionType,
+            transactionSearchSummary(transaction),
+            `/season/${year}/week/${String(weekPayload.week).padStart(2, "0")}`,
+            {
+              week: weekPayload.week,
+              teamKey: transaction.teamKey,
+              teamName: transactionTeamName,
+              playerKey: item?.playerKey,
+              playerName: item?.player,
+              transactionType: transaction.type,
+              transactionItemType: item?.type,
+              transactionActionType: actionType,
+              transactionStatus: displayTransactionStatus(transaction.status),
+              bidAmount: transaction.bidAmount,
+            },
+          ),
+        );
+      });
+    });
 
     boxScores.forEach((boxScore) => {
       [...boxScore.homeLineup, ...boxScore.awayLineup].forEach((player, index) => {
@@ -1024,18 +1157,16 @@ async function buildSeason(year) {
             year,
             player.name,
             `${player.position || "Player"} scored ${player.points ?? "-"} in Week ${
-              week.week
+              weekPayload.week
             }`,
             `/player/${player.key}`,
-            { week: week.week, playerKey: player.key, playerName: player.name },
+            { week: weekPayload.week, playerKey: player.key, playerName: player.name },
           ),
         );
       });
     });
   }
 
-  const draft = compactDraft(year, source.draft || []);
-  (source.draft || []).forEach((pick) => recordDraftPlayer(playerSeasons, year, pick));
   draft.forEach((pick) => {
     searchRows.push(
       searchRow(

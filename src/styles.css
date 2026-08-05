@@ -1203,6 +1203,18 @@ select {
   font-variant-numeric: tabular-nums;
 }
 
+.pvoaNumber {
+  font-weight: 700;
+}
+
+.pvoaNumber.positive {
+  color: #14623e;
+}
+
+.pvoaNumber.negative {
+  color: #8a1f1f;
+}
+
 .contentGrid {
   display: grid;
   grid-template-columns: minmax(280px, 0.9fr) minmax(320px, 1.4fr);
