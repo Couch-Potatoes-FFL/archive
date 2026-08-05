@@ -191,7 +191,7 @@ export type PlayerSeasonReport = {
   replacementPoints?: number;
   avgStarterPoints?: number;
   playerRank: number;
-  positionRank: number;
+  positionRank?: number;
   gamesPlayed: number;
   starts: number;
   appearances: number;

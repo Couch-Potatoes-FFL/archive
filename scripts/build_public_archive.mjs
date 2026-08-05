@@ -41,9 +41,61 @@ const FLEX_STARTER_SLOTS = Object.freeze({
   "RB/WR/TE": ["RB", "WR", "TE"],
   OP: ["QB", "RB", "WR", "TE"],
 });
+const FREE_AGENT_TEAM_NAME = "Free Agent";
+const ESPN_POSITION_LABELS = Object.freeze({
+  1: "QB",
+  2: "RB",
+  3: "WR",
+  4: "TE",
+  5: "K",
+  16: "D/ST",
+});
+const ESPN_PRO_TEAM_LABELS = Object.freeze({
+  0: "None",
+  1: "ATL",
+  2: "BUF",
+  3: "CHI",
+  4: "CIN",
+  5: "CLE",
+  6: "DAL",
+  7: "DEN",
+  8: "DET",
+  9: "GB",
+  10: "TEN",
+  11: "IND",
+  12: "KC",
+  13: "LV",
+  14: "LAR",
+  15: "MIA",
+  16: "MIN",
+  17: "NE",
+  18: "NO",
+  19: "NYG",
+  20: "NYJ",
+  21: "PHI",
+  22: "ARI",
+  23: "PIT",
+  24: "LAC",
+  26: "SEA",
+  27: "TB",
+  28: "WSH",
+  29: "CAR",
+  30: "JAX",
+  33: "BAL",
+  34: "HOU",
+});
 
 function readJson(filePath) {
   return readFile(filePath, "utf8").then((text) => JSON.parse(text));
+}
+
+function readOptionalJson(filePath) {
+  return readJson(filePath).catch((error) => {
+    if (error.code === "ENOENT") {
+      return undefined;
+    }
+    throw error;
+  });
 }
 
 function loadDotenv(filePath) {
@@ -190,6 +242,24 @@ function publicPlayer(player, { includeTotalPoints = false } = {}) {
     row.totalPoints = finiteNumber(player.total_points);
   }
   return row;
+}
+
+function rawMatchupRosterPlayer(entry) {
+  const player = entry?.playerPoolEntry?.player;
+  if (!player) {
+    return undefined;
+  }
+  const position = ESPN_POSITION_LABELS[player.defaultPositionId];
+  return {
+    player_id: entry.playerId ?? entry.playerPoolEntry?.id ?? player.id,
+    name: player.fullName || [player.firstName, player.lastName].filter(Boolean).join(" "),
+    position,
+    lineup_slot: position,
+    slot_position: position,
+    pro_team: ESPN_PRO_TEAM_LABELS[player.proTeamId],
+    points: entry.playerPoolEntry?.appliedStatTotal,
+    injury_status: entry.injuryStatus || player.injuryStatus,
+  };
 }
 
 function espnCookieHeader() {
@@ -575,7 +645,9 @@ function playerSeasonSeed(year, key, player) {
     photoUrl: playerPhotoUrl(player),
     latestNflTeam: undefined,
     fantasyTeamKey: undefined,
-    fantasyTeamName: "FA",
+    fantasyTeamName: FREE_AGENT_TEAM_NAME,
+    acquisitionTeamCounts: new Map(),
+    acquisitionTeamNames: new Map(),
     lineupTeamCounts: new Map(),
     lineupTeamNames: new Map(),
     rosterTotalPoints: undefined,
@@ -640,7 +712,13 @@ function mergePlayerSeason(target, source) {
   }
   mergeCounts(target.positionCounts, source.positionCounts);
   mergeCounts(target.nflTeamCounts, source.nflTeamCounts);
+  mergeCounts(target.acquisitionTeamCounts, source.acquisitionTeamCounts);
   mergeCounts(target.lineupTeamCounts, source.lineupTeamCounts);
+  source.acquisitionTeamNames.forEach((name, key) => {
+    if (!target.acquisitionTeamNames.has(key)) {
+      target.acquisitionTeamNames.set(key, name);
+    }
+  });
   source.lineupTeamNames.forEach((name, key) => {
     if (!target.lineupTeamNames.has(key)) {
       target.lineupTeamNames.set(key, name);
@@ -686,6 +764,14 @@ function canonicalizePlayerSeasons(players) {
   return aliases;
 }
 
+function recordAcquisitionTeam(season, teamKeyValue, teamNameValue) {
+  if (!teamKeyValue) {
+    return;
+  }
+  incrementCount(season.acquisitionTeamCounts, teamKeyValue);
+  season.acquisitionTeamNames.set(teamKeyValue, teamNameValue || teamKeyValue);
+}
+
 function recordRosterPlayer(players, year, player, team) {
   const season = getPlayerSeason(players, year, player);
   season.fantasyTeamKey = team.key;
@@ -716,22 +802,27 @@ function recordLineupPlayer(players, year, week, player, team) {
   }
 }
 
-function recordDraftPlayer(players, year, pick) {
+function recordDraftPlayer(players, year, pick, names) {
   const season = getPlayerSeason(players, year, {
     player_id: pick.playerId,
     name: pick.playerName || pick.player?.name || "Unknown player",
   });
-  season.draftValue = optionalFiniteNumber(pick.bid_amount);
+  season.draftValue = optionalFiniteNumber(pick.bidAmount ?? pick.bid_amount);
+  recordAcquisitionTeam(season, pick.teamKey, teamName(names, pick.teamKey));
 }
 
-function recordTransactionPlayer(players, year, item) {
+function recordTransactionPlayer(players, year, transaction, item, names) {
   if (!item?.player) {
     return;
   }
-  getPlayerSeason(players, year, {
+  const season = getPlayerSeason(players, year, {
     player_id: item.player_id,
     name: item.player,
   });
+  if (item.type === "ADD") {
+    const transactionTeamKey = teamKey(year, transaction.team_id);
+    recordAcquisitionTeam(season, transactionTeamKey, teamName(names, transactionTeamKey));
+  }
 }
 
 function finalizePlayerSeasons(players) {
@@ -739,7 +830,8 @@ function finalizePlayerSeasons(players) {
     const position = mostCommonValue(season.positionCounts);
     const nflTeam = season.latestNflTeam || mostCommonValue(season.nflTeamCounts);
     const lineupTeamKey = mostCommonValue(season.lineupTeamCounts);
-    const fantasyTeamKey = season.fantasyTeamKey ?? lineupTeamKey;
+    const acquisitionTeamKey = mostCommonValue(season.acquisitionTeamCounts);
+    const fantasyTeamKey = season.fantasyTeamKey ?? lineupTeamKey ?? acquisitionTeamKey;
     const fantasyPoints = Math.max(season.rosterTotalPoints ?? 0, season.lineupPoints);
     return {
       key: season.key,
@@ -751,11 +843,11 @@ function finalizePlayerSeasons(players) {
       nflTeam,
       fantasyTeamKey,
       fantasyTeamName:
-        season.fantasyTeamName !== "FA"
+        season.fantasyTeamName !== FREE_AGENT_TEAM_NAME
           ? season.fantasyTeamName
           : lineupTeamKey
             ? season.lineupTeamNames.get(lineupTeamKey)
-            : "FA",
+            : FREE_AGENT_TEAM_NAME,
       fantasyPoints,
       draftValue: season.draftValue,
       gamesPlayed: season.weeks.size,
@@ -774,8 +866,10 @@ function finalizePlayerSeasons(players) {
 
   const byPosition = new Map();
   rows.forEach((row) => {
-    const position = row.position || "UNK";
-    byPosition.set(position, [...(byPosition.get(position) || []), row]);
+    if (!row.position) {
+      return;
+    }
+    byPosition.set(row.position, [...(byPosition.get(row.position) || []), row]);
   });
   byPosition.forEach((positionRows) => {
     [...positionRows]
@@ -1075,7 +1169,7 @@ async function buildSeason(year) {
 
     (week.transactions?.data || []).forEach((transaction) => {
       (transaction.items || []).forEach((item) =>
-        recordTransactionPlayer(playerSeasons, year, item),
+        recordTransactionPlayer(playerSeasons, year, transaction, item, names),
       );
     });
 
@@ -1095,10 +1189,37 @@ async function buildSeason(year) {
         }),
       );
     });
+
+    if (!(week.box_scores?.data || []).length) {
+      const rawWeekPath = path.join(
+        sourceDir,
+        "seasons",
+        String(year),
+        "weeks",
+        `${String(week.week).padStart(2, "0")}.json`,
+      );
+      const rawWeek = await readOptionalJson(rawWeekPath);
+      (rawWeek?.schedule || []).forEach((matchup) => {
+        ["home", "away"].forEach((side) => {
+          const team = matchup[side];
+          const rawTeamKey = teamKey(year, team?.teamId);
+          (team?.rosterForMatchupPeriod?.entries || []).forEach((entry) => {
+            const player = rawMatchupRosterPlayer(entry);
+            if (!player) {
+              return;
+            }
+            recordLineupPlayer(playerSeasons, year, week.week, player, {
+              key: rawTeamKey,
+              name: teamName(names, rawTeamKey),
+            });
+          });
+        });
+      });
+    }
   }
 
   let draft = compactDraft(year, source.draft || []);
-  (source.draft || []).forEach((pick) => recordDraftPlayer(playerSeasons, year, pick));
+  draft.forEach((pick) => recordDraftPlayer(playerSeasons, year, pick, names));
   const playerKeyAliases = canonicalizePlayerSeasons(playerSeasons);
   teams = teams.map((team) => remapTeamRosterPlayerKeys(team, playerKeyAliases));
   standings = standings.map((team) => remapTeamRosterPlayerKeys(team, playerKeyAliases));

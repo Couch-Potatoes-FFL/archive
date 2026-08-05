@@ -532,8 +532,7 @@ const playerSeasonColumns: ColumnDef<PlayerSeasonReport>[] = [
   {
     header: "Position Rank",
     accessorKey: "positionRank",
-    cell: ({ row }) =>
-      `#${row.original.positionRank}${row.original.position ? ` ${row.original.position}` : ""}`,
+    cell: ({ row }) => formatPositionRank(row.original),
   },
   {
     header: "Starts",
@@ -2239,7 +2238,7 @@ function PlayerYearResults({
                   <span className="playerRankBadge">#{season.playerRank}</span>
                   <strong>{player.name}</strong>
                 </span>
-                <small>{season.fantasyTeamName || "FA"}</small>
+                <small>{season.fantasyTeamName || "Free Agent"}</small>
               </span>
               <span className="playerResultStats">
                 <strong>{formatNumber(season.fantasyPoints, 1)}</strong>
@@ -2567,12 +2566,15 @@ function PlayerPage() {
   const bestSeason = player.bestSeason ?? [...seasons].sort(
     (left, right) => right.fantasyPoints - left.fantasyPoints,
   )[0];
-  const bestPositionRankSeason = [...seasons].sort(
-    (left, right) =>
-      left.positionRank - right.positionRank ||
-      right.fantasyPoints - left.fantasyPoints ||
-      right.year - left.year,
-  )[0];
+  const bestPositionRankSeason = [...seasons]
+    .filter((season) => typeof season.positionRank === "number")
+    .sort(
+      (left, right) =>
+        (left.positionRank ?? Number.MAX_SAFE_INTEGER) -
+          (right.positionRank ?? Number.MAX_SAFE_INTEGER) ||
+        right.fantasyPoints - left.fantasyPoints ||
+        right.year - left.year,
+    )[0];
 
   return (
     <>
@@ -2826,8 +2828,10 @@ function PlayerPointChart({ seasons }: { seasons: PlayerSeasonReport[] }) {
                 typeof season.avgStarterPoints === "number"
                   ? `, average starter ${formatNumber(season.avgStarterPoints, 1)}`
                   : ""
-              }, #${season.playerRank} overall, #${season.positionRank} ${
-                season.position ?? "position"
+              }, #${season.playerRank} overall${
+                typeof season.positionRank === "number"
+                  ? `, ${formatPositionRank(season)}`
+                  : ""
               }`}
               onMouseEnter={() => setActiveTooltipYear(season.year)}
               onMouseLeave={() => setActiveTooltipYear(undefined)}
@@ -2874,8 +2878,10 @@ function ChartTooltip({
         {season.year}: {formatNumber(season.fantasyPoints, 1)} points
       </text>
       <text x="12" y="39">
-        #{season.playerRank} overall, #{season.positionRank}{" "}
-        {season.position ?? "position"}
+        #{season.playerRank} overall
+        {typeof season.positionRank === "number"
+          ? `, ${formatPositionRank(season)}`
+          : ""}
       </text>
       {typeof season.replacementPoints === "number" ? (
         <text x="12" y="59">
@@ -2997,7 +3003,7 @@ function PlayerSearchMobileCard({ row }: { row: PlayerSearchResult }) {
       </Link>
       <MobileFieldGrid
         items={[
-          { label: "Rank", value: `#${row.season.positionRank}` },
+          { label: "Rank", value: formatPositionRank(row.season) },
           {
             label: "Points",
             value: formatNumber(row.season.fantasyPoints, 1),
@@ -3039,9 +3045,7 @@ function PlayerSeasonMobileCard({
           },
           {
             label: "Position Rank",
-            value: `#${season.positionRank}${
-              season.position ? ` ${season.position}` : ""
-            }`,
+            value: formatPositionRank(season),
           },
           { label: "Fantasy Team", value: <FantasyTeamLink season={season} /> },
           { label: "NFL Team", value: season.nflTeam ?? "-" },
@@ -3053,9 +3057,13 @@ function PlayerSeasonMobileCard({
 }
 
 function FantasyTeamLink({ season }: { season: PlayerSeasonReport }) {
-  const label = season.fantasyTeamName || "FA";
+  const label = season.fantasyTeamName || "Free Agent";
 
-  if (!season.fantasyTeamName) {
+  if (season.fantasyTeamName === "Free Agent" && season.fantasyTeamKey) {
+    return <Link to={teamPageHref(season.year, season.fantasyTeamKey)}>{label}</Link>;
+  }
+
+  if (!season.fantasyTeamName || season.fantasyTeamName === "Free Agent") {
     return label;
   }
 
@@ -5112,7 +5120,7 @@ function buildLeagueRecords(
       seasonPlayerRecords.push({
         value: season.fantasyPoints,
         subtitle: playerAwardSubtitle(player.name, season.position),
-        meta: `${season.year} · ${season.fantasyTeamName || "FA"} · ${
+        meta: `${season.year} · ${season.fantasyTeamName || "Free Agent"} · ${
           season.appearances
         } ${season.appearances === 1 ? "appearance" : "appearances"}`,
         href: `/player/${player.key}?fromYear=${season.year}`,
@@ -5516,7 +5524,7 @@ function positionRankMap(players: PublicPlayer[], year: number): Map<string, num
 
   players.forEach((player) => {
     const season = player.seasons.find((row) => row.year === year);
-    if (!season) {
+    if (!season || typeof season.positionRank !== "number") {
       return;
     }
     ranks.set(player.key, season.positionRank);
@@ -5900,6 +5908,12 @@ function seasonPvoa(season: PlayerSeasonReport): number | undefined {
 function formatPvoa(value: number | undefined): string {
   const formatted = formatNumber(value, 1);
   return typeof value === "number" && value > 0 ? `+${formatted}` : formatted;
+}
+
+function formatPositionRank(season: PlayerSeasonReport): string {
+  return typeof season.positionRank === "number"
+    ? `#${season.positionRank}${season.position ? ` ${season.position}` : ""}`
+    : "-";
 }
 
 function pvoaClassName(value: number | undefined): string {
