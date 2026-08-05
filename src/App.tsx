@@ -395,13 +395,35 @@ const playerSearchColumns: ColumnDef<PlayerSearchResult>[] = [
     ),
   },
   {
-    header: "Rank",
-    id: "rank",
-    accessorFn: (row) => row.season.positionRank,
-    cell: ({ row }) => `#${row.original.season.positionRank}`,
+    header: "NFL Team",
+    id: "nflTeam",
+    accessorFn: (row) => row.season.nflTeam ?? "",
+    cell: ({ row }) => row.original.season.nflTeam ?? "-",
   },
   {
-    header: "Points",
+    header: "Fantasy Team",
+    id: "fantasyTeam",
+    accessorFn: (row) => row.season.fantasyTeamName,
+    cell: ({ row }) => <FantasyTeamLink season={row.original.season} />,
+  },
+  {
+    header: "Draft Value",
+    id: "draftValue",
+    accessorFn: (row) => row.season.draftValue ?? 0,
+    cell: ({ row }) => formatDraftValue(row.original.season.draftValue),
+  },
+  {
+    header: "P:D",
+    id: "pointsPerDollar",
+    accessorFn: (row) => pointsPerDollar(row.season) ?? 0,
+    cell: ({ row }) => (
+      <span className="numberText">
+        {formatNumber(pointsPerDollar(row.original.season), 1)}
+      </span>
+    ),
+  },
+  {
+    header: "Fantasy Points",
     id: "points",
     accessorFn: (row) => row.season.fantasyPoints,
     cell: ({ row }) => (
@@ -409,6 +431,32 @@ const playerSearchColumns: ColumnDef<PlayerSearchResult>[] = [
         {formatNumber(row.original.season.fantasyPoints, 1)}
       </span>
     ),
+  },
+  {
+    header: "PVOA",
+    id: "pvoa",
+    accessorFn: (row) => seasonPvoa(row.season),
+    cell: ({ row }) => {
+      const pvoa = seasonPvoa(row.original.season);
+      return <span className={pvoaClassName(pvoa)}>{formatPvoa(pvoa)}</span>;
+    },
+  },
+  {
+    header: "Player Rank",
+    id: "playerRank",
+    accessorFn: (row) => row.season.playerRank,
+    cell: ({ row }) => `#${row.original.season.playerRank}`,
+  },
+  {
+    header: "Position Rank",
+    id: "positionRank",
+    accessorFn: (row) => row.season.positionRank,
+    cell: ({ row }) => formatPositionRank(row.original.season),
+  },
+  {
+    header: "Starts",
+    id: "starts",
+    accessorFn: (row) => row.season.starts,
   },
 ];
 
@@ -498,13 +546,14 @@ const playerSeasonColumns: ColumnDef<PlayerSeasonReport>[] = [
   },
   {
     header: "Draft Value",
-    accessorKey: "draftValue",
-    cell: ({ row }) => formatAuctionValue(row.original.draftValue),
+    id: "draftValue",
+    accessorFn: (season) => season.draftValue ?? 0,
+    cell: ({ row }) => formatDraftValue(row.original.draftValue),
   },
   {
     header: "P:D",
     id: "pointsPerDollar",
-    accessorFn: (season) => pointsPerDollar(season),
+    accessorFn: (season) => pointsPerDollar(season) ?? 0,
     cell: ({ row }) => {
       const ratio = pointsPerDollar(row.original);
       return <span className="numberText">{formatNumber(ratio, 1)}</span>;
@@ -2842,6 +2891,8 @@ function SearchResultMobileCard({ row }: { row: SearchRow }) {
 }
 
 function PlayerSearchMobileCard({ row }: { row: PlayerSearchResult }) {
+  const pvoa = seasonPvoa(row.season);
+
   return (
     <article className="mobileDataCard">
       <div className="mobileCardHeader">
@@ -2856,11 +2907,27 @@ function PlayerSearchMobileCard({ row }: { row: PlayerSearchResult }) {
       </Link>
       <MobileFieldGrid
         items={[
-          { label: "Rank", value: formatPositionRank(row.season) },
+          { label: "NFL Team", value: row.season.nflTeam ?? "-" },
+          { label: "Fantasy Team", value: <FantasyTeamLink season={row.season} /> },
           {
-            label: "Points",
+            label: "Draft Value",
+            value: formatDraftValue(row.season.draftValue),
+          },
+          {
+            label: "P:D",
+            value: formatNumber(pointsPerDollar(row.season), 1),
+          },
+          {
+            label: "Fantasy Points",
             value: formatNumber(row.season.fantasyPoints, 1),
           },
+          {
+            label: "PVOA",
+            value: <span className={pvoaClassName(pvoa)}>{formatPvoa(pvoa)}</span>,
+          },
+          { label: "Player Rank", value: `#${row.season.playerRank}` },
+          { label: "Position Rank", value: formatPositionRank(row.season) },
+          { label: "Starts", value: row.season.starts },
         ]}
       />
     </article>
@@ -2886,7 +2953,7 @@ function PlayerSeasonMobileCard({
         items={[
           {
             label: "Draft Value",
-            value: formatAuctionValue(season.draftValue),
+            value: formatDraftValue(season.draftValue),
           },
           {
             label: "P:D",
@@ -5753,6 +5820,12 @@ function keeperColumnsForView(showsYear: boolean): ColumnDef<KeeperRow>[] {
 function formatAuctionValue(value: number | undefined): string {
   return typeof value === "number" && Number.isFinite(value)
     ? `$${formatNumber(value)}`
+    : "-";
+}
+
+function formatDraftValue(value: number | undefined): string {
+  return typeof value === "number" && Number.isFinite(value) && value > 0
+    ? formatAuctionValue(value)
     : "-";
 }
 

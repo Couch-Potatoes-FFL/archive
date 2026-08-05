@@ -64,6 +64,7 @@ export function SimpleTable<T>({
     onSortingChange: setSorting,
     onPaginationChange: setPagination,
     enableSorting: sortable,
+    enableSortingRemoval: false,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: sortable ? getSortedRowModel() : undefined,
     getFilteredRowModel: getFilteredRowModel(),

@@ -268,6 +268,85 @@ function espnCookieHeader() {
   return swid && espnS2 ? `SWID=${swid}; espn_s2=${espnS2}` : undefined;
 }
 
+function chunk(values, size) {
+  const chunks = [];
+  for (let index = 0; index < values.length; index += size) {
+    chunks.push(values.slice(index, index + size));
+  }
+  return chunks;
+}
+
+function actualSeasonStat(player, year) {
+  return (player?.stats || []).find(
+    (stat) =>
+      Number(stat.seasonId) === Number(year) &&
+      Number(stat.statSourceId) === 0 &&
+      Number(stat.statSplitTypeId) === 0 &&
+      Number(stat.scoringPeriodId) === 0,
+  );
+}
+
+function playerPoolBackfill(entry, year) {
+  const player = entry?.player;
+  if (!player) {
+    return undefined;
+  }
+
+  const actualStat = actualSeasonStat(player, year);
+  return {
+    playerId: entry.id ?? player.id,
+    name: player.fullName || [player.firstName, player.lastName].filter(Boolean).join(" "),
+    position: ESPN_POSITION_LABELS[player.defaultPositionId],
+    nflTeam: ESPN_PRO_TEAM_LABELS[player.proTeamId],
+    photoUrl: espnPlayerPhotoUrl(entry.id ?? player.id),
+    fantasyPoints: optionalFiniteNumber(actualStat?.appliedTotal),
+  };
+}
+
+async function fetchPlayerPoolBackfills(year, leagueId, playerIds) {
+  const cookie = espnCookieHeader();
+  if (!cookie || !leagueId || !playerIds.length || Number(year) < 2018) {
+    return new Map();
+  }
+
+  const rows = new Map();
+  const url = `https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/${year}/segments/0/leagues/${leagueId}?view=kona_player_info`;
+
+  for (const playerIdChunk of chunk([...new Set(playerIds)], 50)) {
+    const response = await fetch(url, {
+      headers: {
+        Accept: "application/json",
+        Cookie: cookie,
+        "User-Agent": "cpffl-public-archive/1.0",
+        "x-fantasy-filter": JSON.stringify({
+          players: {
+            filterIds: { value: playerIdChunk },
+            limit: playerIdChunk.length,
+            sortPercOwned: { sortAsc: false, sortPriority: 1 },
+          },
+        }),
+      },
+    });
+
+    if (!response.ok) {
+      console.warn(
+        `Unable to backfill ${year} player stats: ${response.status} ${response.statusText}`,
+      );
+      continue;
+    }
+
+    const payload = await response.json();
+    (payload.players || []).forEach((entry) => {
+      const row = playerPoolBackfill(entry, year);
+      if (row?.playerId) {
+        rows.set(Number(row.playerId), row);
+      }
+    });
+  }
+
+  return rows;
+}
+
 function shouldCacheLogo(logoUrl) {
   return typeof logoUrl === "string" && logoUrl.includes("mystique-api.fantasy.espn.com");
 }
@@ -764,6 +843,48 @@ function canonicalizePlayerSeasons(players) {
   return aliases;
 }
 
+async function backfillPlayerSeasonStats(year, leagueId, players) {
+  const candidates = [...players.values()].filter(
+    (season) =>
+      Number(season.playerId) > 0 &&
+      season.rosterTotalPoints === undefined &&
+      (season.draftValue !== undefined || season.lineupPoints > 0),
+  );
+
+  if (!candidates.length) {
+    return;
+  }
+
+  const backfills = await fetchPlayerPoolBackfills(
+    year,
+    leagueId,
+    candidates.map((season) => Number(season.playerId)),
+  );
+
+  candidates.forEach((season) => {
+    const backfill = backfills.get(Number(season.playerId));
+    if (!backfill) {
+      return;
+    }
+
+    if (backfill.name && season.name === "Unknown player") {
+      season.name = backfill.name;
+    }
+    season.photoUrl = season.photoUrl || backfill.photoUrl;
+    incrementCount(season.positionCounts, backfill.position);
+    incrementCount(season.nflTeamCounts, backfill.nflTeam);
+    if (backfill.nflTeam && backfill.nflTeam !== "None") {
+      season.latestNflTeam = backfill.nflTeam;
+    }
+    if (backfill.fantasyPoints !== undefined) {
+      season.rosterTotalPoints =
+        season.rosterTotalPoints === undefined
+          ? backfill.fantasyPoints
+          : Math.max(season.rosterTotalPoints, backfill.fantasyPoints);
+    }
+  });
+}
+
 function recordAcquisitionTeam(season, teamKeyValue, teamNameValue) {
   if (!teamKeyValue) {
     return;
@@ -1220,6 +1341,11 @@ async function buildSeason(year) {
 
   let draft = compactDraft(year, source.draft || []);
   draft.forEach((pick) => recordDraftPlayer(playerSeasons, year, pick, names));
+  await backfillPlayerSeasonStats(
+    year,
+    source.league_id || process.env.ESPN_LEAGUE_ID,
+    playerSeasons,
+  );
   const playerKeyAliases = canonicalizePlayerSeasons(playerSeasons);
   teams = teams.map((team) => remapTeamRosterPlayerKeys(team, playerKeyAliases));
   standings = standings.map((team) => remapTeamRosterPlayerKeys(team, playerKeyAliases));
