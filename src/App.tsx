@@ -1990,7 +1990,7 @@ function PlayerBrowserPage() {
             >
               {hasPendingFilters
                 ? "Filter changes pending"
-                : `${formatNumber(playerRows.length)} matching player seasons`}
+                : `${formatNumber(playerRows.length)} matching players`}
             </span>
           </div>
           <SimpleTable
