@@ -2144,9 +2144,10 @@ function PlayerYearResults({
               </span>
               <span className="playerResultStats">
                 <strong>{formatNumber(season.fantasyPoints, 1)}</strong>
-                <small>
-                  #{season.positionRank} {season.position ?? "pos"}
-                </small>
+                <small>{formatPositionRank(season)}</small>
+                {typeof season.draftValue === "number" && season.draftValue > 0 ? (
+                  <small>{formatDraftValue(season.draftValue)}</small>
+                ) : null}
               </span>
             </Link>
           ))}
