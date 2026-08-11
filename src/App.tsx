@@ -1217,8 +1217,35 @@ function KeepersPage() {
   }
 
   function clearFilters() {
-    setKeeperFilters({ query: "", year: "all", position: "" });
-    setSearchParams({});
+    const params = new URLSearchParams();
+    if (selectedYear !== "all") {
+      params.set("year", selectedYear);
+    }
+    if (selectedPosition) {
+      params.set("pos", selectedPosition);
+    }
+    setKeeperFilters({ query: "", year: selectedYear, position: selectedPosition });
+    setSearchParams(params);
+  }
+
+  function applyYearFilter(yearValue: string) {
+    const query = keeperFilters.query.trim();
+    const year = normalizeKeeperYear(yearValue, years);
+    const position = normalizePositionFilter(keeperFilters.position);
+    const params = new URLSearchParams();
+
+    if (query) {
+      params.set("q", query);
+    }
+    if (year !== "all") {
+      params.set("year", year);
+    }
+    if (position) {
+      params.set("pos", position);
+    }
+
+    setKeeperFilters({ query, year, position });
+    setSearchParams(params);
   }
 
   function applyPositionFilter(position: PositionFilter | "") {
@@ -1274,12 +1301,7 @@ function KeepersPage() {
           <select
             aria-label="Filter keepers by season"
             value={keeperFilters.year}
-            onChange={(event) =>
-              setKeeperFilters((current) => ({
-                ...current,
-                year: event.target.value,
-              }))
-            }
+            onChange={(event) => applyYearFilter(event.target.value)}
           >
             <option value="all">All seasons</option>
             {years.map((seasonYear) => (
@@ -1444,9 +1466,17 @@ function BrowserPage() {
   }
 
   function clearFilters() {
-    setDraftFilters(defaultFilters);
-    setAppliedFilters(defaultFilters);
-    setSearchParams({});
+    const nextFilters = clearedBrowserFilters(appliedFilters);
+    setDraftFilters(nextFilters);
+    setAppliedFilters(nextFilters);
+    setSearchParams(paramsFromFilters(nextFilters));
+  }
+
+  function applyYearFilter(year: string) {
+    const nextFilters = normalizeFilters({ ...draftFilters, year, view: "all" });
+    setDraftFilters(nextFilters);
+    setAppliedFilters(nextFilters);
+    setSearchParams(paramsFromFilters(nextFilters));
   }
 
   return (
@@ -1481,14 +1511,7 @@ function BrowserPage() {
         <select
           aria-label="Filter by season"
           value={draftFilters.year}
-          onChange={(event) => {
-            const year = event.target.value;
-            setDraftFilters((current) => ({
-              ...current,
-              year,
-              view: year === "all" ? "all" : "picker",
-            }));
-          }}
+          onChange={(event) => applyYearFilter(event.target.value)}
         >
           <option value="all">All seasons</option>
           {years.map((seasonYear) => (
@@ -1662,10 +1685,22 @@ function DraftBrowserPage() {
   }
 
   function clearFilters() {
-    const nextFilters = { ...defaultFilters, type: "draft" as const };
+    const nextFilters = clearedBrowserFilters(appliedFilters, "draft");
     setDraftFilters(nextFilters);
     setAppliedFilters(nextFilters);
-    setSearchParams({});
+    setSearchParams(draftParamsFromFilters(nextFilters));
+  }
+
+  function applyYearFilter(year: string) {
+    const nextFilters = normalizeFilters({
+      ...draftFilters,
+      type: "draft",
+      year,
+      view: "all",
+    });
+    setDraftFilters(nextFilters);
+    setAppliedFilters(nextFilters);
+    setSearchParams(draftParamsFromFilters(nextFilters));
   }
 
   function applyPositionFilter(position: PositionFilter | "") {
@@ -1720,14 +1755,7 @@ function DraftBrowserPage() {
         <select
           aria-label="Filter drafts by season"
           value={draftFilters.year}
-          onChange={(event) => {
-            const year = event.target.value;
-            setDraftFilters((current) => ({
-              ...current,
-              year,
-              view: year === "all" ? "all" : "picker",
-            }));
-          }}
+          onChange={(event) => applyYearFilter(event.target.value)}
         >
           <option value="all">All seasons</option>
           {years.map((seasonYear) => (
@@ -1891,10 +1919,22 @@ function PlayerBrowserPage() {
   }
 
   function clearFilters() {
-    const nextFilters = { ...defaultFilters, type: "player" as const };
+    const nextFilters = clearedBrowserFilters(appliedFilters, "player");
     setDraftFilters(nextFilters);
     setAppliedFilters(nextFilters);
-    setSearchParams({});
+    setSearchParams(playerParamsFromFilters(nextFilters));
+  }
+
+  function applyYearFilter(year: string) {
+    const nextFilters = normalizeFilters({
+      ...draftFilters,
+      type: "player",
+      year,
+      view: "all",
+    });
+    setDraftFilters(nextFilters);
+    setAppliedFilters(nextFilters);
+    setSearchParams(playerParamsFromFilters(nextFilters));
   }
 
   function applyPositionFilter(position: PositionFilter | "") {
@@ -1949,14 +1989,7 @@ function PlayerBrowserPage() {
         <select
           aria-label="Filter players by season"
           value={draftFilters.year}
-          onChange={(event) => {
-            const year = event.target.value;
-            setDraftFilters((current) => ({
-              ...current,
-              year,
-              view: year === "all" ? "all" : "picker",
-            }));
-          }}
+          onChange={(event) => applyYearFilter(event.target.value)}
         >
           <option value="all">All seasons</option>
           {years.map((seasonYear) => (
@@ -6509,6 +6542,17 @@ function normalizeFilters(filters: BrowserFilters): BrowserFilters {
         : "picker";
 
   return { query, type, year, view, position };
+}
+
+function clearedBrowserFilters(
+  filters: BrowserFilters,
+  type = filters.type,
+): BrowserFilters {
+  const view =
+    filters.year === "all" && (filters.query || filters.position)
+      ? "all"
+      : filters.view;
+  return normalizeFilters({ ...filters, query: "", type, view });
 }
 
 function isBrowserFilterType(value: unknown): value is BrowserFilterType {
