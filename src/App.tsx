@@ -1831,7 +1831,7 @@ function PlayerBrowserPage() {
         }
         if (
           !matchesPositionFilter(
-            season.position ?? player.primaryPosition,
+            season.position,
             appliedFilters.position,
           )
         ) {
