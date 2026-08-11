@@ -1681,7 +1681,16 @@ function DraftBrowserPage() {
 
   return (
     <>
-      <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "Drafts" }]} />
+      <Breadcrumbs
+        items={[
+          { label: "Home", to: "/" },
+          { label: "Drafts", to: "/drafts" },
+          appliedFilters.year !== "all" ? { label: appliedFilters.year } : undefined,
+          appliedFilters.year === "all" && appliedFilters.view === "all"
+            ? { label: "All Seasons" }
+            : undefined,
+        ]}
+      />
       <section className="pageIntro">
         <div>
           <p className="eyebrow">Draft auction history</p>
@@ -1904,7 +1913,7 @@ function PlayerBrowserPage() {
       <Breadcrumbs
         items={[
           { label: "Home", to: "/" },
-          { label: "Players" },
+          { label: "Players", to: "/players" },
           appliedFilters.year !== "all" ? { label: appliedFilters.year } : undefined,
           appliedFilters.year === "all" && appliedFilters.view === "all"
             ? { label: "All Seasons" }
