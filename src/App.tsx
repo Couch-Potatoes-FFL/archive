@@ -1838,7 +1838,9 @@ function PlayerBrowserPage() {
           return false;
         }
 
-        return matchesPlayerYearQuery(player, season, normalizedQuery);
+        return appliedFilters.year === "all"
+          ? matchesPlayerQuery(player, normalizedQuery)
+          : matchesPlayerYearQuery(player, season, normalizedQuery);
       })
       .sort(
         (left, right) =>
@@ -6356,7 +6358,7 @@ function playerParamsFromFilters(filters: BrowserFilters): URLSearchParams {
 function searchPlaceholder(filters: BrowserFilters): string {
   if (filters.type === "player") {
     return filters.year === "all"
-      ? "Search players or enter a year"
+      ? "Search players"
       : "Search players, NFL teams, fantasy teams";
   }
   return "Search teams, matchups, transactions";
@@ -6439,6 +6441,10 @@ function matchesPlayerYearQuery(
   ].join(" ");
 
   return includesSearchText(haystack, query);
+}
+
+function matchesPlayerQuery(player: PublicPlayer, query: string): boolean {
+  return includesSearchText(player.name, query);
 }
 
 function filtersFromSearchParams(searchParams: URLSearchParams): BrowserFilters {
