@@ -376,13 +376,13 @@ main {
   gap: 10px;
   width: 100%;
   min-width: 0;
-  color: #07140f;
-  background: var(--gold);
+  color: #fffdf8;
+  background: #155f3c;
 }
 
 .scorebug.hasScore .scorebugTeam.winner {
-  color: #fffdf8;
-  background: #155f3c;
+  color: #07140f;
+  background: var(--gold);
 }
 
 .scorebugTeam small {
