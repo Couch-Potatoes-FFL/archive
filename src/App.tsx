@@ -196,10 +196,10 @@ type ChampionRecordRow = {
   year: number;
   owner: string;
   teamName: string;
-  record: string;
-  pointsFor: number;
-  pointsAgainst: number;
-  href: string;
+  record?: string;
+  pointsFor?: number;
+  pointsAgainst?: number;
+  href?: string;
 };
 
 type LeagueRecords = {
@@ -217,6 +217,16 @@ type BreadcrumbItem = {
   label: string;
   to?: string;
 };
+
+// ESPN retains champion results before this archive's detailed data begins in 2012.
+const HISTORICAL_CHAMPIONS = [
+  { year: 2006, owner: "George B", teamName: "Steve Smith Raptors" },
+  { year: 2007, owner: "George B", teamName: "Brady-Moss The Unstopable Toss" },
+  { year: 2008, owner: "Ethan J", teamName: "Urine the Championship!!!" },
+  { year: 2009, owner: "Mark M", teamName: "The T.No Show" },
+  { year: 2010, owner: "Ethan J", teamName: "Whatchu Talkin Bout Hillis?" },
+  { year: 2011, owner: "Andy M", teamName: "Make it Dwayne On Them Bowes" },
+] as const;
 
 const defaultFilters: BrowserFilters = {
   query: "",
@@ -851,11 +861,7 @@ function RecordsPage() {
       {
         header: "Team",
         accessorKey: "teamName",
-        cell: ({ row }) => (
-          <Link to={row.original.href}>
-            {row.original.teamName} ({row.original.record})
-          </Link>
-        ),
+        cell: ({ row }) => <ChampionTeam row={row.original} />,
       },
       {
         header: "PF",
@@ -974,6 +980,10 @@ function RecordsPage() {
             {formatNumber(records.ownerRows.length)} owners
           </span>
         </div>
+        <p className="pendingNote">
+          Championship totals include the 2006–11 ESPN history; all other owner
+          statistics begin in 2012.
+        </p>
         <SimpleTable
           data={records.ownerRows}
           columns={ownerColumns}
@@ -1014,9 +1024,7 @@ function ChampionMobileCard({ row }: { row: ChampionRecordRow }) {
   return (
     <article className="mobileDataCard compact">
       <div className="keeperMobileTitleRow">
-        <Link className="mobileCardTitle" to={row.href}>
-          {row.teamName} ({row.record})
-        </Link>
+        <ChampionTeam className="mobileCardTitle" row={row} />
         <strong className="keeperMobileValue">{row.year}</strong>
       </div>
       <p className="keeperMobileTeamLine">
@@ -1024,6 +1032,23 @@ function ChampionMobileCard({ row }: { row: ChampionRecordRow }) {
         {formatScore(row.pointsAgainst, false)} PA
       </p>
     </article>
+  );
+}
+
+function ChampionTeam({
+  className,
+  row,
+}: {
+  className?: string;
+  row: ChampionRecordRow;
+}) {
+  const label = `${row.teamName}${row.record ? ` (${row.record})` : ""}`;
+  return row.href ? (
+    <Link className={className} to={row.href}>
+      {label}
+    </Link>
+  ) : (
+    <span className={className}>{label}</span>
   );
 }
 
@@ -5078,6 +5103,14 @@ function buildLeagueRecords(
           : teamPageHref(season.year, player.teamKey),
       });
     });
+  });
+
+  HISTORICAL_CHAMPIONS.forEach((champion) => {
+    const owner = ownerTotals.get(champion.owner);
+    if (owner) {
+      owner.championships += 1;
+    }
+    championRows.push({ id: `historical-${champion.year}`, ...champion });
   });
 
   players.forEach((player) => {
