@@ -3574,6 +3574,33 @@
           "player": "Damien Harris"
         }
       ]
+    },
+    {
+      "transactionKey": "2020-w05-x0048",
+      "teamKey": "2020-t05",
+      "type": "TRADE_PROPOSAL",
+      "status": "PENDING",
+      "scoringPeriod": 5,
+      "date": 1602601328074,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "TRADE",
+          "playerKey": "espn-4241463",
+          "playerId": 4241463,
+          "player": "Jerry Jeudy",
+          "fromTeamKey": "2020-t10",
+          "toTeamKey": "2020-t05"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-2580",
+          "playerId": 2580,
+          "player": "Drew Brees",
+          "fromTeamKey": "2020-t05",
+          "toTeamKey": "2020-t10"
+        }
+      ]
     }
   ]
 }

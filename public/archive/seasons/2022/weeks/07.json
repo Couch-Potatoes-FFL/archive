@@ -3760,6 +3760,57 @@
           "player": "Mike Boone"
         }
       ]
+    },
+    {
+      "transactionKey": "2022-w07-x0062",
+      "teamKey": "2022-t02",
+      "type": "TRADE_PROPOSAL",
+      "status": "PENDING",
+      "scoringPeriod": 7,
+      "date": 1666463387704,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "TRADE",
+          "playerKey": "espn-2977187",
+          "playerId": 2977187,
+          "player": "Cooper Kupp",
+          "fromTeamKey": "2022-t05",
+          "toTeamKey": "2022-t02"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-14881",
+          "playerId": 14881,
+          "player": "Russell Wilson",
+          "fromTeamKey": "2022-t05",
+          "toTeamKey": "2022-t02"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-4038941",
+          "playerId": 4038941,
+          "player": "Justin Herbert",
+          "fromTeamKey": "2022-t02",
+          "toTeamKey": "2022-t05"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-2577327",
+          "playerId": 2577327,
+          "player": "Tyler Lockett",
+          "fromTeamKey": "2022-t02",
+          "toTeamKey": "2022-t05"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-4036133",
+          "playerId": 4036133,
+          "player": "T.J. Hockenson",
+          "fromTeamKey": "2022-t02",
+          "toTeamKey": "2022-t05"
+        }
+      ]
     }
   ]
 }

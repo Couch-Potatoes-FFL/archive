@@ -3070,6 +3070,33 @@
           "player": "Tony Pollard"
         }
       ]
+    },
+    {
+      "transactionKey": "2020-w01-x0027",
+      "teamKey": "2020-t11",
+      "type": "TRADE_PROPOSAL",
+      "status": "PENDING",
+      "scoringPeriod": 1,
+      "date": 1598889825650,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3042519",
+          "playerId": 3042519,
+          "player": "Aaron Jones",
+          "fromTeamKey": "2020-t05",
+          "toTeamKey": "2020-t11"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3128429",
+          "playerId": 3128429,
+          "player": "Courtland Sutton",
+          "fromTeamKey": "2020-t11",
+          "toTeamKey": "2020-t05"
+        }
+      ]
     }
   ]
 }

@@ -3780,6 +3780,41 @@
           "player": "Steelers D/ST"
         }
       ]
+    },
+    {
+      "transactionKey": "2021-w11-x0060",
+      "teamKey": "2021-t10",
+      "type": "TRADE_PROPOSAL",
+      "status": "PENDING",
+      "scoringPeriod": 11,
+      "date": 1637179718906,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3116406",
+          "playerId": 3116406,
+          "player": "Tyreek Hill",
+          "fromTeamKey": "2021-t10",
+          "toTeamKey": "2021-t05"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-16800",
+          "playerId": 16800,
+          "player": "Davante Adams",
+          "fromTeamKey": "2021-t05",
+          "toTeamKey": "2021-t10"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3128720",
+          "playerId": 3128720,
+          "player": "Nick Chubb",
+          "fromTeamKey": "2021-t05",
+          "toTeamKey": "2021-t10"
+        }
+      ]
     }
   ]
 }

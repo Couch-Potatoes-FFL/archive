@@ -415,7 +415,7 @@ def maybe_compact(method: Any, serializer: Any, *args: Any, **kwargs: Any) -> Di
         }
 
 
-def fetch_accepted_trades(config: Config, year: int, scoring_period: int) -> List[Dict[str, Any]]:
+def fetch_trades(config: Config, year: int, scoring_period: int) -> List[Dict[str, Any]]:
     if year < 2018:
         url = espn_url(config.league_id, year, {"view": "mTransactions2", "scoringPeriodId": scoring_period})
     else:
@@ -431,20 +431,36 @@ def fetch_accepted_trades(config: Config, year: int, scoring_period: int) -> Lis
             "Cookie": f"SWID={config.swid}; espn_s2={config.espn_s2}",
             "User-Agent": "cpffl-history-export/1.0",
             "x-fantasy-filter": json.dumps(
-                {"transactions": {"filterType": {"value": ["TRADE_ACCEPT"]}}}
+                {
+                    "transactions": {
+                        "filterType": {"value": ["TRADE_ACCEPT", "TRADE_PROPOSAL"]}
+                    }
+                }
             ),
         },
     )
     with urlopen(request, timeout=60) as response:
         payload = unwrap_history_response(json.loads(response.read().decode("utf-8")))
-    return [
+    transactions = payload.get("transactions", [])
+    processed = [
         transaction
-        for transaction in payload.get("transactions", [])
-        if transaction.get("status") == "EXECUTED"
+        for transaction in transactions
+        if transaction.get("type") == "TRADE_ACCEPT"
+        and transaction.get("status") == "EXECUTED"
+    ]
+    processed_proposals = {
+        transaction.get("relatedTransactionId") for transaction in processed
+    }
+    return processed + [
+        transaction
+        for transaction in transactions
+        if transaction.get("type") == "TRADE_PROPOSAL"
+        and transaction.get("status") == "PENDING"
+        and transaction.get("id") not in processed_proposals
     ]
 
 
-def compact_accepted_trade(transaction: Dict[str, Any], player_map: Dict[int, str]) -> Dict[str, Any]:
+def compact_trade(transaction: Dict[str, Any], player_map: Dict[int, str]) -> Dict[str, Any]:
     return {
         "team_id": transaction.get("teamId"),
         "type": transaction.get("type"),
@@ -476,8 +492,8 @@ def compact_transactions(
             types=TRANSACTION_TYPES,
         ),
         maybe_compact(
-            fetch_accepted_trades,
-            lambda transaction: compact_accepted_trade(transaction, league.player_map),
+            fetch_trades,
+            lambda transaction: compact_trade(transaction, league.player_map),
             config,
             year,
             scoring_period,

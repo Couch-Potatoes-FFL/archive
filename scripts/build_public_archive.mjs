@@ -13,6 +13,7 @@ const TRANSACTION_TYPE_LABELS = Object.freeze({
   FREEAGENT: "Free Agent",
   ROSTER: "Roster",
   TRADE_ACCEPT: "Trade",
+  TRADE_PROPOSAL: "Trade",
   WAIVER: "Waiver",
 });
 
@@ -713,7 +714,7 @@ function displayTransactionItemType(itemType) {
 function transactionActionType(transaction, item) {
   const type = displayTransactionType(transaction.type);
   const itemType = displayTransactionItemType(item?.type);
-  if (type === "Trade") {
+  if (type?.startsWith("Trade")) {
     return type;
   }
   return (
@@ -1423,7 +1424,8 @@ async function buildSeason(year) {
     transactions
       .filter(
         (transaction) =>
-          transaction.type === "TRADE_ACCEPT" && transaction.status === "EXECUTED",
+          (transaction.type === "TRADE_ACCEPT" && transaction.status === "EXECUTED") ||
+          (transaction.type === "TRADE_PROPOSAL" && transaction.status === "PENDING"),
       )
       .forEach((transaction) => {
         transaction.items

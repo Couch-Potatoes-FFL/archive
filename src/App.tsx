@@ -253,6 +253,7 @@ enum TransactionTypeLabel {
   FREEAGENT = "Free Agent",
   ROSTER = "Roster",
   TRADE_ACCEPT = "Trade",
+  TRADE_PROPOSAL = "Trade",
   WAIVER = "Waiver",
 }
 
@@ -1620,6 +1621,10 @@ function BrowserPage() {
 function TradesPage() {
   const trades = useArchiveJson<PublicTrade[]>("trades.json");
   const [selectedTradeKey, setSelectedTradeKey] = useState<string>();
+  const [draftQuery, setDraftQuery] = useState("");
+  const [query, setQuery] = useState("");
+  const [draftYear, setDraftYear] = useState("all");
+  const [year, setYear] = useState("all");
 
   if (trades.status === "loading") {
     return <StatusPanel label="Loading trades..." />;
@@ -1629,6 +1634,23 @@ function TradesPage() {
     return <StatusPanel label="Unable to load trades." tone="danger" />;
   }
 
+  const years = [...new Set(trades.data.map((trade) => trade.year))].sort(
+    (left, right) => right - left,
+  );
+  const normalizedQuery = normalizeSearchText(query);
+  const filteredTrades = trades.data.filter((trade) => {
+    const matchesYear = year === "all" || trade.year === Number(year);
+    const matchesQuery =
+      !normalizedQuery ||
+      includesSearchText(
+        [trade.player, trade.fromTeamName, trade.toTeamName, trade.year].join(" "),
+        normalizedQuery,
+      );
+    return matchesYear && matchesQuery;
+  });
+  const filteredTradeCount = new Set(
+    filteredTrades.map((trade) => trade.transactionKey),
+  ).size;
   const selectedTrade = trades.data.find(
     (trade) => trade.transactionKey === selectedTradeKey,
   );
@@ -1686,15 +1708,64 @@ function TradesPage() {
           <h1>Trades</h1>
         </div>
       </section>
+      <form
+        className="controlBand browseControlBand"
+        aria-label="Trade filters"
+        onSubmit={(event) => {
+          event.preventDefault();
+          setQuery(draftQuery.trim());
+          setYear(draftYear);
+        }}
+      >
+        <label className="searchField">
+          <Search size={18} aria-hidden />
+          <input
+            aria-label="Search trades"
+            value={draftQuery}
+            onChange={(event) => setDraftQuery(event.target.value)}
+            placeholder="Search players or teams"
+          />
+        </label>
+        <select
+          aria-label="Filter trades by season"
+          value={draftYear}
+          onChange={(event) => setDraftYear(event.target.value)}
+        >
+          <option value="all">All seasons</option>
+          {years.map((tradeYear) => (
+            <option key={tradeYear} value={tradeYear}>
+              {tradeYear}
+            </option>
+          ))}
+        </select>
+        <div className="filterActions">
+          <button className="primaryButton" type="submit">
+            <Search size={16} aria-hidden />
+            Update
+          </button>
+          <button
+            className="ghostButton"
+            type="button"
+            onClick={() => {
+              setDraftQuery("");
+              setQuery("");
+              setDraftYear("all");
+              setYear("all");
+            }}
+          >
+            Clear
+          </button>
+        </div>
+      </form>
       <section className="contentBand">
         <div className="sectionHeader">
           <h2>Trade History</h2>
           <span className="pendingNote">
-            {formatNumber(trades.data.length)} player movements
+            {formatNumber(filteredTradeCount)} trades, {formatNumber(filteredTrades.length)} player movements
           </span>
         </div>
         <SimpleTable
-          data={trades.data}
+          data={filteredTrades}
           columns={columns}
           emptyLabel="No executed trades found."
           mobileLabel="Trade cards"

@@ -3667,6 +3667,41 @@
           "player": "Nico Collins"
         }
       ]
+    },
+    {
+      "transactionKey": "2022-w08-x0055",
+      "teamKey": "2022-t10",
+      "type": "TRADE_PROPOSAL",
+      "status": "PENDING",
+      "scoringPeriod": 8,
+      "date": 1666836966713,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3128720",
+          "playerId": 3128720,
+          "player": "Nick Chubb",
+          "fromTeamKey": "2022-t05",
+          "toTeamKey": "2022-t10"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-4239996",
+          "playerId": 4239996,
+          "player": "Travis Etienne Jr.",
+          "fromTeamKey": "2022-t10",
+          "toTeamKey": "2022-t05"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3128429",
+          "playerId": 3128429,
+          "player": "Courtland Sutton",
+          "fromTeamKey": "2022-t10",
+          "toTeamKey": "2022-t05"
+        }
+      ]
     }
   ]
 }
