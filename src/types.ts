@@ -177,7 +177,29 @@ export type Transaction = {
   scoringPeriod?: number;
   date?: number;
   bidAmount?: number;
-  items: Array<{ type?: string; playerKey?: string; playerId?: number; player: string }>;
+  items: Array<{
+    type?: string;
+    playerKey?: string;
+    playerId?: number;
+    player: string;
+    fromTeamKey?: string;
+    toTeamKey?: string;
+  }>;
+};
+
+export type PublicTrade = {
+  tradeKey: string;
+  transactionKey: string;
+  year: number;
+  week: number;
+  date?: number;
+  playerKey?: string;
+  playerId?: number;
+  player: string;
+  fromTeamKey?: string;
+  fromTeamName: string;
+  toTeamKey?: string;
+  toTeamName: string;
 };
 
 export type PlayerSeasonReport = {

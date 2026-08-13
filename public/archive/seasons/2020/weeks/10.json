@@ -3768,6 +3768,49 @@
           "player": "Rodrigo Blankenship"
         }
       ]
+    },
+    {
+      "transactionKey": "2020-w10-x0056",
+      "teamKey": "2020-t10",
+      "type": "TRADE_ACCEPT",
+      "status": "EXECUTED",
+      "scoringPeriod": 10,
+      "date": 1605108212649,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3121422",
+          "playerId": 3121422,
+          "player": "Terry McLaurin",
+          "fromTeamKey": "2020-t05",
+          "toTeamKey": "2020-t10"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-2975674",
+          "playerId": 2975674,
+          "player": "Robert Tonyan",
+          "fromTeamKey": "2020-t05",
+          "toTeamKey": "2020-t10"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3116406",
+          "playerId": 3116406,
+          "player": "Tyreek Hill",
+          "fromTeamKey": "2020-t10",
+          "toTeamKey": "2020-t05"
+        },
+        {
+          "type": "DROP",
+          "playerKey": "espn-3120303",
+          "playerId": 3120303,
+          "player": "Ross Dwelley",
+          "fromTeamKey": "2020-t10",
+          "toTeamKey": "2020-t00"
+        }
+      ]
     }
   ]
 }

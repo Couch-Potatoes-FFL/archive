@@ -12,6 +12,7 @@ const outputDir = path.join(rootDir, "public", "archive");
 const TRANSACTION_TYPE_LABELS = Object.freeze({
   FREEAGENT: "Free Agent",
   ROSTER: "Roster",
+  TRADE_ACCEPT: "Trade",
   WAIVER: "Waiver",
 });
 
@@ -33,6 +34,7 @@ const TRANSACTION_ITEM_TYPE_LABELS = Object.freeze({
   ADD: "Add",
   DROP: "Drop",
   LINEUP: "Lineup",
+  TRADE: "Trade",
 });
 
 const FIXED_STARTER_SLOTS = new Set(["QB", "RB", "WR", "TE", "K", "D/ST", "HC"]);
@@ -621,6 +623,8 @@ function compactTransaction(year, weekNumber, transaction, index) {
           playerKey: playerKeyFromParts(item.player_id, item.player),
           playerId: item.player_id,
           player: item.player || "Unknown player",
+          fromTeamKey: teamKey(year, item.from_team_id),
+          toTeamKey: teamKey(year, item.to_team_id),
         }))
       : [],
   };
@@ -707,10 +711,13 @@ function displayTransactionItemType(itemType) {
 }
 
 function transactionActionType(transaction, item) {
+  const type = displayTransactionType(transaction.type);
+  const itemType = displayTransactionItemType(item?.type);
+  if (type === "Trade") {
+    return type;
+  }
   return (
-    [displayTransactionType(transaction.type), displayTransactionItemType(item?.type)]
-      .filter(Boolean)
-      .join(" ") || "Transaction"
+    [type, itemType].filter(Boolean).join(" ") || "Transaction"
   );
 }
 
@@ -1238,6 +1245,7 @@ async function buildSeason(year) {
   const weeks = [];
   const weekPayloads = [];
   const searchRows = [];
+  const trades = [];
   const names = teamNameLookup(teams);
   const playerSeasons = new Map();
 
@@ -1412,6 +1420,32 @@ async function buildSeason(year) {
       });
     });
 
+    transactions
+      .filter(
+        (transaction) =>
+          transaction.type === "TRADE_ACCEPT" && transaction.status === "EXECUTED",
+      )
+      .forEach((transaction) => {
+        transaction.items
+          .filter((item) => item.type === "TRADE")
+          .forEach((item, index) => {
+            trades.push({
+              tradeKey: `${transaction.transactionKey}-i${String(index + 1).padStart(2, "0")}`,
+              transactionKey: transaction.transactionKey,
+              year,
+              week: weekPayload.week,
+              date: transaction.date,
+              playerKey: item.playerKey,
+              playerId: item.playerId,
+              player: item.player,
+              fromTeamKey: item.fromTeamKey,
+              fromTeamName: teamName(names, item.fromTeamKey),
+              toTeamKey: item.toTeamKey,
+              toTeamName: teamName(names, item.toTeamKey),
+            });
+          });
+      });
+
     boxScores.forEach((boxScore) => {
       [...boxScore.homeLineup, ...boxScore.awayLineup].forEach((player, index) => {
         searchRows.push(
@@ -1507,6 +1541,7 @@ async function buildSeason(year) {
     },
     searchRows,
     playerSeasons: playerSeasonRows,
+    trades,
   };
 }
 
@@ -1524,11 +1559,13 @@ async function main() {
   const publicSeasons = [];
   const searchRows = [];
   const playerSeasons = [];
+  const trades = [];
   for (const year of years) {
     const result = await buildSeason(year);
     publicSeasons.push(result.season);
     searchRows.push(...result.searchRows);
     playerSeasons.push(...result.playerSeasons);
+    trades.push(...result.trades);
   }
 
   await writeJson("manifest.json", {
@@ -1538,6 +1575,10 @@ async function main() {
   await writeJson(
     "search-index.json",
     searchRows.sort((a, b) => b.year - a.year || a.type.localeCompare(b.type)),
+  );
+  await writeJson(
+    "trades.json",
+    trades.sort((left, right) => right.date - left.date || right.year - left.year),
   );
   await writeJson("players.json", mergePlayerSeasons(playerSeasons));
 

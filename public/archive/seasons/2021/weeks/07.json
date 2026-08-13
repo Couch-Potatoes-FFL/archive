@@ -4307,6 +4307,49 @@
           "player": "Taylor Heinicke"
         }
       ]
+    },
+    {
+      "transactionKey": "2021-w07-x0081",
+      "teamKey": "2021-t03",
+      "type": "TRADE_ACCEPT",
+      "status": "EXECUTED",
+      "scoringPeriod": 7,
+      "date": 1634748191609,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "TRADE",
+          "playerKey": "espn-8439",
+          "playerId": 8439,
+          "player": "Aaron Rodgers",
+          "fromTeamKey": "2021-t03",
+          "toTeamKey": "2021-t05"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-4372485",
+          "playerId": 4372485,
+          "player": "Rondale Moore",
+          "fromTeamKey": "2021-t05",
+          "toTeamKey": "2021-t03"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-4047365",
+          "playerId": 4047365,
+          "player": "Josh Jacobs",
+          "fromTeamKey": "2021-t05",
+          "toTeamKey": "2021-t03"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3052587",
+          "playerId": 3052587,
+          "player": "Baker Mayfield",
+          "fromTeamKey": "2021-t05",
+          "toTeamKey": "2021-t03"
+        }
+      ]
     }
   ]
 }

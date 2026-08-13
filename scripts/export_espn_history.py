@@ -415,6 +415,79 @@ def maybe_compact(method: Any, serializer: Any, *args: Any, **kwargs: Any) -> Di
         }
 
 
+def fetch_accepted_trades(config: Config, year: int, scoring_period: int) -> List[Dict[str, Any]]:
+    if year < 2018:
+        url = espn_url(config.league_id, year, {"view": "mTransactions2", "scoringPeriodId": scoring_period})
+    else:
+        url = (
+            "https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/"
+            f"seasons/{year}/segments/0/leagues/{config.league_id}?"
+            + urlencode({"view": "mTransactions2", "scoringPeriodId": scoring_period})
+        )
+    request = Request(
+        url,
+        headers={
+            "Accept": "application/json",
+            "Cookie": f"SWID={config.swid}; espn_s2={config.espn_s2}",
+            "User-Agent": "cpffl-history-export/1.0",
+            "x-fantasy-filter": json.dumps(
+                {"transactions": {"filterType": {"value": ["TRADE_ACCEPT"]}}}
+            ),
+        },
+    )
+    with urlopen(request, timeout=60) as response:
+        payload = unwrap_history_response(json.loads(response.read().decode("utf-8")))
+    return [
+        transaction
+        for transaction in payload.get("transactions", [])
+        if transaction.get("status") == "EXECUTED"
+    ]
+
+
+def compact_accepted_trade(transaction: Dict[str, Any], player_map: Dict[int, str]) -> Dict[str, Any]:
+    return {
+        "team_id": transaction.get("teamId"),
+        "type": transaction.get("type"),
+        "status": transaction.get("status"),
+        "scoring_period": transaction.get("scoringPeriodId"),
+        "date": transaction.get("processDate") or transaction.get("proposedDate"),
+        "bid_amount": transaction.get("bidAmount"),
+        "items": [
+            {
+                "type": item.get("type"),
+                "player_id": item.get("playerId"),
+                "player": player_map.get(item.get("playerId"), "Unknown player"),
+                "from_team_id": item.get("fromTeamId"),
+                "to_team_id": item.get("toTeamId"),
+            }
+            for item in transaction.get("items", [])
+        ],
+    }
+
+
+def compact_transactions(
+    league: Any, config: Config, year: int, scoring_period: int
+) -> Dict[str, Any]:
+    results = [
+        maybe_compact(
+            league.transactions,
+            compact_transaction,
+            scoring_period=scoring_period,
+            types=TRANSACTION_TYPES,
+        ),
+        maybe_compact(
+            fetch_accepted_trades,
+            lambda transaction: compact_accepted_trade(transaction, league.player_map),
+            config,
+            year,
+            scoring_period,
+        ),
+    ]
+    data = [transaction for result in results if result["ok"] for transaction in result["data"]]
+    errors = [result["error"] for result in results if not result["ok"]]
+    return {"ok": not errors, "data": data, **({"error": "; ".join(errors)} if errors else {})}
+
+
 def collect_recent_activity(
     league: Any,
     page_size: int = 100,
@@ -481,12 +554,7 @@ def build_structured_season(config: Config, year: int) -> Dict[str, Any]:
                     compact_box_score,
                     week,
                 ),
-                "transactions": maybe_compact(
-                    league.transactions,
-                    compact_transaction,
-                    scoring_period=week,
-                    types=TRANSACTION_TYPES,
-                ),
+                "transactions": compact_transactions(league, config, year, week),
             }
         )
 

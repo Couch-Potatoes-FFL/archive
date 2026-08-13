@@ -3565,6 +3565,33 @@
           "player": "Browns D/ST"
         }
       ]
+    },
+    {
+      "transactionKey": "2019-w10-x0056",
+      "teamKey": "2019-t05",
+      "type": "TRADE_ACCEPT",
+      "status": "EXECUTED",
+      "scoringPeriod": 10,
+      "date": 1573059425437,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "TRADE",
+          "playerKey": "espn-13295",
+          "playerId": 13295,
+          "player": "Emmanuel Sanders",
+          "fromTeamKey": "2019-t10",
+          "toTeamKey": "2019-t05"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3917315",
+          "playerId": 3917315,
+          "player": "Kyler Murray",
+          "fromTeamKey": "2019-t05",
+          "toTeamKey": "2019-t10"
+        }
+      ]
     }
   ]
 }

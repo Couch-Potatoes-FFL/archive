@@ -3699,6 +3699,41 @@
           "player": "Taylor Heinicke"
         }
       ]
+    },
+    {
+      "transactionKey": "2021-w10-x0054",
+      "teamKey": "2021-t05",
+      "type": "TRADE_ACCEPT",
+      "status": "EXECUTED",
+      "scoringPeriod": 10,
+      "date": 1636574567547,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3128720",
+          "playerId": 3128720,
+          "player": "Nick Chubb",
+          "fromTeamKey": "2021-t04",
+          "toTeamKey": "2021-t05"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-4241555",
+          "playerId": 4241555,
+          "player": "Elijah Mitchell",
+          "fromTeamKey": "2021-t05",
+          "toTeamKey": "2021-t04"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-4262921",
+          "playerId": 4262921,
+          "player": "Justin Jefferson",
+          "fromTeamKey": "2021-t05",
+          "toTeamKey": "2021-t04"
+        }
+      ]
     }
   ]
 }

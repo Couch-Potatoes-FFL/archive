@@ -47,6 +47,7 @@ import {
   PublicSeason,
   PublicTeam,
   PublicPlayer,
+  PublicTrade,
   PublicWeek,
   PlayerSeasonReport,
   LineupPlayer,
@@ -243,7 +244,7 @@ const recordTypeOptions: Array<{ value: BrowserFilterType; label: string }> = [
   { value: "season", label: "Seasons" },
   { value: "team", label: "Teams" },
   { value: "week", label: "Weeks" },
-  { value: "transaction", label: "Transactions" },
+  { value: "transaction", label: "Add/Drop" },
   { value: "draft", label: "Drafts" },
   { value: "player", label: "Players" },
 ];
@@ -251,6 +252,7 @@ const recordTypeOptions: Array<{ value: BrowserFilterType; label: string }> = [
 enum TransactionTypeLabel {
   FREEAGENT = "Free Agent",
   ROSTER = "Roster",
+  TRADE_ACCEPT = "Trade",
   WAIVER = "Waiver",
 }
 
@@ -272,6 +274,7 @@ enum TransactionItemTypeLabel {
   ADD = "Add",
   DROP = "Drop",
   LINEUP = "Lineup",
+  TRADE = "Trade",
 }
 
 const starterSlotOrder = new Map(
@@ -326,9 +329,9 @@ const dataCategories: Array<{
     icon: <LiaFootballBallSolid size={22} aria-hidden />,
   },
   {
-    title: "Transactions",
-    label: "Review waiver, roster, and trade records from past seasons.",
-    to: "/browse?type=transaction",
+    title: "Add / Drops",
+    label: "Review historical waiver and roster moves.",
+    to: "/freeagency",
     icon: <LiaExchangeAltSolid size={22} aria-hidden />,
   },
   {
@@ -344,10 +347,10 @@ const dataCategories: Array<{
     icon: <LiaCalendarAltSolid size={22} aria-hidden />,
   },
   {
-    title: "Full Archive Search",
-    label: "Search teams, matchups, transactions, weeks, and seasons.",
-    to: "/browse",
-    icon: <LiaSearchSolid size={22} aria-hidden />,
+    title: "Trades",
+    label: "Browse executed player trades from past seasons.",
+    to: "/trades",
+    icon: <LiaExchangeAltSolid size={22} aria-hidden />,
   },
 ];
 
@@ -630,6 +633,8 @@ function App() {
           <Route path="/records" element={<RecordsPage />} />
           <Route path="/keepers" element={<KeepersPage />} />
           <Route path="/browse" element={<BrowserPage />} />
+          <Route path="/freeagency" element={<Navigate replace to="/browse?type=transaction" />} />
+          <Route path="/trades" element={<TradesPage />} />
           <Route path="/drafts" element={<DraftBrowserPage />} />
           <Route path="/players" element={<PlayerBrowserPage />} />
           <Route path="/player/:playerKey" element={<PlayerPage />} />
@@ -1609,6 +1614,197 @@ function BrowserPage() {
         </section>
       )}
     </>
+  );
+}
+
+function TradesPage() {
+  const trades = useArchiveJson<PublicTrade[]>("trades.json");
+  const [selectedTradeKey, setSelectedTradeKey] = useState<string>();
+
+  if (trades.status === "loading") {
+    return <StatusPanel label="Loading trades..." />;
+  }
+
+  if (trades.status === "error") {
+    return <StatusPanel label="Unable to load trades." tone="danger" />;
+  }
+
+  const selectedTrade = trades.data.find(
+    (trade) => trade.transactionKey === selectedTradeKey,
+  );
+  const selectedTradeLines = selectedTrade
+    ? trades.data.filter((trade) => trade.transactionKey === selectedTrade.transactionKey)
+    : [];
+
+  const columns: ColumnDef<PublicTrade>[] = [
+    {
+      header: "Date",
+      accessorKey: "date",
+      cell: ({ row }) => formatDate(row.original.date),
+    },
+    {
+      header: "Type",
+      accessorFn: () => "Trade",
+      cell: ({ row }) => (
+        <button
+          className="linkButton"
+          type="button"
+          onClick={() => setSelectedTradeKey(row.original.transactionKey)}
+        >
+          Trade
+        </button>
+      ),
+    },
+    {
+      header: "Player",
+      accessorKey: "player",
+      cell: ({ row }) =>
+        row.original.playerKey ? (
+          <Link to={`/player/${encodeURIComponent(row.original.playerKey)}`}>
+            {row.original.player}
+          </Link>
+        ) : (
+          row.original.player
+        ),
+    },
+    {
+      header: "Sending team",
+      accessorKey: "fromTeamName",
+    },
+    {
+      header: "Receiving team",
+      accessorKey: "toTeamName",
+    },
+  ];
+
+  return (
+    <>
+      <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "Trades" }]} />
+      <section className="pageIntro">
+        <div>
+          <p className="eyebrow">Historical fantasy football data</p>
+          <h1>Trades</h1>
+        </div>
+      </section>
+      <section className="contentBand">
+        <div className="sectionHeader">
+          <h2>Trade History</h2>
+          <span className="pendingNote">
+            {formatNumber(trades.data.length)} player movements
+          </span>
+        </div>
+        <SimpleTable
+          data={trades.data}
+          columns={columns}
+          emptyLabel="No executed trades found."
+          mobileLabel="Trade cards"
+        />
+      </section>
+      {selectedTrade ? (
+        <TradeModal
+          trade={selectedTrade}
+          lines={selectedTradeLines}
+          onClose={() => setSelectedTradeKey(undefined)}
+        />
+      ) : null}
+    </>
+  );
+}
+
+function TradeModal({
+  trade,
+  lines,
+  onClose,
+}: {
+  trade: PublicTrade;
+  lines: PublicTrade[];
+  onClose: () => void;
+}) {
+  useEffect(() => {
+    const previousOverflow = document.body.style.overflow;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
+
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [onClose]);
+
+  const titleId = "trade-detail-title";
+  const sendingTeams = lines.reduce(
+    (groups, line) => {
+      const key = line.fromTeamKey || line.fromTeamName;
+      const group = groups.get(key) ?? { name: line.fromTeamName, players: [] };
+      group.players.push(line);
+      groups.set(key, group);
+      return groups;
+    },
+    new Map<string, { name: string; players: PublicTrade[] }>(),
+  );
+
+  return (
+    <div
+      className="modalBackdrop"
+      role="presentation"
+      onMouseDown={(event) => {
+        if (event.target === event.currentTarget) {
+          onClose();
+        }
+      }}
+    >
+      <section
+        aria-labelledby={titleId}
+        aria-modal="true"
+        className="matchupModal tradeModal"
+        role="dialog"
+      >
+        <div className="modalHeader">
+          <div>
+            <p className="eyebrow">Week {trade.week} · {trade.year}</p>
+            <h2 id={titleId}>Trade</h2>
+            <strong>{formatDate(trade.date)}</strong>
+          </div>
+          <button
+            autoFocus
+            className="modalCloseButton"
+            type="button"
+            onClick={onClose}
+            title="Close trade details"
+          >
+            <X size={20} aria-hidden />
+          </button>
+        </div>
+        <div className="tradeDetailList">
+          {[...sendingTeams.entries()].map(([key, team]) => (
+            <section className="tradeSendingTeam" key={key}>
+              <h3>{team.name} sends:</h3>
+              <ul>
+                {team.players.map((line) => (
+                  <li key={line.tradeKey}>
+                    {line.playerKey ? (
+                      <Link
+                        to={`/player/${encodeURIComponent(line.playerKey)}`}
+                        onClick={onClose}
+                      >
+                        {line.player}
+                      </Link>
+                    ) : (
+                      line.player
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))}
+        </div>
+      </section>
+    </div>
   );
 }
 

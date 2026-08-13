@@ -3755,6 +3755,33 @@
           "player": "Justin Fields"
         }
       ]
+    },
+    {
+      "transactionKey": "2021-w13-x0058",
+      "teamKey": "2021-t02",
+      "type": "TRADE_ACCEPT",
+      "status": "EXECUTED",
+      "scoringPeriod": 13,
+      "date": 1638291566614,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3116593",
+          "playerId": 3116593,
+          "player": "Dalvin Cook",
+          "fromTeamKey": "2021-t02",
+          "toTeamKey": "2021-t05"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-4035538",
+          "playerId": 4035538,
+          "player": "David Montgomery",
+          "fromTeamKey": "2021-t05",
+          "toTeamKey": "2021-t02"
+        }
+      ]
     }
   ]
 }

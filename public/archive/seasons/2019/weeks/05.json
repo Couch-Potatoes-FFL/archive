@@ -3317,6 +3317,33 @@
           "player": "Cowboys D/ST"
         }
       ]
+    },
+    {
+      "transactionKey": "2019-w05-x0039",
+      "teamKey": "2019-t05",
+      "type": "TRADE_ACCEPT",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1570075201351,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3059915",
+          "playerId": 3059915,
+          "player": "Kareem Hunt",
+          "fromTeamKey": "2019-t12",
+          "toTeamKey": "2019-t05"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3127292",
+          "playerId": 3127292,
+          "player": "Will Dissly",
+          "fromTeamKey": "2019-t05",
+          "toTeamKey": "2019-t12"
+        }
+      ]
     }
   ]
 }

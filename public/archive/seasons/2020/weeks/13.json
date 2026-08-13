@@ -3446,6 +3446,33 @@
           "player": "Zach Ertz"
         }
       ]
+    },
+    {
+      "transactionKey": "2020-w13-x0044",
+      "teamKey": "2020-t04",
+      "type": "TRADE_ACCEPT",
+      "status": "EXECUTED",
+      "scoringPeriod": 13,
+      "date": 1607127891142,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3924327",
+          "playerId": 3924327,
+          "player": "Drew Lock",
+          "fromTeamKey": "2020-t05",
+          "toTeamKey": "2020-t04"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-16728",
+          "playerId": 16728,
+          "player": "Teddy Bridgewater",
+          "fromTeamKey": "2020-t04",
+          "toTeamKey": "2020-t05"
+        }
+      ]
     }
   ]
 }

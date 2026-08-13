@@ -2803,673 +2803,93 @@
   "transactions": [
     {
       "transactionKey": "2024-w10-x0001",
-      "teamKey": "2024-t11",
-      "type": "WAIVER",
+      "teamKey": "2024-t10",
+      "type": "TRADE_ACCEPT",
       "status": "EXECUTED",
       "scoringPeriod": 10,
-      "date": 1731229419673,
-      "bidAmount": 1,
+      "date": 1730823953891,
+      "bidAmount": 0,
       "items": [
         {
-          "type": "ADD",
-          "playerKey": "espn-4426385",
-          "playerId": null,
-          "player": "Zach Charbonnet"
+          "type": "TRADE",
+          "playerKey": "espn-4243331",
+          "playerId": 4243331,
+          "player": "Cade Otton",
+          "fromTeamKey": "2024-t10",
+          "toTeamKey": "2024-t06"
         }
       ]
     },
     {
       "transactionKey": "2024-w10-x0002",
-      "teamKey": "2024-t10",
-      "type": "ROSTER",
+      "teamKey": "2024-t05",
+      "type": "TRADE_ACCEPT",
       "status": "EXECUTED",
       "scoringPeriod": 10,
-      "date": 1730831495254,
+      "date": 1730812190175,
       "bidAmount": 0,
       "items": [
         {
-          "type": "DROP",
-          "playerKey": "espn-3116593",
-          "playerId": null,
-          "player": "Dalvin Cook"
+          "type": "TRADE",
+          "playerKey": "espn-3040151",
+          "playerId": 3040151,
+          "player": "George Kittle",
+          "fromTeamKey": "2024-t05",
+          "toTeamKey": "2024-t09"
         }
       ]
     },
     {
       "transactionKey": "2024-w10-x0003",
-      "teamKey": "2024-t10",
-      "type": "FREEAGENT",
+      "teamKey": "2024-t05",
+      "type": "TRADE_ACCEPT",
       "status": "EXECUTED",
       "scoringPeriod": 10,
-      "date": 1730914095348,
+      "date": 1730812202737,
       "bidAmount": 0,
       "items": [
         {
-          "type": "ADD",
-          "playerKey": "espn-4427095",
-          "playerId": null,
-          "player": "DeMario Douglas"
+          "type": "TRADE",
+          "playerKey": "espn-4362628",
+          "playerId": 4362628,
+          "player": "Ja'Marr Chase",
+          "fromTeamKey": "2024-t05",
+          "toTeamKey": "2024-t12"
+        },
+        {
+          "type": "DROP",
+          "playerKey": "espn-4360569",
+          "playerId": 4360569,
+          "player": "Jordan Mason",
+          "fromTeamKey": "2024-t12",
+          "toTeamKey": "2024-t00"
         }
       ]
     },
     {
       "transactionKey": "2024-w10-x0004",
-      "teamKey": "2024-t11",
-      "type": "ROSTER",
-      "status": "EXECUTED",
-      "scoringPeriod": 10,
-      "date": 1731028967796,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "DROP",
-          "playerKey": "espn-4429096",
-          "playerId": null,
-          "player": "Blake Corum"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2024-w10-x0005",
-      "teamKey": "2024-t09",
-      "type": "FREEAGENT",
-      "status": "EXECUTED",
-      "scoringPeriod": 10,
-      "date": 1730983487206,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn--16007",
-          "playerId": null,
-          "player": "Broncos D/ST"
-        },
-        {
-          "type": "DROP",
-          "playerKey": "espn--16002",
-          "playerId": null,
-          "player": "Bills D/ST"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2024-w10-x0006",
-      "teamKey": "2024-t05",
-      "type": "FREEAGENT",
-      "status": "EXECUTED",
-      "scoringPeriod": 10,
-      "date": 1730901215819,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn-3116164",
-          "playerId": null,
-          "player": "Mike Gesicki"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2024-w10-x0007",
-      "teamKey": "2024-t13",
-      "type": "ROSTER",
-      "status": "EXECUTED",
-      "scoringPeriod": 10,
-      "date": 1730906832238,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "DROP",
-          "playerKey": "espn-4428718",
-          "playerId": null,
-          "player": "Tre Tucker"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2024-w10-x0008",
-      "teamKey": "2024-t13",
-      "type": "ROSTER",
-      "status": "EXECUTED",
-      "scoringPeriod": 10,
-      "date": 1730906804654,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "DROP",
-          "playerKey": "espn-4360797",
-          "playerId": null,
-          "player": "Tutu Atwell"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2024-w10-x0009",
       "teamKey": "2024-t10",
-      "type": "FREEAGENT",
+      "type": "TRADE_ACCEPT",
       "status": "EXECUTED",
       "scoringPeriod": 10,
-      "date": 1730913894072,
+      "date": 1730909292302,
       "bidAmount": 0,
       "items": [
         {
-          "type": "ADD",
-          "playerKey": "espn-4428209",
-          "playerId": null,
-          "player": "Ricky Pearsall"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2024-w10-x0010",
-      "teamKey": "2024-t10",
-      "type": "ROSTER",
-      "status": "EXECUTED",
-      "scoringPeriod": 10,
-      "date": 1730846567031,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "DROP",
-          "playerKey": "espn-4429084",
-          "playerId": null,
-          "player": "Anthony Richardson"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2024-w10-x0011",
-      "teamKey": "2024-t04",
-      "type": "FREEAGENT",
-      "status": "EXECUTED",
-      "scoringPeriod": 10,
-      "date": 1731169426968,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn-4573697",
-          "playerId": null,
-          "player": "Mason Tipton"
+          "type": "TRADE",
+          "playerKey": "espn-3916433",
+          "playerId": 3916433,
+          "player": "Jakobi Meyers",
+          "fromTeamKey": "2024-t10",
+          "toTeamKey": "2024-t13"
         },
         {
-          "type": "DROP",
-          "playerKey": "espn-4597500",
-          "playerId": null,
-          "player": "Adonai Mitchell"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2024-w10-x0012",
-      "teamKey": "2024-t10",
-      "type": "FREEAGENT",
-      "status": "EXECUTED",
-      "scoringPeriod": 10,
-      "date": 1731021485473,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn-4430968",
-          "playerId": null,
-          "player": "Kimani Vidal"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2024-w10-x0013",
-      "teamKey": "2024-t10",
-      "type": "FREEAGENT",
-      "status": "EXECUTED",
-      "scoringPeriod": 10,
-      "date": 1730913929309,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn-3054212",
-          "playerId": null,
-          "player": "Jonnu Smith"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2024-w10-x0014",
-      "teamKey": "2024-t02",
-      "type": "ROSTER",
-      "status": "EXECUTED",
-      "scoringPeriod": 10,
-      "date": 1730808211137,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "DROP",
-          "playerKey": "espn-4362081",
-          "playerId": null,
-          "player": "Cameron Dicker"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2024-w10-x0015",
-      "teamKey": "2024-t04",
-      "type": "FREEAGENT",
-      "status": "EXECUTED",
-      "scoringPeriod": 10,
-      "date": 1730944323753,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn--16019",
-          "playerId": null,
-          "player": "Giants D/ST"
-        },
-        {
-          "type": "DROP",
-          "playerKey": "espn-4361777",
-          "playerId": null,
-          "player": "Zamir White"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2024-w10-x0016",
-      "teamKey": "2024-t06",
-      "type": "ROSTER",
-      "status": "EXECUTED",
-      "scoringPeriod": 10,
-      "date": 1730815510219,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "DROP",
-          "playerKey": "espn--16018",
-          "playerId": null,
-          "player": "Saints D/ST"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2024-w10-x0017",
-      "teamKey": "2024-t12",
-      "type": "WAIVER",
-      "status": "EXECUTED",
-      "scoringPeriod": 10,
-      "date": 1730883154364,
-      "bidAmount": 2,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn--16003",
-          "playerId": null,
-          "player": "Bears D/ST"
-        },
-        {
-          "type": "DROP",
-          "playerKey": "espn--16007",
-          "playerId": null,
-          "player": "Broncos D/ST"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2024-w10-x0018",
-      "teamKey": "2024-t12",
-      "type": "WAIVER",
-      "status": "FAILED_PLAYERALREADYDROPPED",
-      "scoringPeriod": 10,
-      "date": 1730883154365,
-      "bidAmount": 2,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn--16019",
-          "playerId": null,
-          "player": "Giants D/ST"
-        },
-        {
-          "type": "DROP",
-          "playerKey": "espn--16007",
-          "playerId": null,
-          "player": "Broncos D/ST"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2024-w10-x0019",
-      "teamKey": "2024-t03",
-      "type": "FREEAGENT",
-      "status": "EXECUTED",
-      "scoringPeriod": 10,
-      "date": 1731260729721,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn--14012",
-          "playerId": null,
-          "player": "Chiefs Coach"
-        },
-        {
-          "type": "DROP",
-          "playerKey": "espn--14009",
-          "playerId": null,
-          "player": "Packers Coach"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2024-w10-x0020",
-      "teamKey": "2024-t02",
-      "type": "FREEAGENT",
-      "status": "EXECUTED",
-      "scoringPeriod": 10,
-      "date": 1731284227550,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn-3043116",
-          "playerId": null,
-          "player": "Demarcus Robinson"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2024-w10-x0021",
-      "teamKey": "2024-t04",
-      "type": "WAIVER",
-      "status": "FAILED_INVALIDPLAYERSOURCE",
-      "scoringPeriod": 10,
-      "date": 1730883154364,
-      "bidAmount": 20,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn-4429025",
-          "playerId": null,
-          "player": "Quentin Johnston"
-        },
-        {
-          "type": "DROP",
-          "playerKey": "espn-4361777",
-          "playerId": null,
-          "player": "Zamir White"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2024-w10-x0022",
-      "teamKey": "2024-t05",
-      "type": "FREEAGENT",
-      "status": "EXECUTED",
-      "scoringPeriod": 10,
-      "date": 1731243944248,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn-4429096",
-          "playerId": null,
-          "player": "Blake Corum"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2024-w10-x0023",
-      "teamKey": "2024-t10",
-      "type": "FREEAGENT",
-      "status": "EXECUTED",
-      "scoringPeriod": 10,
-      "date": 1730913904386,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn-3121409",
-          "playerId": null,
-          "player": "Noah Brown"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2024-w10-x0024",
-      "teamKey": "2024-t10",
-      "type": "FREEAGENT",
-      "status": "EXECUTED",
-      "scoringPeriod": 10,
-      "date": 1730913952749,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn-2468609",
-          "playerId": null,
-          "player": "Taysom Hill"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2024-w10-x0025",
-      "teamKey": "2024-t04",
-      "type": "FREEAGENT",
-      "status": "EXECUTED",
-      "scoringPeriod": 10,
-      "date": 1731104936931,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn-4597500",
-          "playerId": null,
-          "player": "Adonai Mitchell"
-        },
-        {
-          "type": "DROP",
-          "playerKey": "espn-4426385",
-          "playerId": null,
-          "player": "Zach Charbonnet"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2024-w10-x0026",
-      "teamKey": "2024-t13",
-      "type": "FREEAGENT",
-      "status": "EXECUTED",
-      "scoringPeriod": 10,
-      "date": 1730914690037,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn-3917232",
-          "playerId": null,
-          "player": "Tyler Bass"
-        },
-        {
-          "type": "DROP",
-          "playerKey": "espn-4567104",
-          "playerId": null,
-          "player": "Will Reichard"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2024-w10-x0027",
-      "teamKey": "2024-t12",
-      "type": "FREEAGENT",
-      "status": "EXECUTED",
-      "scoringPeriod": 10,
-      "date": 1731187709355,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn-3050478",
-          "playerId": null,
-          "player": "Jake Elliott"
-        },
-        {
-          "type": "DROP",
-          "playerKey": "espn-3821683",
-          "playerId": null,
-          "player": "Austin Seibert"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2024-w10-x0028",
-      "teamKey": "2024-t10",
-      "type": "ROSTER",
-      "status": "EXECUTED",
-      "scoringPeriod": 10,
-      "date": 1730831504677,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "DROP",
-          "playerKey": "espn-4372414",
-          "playerId": null,
-          "player": "Elijah Moore"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2024-w10-x0029",
-      "teamKey": "2024-t06",
-      "type": "FREEAGENT",
-      "status": "EXECUTED",
-      "scoringPeriod": 10,
-      "date": 1731261388041,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn-3116389",
-          "playerId": null,
-          "player": "Samaje Perine"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2024-w10-x0030",
-      "teamKey": "2024-t10",
-      "type": "WAIVER",
-      "status": "EXECUTED",
-      "scoringPeriod": 10,
-      "date": 1730967392616,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn-4360569",
-          "playerId": null,
-          "player": "Jordan Mason"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2024-w10-x0031",
-      "teamKey": "2024-t02",
-      "type": "WAIVER",
-      "status": "EXECUTED",
-      "scoringPeriod": 10,
-      "date": 1730883154363,
-      "bidAmount": 27,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn-4429025",
-          "playerId": null,
-          "player": "Quentin Johnston"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2024-w10-x0032",
-      "teamKey": "2024-t09",
-      "type": "ROSTER",
-      "status": "EXECUTED",
-      "scoringPeriod": 10,
-      "date": 1730808842098,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "DROP",
-          "playerKey": "espn--16028",
-          "playerId": null,
-          "player": "Commanders D/ST"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2024-w10-x0033",
-      "teamKey": "2024-t09",
-      "type": "ROSTER",
-      "status": "EXECUTED",
-      "scoringPeriod": 10,
-      "date": 1730808407766,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "DROP",
-          "playerKey": "espn-4243537",
-          "playerId": null,
-          "player": "Gabe Davis"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2024-w10-x0034",
-      "teamKey": "2024-t10",
-      "type": "ROSTER",
-      "status": "EXECUTED",
-      "scoringPeriod": 10,
-      "date": 1730831522905,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "DROP",
-          "playerKey": "espn-4035676",
-          "playerId": null,
-          "player": "Zack Moss"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2024-w10-x0035",
-      "teamKey": "2024-t02",
-      "type": "ROSTER",
-      "status": "EXECUTED",
-      "scoringPeriod": 10,
-      "date": 1731257072930,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "DROP",
-          "playerKey": "espn-4429025",
-          "playerId": null,
-          "player": "Quentin Johnston"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2024-w10-x0036",
-      "teamKey": "2024-t09",
-      "type": "WAIVER",
-      "status": "EXECUTED",
-      "scoringPeriod": 10,
-      "date": 1730883154364,
-      "bidAmount": 16,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn-2972515",
-          "playerId": null,
-          "player": "Cooper Rush"
+          "type": "TRADE",
+          "playerKey": "espn-3128429",
+          "playerId": 3128429,
+          "player": "Courtland Sutton",
+          "fromTeamKey": "2024-t10",
+          "toTeamKey": "2024-t13"
         }
       ]
     }
