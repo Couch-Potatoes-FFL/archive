@@ -253,7 +253,6 @@ enum TransactionTypeLabel {
   FREEAGENT = "Free Agent",
   ROSTER = "Roster",
   TRADE_ACCEPT = "Trade",
-  TRADE_PROPOSAL = "Trade",
   WAIVER = "Waiver",
 }
 

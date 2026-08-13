@@ -13,7 +13,6 @@ const TRANSACTION_TYPE_LABELS = Object.freeze({
   FREEAGENT: "Free Agent",
   ROSTER: "Roster",
   TRADE_ACCEPT: "Trade",
-  TRADE_PROPOSAL: "Trade",
   WAIVER: "Waiver",
 });
 
@@ -1424,8 +1423,7 @@ async function buildSeason(year) {
     transactions
       .filter(
         (transaction) =>
-          (transaction.type === "TRADE_ACCEPT" && transaction.status === "EXECUTED") ||
-          (transaction.type === "TRADE_PROPOSAL" && transaction.status === "PENDING"),
+          transaction.type === "TRADE_ACCEPT" && transaction.status === "EXECUTED",
       )
       .forEach((transaction) => {
         transaction.items

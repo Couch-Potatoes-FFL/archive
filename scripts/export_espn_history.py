@@ -431,32 +431,17 @@ def fetch_trades(config: Config, year: int, scoring_period: int) -> List[Dict[st
             "Cookie": f"SWID={config.swid}; espn_s2={config.espn_s2}",
             "User-Agent": "cpffl-history-export/1.0",
             "x-fantasy-filter": json.dumps(
-                {
-                    "transactions": {
-                        "filterType": {"value": ["TRADE_ACCEPT", "TRADE_PROPOSAL"]}
-                    }
-                }
+                {"transactions": {"filterType": {"value": ["TRADE_ACCEPT"]}}}
             ),
         },
     )
     with urlopen(request, timeout=60) as response:
         payload = unwrap_history_response(json.loads(response.read().decode("utf-8")))
-    transactions = payload.get("transactions", [])
-    processed = [
+    return [
         transaction
-        for transaction in transactions
+        for transaction in payload.get("transactions", [])
         if transaction.get("type") == "TRADE_ACCEPT"
         and transaction.get("status") == "EXECUTED"
-    ]
-    processed_proposals = {
-        transaction.get("relatedTransactionId") for transaction in processed
-    }
-    return processed + [
-        transaction
-        for transaction in transactions
-        if transaction.get("type") == "TRADE_PROPOSAL"
-        and transaction.get("status") == "PENDING"
-        and transaction.get("id") not in processed_proposals
     ]
 
 
