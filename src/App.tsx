@@ -1682,12 +1682,10 @@ function TradesPage() {
 
   const columns: ColumnDef<PublicTrade[]>[] = [
     {
-      header: "Date",
-      accessorFn: (trade) => trade[0]?.date,
-      cell: ({ row }) =>
-        row.original[0]?.date
-          ? formatDate(row.original[0].date)
-          : `Week ${row.original[0]?.week}, ${row.original[0]?.year}`,
+      header: "Week",
+      accessorFn: (trade) =>
+        trade[0] ? trade[0].year * 100 + trade[0].week : 0,
+      cell: ({ row }) => `Week ${row.original[0]?.week}, ${row.original[0]?.year}`,
     },
     {
       header: "Players",

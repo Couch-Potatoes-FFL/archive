@@ -1657,9 +1657,9 @@ async function main() {
     "trades.json",
     trades.sort(
       (left, right) =>
-        (right.date || 0) - (left.date || 0) ||
         right.year - left.year ||
-        right.week - left.week,
+        right.week - left.week ||
+        (right.date || 0) - (left.date || 0),
     ),
   );
   await writeJson("players.json", mergePlayerSeasons(playerSeasons));
