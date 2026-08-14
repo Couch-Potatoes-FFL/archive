@@ -2154,6 +2154,23 @@ a.teamLabel:hover {
   color: var(--muted);
 }
 
+.tradePlayerExchange,
+.tradePlayerSide {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.tradePlayerSide + .tradePlayerSide {
+  gap: 6px;
+}
+
+.tradeExchangeIcon {
+  flex: 0 0 auto;
+  margin-left: 6px;
+  color: var(--muted);
+}
+
 .lineupColumns {
   display: grid;
   grid-template-columns: repeat(2, minmax(280px, 1fr));

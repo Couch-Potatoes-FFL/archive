@@ -1,6 +1,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import {
   ArrowRight,
+  ArrowLeftRight,
   BarChart3,
   ChevronDown,
   Home,
@@ -1650,6 +1651,14 @@ function TradesPage() {
   const filteredTradeCount = new Set(
     filteredTrades.map((trade) => trade.transactionKey),
   ).size;
+  const filteredTradeGroups = Array.from(
+    filteredTrades.reduce((groups, trade) => {
+      const group = groups.get(trade.transactionKey) ?? [];
+      group.push(trade);
+      groups.set(trade.transactionKey, group);
+      return groups;
+    }, new Map<string, PublicTrade[]>()).values(),
+  );
   const selectedTrade = trades.data.find(
     (trade) => trade.transactionKey === selectedTradeKey,
   );
@@ -1657,44 +1666,73 @@ function TradesPage() {
     ? trades.data.filter((trade) => trade.transactionKey === selectedTrade.transactionKey)
     : [];
 
-  const columns: ColumnDef<PublicTrade>[] = [
+  const columns: ColumnDef<PublicTrade[]>[] = [
     {
       header: "Date",
-      accessorKey: "date",
-      cell: ({ row }) => formatDate(row.original.date),
+      accessorFn: (trade) => trade[0]?.date,
+      cell: ({ row }) => formatDate(row.original[0]?.date),
     },
     {
-      header: "Type",
+      header: "Players",
+      accessorFn: (trade) => trade.map((line) => line.player).join(" "),
+      cell: ({ row }) => {
+        const sides = Array.from(
+          row.original.reduce((groups, line) => {
+            const key = line.fromTeamKey || line.fromTeamName;
+            const group = groups.get(key) ?? [];
+            group.push(line);
+            groups.set(key, group);
+            return groups;
+          }, new Map<string, PublicTrade[]>()).values(),
+        );
+
+        return (
+          <span className="tradePlayerExchange">
+            {sides.map((players, index) => (
+              <span className="tradePlayerSide" key={players[0]?.fromTeamKey || players[0]?.fromTeamName}>
+                {index ? <ArrowLeftRight className="tradeExchangeIcon" size={17} aria-hidden /> : null}
+                {players.map((line, playerIndex) => (
+                  <span key={line.tradeKey}>
+                    {playerIndex ? ", " : ""}
+                    {line.playerKey ? (
+                      <Link to={`/player/${encodeURIComponent(line.playerKey)}`}>
+                        {line.player}
+                      </Link>
+                    ) : (
+                      line.player
+                    )}
+                  </span>
+                ))}
+              </span>
+            ))}
+          </span>
+        );
+      },
+    },
+    {
+      header: "Teams",
+      accessorFn: (trade) =>
+        [...new Set(trade.flatMap((line) => [line.fromTeamName, line.toTeamName]))].join(" "),
+      cell: ({ row }) => {
+        const sendingTeams = [...new Set(row.original.map((line) => line.fromTeamName))];
+        const teams = [
+          ...new Set(row.original.flatMap((line) => [line.fromTeamName, line.toTeamName])),
+        ];
+        return teams.join(sendingTeams.length > 1 ? " ↔ " : " → ");
+      },
+    },
+    {
+      header: "Details",
       accessorFn: () => "Trade",
       cell: ({ row }) => (
         <button
           className="linkButton"
           type="button"
-          onClick={() => setSelectedTradeKey(row.original.transactionKey)}
+          onClick={() => setSelectedTradeKey(row.original[0]?.transactionKey)}
         >
-          Trade
+          Details
         </button>
       ),
-    },
-    {
-      header: "Player",
-      accessorKey: "player",
-      cell: ({ row }) =>
-        row.original.playerKey ? (
-          <Link to={`/player/${encodeURIComponent(row.original.playerKey)}`}>
-            {row.original.player}
-          </Link>
-        ) : (
-          row.original.player
-        ),
-    },
-    {
-      header: "Sending team",
-      accessorKey: "fromTeamName",
-    },
-    {
-      header: "Receiving team",
-      accessorKey: "toTeamName",
     },
   ];
 
@@ -1764,7 +1802,7 @@ function TradesPage() {
           </span>
         </div>
         <SimpleTable
-          data={filteredTrades}
+          data={filteredTradeGroups}
           columns={columns}
           emptyLabel="No executed trades found."
           mobileLabel="Trade cards"
