@@ -67,14 +67,18 @@
         {
           "type": "ADD",
           "playerKey": "espn-2980453",
-          "playerId": null,
-          "player": "Jamaal Williams"
+          "playerId": 2980453,
+          "player": "Jamaal Williams",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t12"
         },
         {
           "type": "DROP",
           "playerKey": "espn-15994",
-          "playerId": null,
-          "player": "Theo Riddick"
+          "playerId": 15994,
+          "player": "Theo Riddick",
+          "fromTeamKey": "2018-t12",
+          "toTeamKey": "2018-t-1"
         }
       ]
     },
@@ -90,13 +94,16 @@
         {
           "type": "DROP",
           "playerKey": "espn-16016",
-          "playerId": null,
-          "player": "Kenny Stills"
+          "playerId": 16016,
+          "player": "Kenny Stills",
+          "fromTeamKey": "2018-t05",
+          "toTeamKey": "2018-t-1"
         }
       ]
     },
     {
       "transactionKey": "2018-w16-x0003",
+      "teamKey": "2018-t-2147483648",
       "type": "WAIVER",
       "status": "EXECUTED",
       "scoringPeriod": 16,
@@ -106,14 +113,18 @@
         {
           "type": "ADD",
           "playerKey": "espn-2574808",
-          "playerId": null,
-          "player": "Robby Anderson"
+          "playerId": 2574808,
+          "player": "Robby Anderson",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t02"
         },
         {
           "type": "DROP",
           "playerKey": "espn-16946",
-          "playerId": null,
-          "player": "Bruce Ellington"
+          "playerId": 16946,
+          "player": "Bruce Ellington",
+          "fromTeamKey": "2018-t02",
+          "toTeamKey": "2018-t-1"
         }
       ]
     },
@@ -129,8 +140,10 @@
         {
           "type": "ADD",
           "playerKey": "espn-2980453",
-          "playerId": null,
-          "player": "Jamaal Williams"
+          "playerId": 2980453,
+          "player": "Jamaal Williams",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t02"
         }
       ]
     },
@@ -146,8 +159,10 @@
         {
           "type": "ADD",
           "playerKey": "espn--16017",
-          "playerId": null,
-          "player": "Patriots D/ST"
+          "playerId": -16017,
+          "player": "Patriots D/ST",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t02"
         }
       ]
     },
@@ -163,8 +178,10 @@
         {
           "type": "DROP",
           "playerKey": "espn-13587",
-          "playerId": null,
-          "player": "Chris Ivory"
+          "playerId": 13587,
+          "player": "Chris Ivory",
+          "fromTeamKey": "2018-t02",
+          "toTeamKey": "2018-t-1"
         }
       ]
     },
@@ -180,19 +197,24 @@
         {
           "type": "DROP",
           "playerKey": "espn-17453",
-          "playerId": null,
-          "player": "Cameron Brate"
+          "playerId": 17453,
+          "player": "Cameron Brate",
+          "fromTeamKey": "2018-t12",
+          "toTeamKey": "2018-t-1"
         },
         {
           "type": "ADD",
           "playerKey": "espn-16969",
-          "playerId": null,
-          "player": "Kapri Bibbs"
+          "playerId": 16969,
+          "player": "Kapri Bibbs",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t12"
         }
       ]
     },
     {
       "transactionKey": "2018-w16-x0008",
+      "teamKey": "2018-t-2147483648",
       "type": "WAIVER",
       "status": "EXECUTED",
       "scoringPeriod": 16,
@@ -202,13 +224,16 @@
         {
           "type": "ADD",
           "playerKey": "espn-3128774",
-          "playerId": null,
-          "player": "Kalen Ballage"
+          "playerId": 3128774,
+          "player": "Kalen Ballage",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t05"
         }
       ]
     },
     {
       "transactionKey": "2018-w16-x0009",
+      "teamKey": "2018-t-2147483648",
       "type": "WAIVER",
       "status": "PENDING",
       "scoringPeriod": 16,
@@ -218,8 +243,10 @@
         {
           "type": "ADD",
           "playerKey": "espn-3915381",
-          "playerId": null,
-          "player": "John Kelly"
+          "playerId": 3915381,
+          "player": "John Kelly",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t05"
         }
       ]
     },
@@ -235,13 +262,16 @@
         {
           "type": "ADD",
           "playerKey": "espn-3134353",
-          "playerId": null,
-          "player": "Tim Patrick"
+          "playerId": 3134353,
+          "player": "Tim Patrick",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t02"
         }
       ]
     },
     {
       "transactionKey": "2018-w16-x0011",
+      "teamKey": "2018-t-2147483648",
       "type": "WAIVER",
       "status": "PENDING",
       "scoringPeriod": 16,
@@ -251,8 +281,10 @@
         {
           "type": "ADD",
           "playerKey": "espn-2980453",
-          "playerId": null,
-          "player": "Jamaal Williams"
+          "playerId": 2980453,
+          "player": "Jamaal Williams",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t02"
         }
       ]
     },
@@ -268,13 +300,16 @@
         {
           "type": "ADD",
           "playerKey": "espn-2579604",
-          "playerId": null,
-          "player": "Phillip Dorsett"
+          "playerId": 2579604,
+          "player": "Phillip Dorsett",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t06"
         }
       ]
     },
     {
       "transactionKey": "2018-w16-x0013",
+      "teamKey": "2018-t-2147483648",
       "type": "WAIVER",
       "status": "PENDING",
       "scoringPeriod": 16,
@@ -284,14 +319,18 @@
         {
           "type": "ADD",
           "playerKey": "espn-2980453",
-          "playerId": null,
-          "player": "Jamaal Williams"
+          "playerId": 2980453,
+          "player": "Jamaal Williams",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t12"
         },
         {
           "type": "DROP",
           "playerKey": "espn-15994",
-          "playerId": null,
-          "player": "Theo Riddick"
+          "playerId": 15994,
+          "player": "Theo Riddick",
+          "fromTeamKey": "2018-t12",
+          "toTeamKey": "2018-t-1"
         }
       ]
     },
@@ -307,8 +346,10 @@
         {
           "type": "ADD",
           "playerKey": "espn-3915381",
-          "playerId": null,
-          "player": "John Kelly"
+          "playerId": 3915381,
+          "player": "John Kelly",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t05"
         }
       ]
     },
@@ -324,19 +365,24 @@
         {
           "type": "ADD",
           "playerKey": "espn-3059915",
-          "playerId": null,
-          "player": "Kareem Hunt"
+          "playerId": 3059915,
+          "player": "Kareem Hunt",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t02"
         },
         {
           "type": "DROP",
           "playerKey": "espn--16033",
-          "playerId": null,
-          "player": "Ravens D/ST"
+          "playerId": -16033,
+          "player": "Ravens D/ST",
+          "fromTeamKey": "2018-t02",
+          "toTeamKey": "2018-t-1"
         }
       ]
     },
     {
       "transactionKey": "2018-w16-x0016",
+      "teamKey": "2018-t-2147483648",
       "type": "WAIVER",
       "status": "EXECUTED",
       "scoringPeriod": 16,
@@ -346,8 +392,10 @@
         {
           "type": "ADD",
           "playerKey": "espn-2980453",
-          "playerId": null,
-          "player": "Jamaal Williams"
+          "playerId": 2980453,
+          "player": "Jamaal Williams",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t05"
         }
       ]
     },
@@ -363,14 +411,18 @@
         {
           "type": "ADD",
           "playerKey": "espn-2473037",
-          "playerId": null,
-          "player": "Jason Myers"
+          "playerId": 2473037,
+          "player": "Jason Myers",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t12"
         },
         {
           "type": "DROP",
           "playerKey": "espn-16486",
-          "playerId": null,
-          "player": "Brett Maher"
+          "playerId": 16486,
+          "player": "Brett Maher",
+          "fromTeamKey": "2018-t12",
+          "toTeamKey": "2018-t-1"
         }
       ]
     },
@@ -386,8 +438,10 @@
         {
           "type": "DROP",
           "playerKey": "espn-3123969",
-          "playerId": null,
-          "player": "Ito Smith"
+          "playerId": 3123969,
+          "player": "Ito Smith",
+          "fromTeamKey": "2018-t05",
+          "toTeamKey": "2018-t-1"
         }
       ]
     }

@@ -2800,19 +2800,42 @@
         {
           "type": "ADD",
           "playerKey": "espn-4360423",
-          "playerId": null,
-          "player": "Michael Penix Jr."
+          "playerId": 4360423,
+          "player": "Michael Penix Jr.",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t02"
         },
         {
           "type": "DROP",
           "playerKey": "espn-14880",
-          "playerId": null,
-          "player": "Kirk Cousins"
+          "playerId": 14880,
+          "player": "Kirk Cousins",
+          "fromTeamKey": "2024-t02",
+          "toTeamKey": "2024-t00"
         }
       ]
     },
     {
       "transactionKey": "2024-w16-x0002",
+      "teamKey": "2024-t12",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1734318483472,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3123076",
+          "playerId": 3123076,
+          "player": "David Njoku",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2024-w16-x0003",
       "teamKey": "2024-t05",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -2823,13 +2846,99 @@
         {
           "type": "ADD",
           "playerKey": "espn--14021",
-          "playerId": null,
-          "player": "Eagles Coach"
+          "playerId": -14021,
+          "player": "Eagles Coach",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t05"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0003",
+      "transactionKey": "2024-w16-x0004",
+      "teamKey": "2024-t12",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1733807016969,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4362628",
+          "playerId": 4362628,
+          "player": "Ja'Marr Chase",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2024-w16-x0005",
+      "teamKey": "2024-t12",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1734306848684,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3054850",
+          "playerId": 3054850,
+          "player": "Alvin Kamara",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2024-w16-x0006",
+      "teamKey": "2024-t12",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1734305335869,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4596448",
+          "playerId": 4596448,
+          "player": "Bucky Irving",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3054850",
+          "playerId": 3054850,
+          "player": "Alvin Kamara",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2024-w16-x0007",
+      "teamKey": "2024-t12",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1734382907491,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4426388",
+          "playerId": 4426388,
+          "player": "Jameson Williams",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2024-w16-x0008",
       "teamKey": "2024-t05",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -2840,13 +2949,34 @@
         {
           "type": "ADD",
           "playerKey": "espn--14008",
-          "playerId": null,
-          "player": "Lions Coach"
+          "playerId": -14008,
+          "player": "Lions Coach",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t05"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0004",
+      "transactionKey": "2024-w16-x0009",
+      "teamKey": "2024-t12",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1734097380150,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4372561",
+          "playerId": 4372561,
+          "player": "Isaac Guerendo",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2024-w16-x0010",
       "teamKey": "2024-t12",
       "type": "WAIVER",
       "status": "EXECUTED",
@@ -2857,19 +2987,23 @@
         {
           "type": "ADD",
           "playerKey": "espn-4430834",
-          "playerId": null,
-          "player": "Jalen McMillan"
+          "playerId": 4430834,
+          "player": "Jalen McMillan",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t12"
         },
         {
           "type": "DROP",
           "playerKey": "espn-3126486",
-          "playerId": null,
-          "player": "Deebo Samuel Sr."
+          "playerId": 3126486,
+          "player": "Deebo Samuel Sr.",
+          "fromTeamKey": "2024-t12",
+          "toTeamKey": "2024-t00"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0005",
+      "transactionKey": "2024-w16-x0011",
       "teamKey": "2024-t12",
       "type": "WAIVER",
       "status": "CANCELED",
@@ -2880,19 +3014,23 @@
         {
           "type": "ADD",
           "playerKey": "espn-4361432",
-          "playerId": null,
-          "player": "Romeo Doubs"
+          "playerId": 4361432,
+          "player": "Romeo Doubs",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t12"
         },
         {
           "type": "DROP",
           "playerKey": "espn-3126486",
-          "playerId": null,
-          "player": "Deebo Samuel Sr."
+          "playerId": 3126486,
+          "player": "Deebo Samuel Sr.",
+          "fromTeamKey": "2024-t12",
+          "toTeamKey": "2024-t00"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0006",
+      "transactionKey": "2024-w16-x0012",
       "teamKey": "2024-t05",
       "type": "WAIVER",
       "status": "EXECUTED",
@@ -2903,13 +3041,15 @@
         {
           "type": "ADD",
           "playerKey": "espn-3126486",
-          "playerId": null,
-          "player": "Deebo Samuel Sr."
+          "playerId": 3126486,
+          "player": "Deebo Samuel Sr.",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t05"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0007",
+      "transactionKey": "2024-w16-x0013",
       "teamKey": "2024-t05",
       "type": "ROSTER",
       "status": "EXECUTED",
@@ -2920,13 +3060,72 @@
         {
           "type": "DROP",
           "playerKey": "espn-4361418",
-          "playerId": null,
-          "player": "Will Levis"
+          "playerId": 4361418,
+          "player": "Will Levis",
+          "fromTeamKey": "2024-t05",
+          "toTeamKey": "2024-t00"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0008",
+      "transactionKey": "2024-w16-x0014",
+      "teamKey": "2024-t12",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1733807074199,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn--16011",
+          "playerId": -16011,
+          "player": "Colts D/ST",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2024-w16-x0015",
+      "teamKey": "2024-t12",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1734318488851,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3139477",
+          "playerId": 3139477,
+          "player": "Patrick Mahomes",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2024-w16-x0016",
+      "teamKey": "2024-t12",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1734305357946,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3054850",
+          "playerId": 3054850,
+          "player": "Alvin Kamara",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2024-w16-x0017",
       "teamKey": "2024-t05",
       "type": "WAIVER",
       "status": "PENDING",
@@ -2937,13 +3136,15 @@
         {
           "type": "ADD",
           "playerKey": "espn-3126486",
-          "playerId": null,
-          "player": "Deebo Samuel Sr."
+          "playerId": 3126486,
+          "player": "Deebo Samuel Sr.",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t05"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0009",
+      "transactionKey": "2024-w16-x0018",
       "teamKey": "2024-t09",
       "type": "WAIVER",
       "status": "FAILED_INVALIDPLAYERSOURCE",
@@ -2954,19 +3155,23 @@
         {
           "type": "ADD",
           "playerKey": "espn-4372019",
-          "playerId": null,
-          "player": "Jerome Ford"
+          "playerId": 4372019,
+          "player": "Jerome Ford",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t09"
         },
         {
           "type": "DROP",
           "playerKey": "espn--16008",
-          "playerId": null,
-          "player": "Lions D/ST"
+          "playerId": -16008,
+          "player": "Lions D/ST",
+          "fromTeamKey": "2024-t09",
+          "toTeamKey": "2024-t00"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0010",
+      "transactionKey": "2024-w16-x0019",
       "teamKey": "2024-t05",
       "type": "WAIVER",
       "status": "PENDING",
@@ -2977,13 +3182,72 @@
         {
           "type": "ADD",
           "playerKey": "espn-4360423",
-          "playerId": null,
-          "player": "Michael Penix Jr."
+          "playerId": 4360423,
+          "player": "Michael Penix Jr.",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t05"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0011",
+      "transactionKey": "2024-w16-x0020",
+      "teamKey": "2024-t12",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1734306851454,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3139477",
+          "playerId": 3139477,
+          "player": "Patrick Mahomes",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2024-w16-x0021",
+      "teamKey": "2024-t12",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1733807030941,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3043078",
+          "playerId": 3043078,
+          "player": "Derrick Henry",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2024-w16-x0022",
+      "teamKey": "2024-t12",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1734318486453,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3054850",
+          "playerId": 3054850,
+          "player": "Alvin Kamara",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2024-w16-x0023",
       "teamKey": "2024-t05",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -2994,13 +3258,15 @@
         {
           "type": "ADD",
           "playerKey": "espn--14003",
-          "playerId": null,
-          "player": "Bears Coach"
+          "playerId": -14003,
+          "player": "Bears Coach",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t05"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0012",
+      "transactionKey": "2024-w16-x0024",
       "teamKey": "2024-t10",
       "type": "ROSTER",
       "status": "EXECUTED",
@@ -3011,13 +3277,15 @@
         {
           "type": "DROP",
           "playerKey": "espn-4430104",
-          "playerId": null,
-          "player": "Sincere McCormick"
+          "playerId": 4430104,
+          "player": "Sincere McCormick",
+          "fromTeamKey": "2024-t10",
+          "toTeamKey": "2024-t00"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0013",
+      "transactionKey": "2024-w16-x0025",
       "teamKey": "2024-t05",
       "type": "ROSTER",
       "status": "EXECUTED",
@@ -3028,13 +3296,15 @@
         {
           "type": "DROP",
           "playerKey": "espn-3051738",
-          "playerId": null,
-          "player": "Marquez Valdes-Scantling"
+          "playerId": 3051738,
+          "player": "Marquez Valdes-Scantling",
+          "fromTeamKey": "2024-t05",
+          "toTeamKey": "2024-t00"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0014",
+      "transactionKey": "2024-w16-x0026",
       "teamKey": "2024-t03",
       "type": "ROSTER",
       "status": "EXECUTED",
@@ -3045,13 +3315,42 @@
         {
           "type": "DROP",
           "playerKey": "espn--16018",
-          "playerId": null,
-          "player": "Saints D/ST"
+          "playerId": -16018,
+          "player": "Saints D/ST",
+          "fromTeamKey": "2024-t03",
+          "toTeamKey": "2024-t00"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0015",
+      "transactionKey": "2024-w16-x0027",
+      "teamKey": "2024-t09",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1734354863166,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4427366",
+          "playerId": 4427366,
+          "player": "Breece Hall",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3916148",
+          "playerId": 3916148,
+          "player": "Tony Pollard",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2024-w16-x0028",
       "teamKey": "2024-t11",
       "type": "ROSTER",
       "status": "EXECUTED",
@@ -3062,13 +3361,61 @@
         {
           "type": "DROP",
           "playerKey": "espn--16028",
-          "playerId": null,
-          "player": "Commanders D/ST"
+          "playerId": -16028,
+          "player": "Commanders D/ST",
+          "fromTeamKey": "2024-t11",
+          "toTeamKey": "2024-t00"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0016",
+      "transactionKey": "2024-w16-x0029",
+      "teamKey": "2024-t12",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1734382915377,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4426388",
+          "playerId": 4426388,
+          "player": "Jameson Williams",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2024-w16-x0030",
+      "teamKey": "2024-t12",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1734097385958,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4372561",
+          "playerId": 4372561,
+          "player": "Isaac Guerendo",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3054850",
+          "playerId": 3054850,
+          "player": "Alvin Kamara",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2024-w16-x0031",
       "teamKey": "2024-t10",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3079,13 +3426,15 @@
         {
           "type": "ADD",
           "playerKey": "espn-4241372",
-          "playerId": null,
-          "player": "Hollywood Brown"
+          "playerId": 4241372,
+          "player": "Hollywood Brown",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t10"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0017",
+      "transactionKey": "2024-w16-x0032",
       "teamKey": "2024-t05",
       "type": "WAIVER",
       "status": "FAILED_INVALIDPLAYERSOURCE",
@@ -3096,13 +3445,34 @@
         {
           "type": "ADD",
           "playerKey": "espn-4360423",
-          "playerId": null,
-          "player": "Michael Penix Jr."
+          "playerId": 4360423,
+          "player": "Michael Penix Jr.",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t05"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0018",
+      "transactionKey": "2024-w16-x0033",
+      "teamKey": "2024-t12",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1734318444717,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3123076",
+          "playerId": 3123076,
+          "player": "David Njoku",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2024-w16-x0034",
       "teamKey": "2024-t12",
       "type": "WAIVER",
       "status": "CANCELED",
@@ -3113,19 +3483,23 @@
         {
           "type": "ADD",
           "playerKey": "espn-16339",
-          "playerId": null,
-          "player": "Brandon McManus"
+          "playerId": 16339,
+          "player": "Brandon McManus",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t12"
         },
         {
           "type": "DROP",
           "playerKey": "espn-15683",
-          "playerId": null,
-          "player": "Justin Tucker"
+          "playerId": 15683,
+          "player": "Justin Tucker",
+          "fromTeamKey": "2024-t12",
+          "toTeamKey": "2024-t00"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0019",
+      "transactionKey": "2024-w16-x0035",
       "teamKey": "2024-t10",
       "type": "ROSTER",
       "status": "EXECUTED",
@@ -3136,13 +3510,15 @@
         {
           "type": "DROP",
           "playerKey": "espn-4428718",
-          "playerId": null,
-          "player": "Tre Tucker"
+          "playerId": 4428718,
+          "player": "Tre Tucker",
+          "fromTeamKey": "2024-t10",
+          "toTeamKey": "2024-t00"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0020",
+      "transactionKey": "2024-w16-x0036",
       "teamKey": "2024-t05",
       "type": "ROSTER",
       "status": "EXECUTED",
@@ -3153,13 +3529,72 @@
         {
           "type": "DROP",
           "playerKey": "espn-2573079",
-          "playerId": null,
-          "player": "Carson Wentz"
+          "playerId": 2573079,
+          "player": "Carson Wentz",
+          "fromTeamKey": "2024-t05",
+          "toTeamKey": "2024-t00"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0021",
+      "transactionKey": "2024-w16-x0037",
+      "teamKey": "2024-t12",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1734307525298,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4361741",
+          "playerId": 4361741,
+          "player": "Brock Purdy",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2024-w16-x0038",
+      "teamKey": "2024-t12",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1733881074950,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn--14017",
+          "playerId": -14017,
+          "player": "Patriots Coach",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2024-w16-x0039",
+      "teamKey": "2024-t12",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1734295174518,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3123076",
+          "playerId": 3123076,
+          "player": "David Njoku",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2024-w16-x0040",
       "teamKey": "2024-t10",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3170,13 +3605,15 @@
         {
           "type": "ADD",
           "playerKey": "espn-2576336",
-          "playerId": null,
-          "player": "Ameer Abdullah"
+          "playerId": 2576336,
+          "player": "Ameer Abdullah",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t10"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0022",
+      "transactionKey": "2024-w16-x0041",
       "teamKey": "2024-t05",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3187,13 +3624,15 @@
         {
           "type": "ADD",
           "playerKey": "espn--14033",
-          "playerId": null,
-          "player": "Ravens Coach"
+          "playerId": -14033,
+          "player": "Ravens Coach",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t05"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0023",
+      "transactionKey": "2024-w16-x0042",
       "teamKey": "2024-t10",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3204,13 +3643,15 @@
         {
           "type": "ADD",
           "playerKey": "espn-3134353",
-          "playerId": null,
-          "player": "Tim Patrick"
+          "playerId": 3134353,
+          "player": "Tim Patrick",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t10"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0024",
+      "transactionKey": "2024-w16-x0043",
       "teamKey": "2024-t05",
       "type": "ROSTER",
       "status": "EXECUTED",
@@ -3221,13 +3662,15 @@
         {
           "type": "DROP",
           "playerKey": "espn-3051876",
-          "playerId": null,
-          "player": "Evan Engram"
+          "playerId": 3051876,
+          "player": "Evan Engram",
+          "fromTeamKey": "2024-t05",
+          "toTeamKey": "2024-t00"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0025",
+      "transactionKey": "2024-w16-x0044",
       "teamKey": "2024-t12",
       "type": "WAIVER",
       "status": "CANCELED",
@@ -3238,19 +3681,23 @@
         {
           "type": "ADD",
           "playerKey": "espn-4361432",
-          "playerId": null,
-          "player": "Romeo Doubs"
+          "playerId": 4361432,
+          "player": "Romeo Doubs",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t12"
         },
         {
           "type": "DROP",
           "playerKey": "espn-4432708",
-          "playerId": null,
-          "player": "Marvin Harrison Jr."
+          "playerId": 4432708,
+          "player": "Marvin Harrison Jr.",
+          "fromTeamKey": "2024-t12",
+          "toTeamKey": "2024-t00"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0026",
+      "transactionKey": "2024-w16-x0045",
       "teamKey": "2024-t05",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3261,19 +3708,23 @@
         {
           "type": "ADD",
           "playerKey": "espn-2573079",
-          "playerId": null,
-          "player": "Carson Wentz"
+          "playerId": 2573079,
+          "player": "Carson Wentz",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t05"
         },
         {
           "type": "DROP",
           "playerKey": "espn-4260394",
-          "playerId": null,
-          "player": "Aidan O'Connell"
+          "playerId": 4260394,
+          "player": "Aidan O'Connell",
+          "fromTeamKey": "2024-t05",
+          "toTeamKey": "2024-t00"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0027",
+      "transactionKey": "2024-w16-x0046",
       "teamKey": "2024-t10",
       "type": "ROSTER",
       "status": "EXECUTED",
@@ -3284,13 +3735,15 @@
         {
           "type": "DROP",
           "playerKey": "espn-3128720",
-          "playerId": null,
-          "player": "Nick Chubb"
+          "playerId": 3128720,
+          "player": "Nick Chubb",
+          "fromTeamKey": "2024-t10",
+          "toTeamKey": "2024-t00"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0028",
+      "transactionKey": "2024-w16-x0047",
       "teamKey": "2024-t12",
       "type": "WAIVER",
       "status": "EXECUTED",
@@ -3301,19 +3754,23 @@
         {
           "type": "ADD",
           "playerKey": "espn-4429013",
-          "playerId": null,
-          "player": "Tank Bigsby"
+          "playerId": 4429013,
+          "player": "Tank Bigsby",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t12"
         },
         {
           "type": "DROP",
           "playerKey": "espn-4428557",
-          "playerId": null,
-          "player": "Tyjae Spears"
+          "playerId": 4428557,
+          "player": "Tyjae Spears",
+          "fromTeamKey": "2024-t12",
+          "toTeamKey": "2024-t00"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0029",
+      "transactionKey": "2024-w16-x0048",
       "teamKey": "2024-t06",
       "type": "WAIVER",
       "status": "EXECUTED",
@@ -3324,13 +3781,61 @@
         {
           "type": "ADD",
           "playerKey": "espn-4372019",
-          "playerId": null,
-          "player": "Jerome Ford"
+          "playerId": 4372019,
+          "player": "Jerome Ford",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t06"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0030",
+      "transactionKey": "2024-w16-x0049",
+      "teamKey": "2024-t10",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1733706991884,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-16731",
+          "playerId": 16731,
+          "player": "Brandin Cooks",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-15818",
+          "playerId": 15818,
+          "player": "Keenan Allen",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2024-w16-x0050",
+      "teamKey": "2024-t12",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1733807023385,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4047646",
+          "playerId": 4047646,
+          "player": "A.J. Brown",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2024-w16-x0051",
       "teamKey": "2024-t11",
       "type": "WAIVER",
       "status": "EXECUTED",
@@ -3341,13 +3846,15 @@
         {
           "type": "ADD",
           "playerKey": "espn--16027",
-          "playerId": null,
-          "player": "Buccaneers D/ST"
+          "playerId": -16027,
+          "player": "Buccaneers D/ST",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t11"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0031",
+      "transactionKey": "2024-w16-x0052",
       "teamKey": "2024-t05",
       "type": "ROSTER",
       "status": "EXECUTED",
@@ -3358,13 +3865,15 @@
         {
           "type": "DROP",
           "playerKey": "espn-4429013",
-          "playerId": null,
-          "player": "Tank Bigsby"
+          "playerId": 4429013,
+          "player": "Tank Bigsby",
+          "fromTeamKey": "2024-t05",
+          "toTeamKey": "2024-t00"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0032",
+      "transactionKey": "2024-w16-x0053",
       "teamKey": "2024-t03",
       "type": "ROSTER",
       "status": "EXECUTED",
@@ -3375,13 +3884,15 @@
         {
           "type": "DROP",
           "playerKey": "espn-2969939",
-          "playerId": null,
-          "player": "Jameis Winston"
+          "playerId": 2969939,
+          "player": "Jameis Winston",
+          "fromTeamKey": "2024-t03",
+          "toTeamKey": "2024-t00"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0033",
+      "transactionKey": "2024-w16-x0054",
       "teamKey": "2024-t05",
       "type": "ROSTER",
       "status": "EXECUTED",
@@ -3392,13 +3903,15 @@
         {
           "type": "DROP",
           "playerKey": "espn-4369863",
-          "playerId": null,
-          "player": "Cedric Tillman"
+          "playerId": 4369863,
+          "player": "Cedric Tillman",
+          "fromTeamKey": "2024-t05",
+          "toTeamKey": "2024-t00"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0034",
+      "transactionKey": "2024-w16-x0055",
       "teamKey": "2024-t12",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3409,13 +3922,34 @@
         {
           "type": "ADD",
           "playerKey": "espn-4428557",
-          "playerId": null,
-          "player": "Tyjae Spears"
+          "playerId": 4428557,
+          "player": "Tyjae Spears",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t12"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0035",
+      "transactionKey": "2024-w16-x0056",
+      "teamKey": "2024-t12",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1734318438164,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3054850",
+          "playerId": 3054850,
+          "player": "Alvin Kamara",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2024-w16-x0057",
       "teamKey": "2024-t05",
       "type": "WAIVER",
       "status": "PENDING",
@@ -3426,13 +3960,34 @@
         {
           "type": "ADD",
           "playerKey": "espn-4260394",
-          "playerId": null,
-          "player": "Aidan O'Connell"
+          "playerId": 4260394,
+          "player": "Aidan O'Connell",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t05"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0036",
+      "transactionKey": "2024-w16-x0058",
+      "teamKey": "2024-t12",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1733807082542,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3123076",
+          "playerId": 3123076,
+          "player": "David Njoku",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2024-w16-x0059",
       "teamKey": "2024-t10",
       "type": "WAIVER",
       "status": "FAILED_INVALIDPLAYERSOURCE",
@@ -3443,13 +3998,15 @@
         {
           "type": "ADD",
           "playerKey": "espn-3126486",
-          "playerId": null,
-          "player": "Deebo Samuel Sr."
+          "playerId": 3126486,
+          "player": "Deebo Samuel Sr.",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t10"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0037",
+      "transactionKey": "2024-w16-x0060",
       "teamKey": "2024-t05",
       "type": "WAIVER",
       "status": "CANCELED",
@@ -3460,13 +4017,53 @@
         {
           "type": "ADD",
           "playerKey": "espn-4260394",
-          "playerId": null,
-          "player": "Aidan O'Connell"
+          "playerId": 4260394,
+          "player": "Aidan O'Connell",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t05"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0038",
+      "transactionKey": "2024-w16-x0061",
+      "teamKey": "2024-t12",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1733807014185,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4426348",
+          "playerId": 4426348,
+          "player": "Jayden Daniels",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2024-w16-x0062",
+      "teamKey": "2024-t12",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1733807057035,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3054850",
+          "playerId": 3054850,
+          "player": "Alvin Kamara",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2024-w16-x0063",
       "teamKey": "2024-t12",
       "type": "WAIVER",
       "status": "EXECUTED",
@@ -3477,19 +4074,69 @@
         {
           "type": "ADD",
           "playerKey": "espn-4363538",
-          "playerId": null,
-          "player": "Chad Ryland"
+          "playerId": 4363538,
+          "player": "Chad Ryland",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t12"
         },
         {
           "type": "DROP",
           "playerKey": "espn-15683",
-          "playerId": null,
-          "player": "Justin Tucker"
+          "playerId": 15683,
+          "player": "Justin Tucker",
+          "fromTeamKey": "2024-t12",
+          "toTeamKey": "2024-t00"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0039",
+      "transactionKey": "2024-w16-x0064",
+      "teamKey": "2024-t12",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1734318441029,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3139477",
+          "playerId": 3139477,
+          "player": "Patrick Mahomes",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2024-w16-x0065",
+      "teamKey": "2024-t10",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1733706999781,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3054212",
+          "playerId": 3054212,
+          "player": "Jonnu Smith",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4432665",
+          "playerId": 4432665,
+          "player": "Brock Bowers",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2024-w16-x0066",
       "teamKey": "2024-t12",
       "type": "WAIVER",
       "status": "CANCELED",
@@ -3500,19 +4147,23 @@
         {
           "type": "ADD",
           "playerKey": "espn-4360423",
-          "playerId": null,
-          "player": "Michael Penix Jr."
+          "playerId": 4360423,
+          "player": "Michael Penix Jr.",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t12"
         },
         {
           "type": "DROP",
           "playerKey": "espn-3139477",
-          "playerId": null,
-          "player": "Patrick Mahomes"
+          "playerId": 3139477,
+          "player": "Patrick Mahomes",
+          "fromTeamKey": "2024-t12",
+          "toTeamKey": "2024-t00"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0040",
+      "transactionKey": "2024-w16-x0067",
       "teamKey": "2024-t03",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3523,13 +4174,42 @@
         {
           "type": "ADD",
           "playerKey": "espn--16022",
-          "playerId": null,
-          "player": "Cardinals D/ST"
+          "playerId": -16022,
+          "player": "Cardinals D/ST",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t03"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0041",
+      "transactionKey": "2024-w16-x0068",
+      "teamKey": "2024-t09",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1734376053898,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4427366",
+          "playerId": 4427366,
+          "player": "Breece Hall",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4379399",
+          "playerId": 4379399,
+          "player": "James Cook",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2024-w16-x0069",
       "teamKey": "2024-t06",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3540,13 +4220,15 @@
         {
           "type": "ADD",
           "playerKey": "espn-2577327",
-          "playerId": null,
-          "player": "Tyler Lockett"
+          "playerId": 2577327,
+          "player": "Tyler Lockett",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t06"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0042",
+      "transactionKey": "2024-w16-x0070",
       "teamKey": "2024-t05",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3557,13 +4239,53 @@
         {
           "type": "ADD",
           "playerKey": "espn-4260394",
-          "playerId": null,
-          "player": "Aidan O'Connell"
+          "playerId": 4260394,
+          "player": "Aidan O'Connell",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t05"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0043",
+      "transactionKey": "2024-w16-x0071",
+      "teamKey": "2024-t12",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1733807064023,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4361741",
+          "playerId": 4361741,
+          "player": "Brock Purdy",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2024-w16-x0072",
+      "teamKey": "2024-t12",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1733807046345,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3139477",
+          "playerId": 3139477,
+          "player": "Patrick Mahomes",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2024-w16-x0073",
       "teamKey": "2024-t06",
       "type": "WAIVER",
       "status": "FAILED_INVALIDPLAYERSOURCE",
@@ -3574,13 +4296,15 @@
         {
           "type": "ADD",
           "playerKey": "espn--16027",
-          "playerId": null,
-          "player": "Buccaneers D/ST"
+          "playerId": -16027,
+          "player": "Buccaneers D/ST",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t06"
         }
       ]
     },
     {
-      "transactionKey": "2024-w16-x0044",
+      "transactionKey": "2024-w16-x0074",
       "teamKey": "2024-t12",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3591,8 +4315,10 @@
         {
           "type": "ADD",
           "playerKey": "espn-4360569",
-          "playerId": null,
-          "player": "Jordan Mason"
+          "playerId": 4360569,
+          "player": "Jordan Mason",
+          "fromTeamKey": "2024-t00",
+          "toTeamKey": "2024-t12"
         }
       ]
     }

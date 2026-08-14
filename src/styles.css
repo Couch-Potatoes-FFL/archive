@@ -2120,6 +2120,42 @@ a.teamLabel:hover {
 
 .tradeModal {
   width: min(760px, 100%);
+  padding: 28px 18px 18px;
+}
+
+.tradeModal .modalHeader {
+  gap: 28px;
+  margin-bottom: 24px;
+}
+
+.tradeModal .modalHeader .eyebrow {
+  margin-bottom: 8px;
+  font-size: 0.86rem;
+}
+
+.tradeModal .modalHeader h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  line-height: 1.05;
+}
+
+.tradeModal .modalHeader strong {
+  font-size: 1.05rem;
+}
+
+.tradeModalMeta {
+  display: grid;
+  justify-items: end;
+  gap: 8px;
+  padding-top: 3px;
+  text-align: right;
+}
+
+.tradeModalActions {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: flex-start;
+  gap: 16px;
 }
 
 .tradeDetailList {

@@ -57,6 +57,7 @@
   "transactions": [
     {
       "transactionKey": "2018-w15-x0001",
+      "teamKey": "2018-t-2147483648",
       "type": "WAIVER",
       "status": "EXECUTED",
       "scoringPeriod": 15,
@@ -66,14 +67,18 @@
         {
           "type": "ADD",
           "playerKey": "espn-13587",
-          "playerId": null,
-          "player": "Chris Ivory"
+          "playerId": 13587,
+          "player": "Chris Ivory",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t02"
         },
         {
           "type": "DROP",
           "playerKey": "espn-3125116",
-          "playerId": null,
-          "player": "D'Onta Foreman"
+          "playerId": 3125116,
+          "player": "D'Onta Foreman",
+          "fromTeamKey": "2018-t02",
+          "toTeamKey": "2018-t-1"
         }
       ]
     },
@@ -89,8 +94,10 @@
         {
           "type": "DROP",
           "playerKey": "espn-16777",
-          "playerId": null,
-          "player": "Carlos Hyde"
+          "playerId": 16777,
+          "player": "Carlos Hyde",
+          "fromTeamKey": "2018-t03",
+          "toTeamKey": "2018-t-1"
         }
       ]
     },
@@ -106,8 +113,10 @@
         {
           "type": "ADD",
           "playerKey": "espn-15807",
-          "playerId": null,
-          "player": "Cordarrelle Patterson"
+          "playerId": 15807,
+          "player": "Cordarrelle Patterson",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t06"
         }
       ]
     },
@@ -123,14 +132,18 @@
         {
           "type": "DROP",
           "playerKey": "espn-3886377",
-          "playerId": null,
-          "player": "Josh Rosen"
+          "playerId": 3886377,
+          "player": "Josh Rosen",
+          "fromTeamKey": "2018-t03",
+          "toTeamKey": "2018-t-1"
         },
         {
           "type": "ADD",
           "playerKey": "espn-2574630",
-          "playerId": null,
-          "player": "Jeff Driskel"
+          "playerId": 2574630,
+          "player": "Jeff Driskel",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t03"
         }
       ]
     },
@@ -146,14 +159,18 @@
         {
           "type": "DROP",
           "playerKey": "espn--16012",
-          "playerId": null,
-          "player": "Chiefs D/ST"
+          "playerId": -16012,
+          "player": "Chiefs D/ST",
+          "fromTeamKey": "2018-t02",
+          "toTeamKey": "2018-t-1"
         },
         {
           "type": "ADD",
           "playerKey": "espn--16033",
-          "playerId": null,
-          "player": "Ravens D/ST"
+          "playerId": -16033,
+          "player": "Ravens D/ST",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t02"
         }
       ]
     },
@@ -169,13 +186,16 @@
         {
           "type": "DROP",
           "playerKey": "espn-17133",
-          "playerId": null,
-          "player": "Isaiah Crowell"
+          "playerId": 17133,
+          "player": "Isaiah Crowell",
+          "fromTeamKey": "2018-t05",
+          "toTeamKey": "2018-t-1"
         }
       ]
     },
     {
       "transactionKey": "2018-w15-x0007",
+      "teamKey": "2018-t-2147483648",
       "type": "WAIVER",
       "status": "EXECUTED",
       "scoringPeriod": 15,
@@ -185,14 +205,18 @@
         {
           "type": "ADD",
           "playerKey": "espn-14877",
-          "playerId": null,
-          "player": "Nick Foles"
+          "playerId": 14877,
+          "player": "Nick Foles",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t12"
         },
         {
           "type": "DROP",
           "playerKey": "espn-12483",
-          "playerId": null,
-          "player": "Matthew Stafford"
+          "playerId": 12483,
+          "player": "Matthew Stafford",
+          "fromTeamKey": "2018-t12",
+          "toTeamKey": "2018-t-1"
         }
       ]
     },
@@ -208,8 +232,10 @@
         {
           "type": "ADD",
           "playerKey": "espn-3123969",
-          "playerId": null,
-          "player": "Ito Smith"
+          "playerId": 3123969,
+          "player": "Ito Smith",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t05"
         }
       ]
     },
@@ -225,8 +251,10 @@
         {
           "type": "ADD",
           "playerKey": "espn-16016",
-          "playerId": null,
-          "player": "Kenny Stills"
+          "playerId": 16016,
+          "player": "Kenny Stills",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t05"
         }
       ]
     },
@@ -242,14 +270,18 @@
         {
           "type": "DROP",
           "playerKey": "espn-11252",
-          "playerId": null,
-          "player": "Joe Flacco"
+          "playerId": 11252,
+          "player": "Joe Flacco",
+          "fromTeamKey": "2018-t06",
+          "toTeamKey": "2018-t-1"
         },
         {
           "type": "DROP",
           "playerKey": "espn--16017",
-          "playerId": null,
-          "player": "Patriots D/ST"
+          "playerId": -16017,
+          "player": "Patriots D/ST",
+          "fromTeamKey": "2018-t06",
+          "toTeamKey": "2018-t-1"
         }
       ]
     },
@@ -265,8 +297,10 @@
         {
           "type": "ADD",
           "playerKey": "espn-2521161",
-          "playerId": null,
-          "player": "Zach Zenner"
+          "playerId": 2521161,
+          "player": "Zach Zenner",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t03"
         }
       ]
     },
@@ -282,14 +316,18 @@
         {
           "type": "DROP",
           "playerKey": "espn-4212909",
-          "playerId": null,
-          "player": "David Moore"
+          "playerId": 4212909,
+          "player": "David Moore",
+          "fromTeamKey": "2018-t05",
+          "toTeamKey": "2018-t-1"
         },
         {
           "type": "ADD",
           "playerKey": "espn-3123969",
-          "playerId": null,
-          "player": "Ito Smith"
+          "playerId": 3123969,
+          "player": "Ito Smith",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t05"
         }
       ]
     },
@@ -305,8 +343,10 @@
         {
           "type": "ADD",
           "playerKey": "espn-4212909",
-          "playerId": null,
-          "player": "David Moore"
+          "playerId": 4212909,
+          "player": "David Moore",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t05"
         }
       ]
     },
@@ -322,19 +362,24 @@
         {
           "type": "ADD",
           "playerKey": "espn-3057987",
-          "playerId": null,
-          "player": "DaeSean Hamilton"
+          "playerId": 3057987,
+          "player": "DaeSean Hamilton",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t05"
         },
         {
           "type": "DROP",
           "playerKey": "espn-3050487",
-          "playerId": null,
-          "player": "Anthony Miller"
+          "playerId": 3050487,
+          "player": "Anthony Miller",
+          "fromTeamKey": "2018-t05",
+          "toTeamKey": "2018-t-1"
         }
       ]
     },
     {
       "transactionKey": "2018-w15-x0015",
+      "teamKey": "2018-t-2147483648",
       "type": "WAIVER",
       "status": "EXECUTED",
       "scoringPeriod": 15,
@@ -344,19 +389,24 @@
         {
           "type": "DROP",
           "playerKey": "espn-2577134",
-          "playerId": null,
-          "player": "Ty Montgomery"
+          "playerId": 2577134,
+          "player": "Ty Montgomery",
+          "fromTeamKey": "2018-t05",
+          "toTeamKey": "2018-t-1"
         },
         {
           "type": "ADD",
           "playerKey": "espn-2971888",
-          "playerId": null,
-          "player": "Kenneth Dixon"
+          "playerId": 2971888,
+          "player": "Kenneth Dixon",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t05"
         }
       ]
     },
     {
       "transactionKey": "2018-w15-x0016",
+      "teamKey": "2018-t-2147483648",
       "type": "WAIVER",
       "status": "PENDING",
       "scoringPeriod": 15,
@@ -366,14 +416,18 @@
         {
           "type": "ADD",
           "playerKey": "espn-2574630",
-          "playerId": null,
-          "player": "Jeff Driskel"
+          "playerId": 2574630,
+          "player": "Jeff Driskel",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t12"
         },
         {
           "type": "DROP",
           "playerKey": "espn-12483",
-          "playerId": null,
-          "player": "Matthew Stafford"
+          "playerId": 12483,
+          "player": "Matthew Stafford",
+          "fromTeamKey": "2018-t12",
+          "toTeamKey": "2018-t-1"
         }
       ]
     },
@@ -389,8 +443,10 @@
         {
           "type": "DROP",
           "playerKey": "espn-3128451",
-          "playerId": null,
-          "player": "Tre'Quan Smith"
+          "playerId": 3128451,
+          "player": "Tre'Quan Smith",
+          "fromTeamKey": "2018-t05",
+          "toTeamKey": "2018-t-1"
         }
       ]
     },
@@ -406,8 +462,10 @@
         {
           "type": "DROP",
           "playerKey": "espn--16024",
-          "playerId": null,
-          "player": "Chargers D/ST"
+          "playerId": -16024,
+          "player": "Chargers D/ST",
+          "fromTeamKey": "2018-t10",
+          "toTeamKey": "2018-t-1"
         }
       ]
     }

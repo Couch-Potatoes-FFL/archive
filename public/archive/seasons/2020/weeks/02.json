@@ -2592,8 +2592,10 @@
         {
           "type": "ADD",
           "playerKey": "espn--16022",
-          "playerId": null,
-          "player": "Cardinals D/ST"
+          "playerId": -16022,
+          "player": "Cardinals D/ST",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t12"
         }
       ]
     },
@@ -2609,14 +2611,18 @@
         {
           "type": "ADD",
           "playerKey": "espn-3051738",
-          "playerId": null,
-          "player": "Marquez Valdes-Scantling"
+          "playerId": 3051738,
+          "player": "Marquez Valdes-Scantling",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t03"
         },
         {
           "type": "DROP",
           "playerKey": "espn-2969962",
-          "playerId": null,
-          "player": "Duke Johnson"
+          "playerId": 2969962,
+          "player": "Duke Johnson",
+          "fromTeamKey": "2020-t03",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
@@ -2632,8 +2638,10 @@
         {
           "type": "ADD",
           "playerKey": "espn-2570986",
-          "playerId": null,
-          "player": "Malcolm Brown"
+          "playerId": 2570986,
+          "player": "Malcolm Brown",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t06"
         }
       ]
     },
@@ -2649,14 +2657,18 @@
         {
           "type": "ADD",
           "playerKey": "espn-3910544",
-          "playerId": null,
-          "player": "Joshua Kelley"
+          "playerId": 3910544,
+          "player": "Joshua Kelley",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t10"
         },
         {
           "type": "DROP",
-          "playerKey": "name-chris-thompson",
-          "playerId": null,
-          "player": "Chris Thompson"
+          "playerKey": "espn-15966",
+          "playerId": 15966,
+          "player": "Chris Thompson",
+          "fromTeamKey": "2020-t10",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
@@ -2672,14 +2684,18 @@
         {
           "type": "ADD",
           "playerKey": "espn-4360438",
-          "playerId": null,
-          "player": "Brandon Aiyuk"
+          "playerId": 4360438,
+          "player": "Brandon Aiyuk",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t12"
         },
         {
           "type": "DROP",
           "playerKey": "espn-16504",
-          "playerId": null,
-          "player": "Jack Doyle"
+          "playerId": 16504,
+          "player": "Jack Doyle",
+          "fromTeamKey": "2020-t12",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
@@ -2695,8 +2711,10 @@
         {
           "type": "ADD",
           "playerKey": "espn-3123050",
-          "playerId": null,
-          "player": "Chris Herndon"
+          "playerId": 3123050,
+          "player": "Chris Herndon",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t03"
         }
       ]
     },
@@ -2712,14 +2730,18 @@
         {
           "type": "ADD",
           "playerKey": "espn-4038941",
-          "playerId": null,
-          "player": "Justin Herbert"
+          "playerId": 4038941,
+          "player": "Justin Herbert",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t05"
         },
         {
           "type": "DROP",
           "playerKey": "espn-3128390",
-          "playerId": null,
-          "player": "Allen Lazard"
+          "playerId": 3128390,
+          "player": "Allen Lazard",
+          "fromTeamKey": "2020-t05",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
@@ -2735,14 +2757,18 @@
         {
           "type": "ADD",
           "playerKey": "espn-3121023",
-          "playerId": null,
-          "player": "Dallas Goedert"
+          "playerId": 3121023,
+          "player": "Dallas Goedert",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t10"
         },
         {
           "type": "DROP",
           "playerKey": "espn-10452",
-          "playerId": null,
-          "player": "Adrian Peterson"
+          "playerId": 10452,
+          "player": "Adrian Peterson",
+          "fromTeamKey": "2020-t10",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
@@ -2758,14 +2784,18 @@
         {
           "type": "ADD",
           "playerKey": "espn-2570986",
-          "playerId": null,
-          "player": "Malcolm Brown"
+          "playerId": 2570986,
+          "player": "Malcolm Brown",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t12"
         },
         {
           "type": "DROP",
           "playerKey": "espn-12514",
-          "playerId": null,
-          "player": "LeSean McCoy"
+          "playerId": 12514,
+          "player": "LeSean McCoy",
+          "fromTeamKey": "2020-t12",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
@@ -2781,8 +2811,10 @@
         {
           "type": "DROP",
           "playerKey": "espn-3115375",
-          "playerId": null,
-          "player": "Darrel Williams"
+          "playerId": 3115375,
+          "player": "Darrel Williams",
+          "fromTeamKey": "2020-t05",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
@@ -2798,8 +2830,10 @@
         {
           "type": "ADD",
           "playerKey": "espn-4243160",
-          "playerId": null,
-          "player": "Laviska Shenault Jr."
+          "playerId": 4243160,
+          "player": "Laviska Shenault Jr.",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t03"
         }
       ]
     },
@@ -2815,8 +2849,10 @@
         {
           "type": "ADD",
           "playerKey": "espn-3042778",
-          "playerId": null,
-          "player": "Corey Davis"
+          "playerId": 3042778,
+          "player": "Corey Davis",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t01"
         }
       ]
     },
@@ -2832,8 +2868,10 @@
         {
           "type": "ADD",
           "playerKey": "espn-2972460",
-          "playerId": null,
-          "player": "Breshad Perriman"
+          "playerId": 2972460,
+          "player": "Breshad Perriman",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t03"
         }
       ]
     },
@@ -2849,8 +2887,10 @@
         {
           "type": "DROP",
           "playerKey": "espn--16021",
-          "playerId": null,
-          "player": "Eagles D/ST"
+          "playerId": -16021,
+          "player": "Eagles D/ST",
+          "fromTeamKey": "2020-t12",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
@@ -2866,8 +2906,10 @@
         {
           "type": "ADD",
           "playerKey": "espn-2570986",
-          "playerId": null,
-          "player": "Malcolm Brown"
+          "playerId": 2570986,
+          "player": "Malcolm Brown",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t03"
         }
       ]
     },
@@ -2883,14 +2925,18 @@
         {
           "type": "ADD",
           "playerKey": "espn-2570986",
-          "playerId": null,
-          "player": "Malcolm Brown"
+          "playerId": 2570986,
+          "player": "Malcolm Brown",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t11"
         },
         {
           "type": "DROP",
           "playerKey": "espn-3128721",
-          "playerId": null,
-          "player": "Sony Michel"
+          "playerId": 3128721,
+          "player": "Sony Michel",
+          "fromTeamKey": "2020-t11",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
@@ -2906,14 +2952,18 @@
         {
           "type": "ADD",
           "playerKey": "espn-2570986",
-          "playerId": null,
-          "player": "Malcolm Brown"
+          "playerId": 2570986,
+          "player": "Malcolm Brown",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t02"
         },
         {
           "type": "DROP",
           "playerKey": "espn-4038818",
-          "playerId": null,
-          "player": "Bryan Edwards"
+          "playerId": 4038818,
+          "player": "Bryan Edwards",
+          "fromTeamKey": "2020-t02",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
@@ -2929,8 +2979,10 @@
         {
           "type": "ADD",
           "playerKey": "espn-3128390",
-          "playerId": null,
-          "player": "Allen Lazard"
+          "playerId": 3128390,
+          "player": "Allen Lazard",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t05"
         }
       ]
     },
@@ -2946,8 +2998,10 @@
         {
           "type": "ADD",
           "playerKey": "espn-11674",
-          "playerId": null,
-          "player": "Danny Amendola"
+          "playerId": 11674,
+          "player": "Danny Amendola",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t06"
         }
       ]
     },
@@ -2963,8 +3017,10 @@
         {
           "type": "DROP",
           "playerKey": "espn-3139605",
-          "playerId": null,
-          "player": "Marlon Mack"
+          "playerId": 3139605,
+          "player": "Marlon Mack",
+          "fromTeamKey": "2020-t03",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
@@ -2980,8 +3036,10 @@
         {
           "type": "ADD",
           "playerKey": "espn-3071572",
-          "playerId": null,
-          "player": "Keelan Cole Sr."
+          "playerId": 3071572,
+          "player": "Keelan Cole Sr.",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t05"
         }
       ]
     },
@@ -2997,14 +3055,18 @@
         {
           "type": "ADD",
           "playerKey": "espn-3115378",
-          "playerId": null,
-          "player": "Russell Gage"
+          "playerId": 3115378,
+          "player": "Russell Gage",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t10"
         },
         {
           "type": "DROP",
           "playerKey": "espn-4039359",
-          "playerId": null,
-          "player": "Darrell Henderson Jr."
+          "playerId": 4039359,
+          "player": "Darrell Henderson Jr.",
+          "fromTeamKey": "2020-t10",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
@@ -3020,14 +3082,18 @@
         {
           "type": "ADD",
           "playerKey": "espn-3039707",
-          "playerId": null,
-          "player": "Mitchell Trubisky"
+          "playerId": 3039707,
+          "player": "Mitchell Trubisky",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t11"
         },
         {
           "type": "DROP",
           "playerKey": "espn-4241479",
-          "playerId": null,
-          "player": "Tua Tagovailoa"
+          "playerId": 4241479,
+          "player": "Tua Tagovailoa",
+          "fromTeamKey": "2020-t11",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
@@ -3043,14 +3109,18 @@
         {
           "type": "ADD",
           "playerKey": "espn--16003",
-          "playerId": null,
-          "player": "Bears D/ST"
+          "playerId": -16003,
+          "player": "Bears D/ST",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t02"
         },
         {
           "type": "DROP",
           "playerKey": "espn--16011",
-          "playerId": null,
-          "player": "Colts D/ST"
+          "playerId": -16011,
+          "player": "Colts D/ST",
+          "fromTeamKey": "2020-t02",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
@@ -3066,8 +3136,10 @@
         {
           "type": "DROP",
           "playerKey": "espn-3045260",
-          "playerId": null,
-          "player": "Corey Clement"
+          "playerId": 3045260,
+          "player": "Corey Clement",
+          "fromTeamKey": "2020-t02",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
@@ -3083,14 +3155,18 @@
         {
           "type": "ADD",
           "playerKey": "espn-3054212",
-          "playerId": null,
-          "player": "Jonnu Smith"
+          "playerId": 3054212,
+          "player": "Jonnu Smith",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t04"
         },
         {
           "type": "DROP",
           "playerKey": "espn-2991767",
-          "playerId": null,
-          "player": "Blake Jarwin"
+          "playerId": 2991767,
+          "player": "Blake Jarwin",
+          "fromTeamKey": "2020-t04",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
@@ -3106,14 +3182,18 @@
         {
           "type": "ADD",
           "playerKey": "espn-4035072",
-          "playerId": null,
-          "player": "Benny Snell Jr."
+          "playerId": 4035072,
+          "player": "Benny Snell Jr.",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t12"
         },
         {
           "type": "DROP",
           "playerKey": "espn-12514",
-          "playerId": null,
-          "player": "LeSean McCoy"
+          "playerId": 12514,
+          "player": "LeSean McCoy",
+          "fromTeamKey": "2020-t12",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
@@ -3129,14 +3209,18 @@
         {
           "type": "ADD",
           "playerKey": "espn-3914397",
-          "playerId": null,
-          "player": "Scotty Miller"
+          "playerId": 3914397,
+          "player": "Scotty Miller",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t05"
         },
         {
           "type": "DROP",
           "playerKey": "espn-3071572",
-          "playerId": null,
-          "player": "Keelan Cole Sr."
+          "playerId": 3071572,
+          "player": "Keelan Cole Sr.",
+          "fromTeamKey": "2020-t05",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
@@ -3152,8 +3236,10 @@
         {
           "type": "ADD",
           "playerKey": "espn-3128451",
-          "playerId": null,
-          "player": "Tre'Quan Smith"
+          "playerId": 3128451,
+          "player": "Tre'Quan Smith",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t06"
         }
       ]
     },
@@ -3169,14 +3255,18 @@
         {
           "type": "ADD",
           "playerKey": "espn-10452",
-          "playerId": null,
-          "player": "Adrian Peterson"
+          "playerId": 10452,
+          "player": "Adrian Peterson",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t10"
         },
         {
           "type": "DROP",
           "playerKey": "espn-3049916",
-          "playerId": null,
-          "player": "Matt Breida"
+          "playerId": 3049916,
+          "player": "Matt Breida",
+          "fromTeamKey": "2020-t10",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
@@ -3192,8 +3282,10 @@
         {
           "type": "ADD",
           "playerKey": "espn-3116164",
-          "playerId": null,
-          "player": "Mike Gesicki"
+          "playerId": 3116164,
+          "player": "Mike Gesicki",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t10"
         }
       ]
     },
@@ -3209,8 +3301,10 @@
         {
           "type": "DROP",
           "playerKey": "espn-4035004",
-          "playerId": null,
-          "player": "Mecole Hardman"
+          "playerId": 4035004,
+          "player": "Mecole Hardman",
+          "fromTeamKey": "2020-t05",
+          "toTeamKey": "2020-t00"
         }
       ]
     }

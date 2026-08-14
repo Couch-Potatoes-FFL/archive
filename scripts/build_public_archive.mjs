@@ -1376,13 +1376,59 @@ async function buildSeason(year) {
   standings = standings.map((team) => remapTeamRosterPlayerKeys(team, playerKeyAliases));
   draft = remapDraftPlayerKeys(draft, playerKeyAliases);
 
-  for (const weekPayload of weekPayloads) {
+  const previousRosterTeams = new Map();
+  for (const weekPayload of [...weekPayloads].sort((left, right) => left.week - right.week)) {
     const boxScores = weekPayload.boxScores.map((boxScore) =>
       remapBoxScorePlayerKeys(boxScore, playerKeyAliases),
     );
     const transactions = weekPayload.transactions.map((transaction) =>
       remapTransactionPlayerKeys(transaction, playerKeyAliases),
     );
+    const rosterTeams = new Map();
+    boxScores.forEach((boxScore) => {
+      [
+        [boxScore.homeTeamKey, boxScore.homeLineup],
+        [boxScore.awayTeamKey, boxScore.awayLineup],
+      ].forEach(([rosterTeamKey, lineup]) => {
+        lineup.forEach((player) => {
+          if (player.key) {
+            rosterTeams.set(player.key, { ...player, teamKey: rosterTeamKey });
+          }
+        });
+      });
+    });
+    const recordedTransactionPlayers = new Set(
+      transactions
+        .filter(
+          (transaction) =>
+            transaction.status === "EXECUTED" && transaction.type !== "FUTURE_ROSTER",
+        )
+        .flatMap((transaction) => transaction.items)
+        .filter((item) => item.type !== "LINEUP")
+        .map((item) => item.playerKey),
+    );
+    const commissionerMoves = [];
+    rosterTeams.forEach((player, playerKey) => {
+      const previous = previousRosterTeams.get(playerKey);
+      if (
+        !previous ||
+        previous.teamKey === player.teamKey ||
+        recordedTransactionPlayers.has(playerKey)
+      ) {
+        return;
+      }
+      commissionerMoves.push({
+        playerKey,
+        playerId: player.playerId,
+        player: player.name,
+        fromTeamKey: previous.teamKey,
+        toTeamKey: player.teamKey,
+      });
+    });
+    if (rosterTeams.size) {
+      previousRosterTeams.clear();
+      rosterTeams.forEach((player, playerKey) => previousRosterTeams.set(playerKey, player));
+    }
     const weekFile = `seasons/${year}/weeks/${String(weekPayload.week).padStart(
       2,
       "0",
@@ -1432,6 +1478,7 @@ async function buildSeason(year) {
             trades.push({
               tradeKey: `${transaction.transactionKey}-i${String(index + 1).padStart(2, "0")}`,
               transactionKey: transaction.transactionKey,
+              type: "TRADE",
               year,
               week: weekPayload.week,
               date: transaction.date,
@@ -1445,6 +1492,36 @@ async function buildSeason(year) {
             });
           });
       });
+
+    Array.from(
+      commissionerMoves.reduce((groups, move) => {
+        const key = `${move.fromTeamKey}-${move.toTeamKey}`;
+        const group = groups.get(key) || [];
+        group.push(move);
+        groups.set(key, group);
+        return groups;
+      }, new Map()).values(),
+    ).forEach((moves, groupIndex) => {
+      const transactionKey = `${year}-w${String(weekPayload.week).padStart(2, "0")}-commissioner-${String(
+        groupIndex + 1,
+      ).padStart(2, "0")}`;
+      moves.forEach((move, itemIndex) => {
+        trades.push({
+          tradeKey: `${transactionKey}-i${String(itemIndex + 1).padStart(2, "0")}`,
+          transactionKey,
+          type: "COMMISSIONER_MOVE",
+          year,
+          week: weekPayload.week,
+          playerKey: move.playerKey,
+          playerId: move.playerId,
+          player: move.player,
+          fromTeamKey: move.fromTeamKey,
+          fromTeamName: teamName(names, move.fromTeamKey),
+          toTeamKey: move.toTeamKey,
+          toTeamName: teamName(names, move.toTeamKey),
+        });
+      });
+    });
 
     boxScores.forEach((boxScore) => {
       [...boxScore.homeLineup, ...boxScore.awayLineup].forEach((player, index) => {
@@ -1578,7 +1655,12 @@ async function main() {
   );
   await writeJson(
     "trades.json",
-    trades.sort((left, right) => right.date - left.date || right.year - left.year),
+    trades.sort(
+      (left, right) =>
+        (right.date || 0) - (left.date || 0) ||
+        right.year - left.year ||
+        right.week - left.week,
+    ),
   );
   await writeJson("players.json", mergePlayerSeasons(playerSeasons));
 

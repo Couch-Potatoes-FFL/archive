@@ -1425,13 +1425,22 @@ function BrowserPage() {
       appliedFilters.year === "all"
     ) {
       return sortSearchRows(
-        index.data.filter((row) => row.type !== "draft" && row.type !== "player"),
+        index.data.filter(
+          (row) =>
+            row.type !== "draft" &&
+            row.type !== "player" &&
+            row.transactionType !== "FUTURE_ROSTER",
+        ),
       );
     }
 
     return sortSearchRows(
       index.data.filter((row) => {
-        if (row.type === "draft" || row.type === "player") {
+        if (
+          row.type === "draft" ||
+          row.type === "player" ||
+          row.transactionType === "FUTURE_ROSTER"
+        ) {
           return false;
         }
 
@@ -1643,13 +1652,18 @@ function TradesPage() {
     const matchesQuery =
       !normalizedQuery ||
       includesSearchText(
-        [trade.player, trade.fromTeamName, trade.toTeamName, trade.year].join(" "),
+        [trade.player, trade.fromTeamName, trade.toTeamName, trade.type, trade.year].join(" "),
         normalizedQuery,
       );
     return matchesYear && matchesQuery;
   });
   const filteredTradeCount = new Set(
     filteredTrades.map((trade) => trade.transactionKey),
+  ).size;
+  const commissionerMoveCount = new Set(
+    filteredTrades
+      .filter((trade) => trade.type === "COMMISSIONER_MOVE")
+      .map((trade) => trade.transactionKey),
   ).size;
   const filteredTradeGroups = Array.from(
     filteredTrades.reduce((groups, trade) => {
@@ -1670,7 +1684,10 @@ function TradesPage() {
     {
       header: "Date",
       accessorFn: (trade) => trade[0]?.date,
-      cell: ({ row }) => formatDate(row.original[0]?.date),
+      cell: ({ row }) =>
+        row.original[0]?.date
+          ? formatDate(row.original[0].date)
+          : `Week ${row.original[0]?.week}, ${row.original[0]?.year}`,
     },
     {
       header: "Players",
@@ -1730,7 +1747,7 @@ function TradesPage() {
           type="button"
           onClick={() => setSelectedTradeKey(row.original[0]?.transactionKey)}
         >
-          Details
+          Info
         </button>
       ),
     },
@@ -1798,7 +1815,9 @@ function TradesPage() {
         <div className="sectionHeader">
           <h2>Trade History</h2>
           <span className="pendingNote">
-            {formatNumber(filteredTradeCount)} trades, {formatNumber(filteredTrades.length)} player movements
+            {formatNumber(filteredTradeCount - commissionerMoveCount)} trades
+            {commissionerMoveCount ? `, ${formatNumber(commissionerMoveCount)} commissioner moves` : ""}
+            {`, ${formatNumber(filteredTrades.length)} player movements`}
           </span>
         </div>
         <SimpleTable
@@ -1875,18 +1894,25 @@ function TradeModal({
         <div className="modalHeader">
           <div>
             <p className="eyebrow">Week {trade.week} · {trade.year}</p>
-            <h2 id={titleId}>Trade</h2>
-            <strong>{formatDate(trade.date)}</strong>
+            <h2 id={titleId}>{trade.type === "COMMISSIONER_MOVE" ? "Commissioner Move" : "Trade"}</h2>
           </div>
-          <button
-            autoFocus
-            className="modalCloseButton"
-            type="button"
-            onClick={onClose}
-            title="Close trade details"
-          >
-            <X size={20} aria-hidden />
-          </button>
+          <div className="tradeModalActions">
+            <div className="tradeModalMeta">
+              {trade.type === "COMMISSIONER_MOVE" ? (
+                <span className="pill">Executed by LM</span>
+              ) : null}
+              {trade.date ? <strong>{formatDate(trade.date)}</strong> : null}
+            </div>
+            <button
+              autoFocus
+              className="modalCloseButton"
+              type="button"
+              onClick={onClose}
+              title="Close trade details"
+            >
+              <X size={20} aria-hidden />
+            </button>
+          </div>
         </div>
         <div className="tradeDetailList">
           {[...sendingTeams.entries()].map(([key, team]) => (

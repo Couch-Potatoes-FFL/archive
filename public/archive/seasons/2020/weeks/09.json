@@ -2748,14 +2748,18 @@
         {
           "type": "ADD",
           "playerKey": "espn-3125403",
-          "playerId": null,
-          "player": "Brian Hill"
+          "playerId": 3125403,
+          "player": "Brian Hill",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t05"
         },
         {
           "type": "DROP",
           "playerKey": "espn-3051891",
-          "playerId": null,
-          "player": "Jordan Wilkins"
+          "playerId": 3051891,
+          "player": "Jordan Wilkins",
+          "fromTeamKey": "2020-t05",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
@@ -2771,14 +2775,18 @@
         {
           "type": "ADD",
           "playerKey": "espn-3049899",
-          "playerId": null,
-          "player": "Younghoe Koo"
+          "playerId": 3049899,
+          "player": "Younghoe Koo",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t04"
         },
         {
           "type": "DROP",
           "playerKey": "espn-16339",
-          "playerId": null,
-          "player": "Brandon McManus"
+          "playerId": 16339,
+          "player": "Brandon McManus",
+          "fromTeamKey": "2020-t04",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
@@ -2794,14 +2802,18 @@
         {
           "type": "ADD",
           "playerKey": "espn--16034",
-          "playerId": null,
-          "player": "Texans D/ST"
+          "playerId": -16034,
+          "player": "Texans D/ST",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t05"
         },
         {
           "type": "DROP",
           "playerKey": "espn--16016",
-          "playerId": null,
-          "player": "Vikings D/ST"
+          "playerId": -16016,
+          "player": "Vikings D/ST",
+          "fromTeamKey": "2020-t05",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
@@ -2817,14 +2829,18 @@
         {
           "type": "ADD",
           "playerKey": "espn-3060022",
-          "playerId": null,
-          "player": "Jordan Howard"
+          "playerId": 3060022,
+          "player": "Jordan Howard",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t09"
         },
         {
           "type": "DROP",
           "playerKey": "espn-4240021",
-          "playerId": null,
-          "player": "Cam Akers"
+          "playerId": 4240021,
+          "player": "Cam Akers",
+          "fromTeamKey": "2020-t09",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
@@ -2840,14 +2856,18 @@
         {
           "type": "ADD",
           "playerKey": "espn-3124084",
-          "playerId": null,
-          "player": "Joey Slye"
+          "playerId": 3124084,
+          "player": "Joey Slye",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t01"
         },
         {
           "type": "DROP",
           "playerKey": "espn-2473037",
-          "playerId": null,
-          "player": "Jason Myers"
+          "playerId": 2473037,
+          "player": "Jason Myers",
+          "fromTeamKey": "2020-t01",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
@@ -2863,8 +2883,10 @@
         {
           "type": "DROP",
           "playerKey": "espn-16733",
-          "playerId": null,
-          "player": "Odell Beckham Jr."
+          "playerId": 16733,
+          "player": "Odell Beckham Jr.",
+          "fromTeamKey": "2020-t02",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
@@ -2880,13 +2902,50 @@
         {
           "type": "ADD",
           "playerKey": "espn-15860",
-          "playerId": null,
-          "player": "Jordan Reed"
+          "playerId": 15860,
+          "player": "Jordan Reed",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t02"
         }
       ]
     },
     {
       "transactionKey": "2020-w09-x0008",
+      "teamKey": "2020-t05",
+      "type": "TRADE_PROPOSAL",
+      "status": "CANCELED",
+      "scoringPeriod": 9,
+      "date": 1604596382329,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3116406",
+          "playerId": 3116406,
+          "player": "Tyreek Hill",
+          "fromTeamKey": "2020-t10",
+          "toTeamKey": "2020-t05"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-2975674",
+          "playerId": 2975674,
+          "player": "Robert Tonyan",
+          "fromTeamKey": "2020-t05",
+          "toTeamKey": "2020-t10"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3915416",
+          "playerId": 3915416,
+          "player": "DJ Moore",
+          "fromTeamKey": "2020-t05",
+          "toTeamKey": "2020-t10"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2020-w09-x0009",
       "teamKey": "2020-t03",
       "type": "WAIVER",
       "status": "FAILED_PLAYERALREADYDROPPED",
@@ -2897,19 +2956,23 @@
         {
           "type": "ADD",
           "playerKey": "espn-3115293",
-          "playerId": null,
-          "player": "Kyle Allen"
+          "playerId": 3115293,
+          "player": "Kyle Allen",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t03"
         },
         {
           "type": "DROP",
           "playerKey": "espn-4038524",
-          "playerId": null,
-          "player": "Gardner Minshew II"
+          "playerId": 4038524,
+          "player": "Gardner Minshew II",
+          "fromTeamKey": "2020-t03",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0009",
+      "transactionKey": "2020-w09-x0010",
       "teamKey": "2020-t10",
       "type": "ROSTER",
       "status": "EXECUTED",
@@ -2920,13 +2983,25 @@
         {
           "type": "DROP",
           "playerKey": "espn-2577417",
-          "playerId": null,
-          "player": "Dak Prescott"
+          "playerId": 2577417,
+          "player": "Dak Prescott",
+          "fromTeamKey": "2020-t10",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0010",
+      "transactionKey": "2020-w09-x0011",
+      "teamKey": "2020-t10",
+      "type": "TRADE_DECLINE",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1604424082046,
+      "bidAmount": 0,
+      "items": []
+    },
+    {
+      "transactionKey": "2020-w09-x0012",
       "teamKey": "2020-t03",
       "type": "WAIVER",
       "status": "EXECUTED",
@@ -2937,19 +3012,23 @@
         {
           "type": "ADD",
           "playerKey": "espn-4241372",
-          "playerId": null,
-          "player": "Marquise Brown"
+          "playerId": 4241372,
+          "player": "Marquise Brown",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t03"
         },
         {
           "type": "DROP",
           "playerKey": "espn-3134353",
-          "playerId": null,
-          "player": "Tim Patrick"
+          "playerId": 3134353,
+          "player": "Tim Patrick",
+          "fromTeamKey": "2020-t03",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0011",
+      "transactionKey": "2020-w09-x0013",
       "teamKey": "2020-t09",
       "type": "WAIVER",
       "status": "FAILED_INVALIDPLAYERSOURCE",
@@ -2960,19 +3039,23 @@
         {
           "type": "ADD",
           "playerKey": "espn-4035676",
-          "playerId": null,
-          "player": "Zack Moss"
+          "playerId": 4035676,
+          "player": "Zack Moss",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t09"
         },
         {
           "type": "DROP",
           "playerKey": "espn--16010",
-          "playerId": null,
-          "player": "Titans D/ST"
+          "playerId": -16010,
+          "player": "Titans D/ST",
+          "fromTeamKey": "2020-t09",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0012",
+      "transactionKey": "2020-w09-x0014",
       "teamKey": "2020-t12",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -2983,13 +3066,149 @@
         {
           "type": "ADD",
           "playerKey": "espn--16019",
-          "playerId": null,
-          "player": "Giants D/ST"
+          "playerId": -16019,
+          "player": "Giants D/ST",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t12"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0013",
+      "transactionKey": "2020-w09-x0015",
+      "teamKey": "2020-t01",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1604340912741,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-2976212",
+          "playerId": 2976212,
+          "player": "Stefon Diggs",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3119195",
+          "playerId": 3119195,
+          "player": "Chase Edmonds",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-15880",
+          "playerId": 15880,
+          "player": "Robert Woods",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4036133",
+          "playerId": 4036133,
+          "player": "T.J. Hockenson",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-13232",
+          "playerId": 13232,
+          "player": "Jimmy Graham",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3042778",
+          "playerId": 3042778,
+          "player": "Corey Davis",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-13983",
+          "playerId": 13983,
+          "player": "A.J. Green",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3925347",
+          "playerId": 3925347,
+          "player": "Damien Harris",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-16790",
+          "playerId": 16790,
+          "player": "Jarvis Landry",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2020-w09-x0016",
+      "teamKey": "2020-t10",
+      "type": "TRADE_PROPOSAL",
+      "status": "CANCELED",
+      "scoringPeriod": 9,
+      "date": 1604424047745,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3115394",
+          "playerId": 3115394,
+          "player": "DJ Chark Jr.",
+          "fromTeamKey": "2020-t12",
+          "toTeamKey": "2020-t10"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-4360438",
+          "playerId": 4360438,
+          "player": "Brandon Aiyuk",
+          "fromTeamKey": "2020-t12",
+          "toTeamKey": "2020-t10"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3051392",
+          "playerId": 3051392,
+          "player": "Ezekiel Elliott",
+          "fromTeamKey": "2020-t12",
+          "toTeamKey": "2020-t10"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-2977644",
+          "playerId": 2977644,
+          "player": "Todd Gurley II",
+          "fromTeamKey": "2020-t10",
+          "toTeamKey": "2020-t12"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3116406",
+          "playerId": 3116406,
+          "player": "Tyreek Hill",
+          "fromTeamKey": "2020-t10",
+          "toTeamKey": "2020-t12"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2020-w09-x0017",
       "teamKey": "2020-t10",
       "type": "WAIVER",
       "status": "CANCELED",
@@ -3000,13 +3219,15 @@
         {
           "type": "ADD",
           "playerKey": "espn-16813",
-          "playerId": null,
-          "player": "Logan Thomas"
+          "playerId": 16813,
+          "player": "Logan Thomas",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t10"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0014",
+      "transactionKey": "2020-w09-x0018",
       "teamKey": "2020-t05",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3017,19 +3238,58 @@
         {
           "type": "ADD",
           "playerKey": "espn-3043275",
-          "playerId": null,
-          "player": "Austin Hooper"
+          "playerId": 3043275,
+          "player": "Austin Hooper",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t05"
         },
         {
           "type": "DROP",
           "playerKey": "espn-3125403",
-          "playerId": null,
-          "player": "Brian Hill"
+          "playerId": 3125403,
+          "player": "Brian Hill",
+          "fromTeamKey": "2020-t05",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0015",
+      "transactionKey": "2020-w09-x0019",
+      "teamKey": "2020-t05",
+      "type": "TRADE_PROPOSAL",
+      "status": "PENDING",
+      "scoringPeriod": 9,
+      "date": 1604591567092,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3116406",
+          "playerId": 3116406,
+          "player": "Tyreek Hill",
+          "fromTeamKey": "2020-t10",
+          "toTeamKey": "2020-t05"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-2975674",
+          "playerId": 2975674,
+          "player": "Robert Tonyan",
+          "fromTeamKey": "2020-t05",
+          "toTeamKey": "2020-t10"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3915416",
+          "playerId": 3915416,
+          "player": "DJ Moore",
+          "fromTeamKey": "2020-t05",
+          "toTeamKey": "2020-t10"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2020-w09-x0020",
       "teamKey": "2020-t02",
       "type": "WAIVER",
       "status": "EXECUTED",
@@ -3040,13 +3300,15 @@
         {
           "type": "ADD",
           "playerKey": "espn-4035004",
-          "playerId": null,
-          "player": "Mecole Hardman"
+          "playerId": 4035004,
+          "player": "Mecole Hardman",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t02"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0016",
+      "transactionKey": "2020-w09-x0021",
       "teamKey": "2020-t01",
       "type": "WAIVER",
       "status": "EXECUTED",
@@ -3057,13 +3319,15 @@
         {
           "type": "ADD",
           "playerKey": "espn-4035676",
-          "playerId": null,
-          "player": "Zack Moss"
+          "playerId": 4035676,
+          "player": "Zack Moss",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t01"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0017",
+      "transactionKey": "2020-w09-x0022",
       "teamKey": "2020-t02",
       "type": "WAIVER",
       "status": "EXECUTED",
@@ -3074,19 +3338,66 @@
         {
           "type": "ADD",
           "playerKey": "espn-3049916",
-          "playerId": null,
-          "player": "Matt Breida"
+          "playerId": 3049916,
+          "player": "Matt Breida",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t02"
         },
         {
           "type": "DROP",
           "playerKey": "espn-3123075",
-          "playerId": null,
-          "player": "Braxton Berrios"
+          "playerId": 3123075,
+          "player": "Braxton Berrios",
+          "fromTeamKey": "2020-t02",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0018",
+      "transactionKey": "2020-w09-x0023",
+      "teamKey": "2020-t02",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1604163253136,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3917315",
+          "playerId": 3917315,
+          "player": "Kyler Murray",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3052587",
+          "playerId": 3052587,
+          "player": "Baker Mayfield",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3052876",
+          "playerId": 3052876,
+          "player": "Will Fuller V",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3139522",
+          "playerId": 3139522,
+          "player": "Travis Fulgham",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2020-w09-x0024",
       "teamKey": "2020-t02",
       "type": "ROSTER",
       "status": "EXECUTED",
@@ -3097,13 +3408,15 @@
         {
           "type": "DROP",
           "playerKey": "espn-3049916",
-          "playerId": null,
-          "player": "Matt Breida"
+          "playerId": 3049916,
+          "player": "Matt Breida",
+          "fromTeamKey": "2020-t02",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0019",
+      "transactionKey": "2020-w09-x0025",
       "teamKey": "2020-t09",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3114,13 +3427,15 @@
         {
           "type": "ADD",
           "playerKey": "espn--16015",
-          "playerId": null,
-          "player": "Dolphins D/ST"
+          "playerId": -16015,
+          "player": "Dolphins D/ST",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t09"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0020",
+      "transactionKey": "2020-w09-x0026",
       "teamKey": "2020-t05",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3131,13 +3446,15 @@
         {
           "type": "ADD",
           "playerKey": "espn-2983319",
-          "playerId": null,
-          "player": "Troymaine Pope"
+          "playerId": 2983319,
+          "player": "Troymaine Pope",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t05"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0021",
+      "transactionKey": "2020-w09-x0027",
       "teamKey": "2020-t09",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3148,19 +3465,23 @@
         {
           "type": "ADD",
           "playerKey": "espn-4240021",
-          "playerId": null,
-          "player": "Cam Akers"
+          "playerId": 4240021,
+          "player": "Cam Akers",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t09"
         },
         {
           "type": "DROP",
           "playerKey": "espn-3932449",
-          "playerId": null,
-          "player": "Dexter Williams"
+          "playerId": 3932449,
+          "player": "Dexter Williams",
+          "fromTeamKey": "2020-t09",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0022",
+      "transactionKey": "2020-w09-x0028",
       "teamKey": "2020-t10",
       "type": "WAIVER",
       "status": "FAILED_INVALIDPLAYERSOURCE",
@@ -3171,13 +3492,15 @@
         {
           "type": "ADD",
           "playerKey": "espn-15072",
-          "playerId": null,
-          "player": "Marvin Jones Jr."
+          "playerId": 15072,
+          "player": "Marvin Jones Jr.",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t10"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0023",
+      "transactionKey": "2020-w09-x0029",
       "teamKey": "2020-t05",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3188,19 +3511,33 @@
         {
           "type": "ADD",
           "playerKey": "espn-3932449",
-          "playerId": null,
-          "player": "Dexter Williams"
+          "playerId": 3932449,
+          "player": "Dexter Williams",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t05"
         },
         {
           "type": "DROP",
           "playerKey": "espn-4241372",
-          "playerId": null,
-          "player": "Marquise Brown"
+          "playerId": 4241372,
+          "player": "Marquise Brown",
+          "fromTeamKey": "2020-t05",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0024",
+      "transactionKey": "2020-w09-x0030",
+      "teamKey": "2020-t12",
+      "type": "TRADE_DECLINE",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1604449062576,
+      "bidAmount": 0,
+      "items": []
+    },
+    {
+      "transactionKey": "2020-w09-x0031",
       "teamKey": "2020-t10",
       "type": "WAIVER",
       "status": "EXECUTED",
@@ -3211,13 +3548,15 @@
         {
           "type": "ADD",
           "playerKey": "espn-2573974",
-          "playerId": null,
-          "player": "Tyler Ervin"
+          "playerId": 2573974,
+          "player": "Tyler Ervin",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t10"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0025",
+      "transactionKey": "2020-w09-x0032",
       "teamKey": "2020-t02",
       "type": "ROSTER",
       "status": "EXECUTED",
@@ -3228,19 +3567,23 @@
         {
           "type": "DROP",
           "playerKey": "espn-3914397",
-          "playerId": null,
-          "player": "Scotty Miller"
+          "playerId": 3914397,
+          "player": "Scotty Miller",
+          "fromTeamKey": "2020-t02",
+          "toTeamKey": "2020-t00"
         },
         {
           "type": "DROP",
           "playerKey": "espn--16002",
-          "playerId": null,
-          "player": "Bills D/ST"
+          "playerId": -16002,
+          "player": "Bills D/ST",
+          "fromTeamKey": "2020-t02",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0026",
+      "transactionKey": "2020-w09-x0033",
       "teamKey": "2020-t02",
       "type": "WAIVER",
       "status": "EXECUTED",
@@ -3251,19 +3594,23 @@
         {
           "type": "ADD",
           "playerKey": "espn-3059989",
-          "playerId": null,
-          "player": "Nick Mullens"
+          "playerId": 3059989,
+          "player": "Nick Mullens",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t02"
         },
         {
           "type": "DROP",
           "playerKey": "espn-3052587",
-          "playerId": null,
-          "player": "Baker Mayfield"
+          "playerId": 3052587,
+          "player": "Baker Mayfield",
+          "fromTeamKey": "2020-t02",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0027",
+      "transactionKey": "2020-w09-x0034",
       "teamKey": "2020-t11",
       "type": "WAIVER",
       "status": "EXECUTED",
@@ -3274,19 +3621,23 @@
         {
           "type": "ADD",
           "playerKey": "espn-15072",
-          "playerId": null,
-          "player": "Marvin Jones Jr."
+          "playerId": 15072,
+          "player": "Marvin Jones Jr.",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t11"
         },
         {
           "type": "DROP",
           "playerKey": "espn-14924",
-          "playerId": null,
-          "player": "T.Y. Hilton"
+          "playerId": 14924,
+          "player": "T.Y. Hilton",
+          "fromTeamKey": "2020-t11",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0028",
+      "transactionKey": "2020-w09-x0035",
       "teamKey": "2020-t10",
       "type": "WAIVER",
       "status": "FAILED_INVALIDPLAYERSOURCE",
@@ -3297,13 +3648,15 @@
         {
           "type": "ADD",
           "playerKey": "espn-4035676",
-          "playerId": null,
-          "player": "Zack Moss"
+          "playerId": 4035676,
+          "player": "Zack Moss",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t10"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0029",
+      "transactionKey": "2020-w09-x0036",
       "teamKey": "2020-t12",
       "type": "WAIVER",
       "status": "FAILED_INVALIDPLAYERSOURCE",
@@ -3314,19 +3667,23 @@
         {
           "type": "ADD",
           "playerKey": "espn-3059989",
-          "playerId": null,
-          "player": "Nick Mullens"
+          "playerId": 3059989,
+          "player": "Nick Mullens",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t12"
         },
         {
           "type": "DROP",
           "playerKey": "espn-14877",
-          "playerId": null,
-          "player": "Nick Foles"
+          "playerId": 14877,
+          "player": "Nick Foles",
+          "fromTeamKey": "2020-t12",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0030",
+      "transactionKey": "2020-w09-x0037",
       "teamKey": "2020-t09",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3337,13 +3694,42 @@
         {
           "type": "ADD",
           "playerKey": "espn-3932449",
-          "playerId": null,
-          "player": "Dexter Williams"
+          "playerId": 3932449,
+          "player": "Dexter Williams",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t09"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0031",
+      "transactionKey": "2020-w09-x0038",
+      "teamKey": "2020-t05",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1604251201349,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4239993",
+          "playerId": 4239993,
+          "player": "Tee Higgins",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3121422",
+          "playerId": 3121422,
+          "player": "Terry McLaurin",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2020-w09-x0039",
       "teamKey": "2020-t10",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3354,19 +3740,23 @@
         {
           "type": "ADD",
           "playerKey": "espn-17372",
-          "playerId": null,
-          "player": "Chris Boswell"
+          "playerId": 17372,
+          "player": "Chris Boswell",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t10"
         },
         {
           "type": "DROP",
           "playerKey": "espn--16014",
-          "playerId": null,
-          "player": "Rams D/ST"
+          "playerId": -16014,
+          "player": "Rams D/ST",
+          "fromTeamKey": "2020-t10",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0032",
+      "transactionKey": "2020-w09-x0040",
       "teamKey": "2020-t10",
       "type": "WAIVER",
       "status": "EXECUTED",
@@ -3377,13 +3767,15 @@
         {
           "type": "ADD",
           "playerKey": "espn-4240631",
-          "playerId": null,
-          "player": "DeeJay Dallas"
+          "playerId": 4240631,
+          "player": "DeeJay Dallas",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t10"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0033",
+      "transactionKey": "2020-w09-x0041",
       "teamKey": "2020-t02",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3394,13 +3786,15 @@
         {
           "type": "ADD",
           "playerKey": "espn-3127211",
-          "playerId": null,
-          "player": "Patrick Laird"
+          "playerId": 3127211,
+          "player": "Patrick Laird",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t02"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0034",
+      "transactionKey": "2020-w09-x0042",
       "teamKey": "2020-t11",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3411,19 +3805,23 @@
         {
           "type": "ADD",
           "playerKey": "espn-14053",
-          "playerId": null,
-          "player": "Randall Cobb"
+          "playerId": 14053,
+          "player": "Randall Cobb",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t11"
         },
         {
           "type": "DROP",
           "playerKey": "espn-3116164",
-          "playerId": null,
-          "player": "Mike Gesicki"
+          "playerId": 3116164,
+          "player": "Mike Gesicki",
+          "fromTeamKey": "2020-t11",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0035",
+      "transactionKey": "2020-w09-x0043",
       "teamKey": "2020-t10",
       "type": "ROSTER",
       "status": "EXECUTED",
@@ -3434,13 +3832,15 @@
         {
           "type": "DROP",
           "playerKey": "espn-2573974",
-          "playerId": null,
-          "player": "Tyler Ervin"
+          "playerId": 2573974,
+          "player": "Tyler Ervin",
+          "fromTeamKey": "2020-t10",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0036",
+      "transactionKey": "2020-w09-x0044",
       "teamKey": "2020-t02",
       "type": "WAIVER",
       "status": "FAILED_INVALIDPLAYERSOURCE",
@@ -3451,13 +3851,15 @@
         {
           "type": "ADD",
           "playerKey": "espn-4035676",
-          "playerId": null,
-          "player": "Zack Moss"
+          "playerId": 4035676,
+          "player": "Zack Moss",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t02"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0037",
+      "transactionKey": "2020-w09-x0045",
       "teamKey": "2020-t03",
       "type": "WAIVER",
       "status": "FAILED_INVALIDPLAYERSOURCE",
@@ -3468,19 +3870,50 @@
         {
           "type": "ADD",
           "playerKey": "espn-3059989",
-          "playerId": null,
-          "player": "Nick Mullens"
+          "playerId": 3059989,
+          "player": "Nick Mullens",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t03"
         },
         {
           "type": "DROP",
           "playerKey": "espn-4038524",
-          "playerId": null,
-          "player": "Gardner Minshew II"
+          "playerId": 4038524,
+          "player": "Gardner Minshew II",
+          "fromTeamKey": "2020-t03",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0038",
+      "transactionKey": "2020-w09-x0046",
+      "teamKey": "2020-t05",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1604251204236,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3924327",
+          "playerId": 3924327,
+          "player": "Drew Lock",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3122840",
+          "playerId": 3122840,
+          "player": "Deshaun Watson",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2020-w09-x0047",
       "teamKey": "2020-t03",
       "type": "WAIVER",
       "status": "EXECUTED",
@@ -3491,19 +3924,23 @@
         {
           "type": "ADD",
           "playerKey": "espn-3124900",
-          "playerId": null,
-          "player": "Jake Luton"
+          "playerId": 3124900,
+          "player": "Jake Luton",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t03"
         },
         {
           "type": "DROP",
           "playerKey": "espn-4038524",
-          "playerId": null,
-          "player": "Gardner Minshew II"
+          "playerId": 4038524,
+          "player": "Gardner Minshew II",
+          "fromTeamKey": "2020-t03",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0039",
+      "transactionKey": "2020-w09-x0048",
       "teamKey": "2020-t06",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3514,13 +3951,117 @@
         {
           "type": "ADD",
           "playerKey": "espn--16014",
-          "playerId": null,
-          "player": "Rams D/ST"
+          "playerId": -16014,
+          "player": "Rams D/ST",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t06"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0040",
+      "transactionKey": "2020-w09-x0049",
+      "teamKey": "2020-t10",
+      "type": "TRADE_PROPOSAL",
+      "status": "CANCELED",
+      "scoringPeriod": 9,
+      "date": 1604415356917,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "TRADE",
+          "playerKey": "espn-2574808",
+          "playerId": 2574808,
+          "player": "Robby Anderson",
+          "fromTeamKey": "2020-t09",
+          "toTeamKey": "2020-t10"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-2976499",
+          "playerId": 2976499,
+          "player": "Amari Cooper",
+          "fromTeamKey": "2020-t09",
+          "toTeamKey": "2020-t10"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-2576434",
+          "playerId": 2576434,
+          "player": "Melvin Gordon III",
+          "fromTeamKey": "2020-t09",
+          "toTeamKey": "2020-t10"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3116406",
+          "playerId": 3116406,
+          "player": "Tyreek Hill",
+          "fromTeamKey": "2020-t10",
+          "toTeamKey": "2020-t09"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-2977644",
+          "playerId": 2977644,
+          "player": "Todd Gurley II",
+          "fromTeamKey": "2020-t10",
+          "toTeamKey": "2020-t09"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2020-w09-x0050",
+      "teamKey": "2020-t10",
+      "type": "TRADE_PROPOSAL",
+      "status": "CANCELED",
+      "scoringPeriod": 9,
+      "date": 1604412197454,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "TRADE",
+          "playerKey": "espn-2576623",
+          "playerId": 2576623,
+          "player": "DeVante Parker",
+          "fromTeamKey": "2020-t05",
+          "toTeamKey": "2020-t10"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3121422",
+          "playerId": 3121422,
+          "player": "Terry McLaurin",
+          "fromTeamKey": "2020-t05",
+          "toTeamKey": "2020-t10"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-2975674",
+          "playerId": 2975674,
+          "player": "Robert Tonyan",
+          "fromTeamKey": "2020-t05",
+          "toTeamKey": "2020-t10"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-2977644",
+          "playerId": 2977644,
+          "player": "Todd Gurley II",
+          "fromTeamKey": "2020-t10",
+          "toTeamKey": "2020-t05"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-16460",
+          "playerId": 16460,
+          "player": "Adam Thielen",
+          "fromTeamKey": "2020-t10",
+          "toTeamKey": "2020-t05"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2020-w09-x0051",
       "teamKey": "2020-t09",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3531,19 +4072,23 @@
         {
           "type": "ADD",
           "playerKey": "espn-3117256",
-          "playerId": null,
-          "player": "Dalton Schultz"
+          "playerId": 3117256,
+          "player": "Dalton Schultz",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t09"
         },
         {
           "type": "DROP",
           "playerKey": "espn-2979477",
-          "playerId": null,
-          "player": "Tevin Coleman"
+          "playerId": 2979477,
+          "player": "Tevin Coleman",
+          "fromTeamKey": "2020-t09",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0041",
+      "transactionKey": "2020-w09-x0052",
       "teamKey": "2020-t05",
       "type": "ROSTER",
       "status": "EXECUTED",
@@ -3554,13 +4099,25 @@
         {
           "type": "DROP",
           "playerKey": "espn--16018",
-          "playerId": null,
-          "player": "Saints D/ST"
+          "playerId": -16018,
+          "player": "Saints D/ST",
+          "fromTeamKey": "2020-t05",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0042",
+      "transactionKey": "2020-w09-x0053",
+      "teamKey": "2020-t12",
+      "type": "TRADE_DECLINE",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1604424192207,
+      "bidAmount": 0,
+      "items": []
+    },
+    {
+      "transactionKey": "2020-w09-x0054",
       "teamKey": "2020-t01",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3571,19 +4128,23 @@
         {
           "type": "ADD",
           "playerKey": "espn-3115293",
-          "playerId": null,
-          "player": "Kyle Allen"
+          "playerId": 3115293,
+          "player": "Kyle Allen",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t01"
         },
         {
           "type": "DROP",
           "playerKey": "espn-13232",
-          "playerId": null,
-          "player": "Jimmy Graham"
+          "playerId": 13232,
+          "player": "Jimmy Graham",
+          "fromTeamKey": "2020-t01",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0043",
+      "transactionKey": "2020-w09-x0055",
       "teamKey": "2020-t12",
       "type": "ROSTER",
       "status": "EXECUTED",
@@ -3594,25 +4155,31 @@
         {
           "type": "DROP",
           "playerKey": "espn-4040774",
-          "playerId": null,
-          "player": "Harrison Bryant"
+          "playerId": 4040774,
+          "player": "Harrison Bryant",
+          "fromTeamKey": "2020-t12",
+          "toTeamKey": "2020-t00"
         },
         {
           "type": "DROP",
           "playerKey": "espn-16777",
-          "playerId": null,
-          "player": "Carlos Hyde"
+          "playerId": 16777,
+          "player": "Carlos Hyde",
+          "fromTeamKey": "2020-t12",
+          "toTeamKey": "2020-t00"
         },
         {
           "type": "DROP",
           "playerKey": "espn-3042910",
-          "playerId": null,
-          "player": "Rashard Higgins"
+          "playerId": 3042910,
+          "player": "Rashard Higgins",
+          "fromTeamKey": "2020-t12",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0044",
+      "transactionKey": "2020-w09-x0056",
       "teamKey": "2020-t05",
       "type": "WAIVER",
       "status": "FAILED_INVALIDPLAYERSOURCE",
@@ -3623,19 +4190,52 @@
         {
           "type": "ADD",
           "playerKey": "espn-4035676",
-          "playerId": null,
-          "player": "Zack Moss"
+          "playerId": 4035676,
+          "player": "Zack Moss",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t05"
         },
         {
           "type": "DROP",
           "playerKey": "espn-4241372",
-          "playerId": null,
-          "player": "Marquise Brown"
+          "playerId": 4241372,
+          "player": "Marquise Brown",
+          "fromTeamKey": "2020-t05",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0045",
+      "transactionKey": "2020-w09-x0057",
+      "teamKey": "2020-t01",
+      "type": "TRADE_DECLINE",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1604472629370,
+      "bidAmount": 0,
+      "items": []
+    },
+    {
+      "transactionKey": "2020-w09-x0058",
+      "teamKey": "2020-t05",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1604251219163,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3059915",
+          "playerId": 3059915,
+          "player": "Kareem Hunt",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2020-w09-x0059",
       "teamKey": "2020-t06",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3646,13 +4246,15 @@
         {
           "type": "ADD",
           "playerKey": "espn-3916430",
-          "playerId": null,
-          "player": "Nyheim Hines"
+          "playerId": 3916430,
+          "player": "Nyheim Hines",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t06"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0046",
+      "transactionKey": "2020-w09-x0060",
       "teamKey": "2020-t03",
       "type": "WAIVER",
       "status": "CANCELED",
@@ -3663,19 +4265,74 @@
         {
           "type": "ADD",
           "playerKey": "espn-4241372",
-          "playerId": null,
-          "player": "Marquise Brown"
+          "playerId": 4241372,
+          "player": "Marquise Brown",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t03"
         },
         {
           "type": "DROP",
           "playerKey": "espn-3051738",
-          "playerId": null,
-          "player": "Marquez Valdes-Scantling"
+          "playerId": 3051738,
+          "player": "Marquez Valdes-Scantling",
+          "fromTeamKey": "2020-t03",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0047",
+      "transactionKey": "2020-w09-x0061",
+      "teamKey": "2020-t10",
+      "type": "TRADE_PROPOSAL",
+      "status": "PENDING",
+      "scoringPeriod": 9,
+      "date": 1604412068598,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "TRADE",
+          "playerKey": "espn-2576623",
+          "playerId": 2576623,
+          "player": "DeVante Parker",
+          "fromTeamKey": "2020-t05",
+          "toTeamKey": "2020-t10"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3121422",
+          "playerId": 3121422,
+          "player": "Terry McLaurin",
+          "fromTeamKey": "2020-t05",
+          "toTeamKey": "2020-t10"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-2975674",
+          "playerId": 2975674,
+          "player": "Robert Tonyan",
+          "fromTeamKey": "2020-t05",
+          "toTeamKey": "2020-t10"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-2977644",
+          "playerId": 2977644,
+          "player": "Todd Gurley II",
+          "fromTeamKey": "2020-t10",
+          "toTeamKey": "2020-t05"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-16460",
+          "playerId": 16460,
+          "player": "Adam Thielen",
+          "fromTeamKey": "2020-t10",
+          "toTeamKey": "2020-t05"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2020-w09-x0062",
       "teamKey": "2020-t10",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3686,13 +4343,15 @@
         {
           "type": "ADD",
           "playerKey": "espn-3916148",
-          "playerId": null,
-          "player": "Tony Pollard"
+          "playerId": 3916148,
+          "player": "Tony Pollard",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t10"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0048",
+      "transactionKey": "2020-w09-x0063",
       "teamKey": "2020-t02",
       "type": "WAIVER",
       "status": "FAILED_INVALIDPLAYERSOURCE",
@@ -3703,19 +4362,50 @@
         {
           "type": "ADD",
           "playerKey": "espn-3124900",
-          "playerId": null,
-          "player": "Jake Luton"
+          "playerId": 3124900,
+          "player": "Jake Luton",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t02"
         },
         {
           "type": "DROP",
           "playerKey": "espn-3052587",
-          "playerId": null,
-          "player": "Baker Mayfield"
+          "playerId": 3052587,
+          "player": "Baker Mayfield",
+          "fromTeamKey": "2020-t02",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0049",
+      "transactionKey": "2020-w09-x0064",
+      "teamKey": "2020-t02",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1604377189296,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3045523",
+          "playerId": 3045523,
+          "player": "Kendrick Bourne",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3123075",
+          "playerId": 3123075,
+          "player": "Braxton Berrios",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2020-w09-x0065",
       "teamKey": "2020-t02",
       "type": "WAIVER",
       "status": "EXECUTED",
@@ -3726,13 +4416,15 @@
         {
           "type": "ADD",
           "playerKey": "espn-3916433",
-          "playerId": null,
-          "player": "Jakobi Meyers"
+          "playerId": 3916433,
+          "player": "Jakobi Meyers",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t02"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0050",
+      "transactionKey": "2020-w09-x0066",
       "teamKey": "2020-t12",
       "type": "WAIVER",
       "status": "FAILED_INVALIDPLAYERSOURCE",
@@ -3743,13 +4435,15 @@
         {
           "type": "ADD",
           "playerKey": "espn-15072",
-          "playerId": null,
-          "player": "Marvin Jones Jr."
+          "playerId": 15072,
+          "player": "Marvin Jones Jr.",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t12"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0051",
+      "transactionKey": "2020-w09-x0067",
       "teamKey": "2020-t02",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3760,19 +4454,23 @@
         {
           "type": "ADD",
           "playerKey": "espn-3123052",
-          "playerId": null,
-          "player": "Michael Badgley"
+          "playerId": 3123052,
+          "player": "Michael Badgley",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t02"
         },
         {
           "type": "DROP",
           "playerKey": "espn-3916433",
-          "playerId": null,
-          "player": "Jakobi Meyers"
+          "playerId": 3916433,
+          "player": "Jakobi Meyers",
+          "fromTeamKey": "2020-t02",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0052",
+      "transactionKey": "2020-w09-x0068",
       "teamKey": "2020-t12",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3783,13 +4481,15 @@
         {
           "type": "ADD",
           "playerKey": "espn-16813",
-          "playerId": null,
-          "player": "Logan Thomas"
+          "playerId": 16813,
+          "player": "Logan Thomas",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t12"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0053",
+      "transactionKey": "2020-w09-x0069",
       "teamKey": "2020-t06",
       "type": "ROSTER",
       "status": "EXECUTED",
@@ -3800,13 +4500,15 @@
         {
           "type": "DROP",
           "playerKey": "espn-2576491",
-          "playerId": null,
-          "player": "Adam Humphries"
+          "playerId": 2576491,
+          "player": "Adam Humphries",
+          "fromTeamKey": "2020-t06",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0054",
+      "transactionKey": "2020-w09-x0070",
       "teamKey": "2020-t10",
       "type": "ROSTER",
       "status": "EXECUTED",
@@ -3817,13 +4519,15 @@
         {
           "type": "DROP",
           "playerKey": "espn-13215",
-          "playerId": null,
-          "player": "Dez Bryant"
+          "playerId": 13215,
+          "player": "Dez Bryant",
+          "fromTeamKey": "2020-t10",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0055",
+      "transactionKey": "2020-w09-x0071",
       "teamKey": "2020-t05",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3834,19 +4538,50 @@
         {
           "type": "ADD",
           "playerKey": "espn-3051891",
-          "playerId": null,
-          "player": "Jordan Wilkins"
+          "playerId": 3051891,
+          "player": "Jordan Wilkins",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t05"
         },
         {
           "type": "DROP",
           "playerKey": "espn-3932449",
-          "playerId": null,
-          "player": "Dexter Williams"
+          "playerId": 3932449,
+          "player": "Dexter Williams",
+          "fromTeamKey": "2020-t05",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0056",
+      "transactionKey": "2020-w09-x0072",
+      "teamKey": "2020-t02",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1604163267107,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn--16028",
+          "playerId": -16028,
+          "player": "Washington D/ST",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn--16011",
+          "playerId": -16011,
+          "player": "Colts D/ST",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2020-w09-x0073",
       "teamKey": "2020-t10",
       "type": "WAIVER",
       "status": "EXECUTED",
@@ -3857,13 +4592,15 @@
         {
           "type": "ADD",
           "playerKey": "espn-3045138",
-          "playerId": null,
-          "player": "Mike Williams"
+          "playerId": 3045138,
+          "player": "Mike Williams",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t10"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0057",
+      "transactionKey": "2020-w09-x0074",
       "teamKey": "2020-t09",
       "type": "ROSTER",
       "status": "EXECUTED",
@@ -3874,13 +4611,15 @@
         {
           "type": "DROP",
           "playerKey": "espn--16010",
-          "playerId": null,
-          "player": "Titans D/ST"
+          "playerId": -16010,
+          "player": "Titans D/ST",
+          "fromTeamKey": "2020-t09",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0058",
+      "transactionKey": "2020-w09-x0075",
       "teamKey": "2020-t05",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3891,19 +4630,23 @@
         {
           "type": "ADD",
           "playerKey": "espn--16016",
-          "playerId": null,
-          "player": "Vikings D/ST"
+          "playerId": -16016,
+          "player": "Vikings D/ST",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t05"
         },
         {
           "type": "DROP",
           "playerKey": "espn-2983319",
-          "playerId": null,
-          "player": "Troymaine Pope"
+          "playerId": 2983319,
+          "player": "Troymaine Pope",
+          "fromTeamKey": "2020-t05",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0059",
+      "transactionKey": "2020-w09-x0076",
       "teamKey": "2020-t02",
       "type": "WAIVER",
       "status": "CANCELED",
@@ -3914,13 +4657,15 @@
         {
           "type": "ADD",
           "playerKey": "espn-3049916",
-          "playerId": null,
-          "player": "Matt Breida"
+          "playerId": 3049916,
+          "player": "Matt Breida",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t02"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0060",
+      "transactionKey": "2020-w09-x0077",
       "teamKey": "2020-t10",
       "type": "ROSTER",
       "status": "EXECUTED",
@@ -3931,13 +4676,15 @@
         {
           "type": "DROP",
           "playerKey": "espn-3915165",
-          "playerId": null,
-          "player": "Rodrigo Blankenship"
+          "playerId": 3915165,
+          "player": "Rodrigo Blankenship",
+          "fromTeamKey": "2020-t10",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0061",
+      "transactionKey": "2020-w09-x0078",
       "teamKey": "2020-t10",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3948,19 +4695,23 @@
         {
           "type": "ADD",
           "playerKey": "espn-3120303",
-          "playerId": null,
-          "player": "Ross Dwelley"
+          "playerId": 3120303,
+          "player": "Ross Dwelley",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t10"
         },
         {
           "type": "DROP",
           "playerKey": "espn-3910544",
-          "playerId": null,
-          "player": "Joshua Kelley"
+          "playerId": 3910544,
+          "player": "Joshua Kelley",
+          "fromTeamKey": "2020-t10",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0062",
+      "transactionKey": "2020-w09-x0079",
       "teamKey": "2020-t01",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3971,19 +4722,23 @@
         {
           "type": "ADD",
           "playerKey": "espn--16011",
-          "playerId": null,
-          "player": "Colts D/ST"
+          "playerId": -16011,
+          "player": "Colts D/ST",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t01"
         },
         {
           "type": "DROP",
           "playerKey": "espn--16024",
-          "playerId": null,
-          "player": "Chargers D/ST"
+          "playerId": -16024,
+          "player": "Chargers D/ST",
+          "fromTeamKey": "2020-t01",
+          "toTeamKey": "2020-t00"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0063",
+      "transactionKey": "2020-w09-x0080",
       "teamKey": "2020-t10",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3994,13 +4749,35 @@
         {
           "type": "ADD",
           "playerKey": "espn--16022",
-          "playerId": null,
-          "player": "Cardinals D/ST"
+          "playerId": -16022,
+          "player": "Cardinals D/ST",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t10"
         }
       ]
     },
     {
-      "transactionKey": "2020-w09-x0064",
+      "transactionKey": "2020-w09-x0081",
+      "teamKey": "2020-t10",
+      "type": "TRADE_DECLINE",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1604596382329,
+      "bidAmount": 0,
+      "items": []
+    },
+    {
+      "transactionKey": "2020-w09-x0082",
+      "teamKey": "2020-t12",
+      "type": "TRADE_DECLINE",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1604788356371,
+      "bidAmount": 0,
+      "items": []
+    },
+    {
+      "transactionKey": "2020-w09-x0083",
       "teamKey": "2020-t05",
       "type": "WAIVER",
       "status": "PENDING",
@@ -4011,14 +4788,18 @@
         {
           "type": "ADD",
           "playerKey": "espn-4035676",
-          "playerId": null,
-          "player": "Zack Moss"
+          "playerId": 4035676,
+          "player": "Zack Moss",
+          "fromTeamKey": "2020-t00",
+          "toTeamKey": "2020-t05"
         },
         {
           "type": "DROP",
           "playerKey": "espn-4241372",
-          "playerId": null,
-          "player": "Marquise Brown"
+          "playerId": 4241372,
+          "player": "Marquise Brown",
+          "fromTeamKey": "2020-t05",
+          "toTeamKey": "2020-t00"
         }
       ]
     }

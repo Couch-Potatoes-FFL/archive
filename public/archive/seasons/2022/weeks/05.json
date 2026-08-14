@@ -2618,14 +2618,18 @@
         {
           "type": "ADD",
           "playerKey": "espn-3051738",
-          "playerId": null,
-          "player": "Marquez Valdes-Scantling"
+          "playerId": 3051738,
+          "player": "Marquez Valdes-Scantling",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t02"
         },
         {
           "type": "DROP",
           "playerKey": "espn-13981",
-          "playerId": null,
-          "player": "Mark Ingram II"
+          "playerId": 13981,
+          "player": "Mark Ingram II",
+          "fromTeamKey": "2022-t02",
+          "toTeamKey": "2022-t00"
         }
       ]
     },
@@ -2641,14 +2645,18 @@
         {
           "type": "ADD",
           "playerKey": "espn-4244732",
-          "playerId": null,
-          "player": "Caleb Huntley"
+          "playerId": 4244732,
+          "player": "Caleb Huntley",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t12"
         },
         {
           "type": "DROP",
           "playerKey": "espn-4040980",
-          "playerId": null,
-          "player": "Irv Smith Jr."
+          "playerId": 4040980,
+          "player": "Irv Smith Jr.",
+          "fromTeamKey": "2022-t12",
+          "toTeamKey": "2022-t00"
         }
       ]
     },
@@ -2664,13 +2672,42 @@
         {
           "type": "ADD",
           "playerKey": "espn-2576414",
-          "playerId": null,
-          "player": "Raheem Mostert"
+          "playerId": 2576414,
+          "player": "Raheem Mostert",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t12"
         }
       ]
     },
     {
       "transactionKey": "2022-w05-x0004",
+      "teamKey": "2022-t02",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1664800612938,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4036133",
+          "playerId": 4036133,
+          "player": "T.J. Hockenson",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3916148",
+          "playerId": 3916148,
+          "player": "Tony Pollard",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2022-w05-x0005",
       "teamKey": "2022-t09",
       "type": "ROSTER",
       "status": "EXECUTED",
@@ -2681,13 +2718,24 @@
         {
           "type": "DROP",
           "playerKey": "espn-3039707",
-          "playerId": null,
-          "player": "Mitch Trubisky"
+          "playerId": 3039707,
+          "player": "Mitch Trubisky",
+          "fromTeamKey": "2022-t09",
+          "toTeamKey": "2022-t00"
         }
       ]
     },
     {
-      "transactionKey": "2022-w05-x0005",
+      "transactionKey": "2022-w05-x0006",
+      "teamKey": "2022-t10",
+      "type": "TRADE_ACCEPT",
+      "scoringPeriod": 5,
+      "date": 1665148336460,
+      "bidAmount": 0,
+      "items": []
+    },
+    {
+      "transactionKey": "2022-w05-x0007",
       "teamKey": "2022-t10",
       "type": "WAIVER",
       "status": "EXECUTED",
@@ -2698,13 +2746,90 @@
         {
           "type": "ADD",
           "playerKey": "espn--16007",
-          "playerId": null,
-          "player": "Broncos D/ST"
+          "playerId": -16007,
+          "player": "Broncos D/ST",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t10"
         }
       ]
     },
     {
-      "transactionKey": "2022-w05-x0006",
+      "transactionKey": "2022-w05-x0008",
+      "teamKey": "2022-t12",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1664855329393,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4361579",
+          "playerId": 4361579,
+          "player": "Javonte Williams",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4242433",
+          "playerId": 4242433,
+          "player": "Joshua Palmer",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3121422",
+          "playerId": 3121422,
+          "player": "Terry McLaurin",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4241372",
+          "playerId": 4241372,
+          "player": "Marquise Brown",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3128390",
+          "playerId": 3128390,
+          "player": "Allen Lazard",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3139925",
+          "playerId": 3139925,
+          "player": "Rashaad Penny",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-2576980",
+          "playerId": 2576980,
+          "player": "Marcus Mariota",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-15864",
+          "playerId": 15864,
+          "player": "Geno Smith",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2022-w05-x0009",
       "teamKey": "2022-t10",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -2715,13 +2840,15 @@
         {
           "type": "ADD",
           "playerKey": "espn-14012",
-          "playerId": null,
-          "player": "Andy Dalton"
+          "playerId": 14012,
+          "player": "Andy Dalton",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t10"
         }
       ]
     },
     {
-      "transactionKey": "2022-w05-x0007",
+      "transactionKey": "2022-w05-x0010",
       "teamKey": "2022-t12",
       "type": "ROSTER",
       "status": "EXECUTED",
@@ -2732,13 +2859,15 @@
         {
           "type": "DROP",
           "playerKey": "espn-4361579",
-          "playerId": null,
-          "player": "Javonte Williams"
+          "playerId": 4361579,
+          "player": "Javonte Williams",
+          "fromTeamKey": "2022-t12",
+          "toTeamKey": "2022-t00"
         }
       ]
     },
     {
-      "transactionKey": "2022-w05-x0008",
+      "transactionKey": "2022-w05-x0011",
       "teamKey": "2022-t03",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -2749,13 +2878,15 @@
         {
           "type": "ADD",
           "playerKey": "espn-3128724",
-          "playerId": null,
-          "player": "Isaiah McKenzie"
+          "playerId": 3128724,
+          "player": "Isaiah McKenzie",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t03"
         }
       ]
     },
     {
-      "transactionKey": "2022-w05-x0009",
+      "transactionKey": "2022-w05-x0012",
       "teamKey": "2022-t05",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -2766,13 +2897,42 @@
         {
           "type": "ADD",
           "playerKey": "espn-3051926",
-          "playerId": null,
-          "player": "Gus Edwards"
+          "playerId": 3051926,
+          "player": "Gus Edwards",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t05"
         }
       ]
     },
     {
-      "transactionKey": "2022-w05-x0010",
+      "transactionKey": "2022-w05-x0013",
+      "teamKey": "2022-t05",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1664803316560,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4241985",
+          "playerId": 4241985,
+          "player": "J.K. Dobbins",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-2576434",
+          "playerId": 2576434,
+          "player": "Melvin Gordon III",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2022-w05-x0014",
       "teamKey": "2022-t01",
       "type": "ROSTER",
       "status": "EXECUTED",
@@ -2783,13 +2943,42 @@
         {
           "type": "DROP",
           "playerKey": "espn-3128724",
-          "playerId": null,
-          "player": "Isaiah McKenzie"
+          "playerId": 3128724,
+          "player": "Isaiah McKenzie",
+          "fromTeamKey": "2022-t01",
+          "toTeamKey": "2022-t00"
         }
       ]
     },
     {
-      "transactionKey": "2022-w05-x0011",
+      "transactionKey": "2022-w05-x0015",
+      "teamKey": "2022-t05",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1664803314379,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-2576434",
+          "playerId": 2576434,
+          "player": "Melvin Gordon III",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4052042",
+          "playerId": 4052042,
+          "player": "James Robinson",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2022-w05-x0016",
       "teamKey": "2022-t10",
       "type": "ROSTER",
       "status": "EXECUTED",
@@ -2800,13 +2989,15 @@
         {
           "type": "DROP",
           "playerKey": "espn--16023",
-          "playerId": null,
-          "player": "Steelers D/ST"
+          "playerId": -16023,
+          "player": "Steelers D/ST",
+          "fromTeamKey": "2022-t10",
+          "toTeamKey": "2022-t00"
         }
       ]
     },
     {
-      "transactionKey": "2022-w05-x0012",
+      "transactionKey": "2022-w05-x0017",
       "teamKey": "2022-t02",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -2817,19 +3008,23 @@
         {
           "type": "ADD",
           "playerKey": "espn-3139033",
-          "playerId": null,
-          "player": "Mike Boone"
+          "playerId": 3139033,
+          "player": "Mike Boone",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t02"
         },
         {
           "type": "DROP",
           "playerKey": "espn-2991662",
-          "playerId": null,
-          "player": "Mack Hollins"
+          "playerId": 2991662,
+          "player": "Mack Hollins",
+          "fromTeamKey": "2022-t02",
+          "toTeamKey": "2022-t00"
         }
       ]
     },
     {
-      "transactionKey": "2022-w05-x0013",
+      "transactionKey": "2022-w05-x0018",
       "teamKey": "2022-t11",
       "type": "ROSTER",
       "status": "EXECUTED",
@@ -2840,13 +3035,42 @@
         {
           "type": "DROP",
           "playerKey": "espn-4241464",
-          "playerId": null,
-          "player": "Mac Jones"
+          "playerId": 4241464,
+          "player": "Mac Jones",
+          "fromTeamKey": "2022-t11",
+          "toTeamKey": "2022-t00"
         }
       ]
     },
     {
-      "transactionKey": "2022-w05-x0014",
+      "transactionKey": "2022-w05-x0019",
+      "teamKey": "2022-t05",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1664803329411,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-2576434",
+          "playerId": 2576434,
+          "player": "Melvin Gordon III",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-15880",
+          "playerId": 15880,
+          "player": "Robert Woods",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2022-w05-x0020",
       "teamKey": "2022-t06",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -2857,13 +3081,15 @@
         {
           "type": "ADD",
           "playerKey": "espn-3042778",
-          "playerId": null,
-          "player": "Corey Davis"
+          "playerId": 3042778,
+          "player": "Corey Davis",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t06"
         }
       ]
     },
     {
-      "transactionKey": "2022-w05-x0015",
+      "transactionKey": "2022-w05-x0021",
       "teamKey": "2022-t05",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -2874,13 +3100,15 @@
         {
           "type": "ADD",
           "playerKey": "espn-3059722",
-          "playerId": null,
-          "player": "Zay Jones"
+          "playerId": 3059722,
+          "player": "Zay Jones",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t05"
         }
       ]
     },
     {
-      "transactionKey": "2022-w05-x0016",
+      "transactionKey": "2022-w05-x0022",
       "teamKey": "2022-t10",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -2891,19 +3119,23 @@
         {
           "type": "ADD",
           "playerKey": "espn-2972515",
-          "playerId": null,
-          "player": "Cooper Rush"
+          "playerId": 2972515,
+          "player": "Cooper Rush",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t10"
         },
         {
           "type": "DROP",
           "playerKey": "espn--16018",
-          "playerId": null,
-          "player": "Saints D/ST"
+          "playerId": -16018,
+          "player": "Saints D/ST",
+          "fromTeamKey": "2022-t10",
+          "toTeamKey": "2022-t00"
         }
       ]
     },
     {
-      "transactionKey": "2022-w05-x0017",
+      "transactionKey": "2022-w05-x0023",
       "teamKey": "2022-t09",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -2914,19 +3146,50 @@
         {
           "type": "ADD",
           "playerKey": "espn-16733",
-          "playerId": null,
-          "player": "Odell Beckham Jr."
+          "playerId": 16733,
+          "player": "Odell Beckham Jr.",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t09"
         },
         {
           "type": "DROP",
           "playerKey": "espn-3115306",
-          "playerId": null,
-          "player": "Josh Reynolds"
+          "playerId": 3115306,
+          "player": "Josh Reynolds",
+          "fromTeamKey": "2022-t09",
+          "toTeamKey": "2022-t00"
         }
       ]
     },
     {
-      "transactionKey": "2022-w05-x0018",
+      "transactionKey": "2022-w05-x0024",
+      "teamKey": "2022-t02",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1664800601490,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3117251",
+          "playerId": 3117251,
+          "player": "Christian McCaffrey",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3916148",
+          "playerId": 3916148,
+          "player": "Tony Pollard",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2022-w05-x0025",
       "teamKey": "2022-t01",
       "type": "ROSTER",
       "status": "EXECUTED",
@@ -2937,13 +3200,15 @@
         {
           "type": "DROP",
           "playerKey": "espn-4037235",
-          "playerId": null,
-          "player": "Greg Dortch"
+          "playerId": 4037235,
+          "player": "Greg Dortch",
+          "fromTeamKey": "2022-t01",
+          "toTeamKey": "2022-t00"
         }
       ]
     },
     {
-      "transactionKey": "2022-w05-x0019",
+      "transactionKey": "2022-w05-x0026",
       "teamKey": "2022-t10",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -2954,13 +3219,15 @@
         {
           "type": "ADD",
           "playerKey": "espn-4361529",
-          "playerId": null,
-          "player": "Isiah Pacheco"
+          "playerId": 4361529,
+          "player": "Isiah Pacheco",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t10"
         }
       ]
     },
     {
-      "transactionKey": "2022-w05-x0020",
+      "transactionKey": "2022-w05-x0027",
       "teamKey": "2022-t06",
       "type": "WAIVER",
       "status": "EXECUTED",
@@ -2971,19 +3238,50 @@
         {
           "type": "ADD",
           "playerKey": "espn-3916430",
-          "playerId": null,
-          "player": "Nyheim Hines"
+          "playerId": 3916430,
+          "player": "Nyheim Hines",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t06"
         },
         {
           "type": "DROP",
           "playerKey": "espn-3930086",
-          "playerId": null,
-          "player": "Dawson Knox"
+          "playerId": 3930086,
+          "player": "Dawson Knox",
+          "fromTeamKey": "2022-t06",
+          "toTeamKey": "2022-t00"
         }
       ]
     },
     {
-      "transactionKey": "2022-w05-x0021",
+      "transactionKey": "2022-w05-x0028",
+      "teamKey": "2022-t02",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1664800604028,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3054850",
+          "playerId": 3054850,
+          "player": "Alvin Kamara",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-13981",
+          "playerId": 13981,
+          "player": "Mark Ingram II",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2022-w05-x0029",
       "teamKey": "2022-t09",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -2994,13 +3292,15 @@
         {
           "type": "ADD",
           "playerKey": "espn-3915486",
-          "playerId": null,
-          "player": "Tyler Conklin"
+          "playerId": 3915486,
+          "player": "Tyler Conklin",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t09"
         }
       ]
     },
     {
-      "transactionKey": "2022-w05-x0022",
+      "transactionKey": "2022-w05-x0030",
       "teamKey": "2022-t01",
       "type": "ROSTER",
       "status": "EXECUTED",
@@ -3011,13 +3311,15 @@
         {
           "type": "DROP",
           "playerKey": "espn-13982",
-          "playerId": null,
-          "player": "Julio Jones"
+          "playerId": 13982,
+          "player": "Julio Jones",
+          "fromTeamKey": "2022-t01",
+          "toTeamKey": "2022-t00"
         }
       ]
     },
     {
-      "transactionKey": "2022-w05-x0023",
+      "transactionKey": "2022-w05-x0031",
       "teamKey": "2022-t10",
       "type": "WAIVER",
       "status": "EXECUTED",
@@ -3028,13 +3330,15 @@
         {
           "type": "ADD",
           "playerKey": "espn-3139033",
-          "playerId": null,
-          "player": "Mike Boone"
+          "playerId": 3139033,
+          "player": "Mike Boone",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t10"
         }
       ]
     },
     {
-      "transactionKey": "2022-w05-x0024",
+      "transactionKey": "2022-w05-x0032",
       "teamKey": "2022-t10",
       "type": "WAIVER",
       "status": "FAILED_INVALIDPLAYERSOURCE",
@@ -3045,13 +3349,15 @@
         {
           "type": "ADD",
           "playerKey": "espn-4240703",
-          "playerId": null,
-          "player": "Kenny Pickett"
+          "playerId": 4240703,
+          "player": "Kenny Pickett",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t10"
         }
       ]
     },
     {
-      "transactionKey": "2022-w05-x0025",
+      "transactionKey": "2022-w05-x0033",
       "teamKey": "2022-t10",
       "type": "ROSTER",
       "status": "EXECUTED",
@@ -3062,13 +3368,42 @@
         {
           "type": "DROP",
           "playerKey": "espn-3052587",
-          "playerId": null,
-          "player": "Baker Mayfield"
+          "playerId": 3052587,
+          "player": "Baker Mayfield",
+          "fromTeamKey": "2022-t10",
+          "toTeamKey": "2022-t00"
         }
       ]
     },
     {
-      "transactionKey": "2022-w05-x0026",
+      "transactionKey": "2022-w05-x0034",
+      "teamKey": "2022-t05",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1664818368968,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-2576434",
+          "playerId": 2576434,
+          "player": "Melvin Gordon III",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-12483",
+          "playerId": 12483,
+          "player": "Matthew Stafford",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2022-w05-x0035",
       "teamKey": "2022-t03",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3079,13 +3414,15 @@
         {
           "type": "ADD",
           "playerKey": "espn-3115306",
-          "playerId": null,
-          "player": "Josh Reynolds"
+          "playerId": 3115306,
+          "player": "Josh Reynolds",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t03"
         }
       ]
     },
     {
-      "transactionKey": "2022-w05-x0027",
+      "transactionKey": "2022-w05-x0036",
       "teamKey": "2022-t03",
       "type": "ROSTER",
       "status": "EXECUTED",
@@ -3096,13 +3433,25 @@
         {
           "type": "DROP",
           "playerKey": "espn-4567156",
-          "playerId": null,
-          "player": "Treylon Burks"
+          "playerId": 4567156,
+          "player": "Treylon Burks",
+          "fromTeamKey": "2022-t03",
+          "toTeamKey": "2022-t00"
         }
       ]
     },
     {
-      "transactionKey": "2022-w05-x0028",
+      "transactionKey": "2022-w05-x0037",
+      "teamKey": "2022-t09",
+      "type": "TRADE_UPHOLD",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1665149013275,
+      "bidAmount": 0,
+      "items": []
+    },
+    {
+      "transactionKey": "2022-w05-x0038",
       "teamKey": "2022-t05",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3113,19 +3462,23 @@
         {
           "type": "ADD",
           "playerKey": "espn-3059722",
-          "playerId": null,
-          "player": "Zay Jones"
+          "playerId": 3059722,
+          "player": "Zay Jones",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t05"
         },
         {
           "type": "DROP",
           "playerKey": "espn-3051738",
-          "playerId": null,
-          "player": "Marquez Valdes-Scantling"
+          "playerId": 3051738,
+          "player": "Marquez Valdes-Scantling",
+          "fromTeamKey": "2022-t05",
+          "toTeamKey": "2022-t00"
         }
       ]
     },
     {
-      "transactionKey": "2022-w05-x0029",
+      "transactionKey": "2022-w05-x0039",
       "teamKey": "2022-t03",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3136,13 +3489,15 @@
         {
           "type": "ADD",
           "playerKey": "espn-4039050",
-          "playerId": null,
-          "player": "Devin Duvernay"
+          "playerId": 4039050,
+          "player": "Devin Duvernay",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t03"
         }
       ]
     },
     {
-      "transactionKey": "2022-w05-x0030",
+      "transactionKey": "2022-w05-x0040",
       "teamKey": "2022-t02",
       "type": "ROSTER",
       "status": "EXECUTED",
@@ -3153,13 +3508,15 @@
         {
           "type": "DROP",
           "playerKey": "espn-3122899",
-          "playerId": null,
-          "player": "Richie James"
+          "playerId": 3122899,
+          "player": "Richie James",
+          "fromTeamKey": "2022-t02",
+          "toTeamKey": "2022-t00"
         }
       ]
     },
     {
-      "transactionKey": "2022-w05-x0031",
+      "transactionKey": "2022-w05-x0041",
       "teamKey": "2022-t04",
       "type": "WAIVER",
       "status": "EXECUTED",
@@ -3170,13 +3527,15 @@
         {
           "type": "ADD",
           "playerKey": "espn-16728",
-          "playerId": null,
-          "player": "Teddy Bridgewater"
+          "playerId": 16728,
+          "player": "Teddy Bridgewater",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t04"
         }
       ]
     },
     {
-      "transactionKey": "2022-w05-x0032",
+      "transactionKey": "2022-w05-x0042",
       "teamKey": "2022-t11",
       "type": "ROSTER",
       "status": "EXECUTED",
@@ -3187,13 +3546,15 @@
         {
           "type": "DROP",
           "playerKey": "espn--16005",
-          "playerId": null,
-          "player": "Browns D/ST"
+          "playerId": -16005,
+          "player": "Browns D/ST",
+          "fromTeamKey": "2022-t11",
+          "toTeamKey": "2022-t00"
         }
       ]
     },
     {
-      "transactionKey": "2022-w05-x0033",
+      "transactionKey": "2022-w05-x0043",
       "teamKey": "2022-t09",
       "type": "WAIVER",
       "status": "EXECUTED",
@@ -3204,19 +3565,50 @@
         {
           "type": "ADD",
           "playerKey": "espn-4240703",
-          "playerId": null,
-          "player": "Kenny Pickett"
+          "playerId": 4240703,
+          "player": "Kenny Pickett",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t09"
         },
         {
           "type": "DROP",
           "playerKey": "espn-4242546",
-          "playerId": null,
-          "player": "Davis Mills"
+          "playerId": 4242546,
+          "player": "Davis Mills",
+          "fromTeamKey": "2022-t09",
+          "toTeamKey": "2022-t00"
         }
       ]
     },
     {
-      "transactionKey": "2022-w05-x0034",
+      "transactionKey": "2022-w05-x0044",
+      "teamKey": "2022-t05",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1664803341111,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4426354",
+          "playerId": 4426354,
+          "player": "George Pickens",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-15880",
+          "playerId": 15880,
+          "player": "Robert Woods",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2022-w05-x0045",
       "teamKey": "2022-t05",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3227,19 +3619,23 @@
         {
           "type": "ADD",
           "playerKey": "espn--16030",
-          "playerId": null,
-          "player": "Jaguars D/ST"
+          "playerId": -16030,
+          "player": "Jaguars D/ST",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t05"
         },
         {
           "type": "DROP",
           "playerKey": "espn--16024",
-          "playerId": null,
-          "player": "Chargers D/ST"
+          "playerId": -16024,
+          "player": "Chargers D/ST",
+          "fromTeamKey": "2022-t05",
+          "toTeamKey": "2022-t00"
         }
       ]
     },
     {
-      "transactionKey": "2022-w05-x0035",
+      "transactionKey": "2022-w05-x0046",
       "teamKey": "2022-t10",
       "type": "ROSTER",
       "status": "EXECUTED",
@@ -3250,13 +3646,15 @@
         {
           "type": "DROP",
           "playerKey": "espn-3139033",
-          "playerId": null,
-          "player": "Mike Boone"
+          "playerId": 3139033,
+          "player": "Mike Boone",
+          "fromTeamKey": "2022-t10",
+          "toTeamKey": "2022-t00"
         }
       ]
     },
     {
-      "transactionKey": "2022-w05-x0036",
+      "transactionKey": "2022-w05-x0047",
       "teamKey": "2022-t02",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3267,13 +3665,42 @@
         {
           "type": "ADD",
           "playerKey": "espn-3115394",
-          "playerId": null,
-          "player": "DJ Chark"
+          "playerId": 3115394,
+          "player": "DJ Chark",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t02"
         }
       ]
     },
     {
-      "transactionKey": "2022-w05-x0037",
+      "transactionKey": "2022-w05-x0048",
+      "teamKey": "2022-t05",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1664818374399,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-2576434",
+          "playerId": 2576434,
+          "player": "Melvin Gordon III",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4426354",
+          "playerId": 4426354,
+          "player": "George Pickens",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2022-w05-x0049",
       "teamKey": "2022-t11",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -3284,13 +3711,15 @@
         {
           "type": "ADD",
           "playerKey": "espn--16015",
-          "playerId": null,
-          "player": "Dolphins D/ST"
+          "playerId": -16015,
+          "player": "Dolphins D/ST",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t11"
         }
       ]
     },
     {
-      "transactionKey": "2022-w05-x0038",
+      "transactionKey": "2022-w05-x0050",
       "teamKey": "2022-t05",
       "type": "ROSTER",
       "status": "EXECUTED",
@@ -3301,8 +3730,64 @@
         {
           "type": "DROP",
           "playerKey": "espn-3059722",
-          "playerId": null,
-          "player": "Zay Jones"
+          "playerId": 3059722,
+          "player": "Zay Jones",
+          "fromTeamKey": "2022-t05",
+          "toTeamKey": "2022-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2022-w05-x0051",
+      "teamKey": "2022-t05",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1664803318581,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-2576434",
+          "playerId": 2576434,
+          "player": "Melvin Gordon III",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3126486",
+          "playerId": 3126486,
+          "player": "Deebo Samuel",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2022-w05-x0052",
+      "teamKey": "2022-t05",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1664818376888,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4426354",
+          "playerId": 4426354,
+          "player": "George Pickens",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-12483",
+          "playerId": 12483,
+          "player": "Matthew Stafford",
+          "fromTeamKey": "2022-t00",
+          "toTeamKey": "2022-t00"
         }
       ]
     }

@@ -57,6 +57,7 @@
   "transactions": [
     {
       "transactionKey": "2018-w03-x0001",
+      "teamKey": "2018-t-2147483648",
       "type": "WAIVER",
       "status": "EXECUTED",
       "scoringPeriod": 3,
@@ -66,8 +67,10 @@
         {
           "type": "ADD",
           "playerKey": "espn-15826",
-          "playerId": null,
-          "player": "Giovani Bernard"
+          "playerId": 15826,
+          "player": "Giovani Bernard",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t10"
         }
       ]
     },
@@ -83,8 +86,10 @@
         {
           "type": "ADD",
           "playerKey": "espn-14322",
-          "playerId": null,
-          "player": "Dan Bailey"
+          "playerId": 14322,
+          "player": "Dan Bailey",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t09"
         }
       ]
     },
@@ -100,8 +105,10 @@
         {
           "type": "ADD",
           "playerKey": "espn-15786",
-          "playerId": null,
-          "player": "Tavon Austin"
+          "playerId": 15786,
+          "player": "Tavon Austin",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t05"
         }
       ]
     },
@@ -117,14 +124,18 @@
         {
           "type": "ADD",
           "playerKey": "espn-17372",
-          "playerId": null,
-          "player": "Chris Boswell"
+          "playerId": 17372,
+          "player": "Chris Boswell",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t10"
         },
         {
           "type": "DROP",
           "playerKey": "espn-3916925",
-          "playerId": null,
-          "player": "Kerryon Johnson"
+          "playerId": 3916925,
+          "player": "Kerryon Johnson",
+          "fromTeamKey": "2018-t10",
+          "toTeamKey": "2018-t-1"
         }
       ]
     },
@@ -140,13 +151,93 @@
         {
           "type": "ADD",
           "playerKey": "espn-14028",
-          "playerId": null,
-          "player": "Stevan Ridley"
+          "playerId": 14028,
+          "player": "Stevan Ridley",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t05"
         }
       ]
     },
     {
       "transactionKey": "2018-w03-x0006",
+      "teamKey": "2018-t09",
+      "type": "TRADE_PROPOSAL",
+      "status": "PENDING",
+      "scoringPeriod": 3,
+      "date": 1537670103095,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "TRADE",
+          "playerKey": "espn-15966",
+          "playerId": 15966,
+          "player": "Chris Thompson",
+          "fromTeamKey": "2018-t04",
+          "toTeamKey": "2018-t09"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3051876",
+          "playerId": 3051876,
+          "player": "Evan Engram",
+          "fromTeamKey": "2018-t09",
+          "toTeamKey": "2018-t04"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-2980453",
+          "playerId": 2980453,
+          "player": "Jamaal Williams",
+          "fromTeamKey": "2018-t09",
+          "toTeamKey": "2018-t04"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w03-x0007",
+      "teamKey": "2018-t09",
+      "type": "TRADE_PROPOSAL",
+      "status": "PENDING",
+      "scoringPeriod": 3,
+      "date": 1537657452357,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3045147",
+          "playerId": 3045147,
+          "player": "James Conner",
+          "fromTeamKey": "2018-t10",
+          "toTeamKey": "2018-t09"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3049916",
+          "playerId": 3049916,
+          "player": "Matt Breida",
+          "fromTeamKey": "2018-t10",
+          "toTeamKey": "2018-t09"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-14881",
+          "playerId": 14881,
+          "player": "Russell Wilson",
+          "fromTeamKey": "2018-t09",
+          "toTeamKey": "2018-t10"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-2977609",
+          "playerId": 2977609,
+          "player": "Devin Funchess",
+          "fromTeamKey": "2018-t09",
+          "toTeamKey": "2018-t10"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w03-x0008",
       "teamKey": "2018-t03",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -157,13 +248,16 @@
         {
           "type": "ADD",
           "playerKey": "espn-16732",
-          "playerId": null,
-          "player": "Eric Ebron"
+          "playerId": 16732,
+          "player": "Eric Ebron",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t03"
         }
       ]
     },
     {
-      "transactionKey": "2018-w03-x0007",
+      "transactionKey": "2018-w03-x0009",
+      "teamKey": "2018-t-2147483648",
       "type": "WAIVER",
       "status": "EXECUTED",
       "scoringPeriod": 3,
@@ -173,19 +267,23 @@
         {
           "type": "ADD",
           "playerKey": "espn-3043080",
-          "playerId": null,
-          "player": "O.J. Howard"
+          "playerId": 3043080,
+          "player": "O.J. Howard",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t04"
         },
         {
           "type": "DROP",
           "playerKey": "espn-3128720",
-          "playerId": null,
-          "player": "Nick Chubb"
+          "playerId": 3128720,
+          "player": "Nick Chubb",
+          "fromTeamKey": "2018-t04",
+          "toTeamKey": "2018-t-1"
         }
       ]
     },
     {
-      "transactionKey": "2018-w03-x0008",
+      "transactionKey": "2018-w03-x0010",
       "teamKey": "2018-t10",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -196,13 +294,16 @@
         {
           "type": "DROP",
           "playerKey": "espn-16339",
-          "playerId": null,
-          "player": "Brandon McManus"
+          "playerId": 16339,
+          "player": "Brandon McManus",
+          "fromTeamKey": "2018-t10",
+          "toTeamKey": "2018-t-1"
         }
       ]
     },
     {
-      "transactionKey": "2018-w03-x0009",
+      "transactionKey": "2018-w03-x0011",
+      "teamKey": "2018-t-2147483648",
       "type": "WAIVER",
       "status": "EXECUTED",
       "scoringPeriod": 3,
@@ -212,19 +313,23 @@
         {
           "type": "DROP",
           "playerKey": "espn--16017",
-          "playerId": null,
-          "player": "Patriots D/ST"
+          "playerId": -16017,
+          "player": "Patriots D/ST",
+          "fromTeamKey": "2018-t06",
+          "toTeamKey": "2018-t-1"
         },
         {
           "type": "ADD",
           "playerKey": "espn--16006",
-          "playerId": null,
-          "player": "Cowboys D/ST"
+          "playerId": -16006,
+          "player": "Cowboys D/ST",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t06"
         }
       ]
     },
     {
-      "transactionKey": "2018-w03-x0010",
+      "transactionKey": "2018-w03-x0012",
       "teamKey": "2018-t05",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -235,13 +340,15 @@
         {
           "type": "DROP",
           "playerKey": "espn-15349",
-          "playerId": null,
-          "player": "Cole Beasley"
+          "playerId": 15349,
+          "player": "Cole Beasley",
+          "fromTeamKey": "2018-t05",
+          "toTeamKey": "2018-t-1"
         }
       ]
     },
     {
-      "transactionKey": "2018-w03-x0011",
+      "transactionKey": "2018-w03-x0013",
       "teamKey": "2018-t09",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -252,19 +359,24 @@
         {
           "type": "ADD",
           "playerKey": "espn-15994",
-          "playerId": null,
-          "player": "Theo Riddick"
+          "playerId": 15994,
+          "player": "Theo Riddick",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t09"
         },
         {
           "type": "DROP",
           "playerKey": "espn-16730",
-          "playerId": null,
-          "player": "Kelvin Benjamin"
+          "playerId": 16730,
+          "player": "Kelvin Benjamin",
+          "fromTeamKey": "2018-t09",
+          "toTeamKey": "2018-t-1"
         }
       ]
     },
     {
-      "transactionKey": "2018-w03-x0012",
+      "transactionKey": "2018-w03-x0014",
+      "teamKey": "2018-t-2147483648",
       "type": "WAIVER",
       "status": "EXECUTED",
       "scoringPeriod": 3,
@@ -274,19 +386,23 @@
         {
           "type": "ADD",
           "playerKey": "espn-8664",
-          "playerId": null,
-          "player": "Ryan Fitzpatrick"
+          "playerId": 8664,
+          "player": "Ryan Fitzpatrick",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t01"
         },
         {
           "type": "DROP",
           "playerKey": "espn-5526",
-          "playerId": null,
-          "player": "Eli Manning"
+          "playerId": 5526,
+          "player": "Eli Manning",
+          "fromTeamKey": "2018-t01",
+          "toTeamKey": "2018-t-1"
         }
       ]
     },
     {
-      "transactionKey": "2018-w03-x0013",
+      "transactionKey": "2018-w03-x0015",
       "teamKey": "2018-t04",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -297,19 +413,24 @@
         {
           "type": "ADD",
           "playerKey": "espn-15920",
-          "playerId": null,
-          "player": "Latavius Murray"
+          "playerId": 15920,
+          "player": "Latavius Murray",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t04"
         },
         {
           "type": "DROP",
           "playerKey": "espn-15788",
-          "playerId": null,
-          "player": "Tyler Eifert"
+          "playerId": 15788,
+          "player": "Tyler Eifert",
+          "fromTeamKey": "2018-t04",
+          "toTeamKey": "2018-t-1"
         }
       ]
     },
     {
-      "transactionKey": "2018-w03-x0014",
+      "transactionKey": "2018-w03-x0016",
+      "teamKey": "2018-t-2147483648",
       "type": "WAIVER",
       "status": "EXECUTED",
       "scoringPeriod": 3,
@@ -319,13 +440,15 @@
         {
           "type": "ADD",
           "playerKey": "espn-3045260",
-          "playerId": null,
-          "player": "Corey Clement"
+          "playerId": 3045260,
+          "player": "Corey Clement",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t10"
         }
       ]
     },
     {
-      "transactionKey": "2018-w03-x0015",
+      "transactionKey": "2018-w03-x0017",
       "teamKey": "2018-t06",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -336,13 +459,58 @@
         {
           "type": "DROP",
           "playerKey": "espn-11270",
-          "playerId": null,
-          "player": "Jordy Nelson"
+          "playerId": 11270,
+          "player": "Jordy Nelson",
+          "fromTeamKey": "2018-t06",
+          "toTeamKey": "2018-t-1"
         }
       ]
     },
     {
-      "transactionKey": "2018-w03-x0016",
+      "transactionKey": "2018-w03-x0018",
+      "teamKey": "2018-t09",
+      "type": "TRADE_PROPOSAL",
+      "status": "PENDING",
+      "scoringPeriod": 3,
+      "date": 1537657452357,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3045147",
+          "playerId": 3045147,
+          "player": "James Conner",
+          "fromTeamKey": "2018-t10",
+          "toTeamKey": "2018-t09"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3049916",
+          "playerId": 3049916,
+          "player": "Matt Breida",
+          "fromTeamKey": "2018-t10",
+          "toTeamKey": "2018-t09"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-14881",
+          "playerId": 14881,
+          "player": "Russell Wilson",
+          "fromTeamKey": "2018-t09",
+          "toTeamKey": "2018-t10"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-2977609",
+          "playerId": 2977609,
+          "player": "Devin Funchess",
+          "fromTeamKey": "2018-t09",
+          "toTeamKey": "2018-t10"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w03-x0019",
       "teamKey": "2018-t12",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -353,19 +521,23 @@
         {
           "type": "ADD",
           "playerKey": "espn-3892889",
-          "playerId": null,
-          "player": "Dede Westbrook"
+          "playerId": 3892889,
+          "player": "Dede Westbrook",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t12"
         },
         {
           "type": "DROP",
           "playerKey": "espn-3912550",
-          "playerId": null,
-          "player": "Ronald Jones"
+          "playerId": 3912550,
+          "player": "Ronald Jones",
+          "fromTeamKey": "2018-t12",
+          "toTeamKey": "2018-t-1"
         }
       ]
     },
     {
-      "transactionKey": "2018-w03-x0017",
+      "transactionKey": "2018-w03-x0020",
       "teamKey": "2018-t11",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -376,13 +548,15 @@
         {
           "type": "ADD",
           "playerKey": "espn-3925357",
-          "playerId": null,
-          "player": "Calvin Ridley"
+          "playerId": 3925357,
+          "player": "Calvin Ridley",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t11"
         }
       ]
     },
     {
-      "transactionKey": "2018-w03-x0018",
+      "transactionKey": "2018-w03-x0021",
       "teamKey": "2018-t05",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -393,19 +567,23 @@
         {
           "type": "DROP",
           "playerKey": "espn-14028",
-          "playerId": null,
-          "player": "Stevan Ridley"
+          "playerId": 14028,
+          "player": "Stevan Ridley",
+          "fromTeamKey": "2018-t05",
+          "toTeamKey": "2018-t-1"
         },
         {
           "type": "ADD",
           "playerKey": "espn-3051891",
-          "playerId": null,
-          "player": "Jordan Wilkins"
+          "playerId": 3051891,
+          "player": "Jordan Wilkins",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t05"
         }
       ]
     },
     {
-      "transactionKey": "2018-w03-x0019",
+      "transactionKey": "2018-w03-x0022",
       "teamKey": "2018-t11",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -416,13 +594,15 @@
         {
           "type": "ADD",
           "playerKey": "espn-15994",
-          "playerId": null,
-          "player": "Theo Riddick"
+          "playerId": 15994,
+          "player": "Theo Riddick",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t11"
         }
       ]
     },
     {
-      "transactionKey": "2018-w03-x0020",
+      "transactionKey": "2018-w03-x0023",
       "teamKey": "2018-t09",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -433,19 +613,58 @@
         {
           "type": "ADD",
           "playerKey": "espn-3128721",
-          "playerId": null,
-          "player": "Sony Michel"
+          "playerId": 3128721,
+          "player": "Sony Michel",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t09"
         },
         {
           "type": "DROP",
           "playerKey": "espn-15994",
-          "playerId": null,
-          "player": "Theo Riddick"
+          "playerId": 15994,
+          "player": "Theo Riddick",
+          "fromTeamKey": "2018-t09",
+          "toTeamKey": "2018-t-1"
         }
       ]
     },
     {
-      "transactionKey": "2018-w03-x0021",
+      "transactionKey": "2018-w03-x0024",
+      "teamKey": "2018-t09",
+      "type": "TRADE_PROPOSAL",
+      "status": "PENDING",
+      "scoringPeriod": 3,
+      "date": 1537670103095,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "TRADE",
+          "playerKey": "espn-15966",
+          "playerId": 15966,
+          "player": "Chris Thompson",
+          "fromTeamKey": "2018-t04",
+          "toTeamKey": "2018-t09"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3051876",
+          "playerId": 3051876,
+          "player": "Evan Engram",
+          "fromTeamKey": "2018-t09",
+          "toTeamKey": "2018-t04"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-2980453",
+          "playerId": 2980453,
+          "player": "Jamaal Williams",
+          "fromTeamKey": "2018-t09",
+          "toTeamKey": "2018-t04"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2018-w03-x0025",
       "teamKey": "2018-t10",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -456,19 +675,24 @@
         {
           "type": "ADD",
           "playerKey": "espn--16005",
-          "playerId": null,
-          "player": "Browns D/ST"
+          "playerId": -16005,
+          "player": "Browns D/ST",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t10"
         },
         {
           "type": "DROP",
           "playerKey": "espn-2976516",
-          "playerId": null,
-          "player": "T.J. Yeldon"
+          "playerId": 2976516,
+          "player": "T.J. Yeldon",
+          "fromTeamKey": "2018-t10",
+          "toTeamKey": "2018-t-1"
         }
       ]
     },
     {
-      "transactionKey": "2018-w03-x0022",
+      "transactionKey": "2018-w03-x0026",
+      "teamKey": "2018-t-2147483648",
       "type": "WAIVER",
       "status": "EXECUTED",
       "scoringPeriod": 3,
@@ -478,19 +702,23 @@
         {
           "type": "DROP",
           "playerKey": "espn-11923",
-          "playerId": null,
-          "player": "Stephen Hauschka"
+          "playerId": 11923,
+          "player": "Stephen Hauschka",
+          "fromTeamKey": "2018-t06",
+          "toTeamKey": "2018-t-1"
         },
         {
           "type": "ADD",
           "playerKey": "espn-10636",
-          "playerId": null,
-          "player": "Mason Crosby"
+          "playerId": 10636,
+          "player": "Mason Crosby",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t06"
         }
       ]
     },
     {
-      "transactionKey": "2018-w03-x0023",
+      "transactionKey": "2018-w03-x0027",
       "teamKey": "2018-t12",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -501,19 +729,24 @@
         {
           "type": "ADD",
           "playerKey": "espn-2577253",
-          "playerId": null,
-          "player": "Javorius Allen"
+          "playerId": 2577253,
+          "player": "Javorius Allen",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t12"
         },
         {
           "type": "DROP",
           "playerKey": "espn-16040",
-          "playerId": null,
-          "player": "C.J. Anderson"
+          "playerId": 16040,
+          "player": "C.J. Anderson",
+          "fromTeamKey": "2018-t12",
+          "toTeamKey": "2018-t-1"
         }
       ]
     },
     {
-      "transactionKey": "2018-w03-x0024",
+      "transactionKey": "2018-w03-x0028",
+      "teamKey": "2018-t-2147483648",
       "type": "WAIVER",
       "status": "EXECUTED",
       "scoringPeriod": 3,
@@ -523,19 +756,23 @@
         {
           "type": "DROP",
           "playerKey": "espn-14922",
-          "playerId": null,
-          "player": "Mohamed Sanu"
+          "playerId": 14922,
+          "player": "Mohamed Sanu",
+          "fromTeamKey": "2018-t06",
+          "toTeamKey": "2018-t-1"
         },
         {
           "type": "ADD",
           "playerKey": "espn-2979590",
-          "playerId": null,
-          "player": "Jesse James"
+          "playerId": 2979590,
+          "player": "Jesse James",
+          "fromTeamKey": "2018-t-1",
+          "toTeamKey": "2018-t06"
         }
       ]
     },
     {
-      "transactionKey": "2018-w03-x0025",
+      "transactionKey": "2018-w03-x0029",
       "teamKey": "2018-t10",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -546,8 +783,10 @@
         {
           "type": "DROP",
           "playerKey": "espn--16024",
-          "playerId": null,
-          "player": "Chargers D/ST"
+          "playerId": -16024,
+          "player": "Chargers D/ST",
+          "fromTeamKey": "2018-t10",
+          "toTeamKey": "2018-t-1"
         }
       ]
     }

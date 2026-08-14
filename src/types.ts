@@ -190,6 +190,7 @@ export type Transaction = {
 export type PublicTrade = {
   tradeKey: string;
   transactionKey: string;
+  type: "TRADE" | "COMMISSIONER_MOVE";
   year: number;
   week: number;
   date?: number;

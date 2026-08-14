@@ -2618,8 +2618,10 @@
         {
           "type": "ADD",
           "playerKey": "espn-3912547",
-          "playerId": null,
-          "player": "Sam Darnold"
+          "playerId": 3912547,
+          "player": "Sam Darnold",
+          "fromTeamKey": "2019-t00",
+          "toTeamKey": "2019-t04"
         }
       ]
     },
@@ -2635,14 +2637,18 @@
         {
           "type": "ADD",
           "playerKey": "espn-2576414",
-          "playerId": null,
-          "player": "Raheem Mostert"
+          "playerId": 2576414,
+          "player": "Raheem Mostert",
+          "fromTeamKey": "2019-t00",
+          "toTeamKey": "2019-t05"
         },
         {
           "type": "DROP",
           "playerKey": "espn-3115375",
-          "playerId": null,
-          "player": "Darrel Williams"
+          "playerId": 3115375,
+          "player": "Darrel Williams",
+          "fromTeamKey": "2019-t05",
+          "toTeamKey": "2019-t00"
         }
       ]
     },
@@ -2658,8 +2664,10 @@
         {
           "type": "DROP",
           "playerKey": "espn--16033",
-          "playerId": null,
-          "player": "Ravens D/ST"
+          "playerId": -16033,
+          "player": "Ravens D/ST",
+          "fromTeamKey": "2019-t10",
+          "toTeamKey": "2019-t00"
         }
       ]
     },
@@ -2675,14 +2683,18 @@
         {
           "type": "ADD",
           "playerKey": "espn-2998120",
-          "playerId": null,
-          "player": "Josh Lambo"
+          "playerId": 2998120,
+          "player": "Josh Lambo",
+          "fromTeamKey": "2019-t00",
+          "toTeamKey": "2019-t01"
         },
         {
           "type": "DROP",
           "playerKey": "espn-3068939",
-          "playerId": null,
-          "player": "Aldrick Rosas"
+          "playerId": 3068939,
+          "player": "Aldrick Rosas",
+          "fromTeamKey": "2019-t01",
+          "toTeamKey": "2019-t00"
         }
       ]
     },
@@ -2698,8 +2710,10 @@
         {
           "type": "DROP",
           "playerKey": "espn-3123076",
-          "playerId": null,
-          "player": "David Njoku"
+          "playerId": 3123076,
+          "player": "David Njoku",
+          "fromTeamKey": "2019-t06",
+          "toTeamKey": "2019-t00"
         }
       ]
     },
@@ -2715,8 +2729,10 @@
         {
           "type": "ADD",
           "playerKey": "espn-4249087",
-          "playerId": null,
-          "player": "Matt Gay"
+          "playerId": 4249087,
+          "player": "Matt Gay",
+          "fromTeamKey": "2019-t00",
+          "toTeamKey": "2019-t12"
         }
       ]
     },
@@ -2732,14 +2748,18 @@
         {
           "type": "ADD",
           "playerKey": "espn--16021",
-          "playerId": null,
-          "player": "Eagles D/ST"
+          "playerId": -16021,
+          "player": "Eagles D/ST",
+          "fromTeamKey": "2019-t00",
+          "toTeamKey": "2019-t03"
         },
         {
           "type": "DROP",
           "playerKey": "espn-2570986",
-          "playerId": null,
-          "player": "Malcolm Brown"
+          "playerId": 2570986,
+          "player": "Malcolm Brown",
+          "fromTeamKey": "2019-t03",
+          "toTeamKey": "2019-t00"
         }
       ]
     },
@@ -2755,19 +2775,33 @@
         {
           "type": "ADD",
           "playerKey": "espn-3116721",
-          "playerId": null,
-          "player": "Jaylen Samuels"
+          "playerId": 3116721,
+          "player": "Jaylen Samuels",
+          "fromTeamKey": "2019-t00",
+          "toTeamKey": "2019-t02"
         },
         {
           "type": "DROP",
           "playerKey": "espn--16011",
-          "playerId": null,
-          "player": "Colts D/ST"
+          "playerId": -16011,
+          "player": "Colts D/ST",
+          "fromTeamKey": "2019-t02",
+          "toTeamKey": "2019-t00"
         }
       ]
     },
     {
       "transactionKey": "2019-w05-x0009",
+      "teamKey": "2019-t10",
+      "type": "TRADE_UPHOLD",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1570131865135,
+      "bidAmount": 0,
+      "items": []
+    },
+    {
+      "transactionKey": "2019-w05-x0010",
       "teamKey": "2019-t09",
       "type": "ROSTER",
       "status": "EXECUTED",
@@ -2778,13 +2812,15 @@
         {
           "type": "DROP",
           "playerKey": "espn-3122449",
-          "playerId": null,
-          "player": "James Washington"
+          "playerId": 3122449,
+          "player": "James Washington",
+          "fromTeamKey": "2019-t09",
+          "toTeamKey": "2019-t00"
         }
       ]
     },
     {
-      "transactionKey": "2019-w05-x0010",
+      "transactionKey": "2019-w05-x0011",
       "teamKey": "2019-t10",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -2795,13 +2831,15 @@
         {
           "type": "ADD",
           "playerKey": "espn-9354",
-          "playerId": null,
-          "player": "Robbie Gould"
+          "playerId": 9354,
+          "player": "Robbie Gould",
+          "fromTeamKey": "2019-t00",
+          "toTeamKey": "2019-t10"
         }
       ]
     },
     {
-      "transactionKey": "2019-w05-x0011",
+      "transactionKey": "2019-w05-x0012",
       "teamKey": "2019-t03",
       "type": "ROSTER",
       "status": "EXECUTED",
@@ -2812,13 +2850,15 @@
         {
           "type": "DROP",
           "playerKey": "espn-2980453",
-          "playerId": null,
-          "player": "Jamaal Williams"
+          "playerId": 2980453,
+          "player": "Jamaal Williams",
+          "fromTeamKey": "2019-t03",
+          "toTeamKey": "2019-t00"
         }
       ]
     },
     {
-      "transactionKey": "2019-w05-x0012",
+      "transactionKey": "2019-w05-x0013",
       "teamKey": "2019-t01",
       "type": "FREEAGENT",
       "status": "EXECUTED",
@@ -2829,497 +2869,23 @@
         {
           "type": "ADD",
           "playerKey": "espn-3051806",
-          "playerId": null,
-          "player": "Ricky Seals-Jones"
+          "playerId": 3051806,
+          "player": "Ricky Seals-Jones",
+          "fromTeamKey": "2019-t00",
+          "toTeamKey": "2019-t01"
         },
         {
           "type": "DROP",
           "playerKey": "espn-3043234",
-          "playerId": null,
-          "player": "Zane Gonzalez"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2019-w05-x0013",
-      "teamKey": "2019-t12",
-      "type": "ROSTER",
-      "status": "EXECUTED",
-      "scoringPeriod": 5,
-      "date": 1570046541114,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "DROP",
-          "playerKey": "espn-9704",
-          "playerId": null,
-          "player": "Stephen Gostkowski"
+          "playerId": 3043234,
+          "player": "Zane Gonzalez",
+          "fromTeamKey": "2019-t01",
+          "toTeamKey": "2019-t00"
         }
       ]
     },
     {
       "transactionKey": "2019-w05-x0014",
-      "teamKey": "2019-t09",
-      "type": "FREEAGENT",
-      "status": "EXECUTED",
-      "scoringPeriod": 5,
-      "date": 1570115955488,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn-3932905",
-          "playerId": null,
-          "player": "Diontae Johnson"
-        },
-        {
-          "type": "DROP",
-          "playerKey": "espn-2578533",
-          "playerId": null,
-          "player": "Chris Conley"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2019-w05-x0015",
-      "teamKey": "2019-t12",
-      "type": "ROSTER",
-      "status": "EXECUTED",
-      "scoringPeriod": 5,
-      "date": 1569971335351,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "DROP",
-          "playerKey": "espn-3127306",
-          "playerId": null,
-          "player": "Dante Pettis"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2019-w05-x0016",
-      "teamKey": "2019-t10",
-      "type": "FREEAGENT",
-      "status": "EXECUTED",
-      "scoringPeriod": 5,
-      "date": 1570286563688,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn-4047646",
-          "playerId": null,
-          "player": "A.J. Brown"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2019-w05-x0017",
-      "teamKey": "2019-t03",
-      "type": "FREEAGENT",
-      "status": "EXECUTED",
-      "scoringPeriod": 5,
-      "date": 1570378786897,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn-15788",
-          "playerId": null,
-          "player": "Tyler Eifert"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2019-w05-x0018",
-      "teamKey": "2019-t06",
-      "type": "ROSTER",
-      "status": "EXECUTED",
-      "scoringPeriod": 5,
-      "date": 1569951379388,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "DROP",
-          "playerKey": "espn--16016",
-          "playerId": null,
-          "player": "Vikings D/ST"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2019-w05-x0019",
-      "teamKey": "2019-t10",
-      "type": "FREEAGENT",
-      "status": "EXECUTED",
-      "scoringPeriod": 5,
-      "date": 1570100165567,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn--16010",
-          "playerId": null,
-          "player": "Titans D/ST"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2019-w05-x0020",
-      "teamKey": "2019-t10",
-      "type": "FREEAGENT",
-      "status": "EXECUTED",
-      "scoringPeriod": 5,
-      "date": 1570100555267,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn-12471",
-          "playerId": null,
-          "player": "Chase Daniel"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2019-w05-x0021",
-      "teamKey": "2019-t05",
-      "type": "FREEAGENT",
-      "status": "EXECUTED",
-      "scoringPeriod": 5,
-      "date": 1570365509359,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn-14877",
-          "playerId": null,
-          "player": "Nick Foles"
-        },
-        {
-          "type": "DROP",
-          "playerKey": "espn-3115293",
-          "playerId": null,
-          "player": "Kyle Allen"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2019-w05-x0022",
-      "teamKey": "2019-t03",
-      "type": "FREEAGENT",
-      "status": "EXECUTED",
-      "scoringPeriod": 5,
-      "date": 1570378497238,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn-3921564",
-          "playerId": null,
-          "player": "Auden Tate"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2019-w05-x0023",
-      "teamKey": "2019-t10",
-      "type": "ROSTER",
-      "status": "EXECUTED",
-      "scoringPeriod": 5,
-      "date": 1570014353900,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "DROP",
-          "playerKey": "espn-10636",
-          "playerId": null,
-          "player": "Mason Crosby"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2019-w05-x0024",
-      "teamKey": "2019-t10",
-      "type": "ROSTER",
-      "status": "EXECUTED",
-      "scoringPeriod": 5,
-      "date": 1569929129783,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "DROP",
-          "playerKey": "espn-15168",
-          "playerId": null,
-          "player": "Case Keenum"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2019-w05-x0025",
-      "teamKey": "2019-t06",
-      "type": "WAIVER",
-      "status": "EXECUTED",
-      "scoringPeriod": 5,
-      "date": 1570089125689,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn-3126486",
-          "playerId": null,
-          "player": "Deebo Samuel"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2019-w05-x0026",
-      "teamKey": "2019-t05",
-      "type": "ROSTER",
-      "status": "EXECUTED",
-      "scoringPeriod": 5,
-      "date": 1569932695725,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "DROP",
-          "playerKey": "espn-16781",
-          "playerId": null,
-          "player": "Paul Richardson Jr."
-        }
-      ]
-    },
-    {
-      "transactionKey": "2019-w05-x0027",
-      "teamKey": "2019-t05",
-      "type": "FREEAGENT",
-      "status": "EXECUTED",
-      "scoringPeriod": 5,
-      "date": 1570365523271,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn-11252",
-          "playerId": null,
-          "player": "Joe Flacco"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2019-w05-x0028",
-      "teamKey": "2019-t06",
-      "type": "FREEAGENT",
-      "status": "EXECUTED",
-      "scoringPeriod": 5,
-      "date": 1570375495674,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn-13232",
-          "playerId": null,
-          "player": "Jimmy Graham"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2019-w05-x0029",
-      "teamKey": "2019-t02",
-      "type": "FREEAGENT",
-      "status": "EXECUTED",
-      "scoringPeriod": 5,
-      "date": 1570327859816,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn--16016",
-          "playerId": null,
-          "player": "Vikings D/ST"
-        },
-        {
-          "type": "DROP",
-          "playerKey": "espn-3051902",
-          "playerId": null,
-          "player": "Peyton Barber"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2019-w05-x0030",
-      "teamKey": "2019-t11",
-      "type": "WAIVER",
-      "status": "EXECUTED",
-      "scoringPeriod": 5,
-      "date": 1570089125687,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn-3115913",
-          "playerId": null,
-          "player": "Geronimo Allison"
-        },
-        {
-          "type": "DROP",
-          "playerKey": "espn-4361606",
-          "playerId": null,
-          "player": "Darwin Thompson"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2019-w05-x0031",
-      "teamKey": "2019-t01",
-      "type": "ROSTER",
-      "status": "EXECUTED",
-      "scoringPeriod": 5,
-      "date": 1570201798483,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "DROP",
-          "playerKey": "espn-3916430",
-          "playerId": null,
-          "player": "Nyheim Hines"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2019-w05-x0032",
-      "teamKey": "2019-t10",
-      "type": "WAIVER",
-      "status": "CANCELED",
-      "scoringPeriod": 5,
-      "date": 1570128001299,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn-3912547",
-          "playerId": null,
-          "player": "Sam Darnold"
-        },
-        {
-          "type": "DROP",
-          "playerKey": "espn-12471",
-          "playerId": null,
-          "player": "Chase Daniel"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2019-w05-x0033",
-      "teamKey": "2019-t05",
-      "type": "ROSTER",
-      "status": "EXECUTED",
-      "scoringPeriod": 5,
-      "date": 1569932764841,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "DROP",
-          "playerKey": "espn--16023",
-          "playerId": null,
-          "player": "Steelers D/ST"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2019-w05-x0034",
-      "teamKey": "2019-t12",
-      "type": "FREEAGENT",
-      "status": "EXECUTED",
-      "scoringPeriod": 5,
-      "date": 1570301507927,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn-2574808",
-          "playerId": null,
-          "player": "Robby Anderson"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2019-w05-x0035",
-      "teamKey": "2019-t03",
-      "type": "ROSTER",
-      "status": "EXECUTED",
-      "scoringPeriod": 5,
-      "date": 1569931113340,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "DROP",
-          "playerKey": "espn--16009",
-          "playerId": null,
-          "player": "Packers D/ST"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2019-w05-x0036",
-      "teamKey": "2019-t12",
-      "type": "ROSTER",
-      "status": "EXECUTED",
-      "scoringPeriod": 5,
-      "date": 1569971314694,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "DROP",
-          "playerKey": "espn-3912547",
-          "playerId": null,
-          "player": "Sam Darnold"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2019-w05-x0037",
-      "teamKey": "2019-t06",
-      "type": "FREEAGENT",
-      "status": "EXECUTED",
-      "scoringPeriod": 5,
-      "date": 1570375833299,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn-16002",
-          "playerId": null,
-          "player": "Kyle Juszczyk"
-        },
-        {
-          "type": "DROP",
-          "playerKey": "espn-2576395",
-          "playerId": null,
-          "player": "Devin Smith"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2019-w05-x0038",
-      "teamKey": "2019-t05",
-      "type": "FREEAGENT",
-      "status": "EXECUTED",
-      "scoringPeriod": 5,
-      "date": 1570106747734,
-      "bidAmount": 0,
-      "items": [
-        {
-          "type": "ADD",
-          "playerKey": "espn--16006",
-          "playerId": null,
-          "player": "Cowboys D/ST"
-        }
-      ]
-    },
-    {
-      "transactionKey": "2019-w05-x0039",
       "teamKey": "2019-t05",
       "type": "TRADE_ACCEPT",
       "status": "EXECUTED",
@@ -3342,6 +2908,723 @@
           "player": "Will Dissly",
           "fromTeamKey": "2019-t05",
           "toTeamKey": "2019-t12"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2019-w05-x0015",
+      "teamKey": "2019-t03",
+      "type": "TRADE_VETO",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1570156617307,
+      "bidAmount": 0,
+      "items": []
+    },
+    {
+      "transactionKey": "2019-w05-x0016",
+      "teamKey": "2019-t12",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1570046541114,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "playerKey": "espn-9704",
+          "playerId": 9704,
+          "player": "Stephen Gostkowski",
+          "fromTeamKey": "2019-t12",
+          "toTeamKey": "2019-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2019-w05-x0017",
+      "teamKey": "2019-t12",
+      "type": "TRADE_ACCEPT",
+      "scoringPeriod": 5,
+      "date": 1570128555241,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "playerKey": "espn-15971",
+          "playerId": 15971,
+          "player": "Rex Burkhead",
+          "fromTeamKey": "2019-t12",
+          "toTeamKey": "2019-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2019-w05-x0018",
+      "teamKey": "2019-t12",
+      "type": "TRADE_ACCEPT",
+      "scoringPeriod": 5,
+      "date": 1569988801215,
+      "bidAmount": 0,
+      "items": []
+    },
+    {
+      "transactionKey": "2019-w05-x0019",
+      "teamKey": "2019-t09",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1570115955488,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "espn-3932905",
+          "playerId": 3932905,
+          "player": "Diontae Johnson",
+          "fromTeamKey": "2019-t00",
+          "toTeamKey": "2019-t09"
+        },
+        {
+          "type": "DROP",
+          "playerKey": "espn-2578533",
+          "playerId": 2578533,
+          "player": "Chris Conley",
+          "fromTeamKey": "2019-t09",
+          "toTeamKey": "2019-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2019-w05-x0020",
+      "teamKey": "2019-t12",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1569971335351,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "playerKey": "espn-3127306",
+          "playerId": 3127306,
+          "player": "Dante Pettis",
+          "fromTeamKey": "2019-t12",
+          "toTeamKey": "2019-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2019-w05-x0021",
+      "teamKey": "2019-t10",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1570286563688,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "espn-4047646",
+          "playerId": 4047646,
+          "player": "A.J. Brown",
+          "fromTeamKey": "2019-t00",
+          "toTeamKey": "2019-t10"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2019-w05-x0022",
+      "teamKey": "2019-t03",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1570378786897,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "espn-15788",
+          "playerId": 15788,
+          "player": "Tyler Eifert",
+          "fromTeamKey": "2019-t00",
+          "toTeamKey": "2019-t03"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2019-w05-x0023",
+      "teamKey": "2019-t12",
+      "type": "TRADE_UPHOLD",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1570128894431,
+      "bidAmount": 0,
+      "items": []
+    },
+    {
+      "transactionKey": "2019-w05-x0024",
+      "teamKey": "2019-t06",
+      "type": "TRADE_DECLINE",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1570056030311,
+      "bidAmount": 0,
+      "items": [
+        {
+          "playerKey": "espn-3054850",
+          "playerId": 3054850,
+          "player": "Alvin Kamara",
+          "fromTeamKey": "2019-t00",
+          "toTeamKey": "2019-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2019-w05-x0025",
+      "teamKey": "2019-t06",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1569951379388,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "playerKey": "espn--16016",
+          "playerId": -16016,
+          "player": "Vikings D/ST",
+          "fromTeamKey": "2019-t06",
+          "toTeamKey": "2019-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2019-w05-x0026",
+      "teamKey": "2019-t12",
+      "type": "TRADE_UPHOLD",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1570015439278,
+      "bidAmount": 0,
+      "items": []
+    },
+    {
+      "transactionKey": "2019-w05-x0027",
+      "teamKey": "2019-t10",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1570100165567,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "espn--16010",
+          "playerId": -16010,
+          "player": "Titans D/ST",
+          "fromTeamKey": "2019-t00",
+          "toTeamKey": "2019-t10"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2019-w05-x0028",
+      "teamKey": "2019-t10",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1570100555267,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "espn-12471",
+          "playerId": 12471,
+          "player": "Chase Daniel",
+          "fromTeamKey": "2019-t00",
+          "toTeamKey": "2019-t10"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2019-w05-x0029",
+      "teamKey": "2019-t05",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1570365509359,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "espn-14877",
+          "playerId": 14877,
+          "player": "Nick Foles",
+          "fromTeamKey": "2019-t00",
+          "toTeamKey": "2019-t05"
+        },
+        {
+          "type": "DROP",
+          "playerKey": "espn-3115293",
+          "playerId": 3115293,
+          "player": "Kyle Allen",
+          "fromTeamKey": "2019-t05",
+          "toTeamKey": "2019-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2019-w05-x0030",
+      "teamKey": "2019-t03",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1570378497238,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "espn-3921564",
+          "playerId": 3921564,
+          "player": "Auden Tate",
+          "fromTeamKey": "2019-t00",
+          "toTeamKey": "2019-t03"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2019-w05-x0031",
+      "teamKey": "2019-t10",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1570014353900,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "playerKey": "espn-10636",
+          "playerId": 10636,
+          "player": "Mason Crosby",
+          "fromTeamKey": "2019-t10",
+          "toTeamKey": "2019-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2019-w05-x0032",
+      "teamKey": "2019-t10",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1569929129783,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "playerKey": "espn-15168",
+          "playerId": 15168,
+          "player": "Case Keenum",
+          "fromTeamKey": "2019-t10",
+          "toTeamKey": "2019-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2019-w05-x0033",
+      "teamKey": "2019-t06",
+      "type": "WAIVER",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1570089125689,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "espn-3126486",
+          "playerId": 3126486,
+          "player": "Deebo Samuel",
+          "fromTeamKey": "2019-t00",
+          "toTeamKey": "2019-t06"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2019-w05-x0034",
+      "teamKey": "2019-t05",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1569932695725,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "playerKey": "espn-16781",
+          "playerId": 16781,
+          "player": "Paul Richardson Jr.",
+          "fromTeamKey": "2019-t05",
+          "toTeamKey": "2019-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2019-w05-x0035",
+      "teamKey": "2019-t05",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1570365523271,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "espn-11252",
+          "playerId": 11252,
+          "player": "Joe Flacco",
+          "fromTeamKey": "2019-t00",
+          "toTeamKey": "2019-t05"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2019-w05-x0036",
+      "teamKey": "2019-t06",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1570375495674,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "espn-13232",
+          "playerId": 13232,
+          "player": "Jimmy Graham",
+          "fromTeamKey": "2019-t00",
+          "toTeamKey": "2019-t06"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2019-w05-x0037",
+      "teamKey": "2019-t02",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1570327859816,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "espn--16016",
+          "playerId": -16016,
+          "player": "Vikings D/ST",
+          "fromTeamKey": "2019-t00",
+          "toTeamKey": "2019-t02"
+        },
+        {
+          "type": "DROP",
+          "playerKey": "espn-3051902",
+          "playerId": 3051902,
+          "player": "Peyton Barber",
+          "fromTeamKey": "2019-t02",
+          "toTeamKey": "2019-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2019-w05-x0038",
+      "teamKey": "2019-t11",
+      "type": "WAIVER",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1570089125687,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "espn-3115913",
+          "playerId": 3115913,
+          "player": "Geronimo Allison",
+          "fromTeamKey": "2019-t00",
+          "toTeamKey": "2019-t11"
+        },
+        {
+          "type": "DROP",
+          "playerKey": "espn-4361606",
+          "playerId": 4361606,
+          "player": "Darwin Thompson",
+          "fromTeamKey": "2019-t11",
+          "toTeamKey": "2019-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2019-w05-x0039",
+      "teamKey": "2019-t03",
+      "type": "TRADE_UPHOLD",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1570063901883,
+      "bidAmount": 0,
+      "items": []
+    },
+    {
+      "transactionKey": "2019-w05-x0040",
+      "teamKey": "2019-t12",
+      "type": "TRADE_PROPOSAL",
+      "status": "CANCELED",
+      "scoringPeriod": 5,
+      "date": 1570128086907,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3115364",
+          "playerId": 3115364,
+          "player": "Leonard Fournette",
+          "fromTeamKey": "2019-t09",
+          "toTeamKey": "2019-t12"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-16731",
+          "playerId": 16731,
+          "player": "Brandin Cooks",
+          "fromTeamKey": "2019-t09",
+          "toTeamKey": "2019-t12"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-15795",
+          "playerId": 15795,
+          "player": "DeAndre Hopkins",
+          "fromTeamKey": "2019-t12",
+          "toTeamKey": "2019-t09"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3915416",
+          "playerId": 3915416,
+          "player": "DJ Moore",
+          "fromTeamKey": "2019-t12",
+          "toTeamKey": "2019-t09"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2019-w05-x0041",
+      "teamKey": "2019-t05",
+      "type": "TRADE_PROPOSAL",
+      "status": "PENDING",
+      "scoringPeriod": 5,
+      "date": 1569981882232,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3059915",
+          "playerId": 3059915,
+          "player": "Kareem Hunt",
+          "fromTeamKey": "2019-t12",
+          "toTeamKey": "2019-t05"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3127292",
+          "playerId": 3127292,
+          "player": "Will Dissly",
+          "fromTeamKey": "2019-t05",
+          "toTeamKey": "2019-t12"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2019-w05-x0042",
+      "teamKey": "2019-t10",
+      "type": "TRADE_DECLINE",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1570128031578,
+      "bidAmount": 0,
+      "items": []
+    },
+    {
+      "transactionKey": "2019-w05-x0043",
+      "teamKey": "2019-t01",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1570201798483,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "playerKey": "espn-3916430",
+          "playerId": 3916430,
+          "player": "Nyheim Hines",
+          "fromTeamKey": "2019-t01",
+          "toTeamKey": "2019-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2019-w05-x0044",
+      "teamKey": "2019-t10",
+      "type": "WAIVER",
+      "status": "CANCELED",
+      "scoringPeriod": 5,
+      "date": 1570128001299,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "espn-3912547",
+          "playerId": 3912547,
+          "player": "Sam Darnold",
+          "fromTeamKey": "2019-t00",
+          "toTeamKey": "2019-t10"
+        },
+        {
+          "type": "DROP",
+          "playerKey": "espn-12471",
+          "playerId": 12471,
+          "player": "Chase Daniel",
+          "fromTeamKey": "2019-t10",
+          "toTeamKey": "2019-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2019-w05-x0045",
+      "teamKey": "2019-t02",
+      "type": "TRADE_DECLINE",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1570129412216,
+      "bidAmount": 0,
+      "items": []
+    },
+    {
+      "transactionKey": "2019-w05-x0046",
+      "teamKey": "2019-t05",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1569932764841,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "playerKey": "espn--16023",
+          "playerId": -16023,
+          "player": "Steelers D/ST",
+          "fromTeamKey": "2019-t05",
+          "toTeamKey": "2019-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2019-w05-x0047",
+      "teamKey": "2019-t12",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1570301507927,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "espn-2574808",
+          "playerId": 2574808,
+          "player": "Robby Anderson",
+          "fromTeamKey": "2019-t00",
+          "toTeamKey": "2019-t12"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2019-w05-x0048",
+      "teamKey": "2019-t03",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1569931113340,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "playerKey": "espn--16009",
+          "playerId": -16009,
+          "player": "Packers D/ST",
+          "fromTeamKey": "2019-t03",
+          "toTeamKey": "2019-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2019-w05-x0049",
+      "teamKey": "2019-t12",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1569971314694,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "playerKey": "espn-3912547",
+          "playerId": 3912547,
+          "player": "Sam Darnold",
+          "fromTeamKey": "2019-t12",
+          "toTeamKey": "2019-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2019-w05-x0050",
+      "teamKey": "2019-t06",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1570375833299,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "espn-16002",
+          "playerId": 16002,
+          "player": "Kyle Juszczyk",
+          "fromTeamKey": "2019-t00",
+          "toTeamKey": "2019-t06"
+        },
+        {
+          "type": "DROP",
+          "playerKey": "espn-2576395",
+          "playerId": 2576395,
+          "player": "Devin Smith",
+          "fromTeamKey": "2019-t06",
+          "toTeamKey": "2019-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2019-w05-x0051",
+      "teamKey": "2019-t05",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 5,
+      "date": 1570106747734,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "espn--16006",
+          "playerId": -16006,
+          "player": "Cowboys D/ST",
+          "fromTeamKey": "2019-t00",
+          "toTeamKey": "2019-t05"
         }
       ]
     }
