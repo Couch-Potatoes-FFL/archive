@@ -40,6 +40,7 @@ import {
   teamDisplay,
 } from "./data";
 import { SimpleTable } from "./SimpleTable";
+import { ANNOUNCED_KEEPERS } from "./keepers";
 import {
   ArchiveManifest,
   BoxScore,
@@ -87,6 +88,7 @@ type KeeperRow = {
   teamName: string;
   keeperEligible: boolean;
   teamKey?: string;
+  teamLinkable?: boolean;
   playerKey?: string;
   draftPick?: number;
 };
@@ -1129,15 +1131,13 @@ function KeepersPage() {
     position: normalizePositionFilter(searchParams.get("pos")),
   }));
 
-  const years = useMemo(
-    () =>
-      manifest.status === "loaded"
-        ? [...manifest.data.seasons]
-            .sort((left, right) => right.year - left.year)
-            .map((season) => season.year)
-        : [],
-    [manifest],
-  );
+  const years = useMemo(() => {
+    const archiveYears =
+      manifest.status === "loaded" ? manifest.data.seasons.map((season) => season.year) : [];
+    return [...new Set([...archiveYears, ...ANNOUNCED_KEEPERS.map((keeper) => keeper.year)])].sort(
+      (left, right) => right - left,
+    );
+  }, [manifest]);
   const selectedYear = normalizeKeeperYear(searchParams.get("year"), years);
   const selectedPosition = normalizePositionFilter(searchParams.get("pos"));
   const appliedQuery = searchParams.get("q")?.trim() ?? "";
@@ -1161,7 +1161,7 @@ function KeepersPage() {
     const playerByKey = new Map(players.data.map((player) => [player.key, player]));
     const keeperEligibleByRowId = keeperEligibilityByRowId(index.data);
 
-    return index.data
+    const historicalRows = index.data
       .filter(
         (row) => {
           if (
@@ -1194,11 +1194,30 @@ function KeepersPage() {
           teamName: row.teamName ?? row.teamKey ?? "Unknown",
           keeperEligible: keeperEligibleByRowId.get(row.id) ?? true,
           teamKey: row.teamKey,
+          teamLinkable: true,
           playerKey: row.playerKey,
           draftPick: row.draftPick,
         };
-      })
-      .sort(sortKeeperRows);
+      });
+
+    const announcedRows = ANNOUNCED_KEEPERS.filter(
+      (keeper) =>
+        (selectedYear === "all" || keeper.year === Number(selectedYear)) &&
+        includesSearchText(keeper.name, normalizedQuery) &&
+        matchesPositionFilter(keeper.position, selectedPosition),
+    ).map((keeper, index): KeeperRow => ({
+      id: `announced-${keeper.year}-${index + 1}`,
+      year: keeper.year,
+      auctionValue: keeper.value,
+      position: keeper.position,
+      name: keeper.name,
+      teamName: keeper.owner,
+      keeperEligible: true,
+      teamLinkable: false,
+      playerKey: keeper.playerKey,
+    }));
+
+    return [...historicalRows, ...announcedRows].sort(sortKeeperRows);
   }, [index, normalizedQuery, players, selectedPosition, selectedYear]);
 
   const keeperColumns = useMemo(
@@ -3439,7 +3458,7 @@ function KeeperMobileCard({
 }
 
 function KeeperTeamLink({ row }: { row: KeeperRow }) {
-  if (row.teamName === "Unknown" && !row.teamKey) {
+  if (!row.teamLinkable || (row.teamName === "Unknown" && !row.teamKey)) {
     return row.teamName;
   }
 
