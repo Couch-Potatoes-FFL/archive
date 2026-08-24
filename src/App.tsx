@@ -624,9 +624,9 @@ function App() {
             <Search size={16} aria-hidden />
             Browse
           </NavLink>
-          <NavLink to="/records">
+          <NavLink to="/players">
             <BarChart3 size={16} aria-hidden />
-            Records
+            Players
           </NavLink>
         </nav>
       </header>
