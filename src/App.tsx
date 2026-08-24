@@ -40,7 +40,7 @@ import {
   teamDisplay,
 } from "./data";
 import { SimpleTable } from "./SimpleTable";
-import { ANNOUNCED_KEEPERS } from "./keepers";
+import { ANNOUNCED_KEEPERS, ANNOUNCED_KEEPER_TEAMS } from "./keepers";
 import {
   ArchiveManifest,
   BoxScore,
@@ -88,7 +88,7 @@ type KeeperRow = {
   teamName: string;
   keeperEligible: boolean;
   teamKey?: string;
-  teamLinkable?: boolean;
+  teamYear?: number;
   playerKey?: string;
   draftPick?: number;
 };
@@ -1194,7 +1194,6 @@ function KeepersPage() {
           teamName: row.teamName ?? row.teamKey ?? "Unknown",
           keeperEligible: keeperEligibleByRowId.get(row.id) ?? true,
           teamKey: row.teamKey,
-          teamLinkable: true,
           playerKey: row.playerKey,
           draftPick: row.draftPick,
         };
@@ -1205,17 +1204,21 @@ function KeepersPage() {
         (selectedYear === "all" || keeper.year === Number(selectedYear)) &&
         includesSearchText(keeper.name, normalizedQuery) &&
         matchesPositionFilter(keeper.position, selectedPosition),
-    ).map((keeper, index): KeeperRow => ({
-      id: `announced-${keeper.year}-${index + 1}`,
-      year: keeper.year,
-      auctionValue: keeper.value,
-      position: keeper.position,
-      name: keeper.name,
-      teamName: keeper.owner,
-      keeperEligible: true,
-      teamLinkable: false,
-      playerKey: keeper.playerKey,
-    }));
+    ).map((keeper, index): KeeperRow => {
+      const team = ANNOUNCED_KEEPER_TEAMS[keeper.owner];
+      return {
+        id: `announced-${keeper.year}-${index + 1}`,
+        year: keeper.year,
+        auctionValue: keeper.value,
+        position: keeper.position,
+        name: keeper.name,
+        teamName: team.name,
+        keeperEligible: true,
+        teamKey: team.key,
+        teamYear: team.year,
+        playerKey: keeper.playerKey,
+      };
+    });
 
     return [...historicalRows, ...announcedRows].sort(sortKeeperRows);
   }, [index, normalizedQuery, players, selectedPosition, selectedYear]);
@@ -3458,12 +3461,12 @@ function KeeperMobileCard({
 }
 
 function KeeperTeamLink({ row }: { row: KeeperRow }) {
-  if (!row.teamLinkable || (row.teamName === "Unknown" && !row.teamKey)) {
+  if (row.teamName === "Unknown" && !row.teamKey) {
     return row.teamName;
   }
 
   const href = row.teamKey
-    ? teamPageHref(row.year, row.teamKey)
+    ? teamPageHref(row.teamYear ?? row.year, row.teamKey)
     : yearBrowseHref("team", row.year, row.teamName);
 
   return <Link to={href}>{row.teamName}</Link>;
