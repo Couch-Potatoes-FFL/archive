@@ -9,7 +9,7 @@ The archive lets members explore league history across seasons, including:
 - league records, champions, lifetime owner totals, and head-to-head rivalries;
 - season settings, standings, and weekly results;
 - team records, rosters, matchups, scoring, and draft history;
-- draft picks, auction values, and keeper information;
+- draft picks, auction values, keeper information, and draft value charts;
 - player history and season-by-season fantasy-point totals; and
 - weekly scoreboards, box scores, and transactions.
 

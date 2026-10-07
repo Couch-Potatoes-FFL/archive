@@ -62,6 +62,8 @@ import { useArchiveJson } from "./useArchiveJson";
 import { includesSearchText, normalizeSearchText } from "./search";
 import { buildRivalryGames } from "./rivalries";
 import RivalriesPage from "./RivalriesPage";
+import { buildDraftValueRows } from "./draftValue";
+import DraftValuePage from "./DraftValuePage";
 
 type BrowserFilterType = SearchType | "all";
 type BrowserView = "picker" | "all";
@@ -337,6 +339,12 @@ const dataCategories: Array<{
     label: "Find historical draft picks and auction values.",
     to: "/drafts",
     icon: <LiaClipboardListSolid size={22} aria-hidden />,
+  },
+  {
+    title: "Draft Value",
+    label: "Compare auction cost with each player's season points.",
+    to: "/draft-value",
+    icon: <LiaChartBarSolid size={22} aria-hidden />,
   },
   {
     title: "Keepers",
@@ -672,6 +680,7 @@ function App() {
           <Route path="/freeagency" element={<Navigate replace to="/browse?type=transaction" />} />
           <Route path="/trades" element={<TradesPage />} />
           <Route path="/drafts" element={<DraftBrowserPage />} />
+          <Route path="/draft-value" element={<DraftValueRoute />} />
           <Route path="/players" element={<PlayerBrowserPage />} />
           <Route path="/player/:playerKey" element={<PlayerPage />} />
           <Route path="/season/:year" element={<SeasonPage />} />
@@ -866,6 +875,82 @@ function DataLandingPage() {
           </Link>
         ))}
       </section>
+    </>
+  );
+}
+
+function DraftValueRoute() {
+  const players = useArchiveJson<PublicPlayer[]>("players.json");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const years = useMemo(
+    () =>
+      players.status === "loaded"
+        ? [...new Set(players.data.flatMap((player) =>
+            player.seasons
+              .filter((season) =>
+                season.position !== "HC" &&
+                typeof season.draftValue === "number" &&
+                Number.isFinite(season.draftValue) &&
+                season.draftValue > 0,
+              )
+              .map((season) => season.year),
+          ))].sort((left, right) => right - left)
+        : [],
+    [players],
+  );
+
+  if (players.status === "loading") {
+    return <StatusPanel label="Loading draft value data..." />;
+  }
+  if (players.status === "error") {
+    return <StatusPanel label="Unable to load draft value data." tone="danger" />;
+  }
+
+  const requestedYear = Number(searchParams.get("year"));
+  const year = years.includes(requestedYear) ? requestedYear : years[0];
+  if (year === undefined) {
+    return <StatusPanel label="No auction-priced seasons are available." />;
+  }
+
+  return (
+    <DraftValueSeason
+      key={year}
+      year={year}
+      years={years}
+      players={players.data}
+      onYearChange={(nextYear) => setSearchParams({ year: String(nextYear) })}
+    />
+  );
+}
+
+function DraftValueSeason({
+  year,
+  years,
+  players,
+  onYearChange,
+}: {
+  year: number;
+  years: number[];
+  players: PublicPlayer[];
+  onYearChange: (year: number) => void;
+}) {
+  const season = useArchiveJson<PublicSeason>(`seasons/${year}.json`);
+  const rows = useMemo(
+    () => season.status === "loaded" ? buildDraftValueRows(season.data, players) : [],
+    [season, players],
+  );
+
+  if (season.status === "loading") {
+    return <StatusPanel label="Loading auction results..." />;
+  }
+  if (season.status === "error") {
+    return <StatusPanel label="Unable to load auction results." tone="danger" />;
+  }
+
+  return (
+    <>
+      <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "Draft Value" }]} />
+      <DraftValuePage year={year} years={years} rows={rows} onYearChange={onYearChange} />
     </>
   );
 }
@@ -2354,6 +2439,7 @@ function DraftBrowserPage() {
           <p className="eyebrow">Draft auction history</p>
           <h1>Draft Browser</h1>
         </div>
+        <Link className="ghostButton" to="/draft-value">Analyze draft value</Link>
       </section>
 
       <form
