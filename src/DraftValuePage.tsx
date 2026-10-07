@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { createPortal } from "react-dom";
 import { Link } from "react-router-dom";
+import { archivePublicUrl } from "./data";
 import type { DraftValueRow } from "./draftValue";
 import "./draftValue.css";
 
@@ -13,6 +15,10 @@ type Props = {
 type SortKey = "pointsPerDollar" | "fantasyPoints" | "bidAmount";
 
 const positions = ["All", "QB", "RB", "WR", "TE", "K", "D/ST"] as const;
+const positionColors: Record<string, string> = {
+  QB: "#176142", RB: "#a55324", WR: "#315e9a",
+  TE: "#80518c", K: "#af3652", "D/ST": "#526675",
+};
 const number = (value: number, decimals = 2) =>
   value.toLocaleString(undefined, { maximumFractionDigits: decimals });
 
@@ -25,6 +31,7 @@ export default function DraftValuePage({ year, years, rows, onYearChange }: Prop
   const [position, setPosition] = useState<string>("All");
   const [search, setSearch] = useState("");
   const [includeKeepers, setIncludeKeepers] = useState(false);
+  const [hovered, setHovered] = useState<{ id: string; left: number; top: number; below: boolean } | null>(null);
   const [sort, setSort] = useState<{ key: SortKey; descending: boolean }>({
     key: "pointsPerDollar",
     descending: true,
@@ -40,6 +47,20 @@ export default function DraftValuePage({ year, years, rows, onYearChange }: Prop
     (sort.descending ? b[sort.key] - a[sort.key] : a[sort.key] - b[sort.key]) ||
     a.playerName.localeCompare(b.playerName),
   );
+  const chartPositions = positions.slice(1).filter((value) => filtered.some((row) => positionOf(row) === value));
+  const hoveredRow = filtered.find((row) => row.id === hovered?.id);
+  const hoveredPhotoUrl = archivePublicUrl(hoveredRow?.photoUrl);
+
+  const showTooltip = (row: DraftValueRow, circle: SVGCircleElement) => {
+    const rect = circle.getBoundingClientRect();
+    const below = rect.top < 140;
+    setHovered({
+      id: row.id,
+      left: Math.max(8, Math.min(rect.right + 8, window.innerWidth - 248)),
+      top: below ? rect.bottom + 10 : rect.top - 10,
+      below,
+    });
+  };
 
   const maxCost = Math.max(10, Math.ceil(Math.max(...filtered.map((row) => row.bidAmount), 0) / 10) * 10);
   const maxPoints = Math.max(50, Math.ceil(Math.max(...filtered.map((row) => row.fantasyPoints), 0) / 50) * 50);
@@ -99,8 +120,7 @@ export default function DraftValuePage({ year, years, rows, onYearChange }: Prop
         ) : (
           <>
             <div className="draftValueChartWrap">
-              <svg className="draftValueChart" viewBox="0 0 800 350" role="img" aria-label={`Auction cost versus season fantasy points for ${filtered.length} players in ${year}`}>
-                <title>Draft value: auction cost versus season fantasy points</title>
+              <svg className="draftValueChart" viewBox="0 0 800 350" role="group" aria-label={`Auction cost versus season fantasy points for ${filtered.length} players in ${year}`}>
                 <desc>Each dot is one drafted player. The horizontal axis shows auction cost in dollars, and the vertical axis shows season fantasy points.</desc>
                 {[0, 1, 2, 3, 4].map((tick) => {
                   const y = plot.top + plot.height * (1 - tick / 4);
@@ -118,21 +138,48 @@ export default function DraftValuePage({ year, years, rows, onYearChange }: Prop
                   <circle
                     key={row.id}
                     className={row.keeperStatus ? "draftValueDot keeper" : "draftValueDot"}
+                    style={{ fill: positionColors[positionOf(row)] ?? "var(--field)" }}
                     cx={plot.left + plot.width * row.bidAmount / maxCost}
                     cy={plot.top + plot.height * (1 - row.fantasyPoints / maxPoints)}
                     r="5"
-                  >
-                    <title>{`${row.playerName} (${positionOf(row)}): $${number(row.bidAmount)} cost, ${number(row.fantasyPoints)} points, ${number(row.pointsPerDollar)} points per dollar${row.keeperStatus ? ", keeper" : ""}`}</title>
-                  </circle>
+                    tabIndex={0}
+                    aria-label={`${row.playerName}, ${positionOf(row)}, ${number(row.fantasyPoints)} season points, $${number(row.bidAmount)} auction cost${row.keeperStatus ? ", keeper" : ""}`}
+                    onPointerEnter={(event) => showTooltip(row, event.currentTarget)}
+                    onPointerLeave={(event) => { if (document.activeElement !== event.currentTarget) setHovered(null); }}
+                    onFocus={(event) => showTooltip(row, event.currentTarget)}
+                    onBlur={(event) => { if (!event.currentTarget.matches(":hover")) setHovered(null); }}
+                  />
                 ))}
                 <text className="draftValueAxisTitle" x={plot.left + plot.width / 2} y="342" textAnchor="middle">Auction cost ($)</text>
                 <text className="draftValueAxisTitle" transform="translate(16 157) rotate(-90)" textAnchor="middle">Season fantasy points</text>
               </svg>
             </div>
-            <p className="draftValueChartNote">Each dot represents one player. Hover a dot for details; all values appear in the table below.{includeKeepers && <span className="draftValueLegend"><i aria-hidden="true" /> Keeper</span>}</p>
+            <div className="draftValueChartNote">
+              <span>Each dot is a player. Hover or focus for details; all values appear below.</span>
+              <div className="draftValueLegend" aria-label="Chart legend">
+                <strong>Position:</strong>
+                {chartPositions.map((value) => <span key={value}><i aria-hidden="true" style={{ backgroundColor: positionColors[value] }} />{value}</span>)}
+                {includeKeepers && <span className="draftValueLegendKeeper"><i aria-hidden="true" />Keeper (orange ring)</span>}
+              </div>
+            </div>
           </>
         )}
       </section>
+
+      {hovered && hoveredRow && createPortal(
+        <div className={`draftValueTooltip${hovered.below ? " below" : ""}`} style={{ left: hovered.left, top: hovered.top }} role="tooltip">
+          <span className="draftValueTooltipAvatar" aria-hidden="true">
+            {positionOf(hoveredRow)}
+            {hoveredPhotoUrl && <img key={hoveredRow.id} src={hoveredPhotoUrl} alt="" onError={(event) => { event.currentTarget.hidden = true; }} />}
+          </span>
+          <span>
+            <strong>{hoveredRow.playerName}</strong>
+            <small>{positionOf(hoveredRow)}{hoveredRow.keeperStatus ? " · Keeper" : ""}</small>
+            <span><b>{number(hoveredRow.fantasyPoints)}</b> season points</span>
+            <span>${number(hoveredRow.bidAmount)} cost · {number(hoveredRow.pointsPerDollar)} pts/$</span>
+          </span>
+        </div>, document.body,
+      )}
 
       <section className="contentBand" aria-label="Draft value leaderboard">
         <div className="sectionHeader">

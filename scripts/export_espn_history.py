@@ -107,11 +107,13 @@ def now_iso() -> str:
 
 
 def espn_url(league_id: int, year: int, params: Dict[str, Any]) -> str:
-    base = (
-        "https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/"
-        f"leagueHistory/{league_id}"
-    )
-    query_items: List[tuple[str, Any]] = [("seasonId", year)]
+    root = "https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/"
+    if year >= datetime.now(timezone.utc).year:
+        base = f"{root}seasons/{year}/segments/0/leagues/{league_id}"
+        query_items: List[tuple[str, Any]] = []
+    else:
+        base = f"{root}leagueHistory/{league_id}"
+        query_items = [("seasonId", year)]
     for key, value in params.items():
         if isinstance(value, list):
             query_items.extend((key, item) for item in value)
@@ -345,25 +347,6 @@ def compact_box_score(box_score: Any) -> Dict[str, Any]:
     }
 
 
-def compact_activity(activity: Any) -> Dict[str, Any]:
-    actions = []
-    for action in getattr(activity, "actions", []):
-        team, action_type, player, bid_amount = (list(action) + [None] * 4)[:4]
-        actions.append(
-            {
-                "team_id": team_id(team),
-                "action": action_type,
-                "player": compact_player(player),
-                "bid_amount": bid_amount,
-            }
-        )
-
-    return {
-        "date": getattr(activity, "date", None),
-        "actions": actions,
-    }
-
-
 def compact_draft_pick(pick: Any) -> Dict[str, Any]:
     payload = {}
     for key, value in public_attrs(pick).items():
@@ -453,39 +436,6 @@ def compact_transactions(
     return {"ok": not errors, "data": data, **({"error": "; ".join(errors)} if errors else {})}
 
 
-def collect_recent_activity(
-    league: Any,
-    page_size: int = 100,
-    max_items: int = 500,
-) -> Dict[str, Any]:
-    activities = []
-    for offset in range(0, max_items, page_size):
-        result = maybe_compact(
-            league.recent_activity,
-            compact_activity,
-            size=page_size,
-            offset=offset,
-        )
-        if not result["ok"]:
-            if activities:
-                return {
-                    "ok": True,
-                    "data": activities,
-                    "warning": result["error"],
-                }
-            return result
-
-        batch = result["data"]
-        if not batch:
-            break
-
-        activities.extend(batch)
-        if len(batch) < page_size:
-            break
-
-    return {"ok": True, "data": activities}
-
-
 def build_structured_season(config: Config, year: int) -> Dict[str, Any]:
     try:
         from espn_api.football import League
@@ -535,7 +485,6 @@ def build_structured_season(config: Config, year: int) -> Dict[str, Any]:
             lambda team: compact_team(team, include_roster=False),
         ),
         "weeks": weeks,
-        "recent_activity": collect_recent_activity(league),
     }
 
 

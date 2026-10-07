@@ -35,5 +35,9 @@ assert.equal(named(rows2025, "Puka Nacua").pointsPerDollar, 401 / 22);
 assert.equal(named(rows2025, "De'Von Achane").pointsPerDollar, 343.8);
 assert.equal(named(rows2025, "Steelers Coach"), undefined);
 assert.equal(rows2025.filter((row) => row.keeperStatus).length, 28);
+const picks2026 = archive("seasons/2026.json").draft;
+assert.equal(picks2026.length, 180);
+assert.deepEqual(picks2026.map((pick) => pick.pick), Array.from({ length: 180 }, (_, index) => index + 1));
+assert.equal(archive("search-index.json").filter((row) => row.year === 2026 && row.type === "draft").length, 180);
 
 console.log("Draft value check passed");

@@ -5,6 +5,7 @@ export type DraftValueRow = {
   year: number;
   playerKey: string;
   playerName: string;
+  photoUrl?: string;
   position?: string;
   bidAmount: number;
   fantasyPoints: number;
@@ -45,6 +46,7 @@ export function buildDraftValueRows(
       year: season.year,
       playerKey: player.key,
       playerName: player.name,
+      photoUrl: player.photoUrl,
       position,
       bidAmount,
       fantasyPoints,
