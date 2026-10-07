@@ -199,7 +199,7 @@ export default function DraftValuePage({ year, years, rows, onYearChange }: Prop
                   <th scope="col">Drafted by</th>
                   {sortHeading("Cost", "bidAmount")}
                   {sortHeading("Season points", "fantasyPoints")}
-                  {sortHeading("Points / $", "pointsPerDollar")}
+                  {sortHeading("PPD", "pointsPerDollar")}
                 </tr>
               </thead>
               <tbody>
