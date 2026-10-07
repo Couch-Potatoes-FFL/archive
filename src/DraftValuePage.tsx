@@ -173,8 +173,8 @@ export default function DraftValuePage({ year, years, rows, onYearChange }: Prop
             {hoveredPhotoUrl && <img key={hoveredRow.id} src={hoveredPhotoUrl} alt="" onError={(event) => { event.currentTarget.hidden = true; }} />}
           </span>
           <span>
-            <strong>{hoveredRow.playerName}</strong>
-            <small>{positionOf(hoveredRow)}{hoveredRow.keeperStatus ? " · Keeper" : ""}</small>
+            <strong>{hoveredRow.playerName} - {positionOf(hoveredRow)}</strong>
+            {hoveredRow.keeperStatus && <small>Keeper</small>}
             <span><b>{number(hoveredRow.fantasyPoints)}</b> season points</span>
             <span>${number(hoveredRow.bidAmount)} cost · {number(hoveredRow.pointsPerDollar)} pts/$</span>
           </span>
