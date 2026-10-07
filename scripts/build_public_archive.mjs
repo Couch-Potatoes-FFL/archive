@@ -289,6 +289,15 @@ function actualSeasonStat(player, year) {
   );
 }
 
+function projectedSeasonStat(player, year) {
+  return (player?.stats || []).find(
+    (stat) =>
+      Number(stat.seasonId) === Number(year) &&
+      Number(stat.statSourceId) === 1 &&
+      Number(stat.statSplitTypeId) === 0,
+  );
+}
+
 function playerPoolBackfill(entry, year) {
   const player = entry?.player;
   if (!player) {
@@ -372,6 +381,62 @@ async function fetchPlayerPoolBackfills(year, leagueId, playerIds) {
   }
 
   return rows;
+}
+
+async function fetchSalaryCapPrices(leagueId) {
+  const cookie = espnCookieHeader();
+  const year = new Date().getFullYear();
+  if (!cookie || !leagueId) {
+    return { year, updatedAt: new Date().toISOString(), prices: [] };
+  }
+
+  const prices = [];
+  const url = `https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/${year}/segments/0/leagues/${leagueId}?view=kona_player_info_edit_draft_strategy`;
+  for (let offset = 0; ; offset += 500) {
+    const response = await fetch(url, {
+      headers: {
+        Accept: "application/json",
+        Cookie: cookie,
+        "User-Agent": "cpffl-public-archive/1.0",
+        "x-fantasy-filter": JSON.stringify({
+          players: {
+            limit: 500,
+            offset,
+            sortPercOwned: { sortAsc: false, sortPriority: 1 },
+          },
+        }),
+      },
+    });
+    if (!response.ok) {
+      console.warn(`Unable to fetch ESPN salary-cap prices: ${response.status}`);
+      break;
+    }
+
+    const players = (await response.json()).players || [];
+    prices.push(
+      ...players.flatMap((entry) => {
+        const playerId = optionalFiniteNumber(entry?.player?.id);
+        const value = optionalFiniteNumber(entry?.draftAuctionValue);
+        if (playerId === undefined || value === undefined) {
+          return [];
+        }
+        return [{
+          playerId,
+          value,
+          position: ESPN_POSITION_LABELS[entry.player.defaultPositionId],
+          nflTeam: ESPN_PRO_TEAM_LABELS[entry.player.proTeamId],
+          projectedPoints: optionalFiniteNumber(
+            projectedSeasonStat(entry.player, year)?.appliedTotal,
+          ),
+        }];
+      }),
+    );
+    if (players.length < 500) {
+      break;
+    }
+  }
+
+  return { year, updatedAt: new Date().toISOString(), prices };
 }
 
 function shouldCacheLogo(logoUrl) {
@@ -1663,6 +1728,7 @@ async function main() {
     ),
   );
   await writeJson("players.json", mergePlayerSeasons(playerSeasons));
+  await writeJson("salary-cap-prices.json", await fetchSalaryCapPrices(manifest.league_id));
 
   console.log(
     `Built public archive for ${publicSeasons.length} seasons and ${searchRows.length} searchable rows.`,

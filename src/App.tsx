@@ -51,6 +51,7 @@ import {
   PublicPlayer,
   PublicTrade,
   PublicWeek,
+  SalaryCapPriceList,
   PlayerSeasonReport,
   LineupPlayer,
   SearchRow,
@@ -59,6 +60,8 @@ import {
 } from "./types";
 import { useArchiveJson } from "./useArchiveJson";
 import { includesSearchText, normalizeSearchText } from "./search";
+import { buildRivalryGames } from "./rivalries";
+import RivalriesPage from "./RivalriesPage";
 
 type BrowserFilterType = SearchType | "all";
 type BrowserView = "picker" | "all";
@@ -91,6 +94,22 @@ type KeeperRow = {
   teamYear?: number;
   playerKey?: string;
   draftPick?: number;
+};
+
+type ProjectedPriceRow = {
+  id: string;
+  name: string;
+  playerKey?: string;
+  player?: PublicPlayer;
+  position?: string;
+  nflTeam?: string;
+  recentPrice?: number;
+  olderPrice?: number;
+  salaryCapPrice?: number;
+  projectedPoints?: number;
+  lastYearPoints?: number;
+  projectedPrice: number;
+  priceChange?: number;
 };
 
 type PlayerSearchResult = {
@@ -308,6 +327,12 @@ const dataCategories: Array<{
     icon: <LiaChartBarSolid size={22} aria-hidden />,
   },
   {
+    title: "Rivalries",
+    label: "Compare owner head-to-head results across seasons.",
+    to: "/rivalries",
+    icon: <LiaUsersSolid size={22} aria-hidden />,
+  },
+  {
     title: "Drafts",
     label: "Find historical draft picks and auction values.",
     to: "/drafts",
@@ -318,6 +343,12 @@ const dataCategories: Array<{
     label: "Review keeper auction values and teams by season.",
     to: "/keepers",
     icon: <LiaTrophySolid size={22} aria-hidden />,
+  },
+  {
+    title: "Projected Prices",
+    label: "See projected auction prices for players who are not 2026 keepers.",
+    to: "/projections",
+    icon: <LiaChartBarSolid size={22} aria-hidden />,
   },
   {
     title: "Teams",
@@ -634,7 +665,9 @@ function App() {
         <Routes>
           <Route path="/" element={<DataLandingPage />} />
           <Route path="/records" element={<RecordsPage />} />
+          <Route path="/rivalries" element={<RivalriesRoute />} />
           <Route path="/keepers" element={<KeepersPage />} />
+          <Route path="/projections" element={<ProjectedPricesPage />} />
           <Route path="/browse" element={<BrowserPage />} />
           <Route path="/freeagency" element={<Navigate replace to="/browse?type=transaction" />} />
           <Route path="/trades" element={<TradesPage />} />
@@ -833,6 +866,36 @@ function DataLandingPage() {
           </Link>
         ))}
       </section>
+    </>
+  );
+}
+
+function RivalriesRoute() {
+  const manifest = useArchiveJson<ArchiveManifest>("manifest.json");
+  const years = useMemo(
+    () =>
+      manifest.status === "loaded"
+        ? manifest.data.seasons.map((season) => season.year)
+        : [],
+    [manifest],
+  );
+  const recordData = useLeagueRecordData(years);
+  const games = useMemo(
+    () => recordData.status === "loaded" ? buildRivalryGames(recordData.data) : [],
+    [recordData],
+  );
+
+  if (manifest.status === "loading" || recordData.status === "idle" || recordData.status === "loading") {
+    return <StatusPanel label="Loading rivalries..." />;
+  }
+  if (manifest.status === "error" || recordData.status === "error") {
+    return <StatusPanel label="Unable to load rivalries." tone="danger" />;
+  }
+
+  return (
+    <>
+      <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "Rivalries" }]} />
+      <RivalriesPage games={games} />
     </>
   );
 }
@@ -1398,6 +1461,191 @@ function KeepersPage() {
             <KeeperMobileCard row={row} showsYear={showsAllSeasons} />
           )}
           mobileLabel="Keeper cards"
+        />
+      </section>
+    </>
+  );
+}
+
+function ProjectedPricesPage() {
+  const manifest = useArchiveJson<ArchiveManifest>("manifest.json");
+  const index = useArchiveJson<SearchRow[]>("search-index.json");
+  const players = useArchiveJson<PublicPlayer[]>("players.json");
+  const salaryCapPrices = useArchiveJson<SalaryCapPriceList>("salary-cap-prices.json");
+  const [query, setQuery] = useState("");
+  const [position, setPosition] = useState<PositionFilter | "">("");
+
+  const sourceYears = useMemo(
+    () =>
+      manifest.status === "loaded"
+        ? manifest.data.seasons
+            .map((season) => season.year)
+            .sort((left, right) => right - left)
+            .slice(0, 2)
+        : [],
+    [manifest],
+  );
+  const [recentYear, olderYear] = sourceYears;
+  const normalizedQuery = normalizeSearchText(query);
+
+  const projectedRows = useMemo(() => {
+    if (
+      index.status !== "loaded" ||
+      players.status !== "loaded" ||
+      salaryCapPrices.status !== "loaded" ||
+      recentYear === undefined ||
+      olderYear === undefined
+    ) {
+      return [];
+    }
+
+    const keeperKeys = new Set(
+      ANNOUNCED_KEEPERS.map((keeper) =>
+        keeper.playerKey ?? normalizeSearchText(keeper.name),
+      ),
+    );
+    const playerByKey = new Map(players.data.map((player) => [player.key, player]));
+    const salaryCapByPlayerId = new Map(
+      salaryCapPrices.data.prices.map((price) => [price.playerId, price]),
+    );
+    const rowsByPlayer = new Map<string, SearchRow[]>();
+
+    index.data.forEach((row) => {
+      if (
+        row.type !== "draft" ||
+        !sourceYears.includes(row.year) ||
+        typeof row.bidAmount !== "number"
+      ) {
+        return;
+      }
+
+      const key = row.playerKey ?? normalizeSearchText(row.playerName ?? row.label);
+      if (keeperKeys.has(key)) {
+        return;
+      }
+      rowsByPlayer.set(key, [...(rowsByPlayer.get(key) ?? []), row]);
+    });
+
+    return [...rowsByPlayer.entries()]
+      .map(([id, draftRows]): ProjectedPriceRow => {
+        const recentRow = draftRows.find((row) => row.year === recentYear);
+        const olderRow = draftRows.find((row) => row.year === olderYear);
+        const prices = [recentRow?.bidAmount, olderRow?.bidAmount].filter(
+          (value): value is number => typeof value === "number",
+        );
+        const playerKey = recentRow?.playerKey ?? olderRow?.playerKey;
+        const player = playerKey ? playerByKey.get(playerKey) : undefined;
+        const playerName = recentRow?.playerName ?? olderRow?.playerName ?? recentRow?.label ?? olderRow?.label ?? id;
+        const historicalPosition =
+          player?.seasons.find((season) => season.year === recentYear)?.position ??
+          player?.seasons.find((season) => season.year === olderYear)?.position ??
+          player?.primaryPosition;
+        const salaryCap = player?.playerId
+          ? salaryCapByPlayerId.get(player.playerId)
+          : undefined;
+        const salaryCapPrice = salaryCap?.value;
+        const priceInputs = [...prices, salaryCapPrice].filter(
+          (value): value is number => typeof value === "number",
+        );
+        const projectedPrice = Math.round(
+          priceInputs.reduce((total, value) => total + value, 0) / priceInputs.length,
+        );
+
+        return {
+          id,
+          name: playerName,
+          playerKey,
+          player,
+          position: salaryCap?.position ?? historicalPosition,
+          nflTeam:
+            salaryCap?.nflTeam ??
+            player?.seasons.find((season) => season.year === recentYear)?.nflTeam,
+          recentPrice: recentRow?.bidAmount,
+          olderPrice: olderRow?.bidAmount,
+          salaryCapPrice,
+          projectedPoints: salaryCap?.projectedPoints,
+          lastYearPoints: player?.seasons.find((season) => season.year === recentYear)
+            ?.fantasyPoints,
+          projectedPrice,
+          priceChange:
+            typeof recentRow?.bidAmount === "number"
+              ? projectedPrice - recentRow.bidAmount
+              : undefined,
+        };
+      })
+      .filter(
+        (row) =>
+          includesSearchText(row.name, normalizedQuery) &&
+          matchesPositionFilter(row.position, position),
+      )
+      .sort(
+        (left, right) =>
+          right.projectedPrice - left.projectedPrice ||
+          (right.recentPrice ?? 0) - (left.recentPrice ?? 0) ||
+          left.name.localeCompare(right.name),
+      );
+  }, [index, normalizedQuery, olderYear, players, position, recentYear, salaryCapPrices, sourceYears]);
+
+  if (manifest.status === "loading" || index.status === "loading" || players.status === "loading" || salaryCapPrices.status === "loading") {
+    return <StatusPanel label="Loading projected prices..." />;
+  }
+
+  if (manifest.status === "error" || index.status === "error" || players.status === "error" || salaryCapPrices.status === "error") {
+    return <StatusPanel label="Unable to load projected prices." tone="danger" />;
+  }
+
+  if (recentYear === undefined || olderYear === undefined) {
+    return <StatusPanel label="Two completed drafts are needed to project prices." tone="danger" />;
+  }
+
+  return (
+    <>
+      <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "Projected Prices" }]} />
+      <section className="pageIntro">
+        <div>
+          <p className="eyebrow">2026 draft planning</p>
+          <h1>Projected Prices</h1>
+        </div>
+      </section>
+
+      <div className="controlBand keeperControlBand">
+        <label className="searchField">
+          <Search size={18} aria-hidden />
+          <input
+            aria-label="Search projected draft prices"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Search players"
+          />
+        </label>
+        <PositionFilterBadges
+          selectedPosition={position}
+          onChange={(nextPosition) =>
+            setPosition((current) => (current === nextPosition ? "" : nextPosition))
+          }
+        />
+      </div>
+
+      <section className="contentBand">
+        <div className="sectionHeader">
+          <div>
+            <h2>Available Players</h2>
+            <p className="sectionNote">
+              Projected price is the rounded average of available {olderYear}–{recentYear} CPFFL draft prices and the current ESPN salary-cap price.
+            </p>
+          </div>
+          <span className="pendingNote active">
+            {formatNumber(projectedRows.length)} available players
+          </span>
+        </div>
+        <SimpleTable
+          data={projectedRows}
+          columns={projectedPriceColumns(olderYear, recentYear, salaryCapPrices.data.year)}
+          emptyLabel="No available players match these filters."
+          mobileCard={(row) => (
+            <ProjectedPriceMobileCard row={row} olderYear={olderYear} recentYear={recentYear} salaryCapYear={salaryCapPrices.data.year} />
+          )}
+          mobileLabel="Projected price cards"
         />
       </section>
     </>
@@ -3457,6 +3705,60 @@ function KeeperMobileCard({
         <KeeperTeamLink row={row} />
       </p>
     </article>
+  );
+}
+
+function ProjectedPriceMobileCard({
+  row,
+  olderYear,
+  recentYear,
+  salaryCapYear,
+}: {
+  row: ProjectedPriceRow;
+  olderYear: number;
+  recentYear: number;
+  salaryCapYear: number;
+}) {
+  return (
+    <article className="mobileDataCard compact">
+      <div className="keeperMobileTitleRow">
+        <ProjectedPricePlayer row={row} recentYear={recentYear} />
+        <strong className="keeperMobileValue">{formatAuctionValue(row.projectedPrice)}</strong>
+      </div>
+      <p className="keeperMobileTeamLine">
+        Projected: {formatNumber(row.projectedPoints, 1)} · {recentYear} points: {formatNumber(row.lastYearPoints, 1)} · ESPN {salaryCapYear}: {formatAuctionValue(row.salaryCapPrice)} · {recentYear}: {formatAuctionValue(row.recentPrice)} · {olderYear}: {formatAuctionValue(row.olderPrice)} · + / -: {formatAuctionChange(row.priceChange)}
+      </p>
+    </article>
+  );
+}
+
+function ProjectedPricePlayer({
+  row,
+  recentYear,
+}: {
+  row: ProjectedPriceRow;
+  recentYear: number;
+}) {
+  const playerName = row.playerKey ? (
+    <Link to={`/player/${row.playerKey}?fromYear=${recentYear}`}>{row.name}</Link>
+  ) : (
+    row.name
+  );
+
+  return (
+    <div className="projectedPlayer">
+      {row.player ? (
+        <PlayerAvatar player={row.player} />
+      ) : (
+        <span className="playerAvatarPlaceholder" aria-hidden>
+          <Shield size={18} />
+        </span>
+      )}
+      <span className="projectedPlayerDetails">
+        <strong>{playerName}</strong>
+        <small>{[row.nflTeam, row.position].filter(Boolean).join(" ") || "-"}</small>
+      </span>
+    </div>
   );
 }
 
@@ -6245,10 +6547,87 @@ function keeperColumnsForView(showsYear: boolean): ColumnDef<KeeperRow>[] {
   return columns;
 }
 
+function projectedPriceColumns(
+  olderYear: number,
+  recentYear: number,
+  salaryCapYear: number,
+): ColumnDef<ProjectedPriceRow>[] {
+  return [
+    {
+      header: "Projected Price",
+      accessorKey: "projectedPrice",
+      cell: ({ row }) => formatAuctionValue(row.original.projectedPrice),
+    },
+    {
+      header: "Player",
+      accessorKey: "name",
+      cell: ({ row }) => <ProjectedPricePlayer row={row.original} recentYear={recentYear} />,
+    },
+    {
+      header: "Projected Points",
+      accessorKey: "projectedPoints",
+      cell: ({ row }) => {
+        const pointChange = projectedPointsChange(row.original);
+        return (
+          <span className={pvoaClassName(pointChange)}>
+            {formatNumber(row.original.projectedPoints, 1)}
+            {pointChange === undefined ? "" : ` (${formatPvoa(pointChange)})`}
+          </span>
+        );
+      },
+    },
+    {
+      header: `${recentYear} Points`,
+      accessorKey: "lastYearPoints",
+      cell: ({ row }) => formatNumber(row.original.lastYearPoints, 1),
+    },
+    {
+      header: `ESPN ${salaryCapYear}`,
+      accessorKey: "salaryCapPrice",
+      cell: ({ row }) => formatAuctionValue(row.original.salaryCapPrice),
+    },
+    {
+      header: `${recentYear} Price`,
+      accessorKey: "recentPrice",
+      cell: ({ row }) => formatAuctionValue(row.original.recentPrice),
+    },
+    {
+      header: `${olderYear} Price`,
+      accessorKey: "olderPrice",
+      cell: ({ row }) => formatAuctionValue(row.original.olderPrice),
+    },
+    {
+      header: "+ / -",
+      accessorKey: "priceChange",
+      cell: ({ row }) => (
+        <span className={pvoaClassName(row.original.priceChange)}>
+          {formatAuctionChange(row.original.priceChange)}
+        </span>
+      ),
+    },
+  ];
+}
+
 function formatAuctionValue(value: number | undefined): string {
   return typeof value === "number" && Number.isFinite(value)
     ? `$${formatNumber(value)}`
     : "-";
+}
+
+function formatAuctionChange(value: number | undefined): string {
+  if (typeof value !== "number" || !Number.isFinite(value)) {
+    return "-";
+  }
+  if (value === 0) {
+    return "$0";
+  }
+  return `${value > 0 ? "+" : "-"}$${formatNumber(Math.abs(value))}`;
+}
+
+function projectedPointsChange(row: ProjectedPriceRow): number | undefined {
+  return typeof row.projectedPoints === "number" && typeof row.lastYearPoints === "number"
+    ? row.projectedPoints - row.lastYearPoints
+    : undefined;
 }
 
 function formatDraftValue(value: number | undefined): string {

@@ -1142,6 +1142,44 @@ select {
   object-position: top center;
 }
 
+.projectedPlayer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 220px;
+}
+
+.projectedPlayer .playerAvatar,
+.projectedPlayer .playerAvatarPlaceholder {
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 0;
+}
+
+.projectedPlayerDetails {
+  display: grid;
+  min-width: 0;
+  gap: 3px;
+}
+
+.projectedPlayerDetails strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.projectedPlayerDetails small {
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.keeperMobileTitleRow .projectedPlayer {
+  flex: 1 1 auto;
+}
+
 .playerResultMain {
   min-width: 0;
 }

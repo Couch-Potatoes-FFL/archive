@@ -232,6 +232,18 @@ export type PublicPlayer = {
   latestSeason?: PlayerSeasonReport;
 };
 
+export type SalaryCapPriceList = {
+  year: number;
+  updatedAt: string;
+  prices: Array<{
+    playerId: number;
+    value: number;
+    position?: string;
+    nflTeam?: string;
+    projectedPoints?: number;
+  }>;
+};
+
 export type PublicWeek = {
   year: number;
   week: number;
