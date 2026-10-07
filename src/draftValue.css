@@ -1,13 +1,22 @@
-.draftValueIntro {
-  max-width: 68ch;
-  margin: 12px 0 0;
-  color: var(--muted);
-  line-height: 1.5;
+.pageIntro.draftValuePageIntro {
+  padding: 10px 0 4px;
 }
 
-.draftValueControls {
+.draftValuePageIntro h1 {
+  font-size: clamp(2rem, 3vw, 3rem);
+}
+
+.draftValueIntro {
+  margin: 8px 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.35;
+}
+
+.controlBand.draftValueControls {
   grid-template-columns: minmax(110px, 0.5fr) minmax(130px, 0.6fr) minmax(200px, 1.5fr) auto;
   gap: 14px;
+  margin-top: 12px;
 }
 
 .draftValueControls label:not(.draftValueKeeperFilter) {
@@ -273,13 +282,13 @@
 }
 
 @media (max-width: 800px) {
-  .draftValueControls {
+  .controlBand.draftValueControls {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 500px) {
-  .draftValueControls {
+  .controlBand.draftValueControls {
     grid-template-columns: minmax(0, 1fr);
   }
 }

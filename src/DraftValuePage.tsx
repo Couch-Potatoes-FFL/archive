@@ -79,11 +79,10 @@ export default function DraftValuePage({ year, years, rows, onYearChange }: Prop
 
   return (
     <>
-      <section className="pageIntro">
+      <section className="pageIntro draftValuePageIntro">
         <div>
-          <p className="eyebrow">League history</p>
           <h1>Draft value</h1>
-          <p className="draftValueIntro">Compare auction cost with each player’s season fantasy points, including points scored after trades. Keeper costs are optional.</p>
+          <p className="draftValueIntro">Auction cost vs. full-season fantasy points, including points scored after trades.</p>
         </div>
       </section>
 
