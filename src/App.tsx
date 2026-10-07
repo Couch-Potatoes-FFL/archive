@@ -66,6 +66,8 @@ import { buildDraftValueRows } from "./draftValue";
 import DraftValuePage from "./DraftValuePage";
 import { buildScheduleLuckRows } from "./scheduleLuck";
 import ScheduleLuckPage from "./ScheduleLuckPage";
+import { buildOwnerCareers } from "./ownerCareers";
+import { OwnerCareerPage, OwnerIndexPage } from "./OwnerCareersPage";
 
 type BrowserFilterType = SearchType | "all";
 type BrowserView = "picker" | "all";
@@ -240,6 +242,12 @@ type SeasonWeeksState =
   | { status: "loaded"; data: PublicWeek[]; requestKey: string }
   | { status: "error"; data: PublicWeek[]; requestKey: string };
 
+type OwnerSeasonsState = {
+  status: "loading" | "loaded" | "error";
+  data: PublicSeason[];
+  requestKey: string;
+};
+
 type BreadcrumbItem = {
   label: string;
   to?: string;
@@ -334,6 +342,12 @@ const dataCategories: Array<{
     title: "Rivalries",
     label: "Compare owner head-to-head results across seasons.",
     to: "/rivalries",
+    icon: <LiaUsersSolid size={22} aria-hidden />,
+  },
+  {
+    title: "Owners",
+    label: "Follow each owner's teams, finishes, points, and championships.",
+    to: "/owners",
     icon: <LiaUsersSolid size={22} aria-hidden />,
   },
   {
@@ -682,6 +696,8 @@ function App() {
           <Route path="/" element={<DataLandingPage />} />
           <Route path="/records" element={<RecordsPage />} />
           <Route path="/rivalries" element={<RivalriesRoute />} />
+          <Route path="/owners" element={<OwnerCareerRoute />} />
+          <Route path="/owner/:ownerName" element={<OwnerCareerRoute />} />
           <Route path="/schedule-luck" element={<ScheduleLuckRoute />} />
           <Route path="/keepers" element={<KeepersPage />} />
           <Route path="/projections" element={<ProjectedPricesPage />} />
@@ -884,6 +900,47 @@ function DataLandingPage() {
           </Link>
         ))}
       </section>
+    </>
+  );
+}
+
+function OwnerCareerRoute() {
+  const { ownerName } = useParams();
+  const manifest = useArchiveJson<ArchiveManifest>("manifest.json");
+  const years = useMemo(
+    () => manifest.status === "loaded"
+      ? manifest.data.seasons.map((season) => season.year)
+      : [],
+    [manifest],
+  );
+  const seasons = useOwnerSeasons(years);
+  const careers = useMemo(
+    () => seasons.status === "loaded"
+      ? buildOwnerCareers(seasons.data, HISTORICAL_CHAMPIONS)
+      : [],
+    [seasons],
+  );
+
+  if (manifest.status === "error" || seasons.status === "error") {
+    return <StatusPanel label="Unable to load owner careers." tone="danger" />;
+  }
+  if (manifest.status === "loading" || seasons.status === "loading") {
+    return <StatusPanel label="Loading owner careers..." />;
+  }
+
+  const career = ownerName ? careers.find((row) => row.name === ownerName) : undefined;
+  if (ownerName && !career) {
+    return <StatusPanel label="Owner career not found." tone="danger" />;
+  }
+
+  return (
+    <>
+      <Breadcrumbs items={[
+        { label: "Home", to: "/" },
+        { label: "Owners", to: career ? "/owners" : undefined },
+        career ? { label: career.name } : undefined,
+      ]} />
+      {career ? <OwnerCareerPage career={career} /> : <OwnerIndexPage careers={careers} />}
     </>
   );
 }
@@ -1096,6 +1153,11 @@ function RecordsPage() {
       {
         header: "Owner",
         accessorKey: "owner",
+        cell: ({ row }) => (
+          <Link to={`/owner/${encodeURIComponent(row.original.owner)}`}>
+            {row.original.owner}
+          </Link>
+        ),
       },
       {
         header: "Team",
@@ -1120,6 +1182,11 @@ function RecordsPage() {
       {
         header: "Owner",
         accessorKey: "owner",
+        cell: ({ row }) => (
+          <Link to={`/owner/${encodeURIComponent(row.original.owner)}`}>
+            {row.original.owner}
+          </Link>
+        ),
       },
       {
         header: "Championships",
@@ -1267,7 +1334,7 @@ function ChampionMobileCard({ row }: { row: ChampionRecordRow }) {
         <strong className="keeperMobileValue">{row.year}</strong>
       </div>
       <p className="keeperMobileTeamLine">
-        {row.owner} · {formatScore(row.pointsFor, false)} PF ·{" "}
+        <Link to={`/owner/${encodeURIComponent(row.owner)}`}>{row.owner}</Link> · {formatScore(row.pointsFor, false)} PF ·{" "}
         {formatScore(row.pointsAgainst, false)} PA
       </p>
     </article>
@@ -1295,7 +1362,9 @@ function OwnerRecordMobileCard({ row }: { row: OwnerRecordRow }) {
   return (
     <article className="mobileDataCard">
       <div className="mobileCardHeader">
-        <strong className="mobileCardTitleText">{row.owner}</strong>
+        <Link className="mobileCardTitleText" to={`/owner/${encodeURIComponent(row.owner)}`}>
+          {row.owner}
+        </Link>
         <span className="mobileCardKicker">
           {row.championships} {row.championships === 1 ? "title" : "titles"}
         </span>
@@ -5529,6 +5598,47 @@ function nflTeamLogoCode(team: string | undefined): string | undefined {
   };
 
   return codeMap[normalized];
+}
+
+function useOwnerSeasons(years: number[]): OwnerSeasonsState {
+  const requestKey = useMemo(
+    () => [...years].sort((left, right) => left - right).join(","),
+    [years],
+  );
+  const yearNumbers = useMemo(
+    () => requestKey ? requestKey.split(",").map(Number) : [],
+    [requestKey],
+  );
+  const [state, setState] = useState<OwnerSeasonsState>({
+    status: "loading",
+    data: [],
+    requestKey: "",
+  });
+
+  useEffect(() => {
+    if (!yearNumbers.length) {
+      setState({ status: "loaded", data: [], requestKey });
+      return;
+    }
+
+    let cancelled = false;
+    setState({ status: "loading", data: [], requestKey });
+    Promise.all(
+      yearNumbers.map((year) => fetchArchiveJson<PublicSeason>(`seasons/${year}.json`)),
+    )
+      .then((data) => {
+        if (!cancelled) setState({ status: "loaded", data, requestKey });
+      })
+      .catch(() => {
+        if (!cancelled) setState({ status: "error", data: [], requestKey });
+      });
+
+    return () => { cancelled = true; };
+  }, [requestKey, yearNumbers]);
+
+  return state.requestKey === requestKey
+    ? state
+    : { status: "loading", data: [], requestKey };
 }
 
 function useSeasonWeeks(

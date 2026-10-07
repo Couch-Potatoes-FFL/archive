@@ -1,0 +1,186 @@
+.ownerIntro {
+  max-width: 70ch;
+  margin: 12px 0 0;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.ownerIndexGrid,
+.ownerTitles,
+.ownerTimeline {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ownerIndexGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(250px, 100%), 1fr));
+  gap: 12px;
+}
+
+.ownerIndexCard,
+.ownerSeasonCard {
+  display: grid;
+  gap: 7px;
+  height: 100%;
+  padding: 16px;
+  color: var(--ink);
+  background: var(--paper-soft);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.ownerIndexCard:hover,
+.ownerSeasonCard:hover {
+  background: #fff;
+  border-color: var(--line-strong);
+  text-decoration: none;
+}
+
+.ownerIndexCard strong {
+  font-size: 1.1rem;
+  overflow-wrap: anywhere;
+}
+
+.ownerIndexCard > span:not(.ownerCardArrow),
+.ownerSeasonCard small {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.ownerCardArrow {
+  align-self: end;
+  color: var(--field);
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+.ownerStats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
+  gap: 12px;
+  margin: 0;
+}
+
+.ownerStats > div {
+  min-width: 0;
+  padding: 16px;
+  background: var(--paper-soft);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.ownerStats dt {
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.ownerStats dd {
+  margin: 8px 0 0;
+  color: var(--field-dark);
+  font-size: clamp(1.25rem, 2.5vw, 1.8rem);
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  overflow-wrap: anywhere;
+}
+
+.ownerTitles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ownerTitles li {
+  display: grid;
+  gap: 4px;
+  padding: 10px 14px;
+  background: rgba(228, 179, 64, 0.15);
+  border: 1px solid rgba(228, 179, 64, 0.45);
+  border-radius: 8px;
+  font-weight: 800;
+}
+
+.ownerTitles small {
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.ownerTimeline {
+  display: grid;
+  gap: 10px;
+}
+
+.ownerSeasonCard {
+  grid-template-columns: 70px minmax(140px, 1.5fr) minmax(100px, 0.7fr) minmax(120px, 0.7fr) auto;
+  align-items: center;
+  gap: 12px;
+}
+
+.ownerSeasonYear {
+  color: var(--field-dark);
+  font-size: 1.3rem;
+  font-weight: 900;
+}
+
+.ownerSeasonTeam,
+.ownerSeasonRecord,
+.ownerSeasonPoints {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.ownerSeasonTeam strong {
+  overflow-wrap: anywhere;
+}
+
+.ownerSeasonRecord,
+.ownerSeasonPoints {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 760px) {
+  .ownerSeasonCard {
+    grid-template-columns: 60px minmax(0, 1fr) auto;
+  }
+
+  .ownerSeasonRecord,
+  .ownerSeasonPoints {
+    grid-row: 2;
+  }
+
+  .ownerSeasonRecord {
+    grid-column: 2;
+  }
+
+  .ownerSeasonPoints {
+    grid-column: 3;
+  }
+
+  .ownerSeasonCard .ownerCardArrow {
+    grid-column: 3;
+    grid-row: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .ownerSeasonCard {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .ownerSeasonYear,
+  .ownerSeasonTeam,
+  .ownerSeasonRecord,
+  .ownerSeasonPoints,
+  .ownerSeasonCard .ownerCardArrow {
+    grid-column: auto;
+    grid-row: auto;
+  }
+
+  .ownerSeasonTeam {
+    grid-column: 2;
+  }
+}
