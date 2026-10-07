@@ -7,7 +7,7 @@ CPFFL is a static, searchable archive for the Couch Potatoes Fantasy Football Le
 The archive lets members explore league history across seasons, including:
 
 - league records, champions, lifetime owner totals, and head-to-head rivalries;
-- season settings, standings, and weekly results;
+- season settings, standings, weekly results, and schedule luck;
 - team records, rosters, matchups, scoring, and draft history;
 - draft picks, auction values, keeper information, and draft value charts;
 - player history and season-by-season fantasy-point totals; and

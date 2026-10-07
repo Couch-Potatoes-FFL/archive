@@ -64,6 +64,8 @@ import { buildRivalryGames } from "./rivalries";
 import RivalriesPage from "./RivalriesPage";
 import { buildDraftValueRows } from "./draftValue";
 import DraftValuePage from "./DraftValuePage";
+import { buildScheduleLuckRows } from "./scheduleLuck";
+import ScheduleLuckPage from "./ScheduleLuckPage";
 
 type BrowserFilterType = SearchType | "all";
 type BrowserView = "picker" | "all";
@@ -333,6 +335,12 @@ const dataCategories: Array<{
     label: "Compare owner head-to-head results across seasons.",
     to: "/rivalries",
     icon: <LiaUsersSolid size={22} aria-hidden />,
+  },
+  {
+    title: "Schedule Luck",
+    label: "See which teams won more or fewer games than their weekly scores suggest.",
+    to: "/schedule-luck",
+    icon: <LiaChartBarSolid size={22} aria-hidden />,
   },
   {
     title: "Drafts",
@@ -674,6 +682,7 @@ function App() {
           <Route path="/" element={<DataLandingPage />} />
           <Route path="/records" element={<RecordsPage />} />
           <Route path="/rivalries" element={<RivalriesRoute />} />
+          <Route path="/schedule-luck" element={<ScheduleLuckRoute />} />
           <Route path="/keepers" element={<KeepersPage />} />
           <Route path="/projections" element={<ProjectedPricesPage />} />
           <Route path="/browse" element={<BrowserPage />} />
@@ -875,6 +884,80 @@ function DataLandingPage() {
           </Link>
         ))}
       </section>
+    </>
+  );
+}
+
+function ScheduleLuckRoute() {
+  const manifest = useArchiveJson<ArchiveManifest>("manifest.json");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const years = useMemo(
+    () =>
+      manifest.status === "loaded"
+        ? manifest.data.seasons.map((season) => season.year).sort((left, right) => right - left)
+        : [],
+    [manifest],
+  );
+
+  if (manifest.status === "loading") {
+    return <StatusPanel label="Loading schedule luck data..." />;
+  }
+  if (manifest.status === "error") {
+    return <StatusPanel label="Unable to load schedule luck data." tone="danger" />;
+  }
+
+  const requestedYear = Number(searchParams.get("year"));
+  const year = years.includes(requestedYear) ? requestedYear : years[0];
+  if (year === undefined) {
+    return <StatusPanel label="No seasons are available." />;
+  }
+
+  return (
+    <ScheduleLuckSeason
+      key={year}
+      year={year}
+      years={years}
+      onYearChange={(nextYear) => setSearchParams({ year: String(nextYear) })}
+    />
+  );
+}
+
+function ScheduleLuckSeason({
+  year,
+  years,
+  onYearChange,
+}: {
+  year: number;
+  years: number[];
+  onYearChange: (year: number) => void;
+}) {
+  const season = useArchiveJson<PublicSeason>(`seasons/${year}.json`);
+  const regularWeeks = season.status === "loaded"
+    ? season.data.weeks.filter((week) =>
+        season.data.settings.regSeasonCount === undefined ||
+        week.week <= season.data.settings.regSeasonCount,
+      )
+    : [];
+  const weeks = useSeasonWeeks(String(year), regularWeeks);
+  const rows = useMemo(
+    () =>
+      season.status === "loaded" && weeks.status === "loaded"
+        ? buildScheduleLuckRows(season.data, weeks.data)
+        : [],
+    [season, weeks],
+  );
+
+  if (season.status === "loading" || weeks.status === "idle" || weeks.status === "loading") {
+    return <StatusPanel label="Loading regular-season scores..." />;
+  }
+  if (season.status === "error" || weeks.status === "error") {
+    return <StatusPanel label="Unable to load regular-season scores." tone="danger" />;
+  }
+
+  return (
+    <>
+      <Breadcrumbs items={[{ label: "Home", to: "/" }, { label: "Schedule Luck" }]} />
+      <ScheduleLuckPage year={year} years={years} rows={rows} onYearChange={onYearChange} />
     </>
   );
 }
@@ -4313,6 +4396,9 @@ function SeasonPage() {
           <p className="eyebrow">{season.data.settings.name}</p>
           <h1>{season.data.year} Season</h1>
         </div>
+        <Link className="ghostButton" to={`/schedule-luck?year=${season.data.year}`}>
+          View schedule luck
+        </Link>
       </section>
 
       <section className="contentGrid">

@@ -1,0 +1,183 @@
+.luckOverview {
+  display: grid;
+  grid-template-columns: minmax(150px, 220px) minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.luckSeasonSelector {
+  display: grid;
+  gap: 7px;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 800;
+}
+
+.luckMethod h2 {
+  margin-bottom: 8px;
+}
+
+.luckMethod p {
+  max-width: 80ch;
+  margin-bottom: 8px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.luckMethod p:last-child {
+  margin-bottom: 0;
+}
+
+.luckScale,
+.luckBarRow {
+  display: grid;
+  grid-template-columns: minmax(160px, 1fr) minmax(180px, 2fr) 70px;
+  gap: 16px;
+  align-items: center;
+}
+
+.luckScale {
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.luckScale span:first-child {
+  grid-column: 2;
+}
+
+.luckScale span:nth-child(2) {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: center;
+}
+
+.luckScale span:last-child {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: end;
+}
+
+.luckBars {
+  display: grid;
+  gap: 0;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.luckBarRow {
+  min-height: 44px;
+  padding: 6px 0;
+  border-top: 1px solid var(--line);
+}
+
+.luckBarTeam {
+  min-width: 0;
+  font-weight: 750;
+  overflow-wrap: anywhere;
+}
+
+.luckBarTrack {
+  position: relative;
+  height: 22px;
+  background: var(--paper-soft);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+.luckBarTrack::after {
+  position: absolute;
+  top: -1px;
+  bottom: -1px;
+  left: 50%;
+  z-index: 1;
+  width: 2px;
+  background: var(--line-strong);
+  content: "";
+}
+
+.luckBarFill {
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  border-radius: 3px;
+}
+
+.luckBarFill.positive {
+  left: 50%;
+  background: var(--field);
+}
+
+.luckBarFill.negative {
+  right: 50%;
+  background: var(--orange);
+}
+
+.luckBarValue {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.luckBarValue.positive,
+.luckPositive {
+  color: var(--field);
+}
+
+.luckBarValue.negative,
+.luckNegative {
+  color: #9b4219;
+}
+
+.luckBarValue.neutral {
+  color: var(--muted);
+}
+
+.luckTable {
+  min-width: 850px;
+}
+
+.luckTable th {
+  padding: 11px 10px;
+  white-space: nowrap;
+}
+
+.luckTable td {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.luckTableTeam,
+.luckTable td small {
+  display: block;
+}
+
+.luckTableTeam {
+  font-weight: 800;
+}
+
+.luckTable td small {
+  color: var(--muted);
+}
+
+@media (max-width: 700px) {
+  .luckOverview {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .luckScale,
+  .luckBarRow {
+    grid-template-columns: minmax(0, 1fr) 70px;
+    gap: 7px 10px;
+  }
+
+  .luckScale {
+    display: none;
+  }
+
+  .luckBarTrack {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+}
