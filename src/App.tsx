@@ -681,17 +681,21 @@ function App() {
           <span>CPFFL</span>
         </Link>
         <nav aria-label="Primary navigation">
-          <NavLink to="/" end>
+          <NavLink to="/" end aria-label="Home">
             <Home size={16} aria-hidden />
-            Home
+            <span>Home</span>
           </NavLink>
-          <NavLink to="/browse">
+          <NavLink to="/browse" aria-label="Browse">
             <Search size={16} aria-hidden />
-            Browse
+            <span>Browse</span>
           </NavLink>
-          <NavLink to="/players">
+          <NavLink to="/players" aria-label="Players">
             <BarChart3 size={16} aria-hidden />
-            Players
+            <span>Players</span>
+          </NavLink>
+          <NavLink to="/keepers" aria-label="Keepers">
+            <LiaTrophySolid size={16} aria-hidden />
+            <span>Keepers</span>
           </NavLink>
         </nav>
       </header>

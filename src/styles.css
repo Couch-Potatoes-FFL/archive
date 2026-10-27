@@ -2979,6 +2979,16 @@ a.teamLabel:hover {
   }
 }
 
+@media (max-width: 560px) {
+  .topBar nav a {
+    gap: 0;
+  }
+
+  .topBar nav a span {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
