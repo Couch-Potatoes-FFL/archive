@@ -8,9 +8,10 @@
     "dev": "vite --host 0.0.0.0",
     "build:data": "node scripts/build_public_archive.mjs",
     "verify:data": "node scripts/verify_public_archive.mjs",
+    "check:keepers": "node scripts/check_keepers.mjs",
     "typecheck": "tsc --noEmit",
-    "check": "npm run verify:data && npm run typecheck",
-    "check:local": "npm run build:data && npm run verify:data && npm run typecheck",
+    "check": "npm run verify:data && npm run check:keepers && npm run typecheck",
+    "check:local": "npm run build:data && npm run check",
     "build": "vite build",
     "preview": "vite preview --host 0.0.0.0"
   },

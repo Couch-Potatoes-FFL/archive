@@ -1,3 +1,26 @@
+import type { SearchRow } from "./types";
+
+// ESPN's 2024 draft export omits keeper flags; these are the league's announced keepers.
+const KEEPERS_2024 = new Set([
+  "Brock Purdy", "Sam LaPorta", "Jayden Reed",
+  "Jerome Ford", "Rashee Rice", "Dalton Schultz",
+  "Jordan Love", "Kyren Williams", "Isiah Pacheco",
+  "Breece Hall", "Jonathan Taylor", "Puka Nacua",
+  "Jahmyr Gibbs", "De'Von Achane", "Tua Tagovailoa",
+  "Christian McCaffrey", "Lamar Jackson", "Brandon Aiyuk",
+  "Amon-Ra St. Brown", "Kyler Murray", "Drake London",
+  "Tyreek Hill", "Dak Prescott", "Nico Collins",
+  "CeeDee Lamb", "Zay Flowers", "Anthony Richardson",
+  "Justin Jefferson", "Garrett Wilson", "C.J. Stroud",
+]);
+
+export function isKeeperRecord(row: SearchRow): boolean {
+  return row.type === "draft" && (
+    Boolean(row.keeperStatus) ||
+    (row.year === 2024 && KEEPERS_2024.has(row.playerName ?? row.label))
+  );
+}
+
 export const ANNOUNCED_KEEPER_TEAMS = {
   Andy: { name: "Darn Tuten", key: "2025-t03", year: 2025 },
   Ethan: { name: "Uncle Rico", key: "2025-t02", year: 2025 },
@@ -52,3 +75,37 @@ export const ANNOUNCED_KEEPERS: readonly AnnouncedKeeper[] = [
   { year: 2026, owner: "Nate S.", name: "Puka Nacua", value: 22, position: "WR", playerKey: "espn-4426515" },
   { year: 2026, owner: "Nate S.", name: "Drake London", value: 4, position: "WR", playerKey: "espn-4426502" },
 ];
+
+export function unmatchedAnnouncedKeepers(rows: SearchRow[]): readonly AnnouncedKeeper[] {
+  const archived = new Set(
+    rows.filter(isKeeperRecord).map((row) =>
+      `${row.year}:${(row.playerName ?? row.label).trim().toLowerCase()}`,
+    ),
+  );
+  return ANNOUNCED_KEEPERS.filter((keeper) =>
+    !archived.has(`${keeper.year}:${keeper.name.trim().toLowerCase()}`),
+  );
+}
+
+export function keeperEligibility(rows: SearchRow[]) {
+  const kept = new Set<string>();
+  const keyFor = (year: number, playerKey: string | undefined, name: string) =>
+    `${year}:${playerKey ?? name.trim().toLowerCase()}`;
+
+  for (const row of rows) {
+    if (isKeeperRecord(row)) {
+      kept.add(keyFor(row.year, row.playerKey, row.playerName ?? row.label));
+    }
+  }
+
+  for (const keeper of ANNOUNCED_KEEPERS) {
+    kept.add(keyFor(keeper.year, keeper.playerKey, keeper.name));
+  }
+
+  return (year: number, playerKey: string | undefined, name: string) => {
+    const current = keyFor(year, playerKey, name);
+    const previous = keyFor(year - 1, playerKey, name);
+    const first = keyFor(year - 2, playerKey, name);
+    return !(kept.has(current) && kept.has(previous) && kept.has(first));
+  };
+}

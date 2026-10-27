@@ -1638,7 +1638,7 @@ async function buildSeason(year) {
         team.name,
         `${team.wins}-${team.losses}-${team.ties}, ${team.ownerNames.join(", ")}`,
         `/season/${year}/team/${encodeURIComponent(team.key)}`,
-        { teamKey: team.key, logoUrl: team.logoUrl },
+        { teamKey: team.key, logoUrl: team.logoUrl, ownerNames: team.ownerNames },
       ),
     );
   });

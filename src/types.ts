@@ -49,6 +49,7 @@ export type SearchRow = {
   week?: number;
   teamKey?: string;
   teamName?: string;
+  ownerNames?: string[];
   logoUrl?: string;
   playerKey?: string;
   playerName?: string;

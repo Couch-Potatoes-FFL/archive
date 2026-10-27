@@ -40,7 +40,13 @@ import {
   teamDisplay,
 } from "./data";
 import { SimpleTable } from "./SimpleTable";
-import { ANNOUNCED_KEEPERS, ANNOUNCED_KEEPER_TEAMS } from "./keepers";
+import {
+  ANNOUNCED_KEEPERS,
+  ANNOUNCED_KEEPER_TEAMS,
+  isKeeperRecord,
+  keeperEligibility,
+  unmatchedAnnouncedKeepers,
+} from "./keepers";
 import {
   ArchiveManifest,
   BoxScore,
@@ -94,10 +100,8 @@ type KeeperRow = {
   auctionValue?: number;
   position?: string;
   name: string;
-  teamName: string;
+  ownerName: string;
   keeperEligible: boolean;
-  teamKey?: string;
-  teamYear?: number;
   playerKey?: string;
   draftPick?: number;
 };
@@ -370,7 +374,7 @@ const dataCategories: Array<{
   },
   {
     title: "Keepers",
-    label: "Review keeper auction values and teams by season.",
+    label: "Review keeper history and see who is ineligible next season.",
     to: "/keepers",
     icon: <LiaTrophySolid size={22} aria-hidden />,
   },
@@ -1453,34 +1457,21 @@ function KeepersPage() {
     });
   }, [searchParamString, years]);
 
-  const keeperRows = useMemo(() => {
+  const allKeeperRows = useMemo(() => {
     if (index.status !== "loaded" || players.status !== "loaded") {
       return [];
     }
 
     const playerByKey = new Map(players.data.map((player) => [player.key, player]));
-    const keeperEligibleByRowId = keeperEligibilityByRowId(index.data);
+    const isKeeperEligible = keeperEligibility(index.data);
+    const ownerByTeamKey = new Map(
+      index.data
+        .filter((row) => row.type === "team" && row.teamKey && row.ownerNames)
+        .map((row) => [row.teamKey!, formatOwnerNames(row.ownerNames!)]),
+    );
 
     const historicalRows = index.data
-      .filter(
-        (row) => {
-          if (
-            row.type !== "draft" ||
-            !row.keeperStatus ||
-            (selectedYear !== "all" && row.year !== Number(selectedYear)) ||
-            !matchesDraftSearchRowQuery(row, normalizedQuery)
-          ) {
-            return false;
-          }
-
-          const player = row.playerKey ? playerByKey.get(row.playerKey) : undefined;
-          const playerSeason = player?.seasons.find((season) => season.year === row.year);
-          return matchesPositionFilter(
-            playerSeason?.position ?? player?.primaryPosition,
-            selectedPosition,
-          );
-        },
-      )
+      .filter(isKeeperRecord)
       .map((row): KeeperRow => {
         const player = row.playerKey ? playerByKey.get(row.playerKey) : undefined;
         const playerSeason = player?.seasons.find((season) => season.year === row.year);
@@ -1491,20 +1482,14 @@ function KeepersPage() {
           auctionValue: row.bidAmount,
           position: playerSeason?.position ?? player?.primaryPosition,
           name: row.playerName ?? row.label,
-          teamName: row.teamName ?? row.teamKey ?? "Unknown",
-          keeperEligible: keeperEligibleByRowId.get(row.id) ?? true,
-          teamKey: row.teamKey,
+          ownerName: ownerByTeamKey.get(row.teamKey ?? "") ?? "Unknown owner",
+          keeperEligible: isKeeperEligible(row.year, row.playerKey, row.playerName ?? row.label),
           playerKey: row.playerKey,
           draftPick: row.draftPick,
         };
       });
 
-    const announcedRows = ANNOUNCED_KEEPERS.filter(
-      (keeper) =>
-        (selectedYear === "all" || keeper.year === Number(selectedYear)) &&
-        includesSearchText(keeper.name, normalizedQuery) &&
-        matchesPositionFilter(keeper.position, selectedPosition),
-    ).map((keeper, index): KeeperRow => {
+    const announcedRows = unmatchedAnnouncedKeepers(index.data).map((keeper, index): KeeperRow => {
       const team = ANNOUNCED_KEEPER_TEAMS[keeper.owner];
       return {
         id: `announced-${keeper.year}-${index + 1}`,
@@ -1512,16 +1497,28 @@ function KeepersPage() {
         auctionValue: keeper.value,
         position: keeper.position,
         name: keeper.name,
-        teamName: team.name,
-        keeperEligible: true,
-        teamKey: team.key,
-        teamYear: team.year,
+        ownerName: ownerByTeamKey.get(team.key) ?? keeper.owner,
+        keeperEligible: isKeeperEligible(keeper.year, keeper.playerKey, keeper.name),
         playerKey: keeper.playerKey,
       };
     });
 
     return [...historicalRows, ...announcedRows].sort(sortKeeperRows);
-  }, [index, normalizedQuery, players, selectedPosition, selectedYear]);
+  }, [index, players]);
+
+  const keeperRows = useMemo(
+    () => allKeeperRows.filter(
+      (row) =>
+        (selectedYear === "all" || row.year === Number(selectedYear)) &&
+        includesSearchText(row.name, normalizedQuery) &&
+        matchesPositionFilter(row.position, selectedPosition),
+    ),
+    [allKeeperRows, normalizedQuery, selectedPosition, selectedYear],
+  );
+  const latestYear = years[0];
+  const ineligibleRows = allKeeperRows.filter(
+    (row) => row.year === latestYear && !row.keeperEligible,
+  );
 
   const keeperColumns = useMemo(
     () => keeperColumnsForView(showsAllSeasons),
@@ -1630,6 +1627,36 @@ function KeepersPage() {
           <h1>Keepers</h1>
         </div>
       </section>
+
+      {latestYear ? (
+        <section className="contentBand" aria-labelledby="ineligible-keepers-title">
+          <div className="sectionHeader">
+            <h2 id="ineligible-keepers-title">Ineligible Keepers for {latestYear + 1}</h2>
+            <span>{formatNumber(ineligibleRows.length)} players</span>
+          </div>
+          <p className="ineligibleKeeperExplanation">
+            Kept in {latestYear - 2}, {latestYear - 1}, and {latestYear}.
+          </p>
+          {ineligibleRows.length ? (
+            <ul className="ineligibleKeeperList">
+              {ineligibleRows.map((row) => (
+                <li key={row.id}>
+                  {row.playerKey ? (
+                    <Link to={`/player/${row.playerKey}?fromYear=${row.year}`}>
+                      {row.name}
+                    </Link>
+                  ) : (
+                    <strong>{row.name}</strong>
+                  )}
+                  <span>{row.position ? `${row.position} · ` : ""}{row.ownerName}</span>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="emptyNote">No keepers have completed a three-season run.</p>
+          )}
+        </section>
+      ) : null}
 
       <form
         className="controlBand keeperControlBand"
@@ -3938,9 +3965,9 @@ function KeeperMobileCard({
       </div>
       <p className="keeperMobileTeamLine">
         {metaPrefix ? `${metaPrefix} · ` : ""}
-        Keeper Eligible: {formatBoolean(row.keeperEligible)} ·{" "}
+        Eligible Next Season: {formatBoolean(row.keeperEligible)} ·{" "}
         {row.draftPick ? `Pick ${row.draftPick}: ` : ""}
-        <KeeperTeamLink row={row} />
+        {row.ownerName}
       </p>
     </article>
   );
@@ -3998,18 +4025,6 @@ function ProjectedPricePlayer({
       </span>
     </div>
   );
-}
-
-function KeeperTeamLink({ row }: { row: KeeperRow }) {
-  if (row.teamName === "Unknown" && !row.teamKey) {
-    return row.teamName;
-  }
-
-  const href = row.teamKey
-    ? teamPageHref(row.teamYear ?? row.year, row.teamKey)
-    : yearBrowseHref("team", row.year, row.teamName);
-
-  return <Link to={href}>{row.teamName}</Link>;
 }
 
 function StandingsMobileCard({
@@ -6808,12 +6823,11 @@ function keeperColumnsForView(showsYear: boolean): ColumnDef<KeeperRow>[] {
         ),
     },
     {
-      header: "Team Name",
-      accessorKey: "teamName",
-      cell: ({ row }) => <KeeperTeamLink row={row.original} />,
+      header: "Owner",
+      accessorKey: "ownerName",
     },
     {
-      header: "Keeper Eligible",
+      header: "Eligible Next Season",
       accessorKey: "keeperEligible",
       cell: ({ row }) => formatBoolean(row.original.keeperEligible),
     },
@@ -6951,46 +6965,6 @@ function pvoaClassName(value: number | undefined): string {
 
 function formatBoolean(value: boolean): string {
   return value ? "Yes" : "No";
-}
-
-function keeperEligibilityByRowId(rows: SearchRow[]): Map<string, boolean> {
-  const yearsByPlayer = new Map<string, Set<number>>();
-
-  rows.forEach((row) => {
-    const key = keeperIdentityKey(row);
-    if (!key) {
-      return;
-    }
-
-    const years = yearsByPlayer.get(key) ?? new Set<number>();
-    years.add(row.year);
-    yearsByPlayer.set(key, years);
-  });
-
-  return new Map(
-    rows.flatMap((row) => {
-      const key = keeperIdentityKey(row);
-      const years = key ? yearsByPlayer.get(key) : undefined;
-      if (!key || !years) {
-        return [];
-      }
-
-      let consecutiveYears = 1;
-      for (let year = row.year - 1; years.has(year); year -= 1) {
-        consecutiveYears += 1;
-      }
-
-      return [[row.id, consecutiveYears < 3]];
-    }),
-  );
-}
-
-function keeperIdentityKey(row: SearchRow): string | undefined {
-  if (row.type !== "draft" || !row.keeperStatus) {
-    return undefined;
-  }
-
-  return row.playerKey ?? normalizeSearchText(row.playerName ?? row.label);
 }
 
 function formatTransactionFab(type?: string, bidAmount?: number): string {
@@ -7164,9 +7138,9 @@ function sortKeeperRows(left: KeeperRow, right: KeeperRow): number {
     return right.year - left.year;
   }
 
-  const teamCompare = left.teamName.localeCompare(right.teamName);
-  if (teamCompare !== 0) {
-    return teamCompare;
+  const ownerCompare = left.ownerName.localeCompare(right.ownerName);
+  if (ownerCompare !== 0) {
+    return ownerCompare;
   }
 
   const leftPick = left.draftPick ?? Number.MAX_SAFE_INTEGER;
