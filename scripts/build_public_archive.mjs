@@ -716,10 +716,9 @@ function remapTransactionPlayerKeys(transaction, aliases) {
   };
 }
 
-function weekSummary(week) {
+function weekSummary(week, transactions) {
   const scoreboard = week.scoreboard?.data || [];
   const boxScores = week.box_scores?.data || [];
-  const transactions = week.transactions?.data || [];
   return {
     week: week.week,
     href: `/season/${week.year}/week/${String(week.week).padStart(2, "0")}`,
@@ -1033,7 +1032,7 @@ function recordDraftPlayer(players, year, pick, names) {
 }
 
 function recordTransactionPlayer(players, year, transaction, item, names) {
-  if (!item?.player) {
+  if (!item?.player || item.type === "LINEUP") {
     return;
   }
   const season = getPlayerSeason(players, year, {
@@ -1352,9 +1351,15 @@ async function buildSeason(year) {
         ? { ...matchup, home_score: boxScore.homeScore, away_score: boxScore.awayScore }
         : matchup, index);
     });
-    const transactions = (week.transactions?.data || []).map((transaction, index) =>
-      compactTransaction(year, week.week, transaction, index),
-    );
+    const transactions = (week.transactions?.data || [])
+      .map((transaction, index) => compactTransaction(year, week.week, transaction, index))
+      .filter((transaction) =>
+        !transaction.items.length || transaction.items.some((item) => item.type !== "LINEUP"),
+      )
+      .map((transaction) => ({
+        ...transaction,
+        items: transaction.items.filter((item) => item.type !== "LINEUP"),
+      }));
     const weekPayload = {
       year,
       week: week.week,
@@ -1365,7 +1370,7 @@ async function buildSeason(year) {
     weekPayloads.push(weekPayload);
 
     weeks.push({
-      ...weekSummary({ ...week, year }),
+      ...weekSummary({ ...week, year }, transactions),
       href: `/season/${year}/week/${String(week.week).padStart(2, "0")}`,
     });
     searchRows.push(

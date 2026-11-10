@@ -76,6 +76,15 @@ async function main() {
   for (const file of files) {
     const payload = JSON.parse(await readFile(file, "utf8"));
     verifyValue(payload, path.relative(rootDir, file), failures, playerKeys);
+    if (Array.isArray(payload.transactions) &&
+      payload.transactions.some((transaction) =>
+        transaction.items.some((item) => item.type === "LINEUP"))) {
+      failures.push(`Lineup transaction item at ${path.relative(rootDir, file)}`);
+    }
+    if (path.basename(file) === "search-index.json" &&
+      payload.some((row) => row.transactionItemType === "LINEUP")) {
+      failures.push(`Lineup search row at ${path.relative(rootDir, file)}`);
+    }
     if (Array.isArray(payload.scoreboard) && Array.isArray(payload.boxScores)) {
       for (const matchup of payload.scoreboard) {
         const boxScore = payload.boxScores.find(
