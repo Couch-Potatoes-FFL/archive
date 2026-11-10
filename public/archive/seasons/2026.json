@@ -1,6 +1,6 @@
 {
   "year": 2026,
-  "exportedAt": "2026-11-10T00:37:33+00:00",
+  "exportedAt": "2026-11-10T19:24:15+00:00",
   "settings": {
     "name": "The Couch Potatoes X21",
     "teamCount": 10,
@@ -371,7 +371,7 @@
           "playerId": 4426388,
           "name": "Jameson Williams",
           "position": "WR",
-          "lineupSlot": "RB/WR",
+          "lineupSlot": "WR",
           "proTeam": "DET",
           "injuryStatus": "ACTIVE",
           "totalPoints": 105.7
@@ -381,7 +381,7 @@
           "playerId": 4685512,
           "name": "Jadarian Price",
           "position": "RB",
-          "lineupSlot": "BE",
+          "lineupSlot": "RB/WR/TE",
           "proTeam": "SEA",
           "injuryStatus": "ACTIVE",
           "totalPoints": 33.5
@@ -391,7 +391,7 @@
           "playerId": 4360761,
           "name": "Michael Wilson",
           "position": "WR",
-          "lineupSlot": "WR",
+          "lineupSlot": "IR",
           "proTeam": "ARI",
           "injuryStatus": "OUT",
           "totalPoints": 123.68
@@ -424,14 +424,14 @@
           "lineupSlot": "TE",
           "proTeam": "BUF",
           "injuryStatus": "ACTIVE",
-          "totalPoints": 83.1
+          "totalPoints": 88.9
         },
         {
           "key": "espn-4685702",
           "playerId": 4685702,
           "name": "Quinshon Judkins",
           "position": "RB",
-          "lineupSlot": "RB/WR/TE",
+          "lineupSlot": "RB/WR",
           "proTeam": "CLE",
           "injuryStatus": "ACTIVE",
           "totalPoints": 92.1
@@ -443,7 +443,7 @@
           "position": "WR",
           "lineupSlot": "IR",
           "proTeam": "DAL",
-          "injuryStatus": "OUT",
+          "injuryStatus": "QUESTIONABLE",
           "totalPoints": 107.3
         },
         {
@@ -538,11 +538,11 @@
         }
       ],
       "wins": 3,
-      "losses": 5,
+      "losses": 6,
       "ties": 0,
-      "pointsFor": 1218.96,
-      "pointsAgainst": 1293.28,
-      "standing": 8,
+      "pointsFor": 1344.22,
+      "pointsAgainst": 1456.16,
+      "standing": 9,
       "finalStanding": 0,
       "scores": [
         132.34,
@@ -553,7 +553,7 @@
         153.6,
         152.74,
         156.6,
-        0,
+        125.26,
         0,
         0,
         0,
@@ -569,7 +569,7 @@
         "L",
         "L",
         "W",
-        "U",
+        "L",
         "U",
         "U",
         "U",
@@ -585,7 +585,7 @@
         -24.039999999999992,
         -49.06,
         44.239999999999995,
-        0,
+        -37.61999999999999,
         0,
         0,
         0,
@@ -613,7 +613,7 @@
         "acquisitionBudgetSpent": 75,
         "drops": 30,
         "trades": 4,
-        "moveToIr": 8
+        "moveToIr": 9
       }
     },
     {
@@ -755,7 +755,7 @@
           "lineupSlot": "BE",
           "proTeam": "MIN",
           "injuryStatus": "ACTIVE",
-          "totalPoints": 20.7
+          "totalPoints": 26.9
         },
         {
           "key": "espn-4569603",
@@ -775,7 +775,7 @@
           "lineupSlot": "BE",
           "proTeam": "BUF",
           "injuryStatus": "ACTIVE",
-          "totalPoints": 66.4
+          "totalPoints": 76.2
         },
         {
           "key": "espn-4430539",
@@ -813,7 +813,7 @@
           "name": "Keenan Allen",
           "position": "WR",
           "lineupSlot": "OP",
-          "proTeam": "IND",
+          "proTeam": "SF",
           "injuryStatus": "ACTIVE",
           "totalPoints": 80.1
         },
@@ -829,10 +829,10 @@
         }
       ],
       "wins": 5,
-      "losses": 3,
+      "losses": 4,
       "ties": 0,
-      "pointsFor": 1449.02,
-      "pointsAgainst": 1342.32,
+      "pointsFor": 1606.94,
+      "pointsAgainst": 1518.78,
       "standing": 3,
       "finalStanding": 0,
       "scores": [
@@ -844,7 +844,7 @@
         143.88,
         201.8,
         188.64,
-        0,
+        157.92,
         0,
         0,
         0,
@@ -860,7 +860,7 @@
         "L",
         "W",
         "W",
-        "U",
+        "L",
         "U",
         "U",
         "U",
@@ -876,7 +876,7 @@
         -4.5800000000000125,
         49.06,
         43.139999999999986,
-        0,
+        -18.54000000000002,
         0,
         0,
         0,
@@ -923,9 +923,9 @@
           "playerId": 4696981,
           "name": "Cam Skattebo",
           "position": "RB",
-          "lineupSlot": "BE",
+          "lineupSlot": "OP",
           "proTeam": "NYG",
-          "injuryStatus": "OUT",
+          "injuryStatus": "QUESTIONABLE",
           "totalPoints": 76.4
         },
         {
@@ -993,7 +993,7 @@
           "playerId": 3052587,
           "name": "Baker Mayfield",
           "position": "QB",
-          "lineupSlot": "QB",
+          "lineupSlot": "BE",
           "proTeam": "TB",
           "injuryStatus": "ACTIVE",
           "totalPoints": 54.88
@@ -1003,9 +1003,9 @@
           "playerId": 4871023,
           "name": "Carnell Tate",
           "position": "WR",
-          "lineupSlot": "IR",
+          "lineupSlot": "BE",
           "proTeam": "TEN",
-          "injuryStatus": "OUT",
+          "injuryStatus": "QUESTIONABLE",
           "totalPoints": 83.3
         },
         {
@@ -1073,7 +1073,7 @@
           "playerId": 4361741,
           "name": "Brock Purdy",
           "position": "QB",
-          "lineupSlot": "OP",
+          "lineupSlot": "QB",
           "proTeam": "SF",
           "injuryStatus": "ACTIVE",
           "totalPoints": 172.3
@@ -1089,12 +1089,12 @@
           "totalPoints": 88.8
         }
       ],
-      "wins": 3,
+      "wins": 4,
       "losses": 5,
       "ties": 0,
-      "pointsFor": 1299.1399999999999,
-      "pointsAgainst": 1379.36,
-      "standing": 7,
+      "pointsFor": 1465.36,
+      "pointsAgainst": 1504.36,
+      "standing": 6,
       "finalStanding": 0,
       "scores": [
         155.34,
@@ -1105,7 +1105,7 @@
         185.44,
         173.02,
         112.36,
-        0,
+        166.22,
         0,
         0,
         0,
@@ -1121,7 +1121,7 @@
         "W",
         "L",
         "L",
-        "U",
+        "W",
         "U",
         "U",
         "U",
@@ -1137,7 +1137,7 @@
         51.900000000000006,
         -51.94,
         -44.239999999999995,
-        0,
+        41.22,
         0,
         0,
         0,
@@ -1194,7 +1194,7 @@
           "playerId": 4426338,
           "name": "Bo Nix",
           "position": "QB",
-          "lineupSlot": "QB",
+          "lineupSlot": "BE",
           "proTeam": "DEN",
           "injuryStatus": "ACTIVE",
           "totalPoints": 133.8
@@ -1207,14 +1207,14 @@
           "lineupSlot": "WR",
           "proTeam": "MIN",
           "injuryStatus": "ACTIVE",
-          "totalPoints": 82.4
+          "totalPoints": 91.2
         },
         {
           "key": "espn-4372016",
           "playerId": 4372016,
           "name": "Jaylen Waddle",
           "position": "WR",
-          "lineupSlot": "WR",
+          "lineupSlot": "BE",
           "proTeam": "DEN",
           "injuryStatus": "QUESTIONABLE",
           "totalPoints": 85
@@ -1224,7 +1224,7 @@
           "playerId": -16007,
           "name": "Broncos D/ST",
           "position": "D/ST",
-          "lineupSlot": "D/ST",
+          "lineupSlot": "BE",
           "proTeam": "DEN",
           "injuryStatus": "NORMAL",
           "totalPoints": 83
@@ -1234,9 +1234,9 @@
           "playerId": 3126486,
           "name": "Deebo Samuel Sr.",
           "position": "WR",
-          "lineupSlot": "IR",
+          "lineupSlot": "OP",
           "proTeam": "SF",
-          "injuryStatus": "OUT",
+          "injuryStatus": "QUESTIONABLE",
           "totalPoints": 61.4
         },
         {
@@ -1244,7 +1244,7 @@
           "playerId": 3054850,
           "name": "Alvin Kamara",
           "position": "RB",
-          "lineupSlot": "BE",
+          "lineupSlot": "RB",
           "proTeam": "NO",
           "injuryStatus": "ACTIVE",
           "totalPoints": 72.7
@@ -1254,7 +1254,7 @@
           "playerId": 4702555,
           "name": "Jonah Coleman",
           "position": "RB",
-          "lineupSlot": "RB",
+          "lineupSlot": "BE",
           "proTeam": "DEN",
           "injuryStatus": "ACTIVE",
           "totalPoints": 62.9
@@ -1274,10 +1274,10 @@
           "playerId": 4429205,
           "name": "Jordan Addison",
           "position": "WR",
-          "lineupSlot": "OP",
+          "lineupSlot": "BE",
           "proTeam": "MIN",
           "injuryStatus": "ACTIVE",
-          "totalPoints": 49.1
+          "totalPoints": 53.9
         },
         {
           "key": "espn-4723820",
@@ -1294,7 +1294,7 @@
           "playerId": 4427095,
           "name": "DeMario Douglas",
           "position": "WR",
-          "lineupSlot": "BE",
+          "lineupSlot": "WR",
           "proTeam": "NE",
           "injuryStatus": "ACTIVE",
           "totalPoints": 99.4
@@ -1324,7 +1324,7 @@
           "playerId": 4837248,
           "name": "Fernando Mendoza",
           "position": "QB",
-          "lineupSlot": "BE",
+          "lineupSlot": "QB",
           "proTeam": "LV",
           "injuryStatus": "ACTIVE",
           "totalPoints": 2.22
@@ -1350,42 +1350,22 @@
           "totalPoints": 178.9
         },
         {
-          "key": "espn-4241555",
-          "playerId": 4241555,
-          "name": "Elijah Mitchell",
-          "position": "RB",
-          "lineupSlot": "BE",
-          "proTeam": "PHI",
-          "injuryStatus": "ACTIVE",
-          "totalPoints": 19.7
-        },
-        {
-          "key": "espn-4038524",
-          "playerId": 4038524,
-          "name": "Gardner Minshew II",
-          "position": "QB",
-          "lineupSlot": "QB",
-          "proTeam": "ARI",
-          "injuryStatus": "DOUBTFUL",
-          "totalPoints": 26.56
-        },
-        {
           "key": "espn-4035687",
           "playerId": 4035687,
           "name": "Michael Pittman Jr.",
           "position": "WR",
-          "lineupSlot": "BE",
+          "lineupSlot": "IR",
           "proTeam": "PIT",
           "injuryStatus": "INJURY_RESERVE",
           "totalPoints": 15.9
         }
       ],
-      "wins": 2,
+      "wins": 3,
       "losses": 6,
       "ties": 0,
-      "pointsFor": 1288.24,
-      "pointsAgainst": 1471.36,
-      "standing": 9,
+      "pointsFor": 1449.56,
+      "pointsAgainst": 1604.26,
+      "standing": 8,
       "finalStanding": 0,
       "scores": [
         177.64,
@@ -1396,7 +1376,7 @@
         133.54,
         145.2,
         131.48,
-        0,
+        161.32,
         0,
         0,
         0,
@@ -1412,7 +1392,7 @@
         "L",
         "L",
         "L",
-        "U",
+        "W",
         "U",
         "U",
         "U",
@@ -1428,7 +1408,7 @@
         -51.900000000000006,
         -2.700000000000017,
         -96.82000000000002,
-        0,
+        28.419999999999987,
         0,
         0,
         0,
@@ -1454,9 +1434,9 @@
       "transactions": {
         "acquisitions": 43,
         "acquisitionBudgetSpent": 63,
-        "drops": 38,
+        "drops": 40,
         "trades": 4,
-        "moveToIr": 10
+        "moveToIr": 11
       }
     },
     {
@@ -1505,7 +1485,7 @@
           "playerId": 3139477,
           "name": "Patrick Mahomes",
           "position": "QB",
-          "lineupSlot": "QB",
+          "lineupSlot": "OP",
           "proTeam": "KC",
           "injuryStatus": "QUESTIONABLE",
           "totalPoints": 149.98
@@ -1515,7 +1495,7 @@
           "playerId": 12483,
           "name": "Matthew Stafford",
           "position": "QB",
-          "lineupSlot": "OP",
+          "lineupSlot": "QB",
           "proTeam": "LAR",
           "injuryStatus": "ACTIVE",
           "totalPoints": 155.86
@@ -1525,9 +1505,9 @@
           "playerId": 4569173,
           "name": "Rhamondre Stevenson",
           "position": "RB",
-          "lineupSlot": "RB/WR",
+          "lineupSlot": "BE",
           "proTeam": "NE",
-          "injuryStatus": "QUESTIONABLE",
+          "injuryStatus": "DOUBTFUL",
           "totalPoints": 114.7
         },
         {
@@ -1545,7 +1525,7 @@
           "playerId": 4047650,
           "name": "DK Metcalf",
           "position": "WR",
-          "lineupSlot": "BE",
+          "lineupSlot": "RB/WR",
           "proTeam": "PIT",
           "injuryStatus": "ACTIVE",
           "totalPoints": 81.9
@@ -1605,7 +1585,7 @@
           "playerId": 3116165,
           "name": "Chris Godwin Jr.",
           "position": "WR",
-          "lineupSlot": "WR",
+          "lineupSlot": "BE",
           "proTeam": "TB",
           "injuryStatus": "ACTIVE",
           "totalPoints": 57.9
@@ -1615,7 +1595,7 @@
           "playerId": 4569587,
           "name": "Wan'Dale Robinson",
           "position": "WR",
-          "lineupSlot": "BE",
+          "lineupSlot": "WR",
           "proTeam": "TEN",
           "injuryStatus": "ACTIVE",
           "totalPoints": 75.3
@@ -1637,7 +1617,7 @@
           "position": "WR",
           "lineupSlot": "BE",
           "proTeam": "SF",
-          "injuryStatus": "OUT",
+          "injuryStatus": "QUESTIONABLE",
           "totalPoints": 91
         },
         {
@@ -1671,12 +1651,12 @@
           "totalPoints": 75
         }
       ],
-      "wins": 4,
+      "wins": 5,
       "losses": 4,
       "ties": 0,
-      "pointsFor": 1336.4199999999996,
-      "pointsAgainst": 1351.64,
-      "standing": 5,
+      "pointsFor": 1512.8799999999997,
+      "pointsAgainst": 1509.56,
+      "standing": 4,
       "finalStanding": 0,
       "scores": [
         174.92,
@@ -1687,7 +1667,7 @@
         148.84,
         127.82,
         137.62,
-        0,
+        176.46,
         0,
         0,
         0,
@@ -1703,7 +1683,7 @@
         "L",
         "L",
         "L",
-        "U",
+        "W",
         "U",
         "U",
         "U",
@@ -1719,7 +1699,7 @@
         -59.5,
         -13.200000000000017,
         -75.4,
-        0,
+        18.54000000000002,
         0,
         0,
         0,
@@ -1766,7 +1746,7 @@
           "playerId": 4426515,
           "name": "Puka Nacua",
           "position": "WR",
-          "lineupSlot": "WR",
+          "lineupSlot": "BE",
           "proTeam": "LAR",
           "injuryStatus": "DOUBTFUL",
           "totalPoints": 185.6
@@ -1776,7 +1756,7 @@
           "playerId": 4426502,
           "name": "Drake London",
           "position": "WR",
-          "lineupSlot": "RB/WR",
+          "lineupSlot": "BE",
           "proTeam": "ATL",
           "injuryStatus": "ACTIVE",
           "totalPoints": 130.6
@@ -1806,7 +1786,7 @@
           "playerId": 4596448,
           "name": "Bucky Irving",
           "position": "RB",
-          "lineupSlot": "RB",
+          "lineupSlot": "BE",
           "proTeam": "TB",
           "injuryStatus": "ACTIVE",
           "totalPoints": 175.1
@@ -1816,7 +1796,7 @@
           "playerId": 4047365,
           "name": "Josh Jacobs",
           "position": "RB",
-          "lineupSlot": "RB/WR/TE",
+          "lineupSlot": "BE",
           "proTeam": "GB",
           "injuryStatus": "OUT",
           "totalPoints": 41.8
@@ -1838,7 +1818,7 @@
           "position": "WR",
           "lineupSlot": "BE",
           "proTeam": "NYJ",
-          "injuryStatus": "OUT",
+          "injuryStatus": "QUESTIONABLE",
           "totalPoints": 120.7
         },
         {
@@ -1856,7 +1836,7 @@
           "playerId": 3040151,
           "name": "George Kittle",
           "position": "TE",
-          "lineupSlot": "TE",
+          "lineupSlot": "RB/WR/TE",
           "proTeam": "SF",
           "injuryStatus": "ACTIVE",
           "totalPoints": 113.3
@@ -1866,7 +1846,7 @@
           "playerId": 4870653,
           "name": "KC Concepcion",
           "position": "WR",
-          "lineupSlot": "BE",
+          "lineupSlot": "RB/WR",
           "proTeam": "CLE",
           "injuryStatus": "ACTIVE",
           "totalPoints": 96.4
@@ -1886,7 +1866,7 @@
           "playerId": -16023,
           "name": "Steelers D/ST",
           "position": "D/ST",
-          "lineupSlot": "BE",
+          "lineupSlot": "D/ST",
           "proTeam": "PIT",
           "injuryStatus": "NORMAL",
           "totalPoints": 90
@@ -1926,7 +1906,7 @@
           "playerId": 15864,
           "name": "Geno Smith",
           "position": "QB",
-          "lineupSlot": "OP",
+          "lineupSlot": "BE",
           "proTeam": "NYJ",
           "injuryStatus": "ACTIVE",
           "totalPoints": 135.52
@@ -1949,7 +1929,7 @@
           "lineupSlot": "K",
           "proTeam": "BUF",
           "injuryStatus": "ACTIVE",
-          "totalPoints": 81.9
+          "totalPoints": 95.5
         },
         {
           "key": "espn-5081432",
@@ -1962,11 +1942,11 @@
           "totalPoints": 59.4
         }
       ],
-      "wins": 7,
+      "wins": 8,
       "losses": 1,
       "ties": 0,
-      "pointsFor": 1684.8999999999999,
-      "pointsAgainst": 1407.18,
+      "pointsFor": 1901.6599999999999,
+      "pointsAgainst": 1577.42,
       "standing": 1,
       "finalStanding": 0,
       "scores": [
@@ -1978,7 +1958,7 @@
         177.64,
         213.84,
         213.02,
-        0,
+        216.76,
         0,
         0,
         0,
@@ -1994,7 +1974,7 @@
         "W",
         "W",
         "W",
-        "U",
+        "W",
         "U",
         "U",
         "U",
@@ -2010,7 +1990,7 @@
         24.039999999999992,
         74.44,
         75.4,
-        0,
+        46.51999999999998,
         0,
         0,
         0,
@@ -2069,7 +2049,7 @@
           "position": "WR",
           "lineupSlot": "IR",
           "proTeam": "NE",
-          "injuryStatus": "OUT",
+          "injuryStatus": "QUESTIONABLE",
           "totalPoints": 19.1
         },
         {
@@ -2087,7 +2067,7 @@
           "playerId": 4259545,
           "name": "D'Andre Swift",
           "position": "RB",
-          "lineupSlot": "RB/WR",
+          "lineupSlot": "BE",
           "proTeam": "CHI",
           "injuryStatus": "ACTIVE",
           "totalPoints": 160.8
@@ -2117,7 +2097,7 @@
           "playerId": 3916148,
           "name": "Tony Pollard",
           "position": "RB",
-          "lineupSlot": "BE",
+          "lineupSlot": "RB/WR",
           "proTeam": "TEN",
           "injuryStatus": "ACTIVE",
           "totalPoints": 127.5
@@ -2127,7 +2107,7 @@
           "playerId": 4426385,
           "name": "Zach Charbonnet",
           "position": "RB",
-          "lineupSlot": "BE",
+          "lineupSlot": "RB/WR/TE",
           "proTeam": "SEA",
           "injuryStatus": "ACTIVE",
           "totalPoints": 15.5
@@ -2157,9 +2137,9 @@
           "playerId": 3122840,
           "name": "Deshaun Watson",
           "position": "QB",
-          "lineupSlot": "IR",
+          "lineupSlot": "BE",
           "proTeam": "CLE",
-          "injuryStatus": "OUT",
+          "injuryStatus": "QUESTIONABLE",
           "totalPoints": 127.94
         },
         {
@@ -2167,7 +2147,7 @@
           "playerId": 4428718,
           "name": "Tre Tucker",
           "position": "WR",
-          "lineupSlot": "RB/WR/TE",
+          "lineupSlot": "WR",
           "proTeam": "LV",
           "injuryStatus": "ACTIVE",
           "totalPoints": 117.3
@@ -2177,7 +2157,7 @@
           "playerId": 4248528,
           "name": "Christian Watson",
           "position": "WR",
-          "lineupSlot": "WR",
+          "lineupSlot": "BE",
           "proTeam": "GB",
           "injuryStatus": "ACTIVE",
           "totalPoints": 197.9
@@ -2223,41 +2203,21 @@
           "totalPoints": 32.7
         },
         {
-          "key": "espn-3116164",
-          "playerId": 3116164,
-          "name": "Mike Gesicki",
-          "position": "TE",
-          "lineupSlot": "TE",
-          "proTeam": "CIN",
-          "injuryStatus": "ACTIVE",
-          "totalPoints": 74.2
-        },
-        {
           "key": "espn-4040761",
           "playerId": 4040761,
           "name": "Devin Singletary",
           "position": "RB",
-          "lineupSlot": "RB",
+          "lineupSlot": "BE",
           "proTeam": "NYG",
           "injuryStatus": "ACTIVE",
           "totalPoints": 38.4
-        },
-        {
-          "key": "espn-4432762",
-          "playerId": 4432762,
-          "name": "Shedeur Sanders",
-          "position": "QB",
-          "lineupSlot": "QB",
-          "proTeam": "CLE",
-          "injuryStatus": "ACTIVE",
-          "totalPoints": 23.76
         }
       ],
-      "wins": 5,
+      "wins": 6,
       "losses": 3,
       "ties": 0,
-      "pointsFor": 1493.2,
-      "pointsAgainst": 1349.34,
+      "pointsFor": 1656.08,
+      "pointsAgainst": 1474.6,
       "standing": 2,
       "finalStanding": 0,
       "scores": [
@@ -2269,7 +2229,7 @@
         148.46,
         224.96,
         228.3,
-        0,
+        162.88,
         0,
         0,
         0,
@@ -2285,7 +2245,7 @@
         "W",
         "W",
         "W",
-        "U",
+        "W",
         "U",
         "U",
         "U",
@@ -2301,7 +2261,7 @@
         4.5800000000000125,
         51.94,
         96.82000000000002,
-        0,
+        37.61999999999999,
         0,
         0,
         0,
@@ -2327,8 +2287,8 @@
       "transactions": {
         "acquisitions": 21,
         "acquisitionBudgetSpent": 65,
-        "drops": 21,
-        "trades": 3,
+        "drops": 23,
+        "trades": 4,
         "moveToIr": 7
       }
     },
@@ -2371,14 +2331,14 @@
           "lineupSlot": "QB",
           "proTeam": "BUF",
           "injuryStatus": "ACTIVE",
-          "totalPoints": 197.82
+          "totalPoints": 210.68
         },
         {
           "key": "espn-3929630",
           "playerId": 3929630,
           "name": "Saquon Barkley",
           "position": "RB",
-          "lineupSlot": "RB",
+          "lineupSlot": "BE",
           "proTeam": "PHI",
           "injuryStatus": "ACTIVE",
           "totalPoints": 58.7
@@ -2398,7 +2358,7 @@
           "playerId": 4723086,
           "name": "Colston Loveland",
           "position": "TE",
-          "lineupSlot": "RB/WR/TE",
+          "lineupSlot": "BE",
           "proTeam": "CHI",
           "injuryStatus": "ACTIVE",
           "totalPoints": 82.3
@@ -2441,7 +2401,7 @@
           "lineupSlot": "K",
           "proTeam": "MIN",
           "injuryStatus": "ACTIVE",
-          "totalPoints": 89
+          "totalPoints": 98.6
         },
         {
           "key": "espn-4688813",
@@ -2461,7 +2421,7 @@
           "lineupSlot": "BE",
           "proTeam": "MIN",
           "injuryStatus": "ACTIVE",
-          "totalPoints": 90.8
+          "totalPoints": 93.9
         },
         {
           "key": "espn-4361432",
@@ -2481,14 +2441,14 @@
           "lineupSlot": "BE",
           "proTeam": "MIN",
           "injuryStatus": "NORMAL",
-          "totalPoints": 88
+          "totalPoints": 95
         },
         {
           "key": "espn-4431611",
           "playerId": 4431611,
           "name": "Caleb Williams",
           "position": "QB",
-          "lineupSlot": "QB",
+          "lineupSlot": "BE",
           "proTeam": "CHI",
           "injuryStatus": "ACTIVE",
           "totalPoints": 117.34
@@ -2528,7 +2488,7 @@
           "playerId": 4433970,
           "name": "J.J. McCarthy",
           "position": "QB",
-          "lineupSlot": "OP",
+          "lineupSlot": "QB",
           "proTeam": "NYG",
           "injuryStatus": "QUESTIONABLE",
           "totalPoints": 32.98
@@ -2538,18 +2498,18 @@
           "playerId": 4569682,
           "name": "Audric Estime",
           "position": "RB",
-          "lineupSlot": "BE",
+          "lineupSlot": "RB",
           "proTeam": "NO",
           "injuryStatus": "ACTIVE",
           "totalPoints": 22.6
         }
       ],
       "wins": 4,
-      "losses": 4,
+      "losses": 5,
       "ties": 0,
-      "pointsFor": 1246.7,
-      "pointsAgainst": 1405.48,
-      "standing": 6,
+      "pointsFor": 1371.7,
+      "pointsAgainst": 1571.7,
+      "standing": 7,
       "finalStanding": 0,
       "scores": [
         196.26,
@@ -2560,7 +2520,7 @@
         116.02,
         139.4,
         145.5,
-        0,
+        125,
         0,
         0,
         0,
@@ -2576,7 +2536,7 @@
         "L",
         "L",
         "L",
-        "U",
+        "L",
         "U",
         "U",
         "U",
@@ -2592,7 +2552,7 @@
         -36.780000000000015,
         -74.44,
         -43.139999999999986,
-        0,
+        -41.22,
         0,
         0,
         0,
@@ -2652,14 +2612,14 @@
           "lineupSlot": "RB",
           "proTeam": "BUF",
           "injuryStatus": "ACTIVE",
-          "totalPoints": 148.7
+          "totalPoints": 170.4
         },
         {
           "key": "espn-4685278",
           "playerId": 4685278,
           "name": "Luther Burden III",
           "position": "WR",
-          "lineupSlot": "RB/WR",
+          "lineupSlot": "BE",
           "proTeam": "CHI",
           "injuryStatus": "QUESTIONABLE",
           "totalPoints": 142.3
@@ -2672,7 +2632,7 @@
           "lineupSlot": "WR",
           "proTeam": "BUF",
           "injuryStatus": "ACTIVE",
-          "totalPoints": 57.9
+          "totalPoints": 64.5
         },
         {
           "key": "espn-4035538",
@@ -2681,7 +2641,7 @@
           "position": "RB",
           "lineupSlot": "BE",
           "proTeam": "HOU",
-          "injuryStatus": "OUT",
+          "injuryStatus": "QUESTIONABLE",
           "totalPoints": 44.5
         },
         {
@@ -2691,7 +2651,7 @@
           "position": "RB",
           "lineupSlot": "IR",
           "proTeam": "NE",
-          "injuryStatus": "OUT",
+          "injuryStatus": "QUESTIONABLE",
           "totalPoints": 34.8
         },
         {
@@ -2759,7 +2719,7 @@
           "playerId": 4360423,
           "name": "Michael Penix Jr.",
           "position": "QB",
-          "lineupSlot": "OP",
+          "lineupSlot": "QB",
           "proTeam": "ATL",
           "injuryStatus": "ACTIVE",
           "totalPoints": 94.26
@@ -2779,7 +2739,7 @@
           "playerId": 4685261,
           "name": "Germie Bernard",
           "position": "WR",
-          "lineupSlot": "BE",
+          "lineupSlot": "RB/WR",
           "proTeam": "PIT",
           "injuryStatus": "ACTIVE",
           "totalPoints": 65.8
@@ -2789,7 +2749,7 @@
           "playerId": 2577417,
           "name": "Dak Prescott",
           "position": "QB",
-          "lineupSlot": "QB",
+          "lineupSlot": "OP",
           "proTeam": "DAL",
           "injuryStatus": "ACTIVE",
           "totalPoints": 177.44
@@ -2799,7 +2759,7 @@
           "playerId": -16014,
           "name": "Rams D/ST",
           "position": "D/ST",
-          "lineupSlot": "BE",
+          "lineupSlot": "D/ST",
           "proTeam": "LAR",
           "injuryStatus": "NORMAL",
           "totalPoints": 64
@@ -2819,7 +2779,7 @@
           "playerId": -16018,
           "name": "Saints D/ST",
           "position": "D/ST",
-          "lineupSlot": "D/ST",
+          "lineupSlot": "BE",
           "proTeam": "NO",
           "injuryStatus": "NORMAL",
           "totalPoints": 55
@@ -2836,10 +2796,10 @@
         }
       ],
       "wins": 2,
-      "losses": 6,
+      "losses": 7,
       "ties": 0,
-      "pointsFor": 1231.8,
-      "pointsAgainst": 1305.58,
+      "pointsFor": 1402.04,
+      "pointsAgainst": 1522.34,
       "standing": 10,
       "finalStanding": 0,
       "scores": [
@@ -2851,7 +2811,7 @@
         208.34,
         147.9,
         142.28,
-        0,
+        170.24,
         0,
         0,
         0,
@@ -2867,7 +2827,7 @@
         "W",
         "W",
         "L",
-        "U",
+        "L",
         "U",
         "U",
         "U",
@@ -2883,7 +2843,7 @@
         59.5,
         2.700000000000017,
         -20,
-        0,
+        -46.51999999999998,
         0,
         0,
         0,
@@ -2910,7 +2870,7 @@
         "acquisitions": 13,
         "acquisitionBudgetSpent": 52,
         "drops": 12,
-        "trades": 3,
+        "trades": 4,
         "moveToIr": 9
       }
     },
@@ -3033,7 +2993,7 @@
           "lineupSlot": "BE",
           "proTeam": "MIN",
           "injuryStatus": "ACTIVE",
-          "totalPoints": 80.5
+          "totalPoints": 87.8
         },
         {
           "key": "espn-4697815",
@@ -3083,7 +3043,7 @@
           "lineupSlot": "BE",
           "proTeam": "BUF",
           "injuryStatus": "ACTIVE",
-          "totalPoints": 68.7
+          "totalPoints": 73.4
         },
         {
           "key": "espn-10621",
@@ -3123,15 +3083,15 @@
           "lineupSlot": "OP",
           "proTeam": "MIN",
           "injuryStatus": "ACTIVE",
-          "totalPoints": 24.54
+          "totalPoints": 22.78
         }
       ],
       "wins": 5,
-      "losses": 3,
+      "losses": 4,
       "ties": 0,
-      "pointsFor": 1287.68,
-      "pointsAgainst": 1230.52,
-      "standing": 4,
+      "pointsFor": 1420.5800000000002,
+      "pointsAgainst": 1391.84,
+      "standing": 5,
       "finalStanding": 0,
       "scores": [
         193.86,
@@ -3142,7 +3102,7 @@
         152.8,
         141.02,
         162.28,
-        0,
+        132.9,
         0,
         0,
         0,
@@ -3158,7 +3118,7 @@
         "W",
         "W",
         "W",
-        "U",
+        "L",
         "U",
         "U",
         "U",
@@ -3174,7 +3134,7 @@
         36.780000000000015,
         13.200000000000017,
         20,
-        0,
+        -28.419999999999987,
         0,
         0,
         0,
@@ -3218,11 +3178,11 @@
       ],
       "logoUrl": "archive/assets/team-logos/2026/2026-t09.jpg",
       "roster": [],
-      "wins": 7,
+      "wins": 8,
       "losses": 1,
       "ties": 0,
-      "pointsFor": 1684.8999999999999,
-      "pointsAgainst": 1407.18,
+      "pointsFor": 1901.6599999999999,
+      "pointsAgainst": 1577.42,
       "standing": 1,
       "finalStanding": 0,
       "scores": [
@@ -3234,7 +3194,7 @@
         177.64,
         213.84,
         213.02,
-        0,
+        216.76,
         0,
         0,
         0,
@@ -3250,7 +3210,7 @@
         "W",
         "W",
         "W",
-        "U",
+        "W",
         "U",
         "U",
         "U",
@@ -3266,7 +3226,7 @@
         24.039999999999992,
         74.44,
         75.4,
-        0,
+        46.51999999999998,
         0,
         0,
         0,
@@ -3308,11 +3268,11 @@
       ],
       "logoUrl": "archive/assets/team-logos/2026/2026-t10.jpg",
       "roster": [],
-      "wins": 5,
+      "wins": 6,
       "losses": 3,
       "ties": 0,
-      "pointsFor": 1493.2,
-      "pointsAgainst": 1349.34,
+      "pointsFor": 1656.08,
+      "pointsAgainst": 1474.6,
       "standing": 2,
       "finalStanding": 0,
       "scores": [
@@ -3324,7 +3284,7 @@
         148.46,
         224.96,
         228.3,
-        0,
+        162.88,
         0,
         0,
         0,
@@ -3340,7 +3300,7 @@
         "W",
         "W",
         "W",
-        "U",
+        "W",
         "U",
         "U",
         "U",
@@ -3356,7 +3316,7 @@
         4.5800000000000125,
         51.94,
         96.82000000000002,
-        0,
+        37.61999999999999,
         0,
         0,
         0,
@@ -3382,8 +3342,8 @@
       "transactions": {
         "acquisitions": 21,
         "acquisitionBudgetSpent": 65,
-        "drops": 21,
-        "trades": 3,
+        "drops": 23,
+        "trades": 4,
         "moveToIr": 7
       }
     },
@@ -3399,10 +3359,10 @@
       "logoUrl": "archive/assets/team-logos/2026/2026-t03.jpg",
       "roster": [],
       "wins": 5,
-      "losses": 3,
+      "losses": 4,
       "ties": 0,
-      "pointsFor": 1449.02,
-      "pointsAgainst": 1342.32,
+      "pointsFor": 1606.94,
+      "pointsAgainst": 1518.78,
       "standing": 3,
       "finalStanding": 0,
       "scores": [
@@ -3414,7 +3374,7 @@
         143.88,
         201.8,
         188.64,
-        0,
+        157.92,
         0,
         0,
         0,
@@ -3430,7 +3390,7 @@
         "L",
         "W",
         "W",
-        "U",
+        "L",
         "U",
         "U",
         "U",
@@ -3446,7 +3406,7 @@
         -4.5800000000000125,
         49.06,
         43.139999999999986,
-        0,
+        -18.54000000000002,
         0,
         0,
         0,
@@ -3478,96 +3438,6 @@
       }
     },
     {
-      "key": "2026-t13",
-      "abbrev": "RICC",
-      "name": "Gibbs me your Lunch Money",
-      "divisionId": 0,
-      "divisionName": "Couch Potatoes",
-      "ownerNames": [
-        "Mr.Ricci"
-      ],
-      "logoUrl": "https://g.espncdn.com/lm-static/ffl/images/default_logos/6.svg",
-      "roster": [],
-      "wins": 5,
-      "losses": 3,
-      "ties": 0,
-      "pointsFor": 1287.68,
-      "pointsAgainst": 1230.52,
-      "standing": 4,
-      "finalStanding": 0,
-      "scores": [
-        193.86,
-        173.88,
-        206.86,
-        133.46,
-        123.52,
-        152.8,
-        141.02,
-        162.28,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      "outcomes": [
-        "L",
-        "W",
-        "W",
-        "L",
-        "L",
-        "W",
-        "W",
-        "W",
-        "U",
-        "U",
-        "U",
-        "U",
-        "U",
-        "U"
-      ],
-      "mov": [
-        -7.219999999999999,
-        16.19999999999999,
-        44.420000000000016,
-        -17.340000000000003,
-        -48.88000000000001,
-        36.780000000000015,
-        13.200000000000017,
-        20,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      "schedule": [
-        "2026-t09",
-        "2026-t03",
-        "2026-t04",
-        "2026-t10",
-        "2026-t02",
-        "2026-t11",
-        "2026-t06",
-        "2026-t12",
-        "2026-t05",
-        "2026-t02",
-        "2026-t06",
-        "2026-t10",
-        "2026-t12",
-        "2026-t05"
-      ],
-      "transactions": {
-        "acquisitions": 23,
-        "acquisitionBudgetSpent": 48,
-        "drops": 21,
-        "trades": 0,
-        "moveToIr": 10
-      }
-    },
-    {
       "key": "2026-t06",
       "abbrev": "MARK",
       "name": "Country Roads, Take Mahomes",
@@ -3578,12 +3448,12 @@
       ],
       "logoUrl": "archive/assets/team-logos/2026/2026-t06.jpg",
       "roster": [],
-      "wins": 4,
+      "wins": 5,
       "losses": 4,
       "ties": 0,
-      "pointsFor": 1336.4199999999996,
-      "pointsAgainst": 1351.64,
-      "standing": 5,
+      "pointsFor": 1512.8799999999997,
+      "pointsAgainst": 1509.56,
+      "standing": 4,
       "finalStanding": 0,
       "scores": [
         174.92,
@@ -3594,7 +3464,7 @@
         148.84,
         127.82,
         137.62,
-        0,
+        176.46,
         0,
         0,
         0,
@@ -3610,7 +3480,7 @@
         "L",
         "L",
         "L",
-        "U",
+        "W",
         "U",
         "U",
         "U",
@@ -3626,7 +3496,7 @@
         -59.5,
         -13.200000000000017,
         -75.4,
-        0,
+        18.54000000000002,
         0,
         0,
         0,
@@ -3658,33 +3528,33 @@
       }
     },
     {
-      "key": "2026-t11",
-      "abbrev": "WILL",
-      "name": "Take Us Out, Mr. Reichard",
+      "key": "2026-t13",
+      "abbrev": "RICC",
+      "name": "Gibbs me your Lunch Money",
       "divisionId": 0,
       "divisionName": "Couch Potatoes",
       "ownerNames": [
-        "JMarcG333"
+        "Mr.Ricci"
       ],
-      "logoUrl": "archive/assets/team-logos/2026/2026-t11.jpg",
+      "logoUrl": "https://g.espncdn.com/lm-static/ffl/images/default_logos/6.svg",
       "roster": [],
-      "wins": 4,
+      "wins": 5,
       "losses": 4,
       "ties": 0,
-      "pointsFor": 1246.7,
-      "pointsAgainst": 1405.48,
-      "standing": 6,
+      "pointsFor": 1420.5800000000002,
+      "pointsAgainst": 1391.84,
+      "standing": 5,
       "finalStanding": 0,
       "scores": [
-        196.26,
-        147.54,
-        160.22,
-        148.58,
-        193.18,
-        116.02,
-        139.4,
-        145.5,
-        0,
+        193.86,
+        173.88,
+        206.86,
+        133.46,
+        123.52,
+        152.8,
+        141.02,
+        162.28,
+        132.9,
         0,
         0,
         0,
@@ -3692,15 +3562,15 @@
         0
       ],
       "outcomes": [
+        "L",
+        "W",
+        "W",
+        "L",
+        "L",
         "W",
         "W",
         "W",
         "L",
-        "W",
-        "L",
-        "L",
-        "L",
-        "U",
         "U",
         "U",
         "U",
@@ -3708,15 +3578,15 @@
         "U"
       ],
       "mov": [
-        0.5199999999999818,
-        15.060000000000002,
-        2,
-        -28.28,
-        6.280000000000001,
-        -36.780000000000015,
-        -74.44,
-        -43.139999999999986,
-        0,
+        -7.219999999999999,
+        16.19999999999999,
+        44.420000000000016,
+        -17.340000000000003,
+        -48.88000000000001,
+        36.780000000000015,
+        13.200000000000017,
+        20,
+        -28.419999999999987,
         0,
         0,
         0,
@@ -3724,27 +3594,27 @@
         0
       ],
       "schedule": [
-        "2026-t10",
-        "2026-t02",
-        "2026-t05",
-        "2026-t06",
-        "2026-t12",
-        "2026-t13",
         "2026-t09",
         "2026-t03",
         "2026-t04",
-        "2026-t12",
-        "2026-t09",
+        "2026-t10",
+        "2026-t02",
+        "2026-t11",
         "2026-t06",
-        "2026-t03",
-        "2026-t04"
+        "2026-t12",
+        "2026-t05",
+        "2026-t02",
+        "2026-t06",
+        "2026-t10",
+        "2026-t12",
+        "2026-t05"
       ],
       "transactions": {
-        "acquisitions": 19,
-        "acquisitionBudgetSpent": 66,
-        "drops": 19,
-        "trades": 1,
-        "moveToIr": 6
+        "acquisitions": 23,
+        "acquisitionBudgetSpent": 48,
+        "drops": 21,
+        "trades": 0,
+        "moveToIr": 10
       }
     },
     {
@@ -3758,12 +3628,12 @@
       ],
       "logoUrl": "archive/assets/team-logos/2026/2026-t04.jpg",
       "roster": [],
-      "wins": 3,
+      "wins": 4,
       "losses": 5,
       "ties": 0,
-      "pointsFor": 1299.1399999999999,
-      "pointsAgainst": 1379.36,
-      "standing": 7,
+      "pointsFor": 1465.36,
+      "pointsAgainst": 1504.36,
+      "standing": 6,
       "finalStanding": 0,
       "scores": [
         155.34,
@@ -3774,7 +3644,7 @@
         185.44,
         173.02,
         112.36,
-        0,
+        166.22,
         0,
         0,
         0,
@@ -3790,7 +3660,7 @@
         "W",
         "L",
         "L",
-        "U",
+        "W",
         "U",
         "U",
         "U",
@@ -3806,7 +3676,7 @@
         51.900000000000006,
         -51.94,
         -44.239999999999995,
-        0,
+        41.22,
         0,
         0,
         0,
@@ -3838,6 +3708,186 @@
       }
     },
     {
+      "key": "2026-t11",
+      "abbrev": "WILL",
+      "name": "Take Us Out, Mr. Reichard",
+      "divisionId": 0,
+      "divisionName": "Couch Potatoes",
+      "ownerNames": [
+        "JMarcG333"
+      ],
+      "logoUrl": "archive/assets/team-logos/2026/2026-t11.jpg",
+      "roster": [],
+      "wins": 4,
+      "losses": 5,
+      "ties": 0,
+      "pointsFor": 1371.7,
+      "pointsAgainst": 1571.7,
+      "standing": 7,
+      "finalStanding": 0,
+      "scores": [
+        196.26,
+        147.54,
+        160.22,
+        148.58,
+        193.18,
+        116.02,
+        139.4,
+        145.5,
+        125,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "outcomes": [
+        "W",
+        "W",
+        "W",
+        "L",
+        "W",
+        "L",
+        "L",
+        "L",
+        "L",
+        "U",
+        "U",
+        "U",
+        "U",
+        "U"
+      ],
+      "mov": [
+        0.5199999999999818,
+        15.060000000000002,
+        2,
+        -28.28,
+        6.280000000000001,
+        -36.780000000000015,
+        -74.44,
+        -43.139999999999986,
+        -41.22,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "schedule": [
+        "2026-t10",
+        "2026-t02",
+        "2026-t05",
+        "2026-t06",
+        "2026-t12",
+        "2026-t13",
+        "2026-t09",
+        "2026-t03",
+        "2026-t04",
+        "2026-t12",
+        "2026-t09",
+        "2026-t06",
+        "2026-t03",
+        "2026-t04"
+      ],
+      "transactions": {
+        "acquisitions": 19,
+        "acquisitionBudgetSpent": 66,
+        "drops": 19,
+        "trades": 1,
+        "moveToIr": 6
+      }
+    },
+    {
+      "key": "2026-t05",
+      "abbrev": "911",
+      "name": "They've Hit The Second Bowers",
+      "divisionId": 0,
+      "divisionName": "Couch Potatoes",
+      "ownerNames": [
+        "Bisstits"
+      ],
+      "logoUrl": "archive/assets/team-logos/2026/2026-t05.jpg",
+      "roster": [],
+      "wins": 3,
+      "losses": 6,
+      "ties": 0,
+      "pointsFor": 1449.56,
+      "pointsAgainst": 1604.26,
+      "standing": 8,
+      "finalStanding": 0,
+      "scores": [
+        177.64,
+        169.5,
+        158.22,
+        182.38,
+        190.28,
+        133.54,
+        145.2,
+        131.48,
+        161.32,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "outcomes": [
+        "W",
+        "L",
+        "L",
+        "L",
+        "W",
+        "L",
+        "L",
+        "L",
+        "W",
+        "U",
+        "U",
+        "U",
+        "U",
+        "U"
+      ],
+      "mov": [
+        45.29999999999998,
+        -47.53999999999999,
+        -2,
+        -45.08000000000001,
+        17.620000000000005,
+        -51.900000000000006,
+        -2.700000000000017,
+        -96.82000000000002,
+        28.419999999999987,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "schedule": [
+        "2026-t02",
+        "2026-t09",
+        "2026-t11",
+        "2026-t03",
+        "2026-t06",
+        "2026-t04",
+        "2026-t12",
+        "2026-t10",
+        "2026-t13",
+        "2026-t06",
+        "2026-t12",
+        "2026-t03",
+        "2026-t10",
+        "2026-t13"
+      ],
+      "transactions": {
+        "acquisitions": 43,
+        "acquisitionBudgetSpent": 63,
+        "drops": 40,
+        "trades": 4,
+        "moveToIr": 11
+      }
+    },
+    {
       "key": "2026-t02",
       "abbrev": "Cuba",
       "name": "The Chuba Missle Crisis",
@@ -3849,11 +3899,11 @@
       "logoUrl": "archive/assets/team-logos/2026/2026-t02.jpg",
       "roster": [],
       "wins": 3,
-      "losses": 5,
+      "losses": 6,
       "ties": 0,
-      "pointsFor": 1218.96,
-      "pointsAgainst": 1293.28,
-      "standing": 8,
+      "pointsFor": 1344.22,
+      "pointsAgainst": 1456.16,
+      "standing": 9,
       "finalStanding": 0,
       "scores": [
         132.34,
@@ -3864,7 +3914,7 @@
         153.6,
         152.74,
         156.6,
-        0,
+        125.26,
         0,
         0,
         0,
@@ -3880,7 +3930,7 @@
         "L",
         "L",
         "W",
-        "U",
+        "L",
         "U",
         "U",
         "U",
@@ -3896,7 +3946,7 @@
         -24.039999999999992,
         -49.06,
         44.239999999999995,
-        0,
+        -37.61999999999999,
         0,
         0,
         0,
@@ -3924,97 +3974,7 @@
         "acquisitionBudgetSpent": 75,
         "drops": 30,
         "trades": 4,
-        "moveToIr": 8
-      }
-    },
-    {
-      "key": "2026-t05",
-      "abbrev": "911",
-      "name": "They've Hit The Second Bowers",
-      "divisionId": 0,
-      "divisionName": "Couch Potatoes",
-      "ownerNames": [
-        "Bisstits"
-      ],
-      "logoUrl": "archive/assets/team-logos/2026/2026-t05.jpg",
-      "roster": [],
-      "wins": 2,
-      "losses": 6,
-      "ties": 0,
-      "pointsFor": 1288.24,
-      "pointsAgainst": 1471.36,
-      "standing": 9,
-      "finalStanding": 0,
-      "scores": [
-        177.64,
-        169.5,
-        158.22,
-        182.38,
-        190.28,
-        133.54,
-        145.2,
-        131.48,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      "outcomes": [
-        "W",
-        "L",
-        "L",
-        "L",
-        "W",
-        "L",
-        "L",
-        "L",
-        "U",
-        "U",
-        "U",
-        "U",
-        "U",
-        "U"
-      ],
-      "mov": [
-        45.29999999999998,
-        -47.53999999999999,
-        -2,
-        -45.08000000000001,
-        17.620000000000005,
-        -51.900000000000006,
-        -2.700000000000017,
-        -96.82000000000002,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      "schedule": [
-        "2026-t02",
-        "2026-t09",
-        "2026-t11",
-        "2026-t03",
-        "2026-t06",
-        "2026-t04",
-        "2026-t12",
-        "2026-t10",
-        "2026-t13",
-        "2026-t06",
-        "2026-t12",
-        "2026-t03",
-        "2026-t10",
-        "2026-t13"
-      ],
-      "transactions": {
-        "acquisitions": 43,
-        "acquisitionBudgetSpent": 63,
-        "drops": 38,
-        "trades": 4,
-        "moveToIr": 10
+        "moveToIr": 9
       }
     },
     {
@@ -4029,10 +3989,10 @@
       "logoUrl": "archive/assets/team-logos/2026/2026-t12.jpg",
       "roster": [],
       "wins": 2,
-      "losses": 6,
+      "losses": 7,
       "ties": 0,
-      "pointsFor": 1231.8,
-      "pointsAgainst": 1305.58,
+      "pointsFor": 1402.04,
+      "pointsAgainst": 1522.34,
       "standing": 10,
       "finalStanding": 0,
       "scores": [
@@ -4044,7 +4004,7 @@
         208.34,
         147.9,
         142.28,
-        0,
+        170.24,
         0,
         0,
         0,
@@ -4060,7 +4020,7 @@
         "W",
         "W",
         "L",
-        "U",
+        "L",
         "U",
         "U",
         "U",
@@ -4076,7 +4036,7 @@
         59.5,
         2.700000000000017,
         -20,
-        0,
+        -46.51999999999998,
         0,
         0,
         0,
@@ -4103,7 +4063,7 @@
         "acquisitions": 13,
         "acquisitionBudgetSpent": 52,
         "drops": 12,
-        "trades": 3,
+        "trades": 4,
         "moveToIr": 9
       }
     }
@@ -6318,7 +6278,7 @@
       "href": "/season/2026/week/09",
       "scoreboardCount": 5,
       "boxScoreCount": 5,
-      "transactionCount": 174,
+      "transactionCount": 181,
       "hasBoxScores": true,
       "hasTransactions": true
     }
