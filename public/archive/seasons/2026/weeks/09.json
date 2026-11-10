@@ -1,0 +1,6780 @@
+{
+  "year": 2026,
+  "week": 9,
+  "scoreboard": [
+    {
+      "matchupKey": "2026-w09-m01",
+      "homeTeamKey": "2026-t13",
+      "awayTeamKey": "2026-t05",
+      "homeScore": 134.66,
+      "awayScore": 147.72,
+      "winnerTeamKey": "2026-t05",
+      "matchupType": "NONE",
+      "isPlayoff": false
+    },
+    {
+      "matchupKey": "2026-w09-m02",
+      "homeTeamKey": "2026-t10",
+      "awayTeamKey": "2026-t02",
+      "homeScore": 162.88,
+      "awayScore": 119.46,
+      "winnerTeamKey": "2026-t10",
+      "matchupType": "NONE",
+      "isPlayoff": false
+    },
+    {
+      "matchupKey": "2026-w09-m03",
+      "homeTeamKey": "2026-t12",
+      "awayTeamKey": "2026-t09",
+      "homeScore": 141.94,
+      "awayScore": 203.16,
+      "winnerTeamKey": "2026-t09",
+      "matchupType": "NONE",
+      "isPlayoff": false
+    },
+    {
+      "matchupKey": "2026-w09-m04",
+      "homeTeamKey": "2026-t03",
+      "awayTeamKey": "2026-t06",
+      "homeScore": 157.92,
+      "awayScore": 176.46,
+      "winnerTeamKey": "2026-t06",
+      "matchupType": "NONE",
+      "isPlayoff": false
+    },
+    {
+      "matchupKey": "2026-w09-m05",
+      "homeTeamKey": "2026-t11",
+      "awayTeamKey": "2026-t04",
+      "homeScore": 102.54,
+      "awayScore": 166.22,
+      "winnerTeamKey": "2026-t04",
+      "matchupType": "NONE",
+      "isPlayoff": false
+    }
+  ],
+  "boxScores": [
+    {
+      "matchupKey": "2026-w09-m01",
+      "homeTeamKey": "2026-t13",
+      "awayTeamKey": "2026-t05",
+      "homeScore": 134.66,
+      "awayScore": 147.72,
+      "winnerTeamKey": "2026-t05",
+      "matchupType": "NONE",
+      "isPlayoff": false,
+      "homeProjected": 151.44,
+      "awayProjected": 178.5,
+      "homeLineup": [
+        {
+          "key": "espn-4429795",
+          "playerId": 4429795,
+          "name": "Jahmyr Gibbs",
+          "position": "RB",
+          "lineupSlot": "RB",
+          "slotPosition": "RB",
+          "proTeam": "DET",
+          "proOpponent": "MIA",
+          "points": 13.4,
+          "projectedPoints": 29.27,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4429160",
+          "playerId": 4429160,
+          "name": "De'Von Achane",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "MIA",
+          "proOpponent": "DET",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "INJURY_RESERVE"
+        },
+        {
+          "key": "espn-4689114",
+          "playerId": 4689114,
+          "name": "Jaxson Dart",
+          "position": "QB",
+          "lineupSlot": "IR",
+          "slotPosition": "IR",
+          "proTeam": "NYG",
+          "proOpponent": "PHI",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "INJURY_RESERVE"
+        },
+        {
+          "key": "espn-4362628",
+          "playerId": 4362628,
+          "name": "Ja'Marr Chase",
+          "position": "WR",
+          "lineupSlot": "WR",
+          "slotPosition": "WR",
+          "proTeam": "CIN",
+          "proOpponent": "ATL",
+          "points": 36.5,
+          "projectedPoints": 23.61,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-3916387",
+          "playerId": 3916387,
+          "name": "Lamar Jackson",
+          "position": "QB",
+          "lineupSlot": "IR",
+          "slotPosition": "IR",
+          "proTeam": "BAL",
+          "proOpponent": "JAX",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "INJURY_RESERVE"
+        },
+        {
+          "key": "espn-4241478",
+          "playerId": 4241478,
+          "name": "DeVonta Smith",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "PHI",
+          "proOpponent": "NYG",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "OUT"
+        },
+        {
+          "key": "espn-4360689",
+          "playerId": 4360689,
+          "name": "Tyler Shough",
+          "position": "QB",
+          "lineupSlot": "QB",
+          "slotPosition": "QB",
+          "proTeam": "NO",
+          "proOpponent": "CLE",
+          "points": 19.7,
+          "projectedPoints": 16.28,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-2976212",
+          "playerId": 2976212,
+          "name": "Stefon Diggs",
+          "position": "WR",
+          "lineupSlot": "RB/WR",
+          "slotPosition": "RB/WR",
+          "proTeam": "WSH",
+          "proOpponent": "LAR",
+          "points": 8.1,
+          "projectedPoints": 12.82,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-5083076",
+          "playerId": 5083076,
+          "name": "Harold Fannin Jr.",
+          "position": "TE",
+          "lineupSlot": "TE",
+          "slotPosition": "TE",
+          "proTeam": "CLE",
+          "proOpponent": "NO",
+          "points": 11.2,
+          "projectedPoints": 11.91,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-3916433",
+          "playerId": 3916433,
+          "name": "Jakobi Meyers",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "JAX",
+          "proOpponent": "BAL",
+          "points": 10.5,
+          "projectedPoints": 10.49,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4036133",
+          "playerId": 4036133,
+          "name": "T.J. Hockenson",
+          "position": "TE",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "MIN",
+          "proOpponent": "BUF",
+          "points": 0,
+          "projectedPoints": 10.61,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4697815",
+          "playerId": 4697815,
+          "name": "Rachaad White",
+          "position": "RB",
+          "lineupSlot": "RB/WR/TE",
+          "slotPosition": "RB/WR/TE",
+          "proTeam": "WSH",
+          "proOpponent": "LAR",
+          "points": 7.9,
+          "projectedPoints": 12.39,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn--16003",
+          "playerId": -16003,
+          "name": "Bears D/ST",
+          "position": "D/ST",
+          "lineupSlot": "D/ST",
+          "slotPosition": "D/ST",
+          "proTeam": "CHI",
+          "proOpponent": "TB",
+          "points": 16,
+          "projectedPoints": 9.57,
+          "injuryStatus": "NORMAL"
+        },
+        {
+          "key": "espn-4597500",
+          "playerId": 4597500,
+          "name": "Adonai Mitchell",
+          "position": "WR",
+          "lineupSlot": "WR",
+          "slotPosition": "WR",
+          "proTeam": "NYJ",
+          "proOpponent": "KC",
+          "points": 0,
+          "projectedPoints": 12.01,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4371733",
+          "playerId": 4371733,
+          "name": "Kenny Gainwell",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "TB",
+          "proOpponent": "CHI",
+          "points": 10.6,
+          "projectedPoints": 8.62,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4635008",
+          "playerId": 4635008,
+          "name": "Keon Coleman",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "BUF",
+          "proOpponent": "MIN",
+          "points": 0,
+          "projectedPoints": 5.78,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-10621",
+          "playerId": 10621,
+          "name": "Nick Folk",
+          "position": "K",
+          "lineupSlot": "K",
+          "slotPosition": "K",
+          "proTeam": "ATL",
+          "proOpponent": "CIN",
+          "points": 3.1,
+          "projectedPoints": 6.57,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4430968",
+          "playerId": 4430968,
+          "name": "Kimani Vidal",
+          "position": "RB",
+          "lineupSlot": "RB",
+          "slotPosition": "RB",
+          "proTeam": "LAC",
+          "proOpponent": "HOU",
+          "points": 4.6,
+          "projectedPoints": 9.19,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4360698",
+          "playerId": 4360698,
+          "name": "Joe Milton",
+          "position": "QB",
+          "lineupSlot": "QB",
+          "slotPosition": "QB",
+          "proTeam": "PHI",
+          "proOpponent": "NYG",
+          "points": 14.16,
+          "projectedPoints": 14.76,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-2573079",
+          "playerId": 2573079,
+          "name": "Carson Wentz",
+          "position": "QB",
+          "lineupSlot": "OP",
+          "slotPosition": "OP",
+          "proTeam": "MIN",
+          "proOpponent": "BUF",
+          "points": 0,
+          "projectedPoints": 16.78,
+          "injuryStatus": "ACTIVE"
+        }
+      ],
+      "awayLineup": [
+        {
+          "key": "espn-4239996",
+          "playerId": 4239996,
+          "name": "Travis Etienne Jr.",
+          "position": "RB",
+          "lineupSlot": "IR",
+          "slotPosition": "IR",
+          "proTeam": "NO",
+          "proOpponent": "CLE",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "INJURY_RESERVE"
+        },
+        {
+          "key": "espn-4426338",
+          "playerId": 4426338,
+          "name": "Bo Nix",
+          "position": "QB",
+          "lineupSlot": "QB",
+          "slotPosition": "QB",
+          "proTeam": "DEN",
+          "proOpponent": "CAR",
+          "points": 15.68,
+          "projectedPoints": 16.59,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4262921",
+          "playerId": 4262921,
+          "name": "Justin Jefferson",
+          "position": "WR",
+          "lineupSlot": "WR",
+          "slotPosition": "WR",
+          "proTeam": "MIN",
+          "proOpponent": "BUF",
+          "points": 0,
+          "projectedPoints": 19.32,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4372016",
+          "playerId": 4372016,
+          "name": "Jaylen Waddle",
+          "position": "WR",
+          "lineupSlot": "WR",
+          "slotPosition": "WR",
+          "proTeam": "DEN",
+          "proOpponent": "CAR",
+          "points": 3.2,
+          "projectedPoints": 11.88,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "key": "espn--16007",
+          "playerId": -16007,
+          "name": "Broncos D/ST",
+          "position": "D/ST",
+          "lineupSlot": "D/ST",
+          "slotPosition": "D/ST",
+          "proTeam": "DEN",
+          "proOpponent": "CAR",
+          "points": 10,
+          "projectedPoints": 8.75,
+          "injuryStatus": "NORMAL"
+        },
+        {
+          "key": "espn-3126486",
+          "playerId": 3126486,
+          "name": "Deebo Samuel Sr.",
+          "position": "WR",
+          "lineupSlot": "IR",
+          "slotPosition": "IR",
+          "proTeam": "SF",
+          "proOpponent": "LV",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "OUT"
+        },
+        {
+          "key": "espn-3054850",
+          "playerId": 3054850,
+          "name": "Alvin Kamara",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "NO",
+          "proOpponent": "CLE",
+          "points": 7.9,
+          "projectedPoints": 12.82,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4702555",
+          "playerId": 4702555,
+          "name": "Jonah Coleman",
+          "position": "RB",
+          "lineupSlot": "RB",
+          "slotPosition": "RB",
+          "proTeam": "DEN",
+          "proOpponent": "CAR",
+          "points": 18.8,
+          "projectedPoints": 15.18,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-2473037",
+          "playerId": 2473037,
+          "name": "Jason Myers",
+          "position": "K",
+          "lineupSlot": "K",
+          "slotPosition": "K",
+          "proTeam": "SEA",
+          "proOpponent": "ARI",
+          "points": 6.5,
+          "projectedPoints": 10.7,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4429205",
+          "playerId": 4429205,
+          "name": "Jordan Addison",
+          "position": "WR",
+          "lineupSlot": "OP",
+          "slotPosition": "OP",
+          "proTeam": "MIN",
+          "proOpponent": "BUF",
+          "points": 0,
+          "projectedPoints": 11.46,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4723820",
+          "playerId": 4723820,
+          "name": "Omar Cooper Jr.",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "NYJ",
+          "proOpponent": "KC",
+          "points": 13.8,
+          "projectedPoints": 11.51,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4427095",
+          "playerId": 4427095,
+          "name": "DeMario Douglas",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "NE",
+          "proOpponent": "GB",
+          "points": 20.2,
+          "projectedPoints": 11.23,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4890973",
+          "playerId": 4890973,
+          "name": "Ashton Jeanty",
+          "position": "RB",
+          "lineupSlot": "RB",
+          "slotPosition": "RB",
+          "proTeam": "LV",
+          "proOpponent": "SF",
+          "points": 7,
+          "projectedPoints": 15.28,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4432665",
+          "playerId": 4432665,
+          "name": "Brock Bowers",
+          "position": "TE",
+          "lineupSlot": "TE",
+          "slotPosition": "TE",
+          "proTeam": "LV",
+          "proOpponent": "SF",
+          "points": 27.3,
+          "projectedPoints": 19.22,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4837248",
+          "playerId": 4837248,
+          "name": "Fernando Mendoza",
+          "position": "QB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "LV",
+          "proOpponent": "SF",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4832800",
+          "playerId": 4832800,
+          "name": "Denzel Boston",
+          "position": "WR",
+          "lineupSlot": "RB/WR/TE",
+          "slotPosition": "RB/WR/TE",
+          "proTeam": "CLE",
+          "proOpponent": "NO",
+          "points": 15.8,
+          "projectedPoints": 12.9,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4701936",
+          "playerId": 4701936,
+          "name": "Matthew Golden",
+          "position": "WR",
+          "lineupSlot": "RB/WR",
+          "slotPosition": "RB/WR",
+          "proTeam": "GB",
+          "proOpponent": "NE",
+          "points": 36.4,
+          "projectedPoints": 18.47,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4241555",
+          "playerId": 4241555,
+          "name": "Elijah Mitchell",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "PHI",
+          "proOpponent": "NYG",
+          "points": 5.6,
+          "projectedPoints": 9.05,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4038524",
+          "playerId": 4038524,
+          "name": "Gardner Minshew II",
+          "position": "QB",
+          "lineupSlot": "QB",
+          "slotPosition": "QB",
+          "proTeam": "ARI",
+          "proOpponent": "SEA",
+          "points": 7.04,
+          "projectedPoints": 12.74,
+          "injuryStatus": "DOUBTFUL"
+        },
+        {
+          "key": "espn-4035687",
+          "playerId": 4035687,
+          "name": "Michael Pittman Jr.",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "PIT",
+          "proOpponent": "None",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "INJURY_RESERVE"
+        }
+      ]
+    },
+    {
+      "matchupKey": "2026-w09-m02",
+      "homeTeamKey": "2026-t10",
+      "awayTeamKey": "2026-t02",
+      "homeScore": 162.88,
+      "awayScore": 119.46,
+      "winnerTeamKey": "2026-t10",
+      "matchupType": "NONE",
+      "isPlayoff": false,
+      "homeProjected": 162.88,
+      "awayProjected": 128.23,
+      "homeLineup": [
+        {
+          "key": "espn-4374302",
+          "playerId": 4374302,
+          "name": "Amon-Ra St. Brown",
+          "position": "WR",
+          "lineupSlot": "WR",
+          "slotPosition": "WR",
+          "proTeam": "DET",
+          "proOpponent": "MIA",
+          "points": 16.6,
+          "projectedPoints": 21.92,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4047646",
+          "playerId": 4047646,
+          "name": "A.J. Brown",
+          "position": "WR",
+          "lineupSlot": "IR",
+          "slotPosition": "IR",
+          "proTeam": "NE",
+          "proOpponent": "GB",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "OUT"
+        },
+        {
+          "key": "espn-4427366",
+          "playerId": 4427366,
+          "name": "Breece Hall",
+          "position": "RB",
+          "lineupSlot": "RB",
+          "slotPosition": "RB",
+          "proTeam": "NYJ",
+          "proOpponent": "KC",
+          "points": 11.7,
+          "projectedPoints": 11.45,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4259545",
+          "playerId": 4259545,
+          "name": "D'Andre Swift",
+          "position": "RB",
+          "lineupSlot": "RB/WR",
+          "slotPosition": "RB/WR",
+          "proTeam": "CHI",
+          "proOpponent": "TB",
+          "points": 3.1,
+          "projectedPoints": 20.1,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn--16034",
+          "playerId": -16034,
+          "name": "Texans D/ST",
+          "position": "D/ST",
+          "lineupSlot": "D/ST",
+          "slotPosition": "D/ST",
+          "proTeam": "HOU",
+          "proOpponent": "LAC",
+          "points": 14,
+          "projectedPoints": 10.1,
+          "injuryStatus": "NORMAL"
+        },
+        {
+          "key": "espn-3953687",
+          "playerId": 3953687,
+          "name": "Brandon Aubrey",
+          "position": "K",
+          "lineupSlot": "K",
+          "slotPosition": "K",
+          "proTeam": "DAL",
+          "proOpponent": "IND",
+          "points": 10.3,
+          "projectedPoints": 11.15,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-3916148",
+          "playerId": 3916148,
+          "name": "Tony Pollard",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "TEN",
+          "proOpponent": "None",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4426385",
+          "playerId": 4426385,
+          "name": "Zach Charbonnet",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "SEA",
+          "proOpponent": "ARI",
+          "points": 9.6,
+          "projectedPoints": 11.46,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4880281",
+          "playerId": 4880281,
+          "name": "Jordyn Tyson",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "NO",
+          "proOpponent": "CLE",
+          "points": 6,
+          "projectedPoints": 5.9,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4832955",
+          "playerId": 4832955,
+          "name": "Emmett Johnson",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "KC",
+          "proOpponent": "NYJ",
+          "points": 9.4,
+          "projectedPoints": 7.55,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-3122840",
+          "playerId": 3122840,
+          "name": "Deshaun Watson",
+          "position": "QB",
+          "lineupSlot": "IR",
+          "slotPosition": "IR",
+          "proTeam": "CLE",
+          "proOpponent": "NO",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "OUT"
+        },
+        {
+          "key": "espn-4428718",
+          "playerId": 4428718,
+          "name": "Tre Tucker",
+          "position": "WR",
+          "lineupSlot": "RB/WR/TE",
+          "slotPosition": "RB/WR/TE",
+          "proTeam": "LV",
+          "proOpponent": "SF",
+          "points": 9.5,
+          "projectedPoints": 9.67,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4248528",
+          "playerId": 4248528,
+          "name": "Christian Watson",
+          "position": "WR",
+          "lineupSlot": "WR",
+          "slotPosition": "WR",
+          "proTeam": "GB",
+          "proOpponent": "NE",
+          "points": 34.1,
+          "projectedPoints": 16.86,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4431452",
+          "playerId": 4431452,
+          "name": "Drake Maye",
+          "position": "QB",
+          "lineupSlot": "QB",
+          "slotPosition": "QB",
+          "proTeam": "NE",
+          "proOpponent": "GB",
+          "points": 18.26,
+          "projectedPoints": 22.39,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4685247",
+          "playerId": 4685247,
+          "name": "Braelon Allen",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "NYJ",
+          "proOpponent": "KC",
+          "points": 6.4,
+          "projectedPoints": 9.59,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-14880",
+          "playerId": 14880,
+          "name": "Kirk Cousins",
+          "position": "QB",
+          "lineupSlot": "OP",
+          "slotPosition": "OP",
+          "proTeam": "LV",
+          "proOpponent": "SF",
+          "points": 12.64,
+          "projectedPoints": 16.13,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4686468",
+          "playerId": 4686468,
+          "name": "Seth McGowan",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "IND",
+          "proOpponent": "DAL",
+          "points": 11.2,
+          "projectedPoints": 4.98,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-3116164",
+          "playerId": 3116164,
+          "name": "Mike Gesicki",
+          "position": "TE",
+          "lineupSlot": "TE",
+          "slotPosition": "TE",
+          "proTeam": "CIN",
+          "proOpponent": "ATL",
+          "points": 3.1,
+          "projectedPoints": 7.67,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4040761",
+          "playerId": 4040761,
+          "name": "Devin Singletary",
+          "position": "RB",
+          "lineupSlot": "RB",
+          "slotPosition": "RB",
+          "proTeam": "NYG",
+          "proOpponent": "PHI",
+          "points": 5.9,
+          "projectedPoints": 14.28,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4432762",
+          "playerId": 4432762,
+          "name": "Shedeur Sanders",
+          "position": "QB",
+          "lineupSlot": "QB",
+          "slotPosition": "QB",
+          "proTeam": "CLE",
+          "proOpponent": "NO",
+          "points": 23.68,
+          "projectedPoints": 16.21,
+          "injuryStatus": "ACTIVE"
+        }
+      ],
+      "awayLineup": [
+        {
+          "key": "espn-4567750",
+          "playerId": 4567750,
+          "name": "Emeka Egbuka",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "TB",
+          "proOpponent": "CHI",
+          "points": 6.9,
+          "projectedPoints": 12.04,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4685472",
+          "playerId": 4685472,
+          "name": "Tetairoa McMillan",
+          "position": "WR",
+          "lineupSlot": "WR",
+          "slotPosition": "WR",
+          "proTeam": "CAR",
+          "proOpponent": "DEN",
+          "points": 14.6,
+          "projectedPoints": 14.2,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4426388",
+          "playerId": 4426388,
+          "name": "Jameson Williams",
+          "position": "WR",
+          "lineupSlot": "RB/WR",
+          "slotPosition": "RB/WR",
+          "proTeam": "DET",
+          "proOpponent": "MIA",
+          "points": 5,
+          "projectedPoints": 14.57,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4685512",
+          "playerId": 4685512,
+          "name": "Jadarian Price",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "SEA",
+          "proOpponent": "ARI",
+          "points": 11.8,
+          "projectedPoints": 11.56,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4360761",
+          "playerId": 4360761,
+          "name": "Michael Wilson",
+          "position": "WR",
+          "lineupSlot": "WR",
+          "slotPosition": "WR",
+          "proTeam": "ARI",
+          "proOpponent": "SEA",
+          "points": 12,
+          "projectedPoints": 13.74,
+          "injuryStatus": "OUT"
+        },
+        {
+          "key": "espn-4241416",
+          "playerId": 4241416,
+          "name": "Chuba Hubbard",
+          "position": "RB",
+          "lineupSlot": "RB",
+          "slotPosition": "RB",
+          "proTeam": "CAR",
+          "proOpponent": "DEN",
+          "points": 13.6,
+          "projectedPoints": 19.39,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4038815",
+          "playerId": 4038815,
+          "name": "Rico Dowdle",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "PIT",
+          "proOpponent": "None",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4385690",
+          "playerId": 4385690,
+          "name": "Dalton Kincaid",
+          "position": "TE",
+          "lineupSlot": "TE",
+          "slotPosition": "TE",
+          "proTeam": "BUF",
+          "proOpponent": "MIN",
+          "points": 0,
+          "projectedPoints": 8.77,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4685702",
+          "playerId": 4685702,
+          "name": "Quinshon Judkins",
+          "position": "RB",
+          "lineupSlot": "RB/WR/TE",
+          "slotPosition": "RB/WR/TE",
+          "proTeam": "CLE",
+          "proOpponent": "NO",
+          "points": 5.5,
+          "projectedPoints": 15.33,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4426354",
+          "playerId": 4426354,
+          "name": "George Pickens",
+          "position": "WR",
+          "lineupSlot": "IR",
+          "slotPosition": "IR",
+          "proTeam": "DAL",
+          "proOpponent": "IND",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "OUT"
+        },
+        {
+          "key": "espn-4685720",
+          "playerId": 4685720,
+          "name": "Bryce Young",
+          "position": "QB",
+          "lineupSlot": "QB",
+          "slotPosition": "QB",
+          "proTeam": "CAR",
+          "proOpponent": "DEN",
+          "points": 21.34,
+          "projectedPoints": 16.92,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4711533",
+          "playerId": 4711533,
+          "name": "Ollie Gordon II",
+          "position": "RB",
+          "lineupSlot": "RB",
+          "slotPosition": "RB",
+          "proTeam": "MIA",
+          "proOpponent": "DET",
+          "points": 7.4,
+          "projectedPoints": 18,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4571557",
+          "playerId": 4571557,
+          "name": "Spencer Shrader",
+          "position": "K",
+          "lineupSlot": "K",
+          "slotPosition": "K",
+          "proTeam": "IND",
+          "proOpponent": "DAL",
+          "points": 17.6,
+          "projectedPoints": 11.57,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4242512",
+          "playerId": 4242512,
+          "name": "Malik Willis",
+          "position": "QB",
+          "lineupSlot": "QB",
+          "slotPosition": "QB",
+          "proTeam": "MIA",
+          "proOpponent": "DET",
+          "points": 3.82,
+          "projectedPoints": 18.46,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "key": "espn--16004",
+          "playerId": -16004,
+          "name": "Bengals D/ST",
+          "position": "D/ST",
+          "lineupSlot": "D/ST",
+          "slotPosition": "D/ST",
+          "proTeam": "CIN",
+          "proOpponent": "ATL",
+          "points": 6,
+          "projectedPoints": 8.44,
+          "injuryStatus": "NORMAL"
+        },
+        {
+          "key": "espn-4696044",
+          "playerId": 4696044,
+          "name": "Kaelon Black",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "SF",
+          "proOpponent": "LV",
+          "points": 7,
+          "projectedPoints": 11.52,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4360635",
+          "playerId": 4360635,
+          "name": "Chig Okonkwo",
+          "position": "TE",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "WSH",
+          "proOpponent": "LAR",
+          "points": 11.7,
+          "projectedPoints": 9.7,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "key": "espn-3924327",
+          "playerId": 3924327,
+          "name": "Drew Lock",
+          "position": "QB",
+          "lineupSlot": "OP",
+          "slotPosition": "OP",
+          "proTeam": "SEA",
+          "proOpponent": "ARI",
+          "points": 12.6,
+          "projectedPoints": 17.87,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "key": "espn-2991662",
+          "playerId": 2991662,
+          "name": "Mack Hollins",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "NE",
+          "proOpponent": "GB",
+          "points": 11.6,
+          "projectedPoints": 9.29,
+          "injuryStatus": "ACTIVE"
+        }
+      ]
+    },
+    {
+      "matchupKey": "2026-w09-m03",
+      "homeTeamKey": "2026-t12",
+      "awayTeamKey": "2026-t09",
+      "homeScore": 141.94,
+      "awayScore": 203.16,
+      "winnerTeamKey": "2026-t09",
+      "matchupType": "NONE",
+      "isPlayoff": false,
+      "homeProjected": 176.31,
+      "awayProjected": 214.32,
+      "homeLineup": [
+        {
+          "key": "espn-4431299",
+          "playerId": 4431299,
+          "name": "Rome Odunze",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "CHI",
+          "proOpponent": "TB",
+          "points": 15,
+          "projectedPoints": 10.4,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4379399",
+          "playerId": 4379399,
+          "name": "James Cook III",
+          "position": "RB",
+          "lineupSlot": "RB",
+          "slotPosition": "RB",
+          "proTeam": "BUF",
+          "proOpponent": "MIN",
+          "points": 0,
+          "projectedPoints": 21.19,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4685278",
+          "playerId": 4685278,
+          "name": "Luther Burden III",
+          "position": "WR",
+          "lineupSlot": "RB/WR",
+          "slotPosition": "RB/WR",
+          "proTeam": "CHI",
+          "proOpponent": "TB",
+          "points": 23.7,
+          "projectedPoints": 14.65,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "key": "espn-3915416",
+          "playerId": 3915416,
+          "name": "DJ Moore",
+          "position": "WR",
+          "lineupSlot": "WR",
+          "slotPosition": "WR",
+          "proTeam": "BUF",
+          "proOpponent": "MIN",
+          "points": 0,
+          "projectedPoints": 13.19,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4035538",
+          "playerId": 4035538,
+          "name": "David Montgomery",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "HOU",
+          "proOpponent": "LAC",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "OUT"
+        },
+        {
+          "key": "espn-4432710",
+          "playerId": 4432710,
+          "name": "TreVeyon Henderson",
+          "position": "RB",
+          "lineupSlot": "IR",
+          "slotPosition": "IR",
+          "proTeam": "NE",
+          "proOpponent": "GB",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "OUT"
+        },
+        {
+          "key": "espn-4430027",
+          "playerId": 4430027,
+          "name": "Sam LaPorta",
+          "position": "TE",
+          "lineupSlot": "RB/WR/TE",
+          "slotPosition": "RB/WR/TE",
+          "proTeam": "DET",
+          "proOpponent": "MIA",
+          "points": 7.2,
+          "projectedPoints": 12.1,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4361050",
+          "playerId": 4361050,
+          "name": "Isaiah Likely",
+          "position": "TE",
+          "lineupSlot": "TE",
+          "slotPosition": "TE",
+          "proTeam": "NYG",
+          "proOpponent": "PHI",
+          "points": 15.3,
+          "projectedPoints": 12.92,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4870795",
+          "playerId": 4870795,
+          "name": "Makai Lemon",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "PHI",
+          "proOpponent": "NYG",
+          "points": 12.1,
+          "projectedPoints": 10.8,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4568490",
+          "playerId": 4568490,
+          "name": "RJ Harvey",
+          "position": "RB",
+          "lineupSlot": "IR",
+          "slotPosition": "IR",
+          "proTeam": "DEN",
+          "proOpponent": "CAR",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "INJURY_RESERVE"
+        },
+        {
+          "key": "espn-4429096",
+          "playerId": 4429096,
+          "name": "Blake Corum",
+          "position": "RB",
+          "lineupSlot": "RB",
+          "slotPosition": "RB",
+          "proTeam": "LAR",
+          "proOpponent": "WSH",
+          "points": 11.8,
+          "projectedPoints": 10.43,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4569559",
+          "playerId": 4569559,
+          "name": "Devaughn Vele",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "NO",
+          "proOpponent": "CLE",
+          "points": 3.7,
+          "projectedPoints": 8.73,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4360423",
+          "playerId": 4360423,
+          "name": "Michael Penix Jr.",
+          "position": "QB",
+          "lineupSlot": "OP",
+          "slotPosition": "OP",
+          "proTeam": "ATL",
+          "proOpponent": "CIN",
+          "points": 13.48,
+          "projectedPoints": 17.11,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4695883",
+          "playerId": 4695883,
+          "name": "Jalen Coker",
+          "position": "WR",
+          "lineupSlot": "WR",
+          "slotPosition": "WR",
+          "proTeam": "CAR",
+          "proOpponent": "DEN",
+          "points": 6.6,
+          "projectedPoints": 12.57,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4685261",
+          "playerId": 4685261,
+          "name": "Germie Bernard",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "PIT",
+          "proOpponent": "None",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-2577417",
+          "playerId": 2577417,
+          "name": "Dak Prescott",
+          "position": "QB",
+          "lineupSlot": "QB",
+          "slotPosition": "QB",
+          "proTeam": "DAL",
+          "proOpponent": "IND",
+          "points": 24.5,
+          "projectedPoints": 20.26,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn--16014",
+          "playerId": -16014,
+          "name": "Rams D/ST",
+          "position": "D/ST",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "LAR",
+          "proOpponent": "WSH",
+          "points": 16,
+          "projectedPoints": 8.29,
+          "injuryStatus": "NORMAL"
+        },
+        {
+          "key": "espn-4426348",
+          "playerId": 4426348,
+          "name": "Jayden Daniels",
+          "position": "QB",
+          "lineupSlot": "QB",
+          "slotPosition": "QB",
+          "proTeam": "WSH",
+          "proOpponent": "LAR",
+          "points": 15.56,
+          "projectedPoints": 21.2,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn--16018",
+          "playerId": -16018,
+          "name": "Saints D/ST",
+          "position": "D/ST",
+          "lineupSlot": "D/ST",
+          "slotPosition": "D/ST",
+          "proTeam": "NO",
+          "proOpponent": "CLE",
+          "points": 6,
+          "projectedPoints": 8.47,
+          "injuryStatus": "NORMAL"
+        },
+        {
+          "key": "espn-2971573",
+          "playerId": 2971573,
+          "name": "Ka'imi Fairbairn",
+          "position": "K",
+          "lineupSlot": "K",
+          "slotPosition": "K",
+          "proTeam": "HOU",
+          "proOpponent": "LAC",
+          "points": 17.8,
+          "projectedPoints": 10.43,
+          "injuryStatus": "ACTIVE"
+        }
+      ],
+      "awayLineup": [
+        {
+          "key": "espn-4426515",
+          "playerId": 4426515,
+          "name": "Puka Nacua",
+          "position": "WR",
+          "lineupSlot": "WR",
+          "slotPosition": "WR",
+          "proTeam": "LAR",
+          "proOpponent": "WSH",
+          "points": 40,
+          "projectedPoints": 25.86,
+          "injuryStatus": "DOUBTFUL"
+        },
+        {
+          "key": "espn-4426502",
+          "playerId": 4426502,
+          "name": "Drake London",
+          "position": "WR",
+          "lineupSlot": "RB/WR",
+          "slotPosition": "RB/WR",
+          "proTeam": "ATL",
+          "proOpponent": "CIN",
+          "points": 11.8,
+          "projectedPoints": 17.9,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4430878",
+          "playerId": 4430878,
+          "name": "Jaxon Smith-Njigba",
+          "position": "WR",
+          "lineupSlot": "WR",
+          "slotPosition": "WR",
+          "proTeam": "SEA",
+          "proOpponent": "ARI",
+          "points": 12.1,
+          "projectedPoints": 24.01,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4567048",
+          "playerId": 4567048,
+          "name": "Kenneth Walker III",
+          "position": "RB",
+          "lineupSlot": "RB",
+          "slotPosition": "RB",
+          "proTeam": "KC",
+          "proOpponent": "NYJ",
+          "points": 39.3,
+          "projectedPoints": 24.97,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4596448",
+          "playerId": 4596448,
+          "name": "Bucky Irving",
+          "position": "RB",
+          "lineupSlot": "RB",
+          "slotPosition": "RB",
+          "proTeam": "TB",
+          "proOpponent": "CHI",
+          "points": 28.5,
+          "projectedPoints": 17.12,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4047365",
+          "playerId": 4047365,
+          "name": "Josh Jacobs",
+          "position": "RB",
+          "lineupSlot": "RB/WR/TE",
+          "slotPosition": "RB/WR/TE",
+          "proTeam": "GB",
+          "proOpponent": "NE",
+          "points": 0.5,
+          "projectedPoints": 17.27,
+          "injuryStatus": "OUT"
+        },
+        {
+          "key": "espn-4036378",
+          "playerId": 4036378,
+          "name": "Jordan Love",
+          "position": "QB",
+          "lineupSlot": "QB",
+          "slotPosition": "QB",
+          "proTeam": "GB",
+          "proOpponent": "NE",
+          "points": 39.18,
+          "projectedPoints": 18.77,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4569618",
+          "playerId": 4569618,
+          "name": "Garrett Wilson",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "NYJ",
+          "proOpponent": "KC",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "OUT"
+        },
+        {
+          "key": "espn-4678008",
+          "playerId": 4678008,
+          "name": "Jonathon Brooks",
+          "position": "RB",
+          "lineupSlot": "IR",
+          "slotPosition": "IR",
+          "proTeam": "CAR",
+          "proOpponent": "DEN",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "INJURY_RESERVE"
+        },
+        {
+          "key": "espn-3040151",
+          "playerId": 3040151,
+          "name": "George Kittle",
+          "position": "TE",
+          "lineupSlot": "TE",
+          "slotPosition": "TE",
+          "proTeam": "SF",
+          "proOpponent": "LV",
+          "points": 9.8,
+          "projectedPoints": 16.86,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4870653",
+          "playerId": 4870653,
+          "name": "KC Concepcion",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "CLE",
+          "proOpponent": "NO",
+          "points": 20.8,
+          "projectedPoints": 11.73,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4710714",
+          "playerId": 4710714,
+          "name": "De'Zhaun Stribling",
+          "position": "WR",
+          "lineupSlot": "IR",
+          "slotPosition": "IR",
+          "proTeam": "SF",
+          "proOpponent": "LV",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "INJURY_RESERVE"
+        },
+        {
+          "key": "espn--16023",
+          "playerId": -16023,
+          "name": "Steelers D/ST",
+          "position": "D/ST",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "PIT",
+          "proOpponent": "None",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "NORMAL"
+        },
+        {
+          "key": "espn-4685382",
+          "playerId": 4685382,
+          "name": "Omarion Hampton",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "LAC",
+          "proOpponent": "HOU",
+          "points": 6,
+          "projectedPoints": 9.36,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4432773",
+          "playerId": 4432773,
+          "name": "Brian Thomas Jr.",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "JAX",
+          "proOpponent": "BAL",
+          "points": 0,
+          "projectedPoints": 6.47,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4432708",
+          "playerId": 4432708,
+          "name": "Marvin Harrison Jr.",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "HOU",
+          "proOpponent": "LAC",
+          "points": 4,
+          "projectedPoints": 7.47,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-15864",
+          "playerId": 15864,
+          "name": "Geno Smith",
+          "position": "QB",
+          "lineupSlot": "OP",
+          "slotPosition": "OP",
+          "proTeam": "NYJ",
+          "proOpponent": "KC",
+          "points": 7.4,
+          "projectedPoints": 15.16,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4360310",
+          "playerId": 4360310,
+          "name": "Trevor Lawrence",
+          "position": "QB",
+          "lineupSlot": "QB",
+          "slotPosition": "QB",
+          "proTeam": "JAX",
+          "proOpponent": "BAL",
+          "points": 14.58,
+          "projectedPoints": 21.36,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-3917232",
+          "playerId": 3917232,
+          "name": "Tyler Bass",
+          "position": "K",
+          "lineupSlot": "K",
+          "slotPosition": "K",
+          "proTeam": "BUF",
+          "proOpponent": "MIN",
+          "points": 0,
+          "projectedPoints": 11.16,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-5081432",
+          "playerId": 5081432,
+          "name": "Antonio Williams",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "WSH",
+          "proOpponent": "LAR",
+          "points": 5.5,
+          "projectedPoints": 10.38,
+          "injuryStatus": "ACTIVE"
+        }
+      ]
+    },
+    {
+      "matchupKey": "2026-w09-m04",
+      "homeTeamKey": "2026-t03",
+      "awayTeamKey": "2026-t06",
+      "homeScore": 157.92,
+      "awayScore": 176.46,
+      "winnerTeamKey": "2026-t06",
+      "matchupType": "NONE",
+      "isPlayoff": false,
+      "homeProjected": 157.92,
+      "awayProjected": 176.46,
+      "homeLineup": [
+        {
+          "key": "espn-4882093",
+          "playerId": 4882093,
+          "name": "Bhayshul Tuten",
+          "position": "RB",
+          "lineupSlot": "RB",
+          "slotPosition": "RB",
+          "proTeam": "JAX",
+          "proOpponent": "BAL",
+          "points": 8.9,
+          "projectedPoints": 16.81,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4361579",
+          "playerId": 4361579,
+          "name": "Javonte Williams",
+          "position": "RB",
+          "lineupSlot": "RB",
+          "slotPosition": "RB",
+          "proTeam": "DAL",
+          "proOpponent": "IND",
+          "points": 27.4,
+          "projectedPoints": 19.09,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4258173",
+          "playerId": 4258173,
+          "name": "Nico Collins",
+          "position": "WR",
+          "lineupSlot": "RB/WR/TE",
+          "slotPosition": "RB/WR/TE",
+          "proTeam": "HOU",
+          "proOpponent": "LAC",
+          "points": 14.5,
+          "projectedPoints": 14.36,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-3117251",
+          "playerId": 3117251,
+          "name": "Christian McCaffrey",
+          "position": "RB",
+          "lineupSlot": "RB/WR",
+          "slotPosition": "RB/WR",
+          "proTeam": "SF",
+          "proOpponent": "LV",
+          "points": 21.7,
+          "projectedPoints": 23.3,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4038941",
+          "playerId": 4038941,
+          "name": "Justin Herbert",
+          "position": "QB",
+          "lineupSlot": "QB",
+          "slotPosition": "QB",
+          "proTeam": "LAC",
+          "proOpponent": "HOU",
+          "points": 11.42,
+          "projectedPoints": 13.54,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "key": "espn-4429615",
+          "playerId": 4429615,
+          "name": "Zay Flowers",
+          "position": "WR",
+          "lineupSlot": "WR",
+          "slotPosition": "WR",
+          "proTeam": "BAL",
+          "proOpponent": "JAX",
+          "points": 5.3,
+          "projectedPoints": 14.92,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-3046779",
+          "playerId": 3046779,
+          "name": "Jared Goff",
+          "position": "QB",
+          "lineupSlot": "QB",
+          "slotPosition": "QB",
+          "proTeam": "DET",
+          "proOpponent": "MIA",
+          "points": 5.3,
+          "projectedPoints": 21.04,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-3121422",
+          "playerId": 3121422,
+          "name": "Terry McLaurin",
+          "position": "WR",
+          "lineupSlot": "IR",
+          "slotPosition": "IR",
+          "proTeam": "WSH",
+          "proOpponent": "LAR",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "INJURY_RESERVE"
+        },
+        {
+          "key": "espn-4239993",
+          "playerId": 4239993,
+          "name": "Tee Higgins",
+          "position": "WR",
+          "lineupSlot": "WR",
+          "slotPosition": "WR",
+          "proTeam": "CIN",
+          "proOpponent": "ATL",
+          "points": 18.2,
+          "projectedPoints": 17.45,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4569987",
+          "playerId": 4569987,
+          "name": "Jaylen Warren",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "PIT",
+          "proOpponent": "None",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-15847",
+          "playerId": 15847,
+          "name": "Travis Kelce",
+          "position": "TE",
+          "lineupSlot": "TE",
+          "slotPosition": "TE",
+          "proTeam": "KC",
+          "proOpponent": "NYJ",
+          "points": 17.3,
+          "projectedPoints": 10.98,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-3912547",
+          "playerId": 3912547,
+          "name": "Sam Darnold",
+          "position": "QB",
+          "lineupSlot": "IR",
+          "slotPosition": "IR",
+          "proTeam": "SEA",
+          "proOpponent": "ARI",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "OUT"
+        },
+        {
+          "key": "espn-4360569",
+          "playerId": 4360569,
+          "name": "Jordan Mason",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "MIN",
+          "proOpponent": "BUF",
+          "points": 0,
+          "projectedPoints": 8.67,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4569603",
+          "playerId": 4569603,
+          "name": "Malik Washington",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "MIA",
+          "proOpponent": "DET",
+          "points": 4.1,
+          "projectedPoints": 9.98,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4373678",
+          "playerId": 4373678,
+          "name": "Khalil Shakir",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "BUF",
+          "proOpponent": "MIN",
+          "points": 0,
+          "projectedPoints": 9.35,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4430539",
+          "playerId": 4430539,
+          "name": "Brenton Strange",
+          "position": "TE",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "JAX",
+          "proOpponent": "BAL",
+          "points": 4.2,
+          "projectedPoints": 9.34,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-5083754",
+          "playerId": 5083754,
+          "name": "Ryan Flournoy",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "DAL",
+          "proOpponent": "IND",
+          "points": 7.3,
+          "projectedPoints": 12.62,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-3150744",
+          "playerId": 3150744,
+          "name": "Chase McLaughlin",
+          "position": "K",
+          "lineupSlot": "K",
+          "slotPosition": "K",
+          "proTeam": "TB",
+          "proOpponent": "CHI",
+          "points": 9.3,
+          "projectedPoints": 9.33,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-15818",
+          "playerId": 15818,
+          "name": "Keenan Allen",
+          "position": "WR",
+          "lineupSlot": "OP",
+          "slotPosition": "OP",
+          "proTeam": "IND",
+          "proOpponent": "DAL",
+          "points": 6.6,
+          "projectedPoints": 10.39,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn--16012",
+          "playerId": -16012,
+          "name": "Chiefs D/ST",
+          "position": "D/ST",
+          "lineupSlot": "D/ST",
+          "slotPosition": "D/ST",
+          "proTeam": "KC",
+          "proOpponent": "NYJ",
+          "points": 12,
+          "projectedPoints": 8.28,
+          "injuryStatus": "NORMAL"
+        }
+      ],
+      "awayLineup": [
+        {
+          "key": "espn-4430807",
+          "playerId": 4430807,
+          "name": "Bijan Robinson",
+          "position": "RB",
+          "lineupSlot": "RB",
+          "slotPosition": "RB",
+          "proTeam": "ATL",
+          "proOpponent": "CIN",
+          "points": 31.7,
+          "projectedPoints": 21.94,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4428331",
+          "playerId": 4428331,
+          "name": "Rashee Rice",
+          "position": "WR",
+          "lineupSlot": "WR",
+          "slotPosition": "WR",
+          "proTeam": "KC",
+          "proOpponent": "NYJ",
+          "points": 9.9,
+          "projectedPoints": 14.6,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-16800",
+          "playerId": 16800,
+          "name": "Davante Adams",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "LAR",
+          "proOpponent": "WSH",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "INJURY_RESERVE"
+        },
+        {
+          "key": "espn-3139477",
+          "playerId": 3139477,
+          "name": "Patrick Mahomes",
+          "position": "QB",
+          "lineupSlot": "QB",
+          "slotPosition": "QB",
+          "proTeam": "KC",
+          "proOpponent": "NYJ",
+          "points": 17.48,
+          "projectedPoints": 19.46,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "key": "espn-12483",
+          "playerId": 12483,
+          "name": "Matthew Stafford",
+          "position": "QB",
+          "lineupSlot": "OP",
+          "slotPosition": "OP",
+          "proTeam": "LAR",
+          "proOpponent": "WSH",
+          "points": 11.22,
+          "projectedPoints": 18.13,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4569173",
+          "playerId": 4569173,
+          "name": "Rhamondre Stevenson",
+          "position": "RB",
+          "lineupSlot": "RB/WR",
+          "slotPosition": "RB/WR",
+          "proTeam": "NE",
+          "proOpponent": "GB",
+          "points": 14.8,
+          "projectedPoints": 15.72,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "key": "espn-4432577",
+          "playerId": 4432577,
+          "name": "C.J. Stroud",
+          "position": "QB",
+          "lineupSlot": "QB",
+          "slotPosition": "QB",
+          "proTeam": "HOU",
+          "proOpponent": "LAC",
+          "points": 40.36,
+          "projectedPoints": 18.1,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4047650",
+          "playerId": 4047650,
+          "name": "DK Metcalf",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "PIT",
+          "proOpponent": "None",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4575131",
+          "playerId": 4575131,
+          "name": "Jacory Croskey-Merritt",
+          "position": "RB",
+          "lineupSlot": "IR",
+          "slotPosition": "IR",
+          "proTeam": "WSH",
+          "proOpponent": "LAR",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "INJURY_RESERVE"
+        },
+        {
+          "key": "espn-4241985",
+          "playerId": 4241985,
+          "name": "J.K. Dobbins",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "DEN",
+          "proOpponent": "CAR",
+          "points": 3.2,
+          "projectedPoints": 8.64,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-3121023",
+          "playerId": 3121023,
+          "name": "Dallas Goedert",
+          "position": "TE",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "PHI",
+          "proOpponent": "NYG",
+          "points": 10,
+          "projectedPoints": 8.87,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-3116406",
+          "playerId": 3116406,
+          "name": "Tyreek Hill",
+          "position": "WR",
+          "lineupSlot": "IR",
+          "slotPosition": "IR",
+          "proTeam": "None",
+          "proOpponent": "None",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "key": "espn-4249087",
+          "playerId": 4249087,
+          "name": "Matt Gay",
+          "position": "K",
+          "lineupSlot": "K",
+          "slotPosition": "K",
+          "proTeam": "LV",
+          "proOpponent": "SF",
+          "points": 7,
+          "projectedPoints": 9.94,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-3116165",
+          "playerId": 3116165,
+          "name": "Chris Godwin Jr.",
+          "position": "WR",
+          "lineupSlot": "WR",
+          "slotPosition": "WR",
+          "proTeam": "TB",
+          "proOpponent": "CHI",
+          "points": 4.8,
+          "projectedPoints": 8.41,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4569587",
+          "playerId": 4569587,
+          "name": "Wan'Dale Robinson",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "TEN",
+          "proOpponent": "None",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4430737",
+          "playerId": 4430737,
+          "name": "Kyren Williams",
+          "position": "RB",
+          "lineupSlot": "RB",
+          "slotPosition": "RB",
+          "proTeam": "LAR",
+          "proOpponent": "WSH",
+          "points": 9.1,
+          "projectedPoints": 17.75,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-16737",
+          "playerId": 16737,
+          "name": "Mike Evans",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "SF",
+          "proOpponent": "LV",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "OUT"
+        },
+        {
+          "key": "espn-4361307",
+          "playerId": 4361307,
+          "name": "Trey McBride",
+          "position": "TE",
+          "lineupSlot": "TE",
+          "slotPosition": "TE",
+          "proTeam": "ARI",
+          "proOpponent": "SEA",
+          "points": 12.4,
+          "projectedPoints": 14.68,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4429086",
+          "playerId": 4429086,
+          "name": "Michael Mayer",
+          "position": "TE",
+          "lineupSlot": "RB/WR/TE",
+          "slotPosition": "RB/WR/TE",
+          "proTeam": "LV",
+          "proOpponent": "SF",
+          "points": 5.7,
+          "projectedPoints": 8.47,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn--16005",
+          "playerId": -16005,
+          "name": "Browns D/ST",
+          "position": "D/ST",
+          "lineupSlot": "D/ST",
+          "slotPosition": "D/ST",
+          "proTeam": "CLE",
+          "proOpponent": "NO",
+          "points": 12,
+          "projectedPoints": 9,
+          "injuryStatus": "NORMAL"
+        }
+      ]
+    },
+    {
+      "matchupKey": "2026-w09-m05",
+      "homeTeamKey": "2026-t11",
+      "awayTeamKey": "2026-t04",
+      "homeScore": 102.54,
+      "awayScore": 166.22,
+      "winnerTeamKey": "2026-t04",
+      "matchupType": "NONE",
+      "isPlayoff": false,
+      "homeProjected": 135.2,
+      "awayProjected": 166.22,
+      "homeLineup": [
+        {
+          "key": "espn-4361370",
+          "playerId": 4361370,
+          "name": "Chris Olave",
+          "position": "WR",
+          "lineupSlot": "WR",
+          "slotPosition": "WR",
+          "proTeam": "NO",
+          "proOpponent": "CLE",
+          "points": 16.8,
+          "projectedPoints": 14.95,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4362238",
+          "playerId": 4362238,
+          "name": "Chase Brown",
+          "position": "RB",
+          "lineupSlot": "RB",
+          "slotPosition": "RB",
+          "proTeam": "CIN",
+          "proOpponent": "ATL",
+          "points": 10.5,
+          "projectedPoints": 17.88,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-3918298",
+          "playerId": 3918298,
+          "name": "Josh Allen",
+          "position": "QB",
+          "lineupSlot": "QB",
+          "slotPosition": "QB",
+          "proTeam": "BUF",
+          "proOpponent": "MIN",
+          "points": 0,
+          "projectedPoints": 21.25,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-3929630",
+          "playerId": 3929630,
+          "name": "Saquon Barkley",
+          "position": "RB",
+          "lineupSlot": "RB",
+          "slotPosition": "RB",
+          "proTeam": "PHI",
+          "proOpponent": "NYG",
+          "points": 8.2,
+          "projectedPoints": 13.56,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4612826",
+          "playerId": 4612826,
+          "name": "Ladd McConkey",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "LAC",
+          "proOpponent": "HOU",
+          "points": 0,
+          "projectedPoints": 11.16,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "key": "espn-4723086",
+          "playerId": 4723086,
+          "name": "Colston Loveland",
+          "position": "TE",
+          "lineupSlot": "RB/WR/TE",
+          "slotPosition": "RB/WR/TE",
+          "proTeam": "CHI",
+          "proOpponent": "TB",
+          "points": 9.4,
+          "projectedPoints": 12.27,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4572680",
+          "playerId": 4572680,
+          "name": "Tucker Kraft",
+          "position": "TE",
+          "lineupSlot": "TE",
+          "slotPosition": "TE",
+          "proTeam": "GB",
+          "proOpponent": "NE",
+          "points": 1.9,
+          "projectedPoints": 10.89,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4432620",
+          "playerId": 4432620,
+          "name": "Parker Washington",
+          "position": "WR",
+          "lineupSlot": "WR",
+          "slotPosition": "WR",
+          "proTeam": "JAX",
+          "proOpponent": "BAL",
+          "points": 16.1,
+          "projectedPoints": 12.89,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4608686",
+          "playerId": 4608686,
+          "name": "Kyle Monangai",
+          "position": "RB",
+          "lineupSlot": "IR",
+          "slotPosition": "IR",
+          "proTeam": "CHI",
+          "proOpponent": "TB",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "OUT"
+        },
+        {
+          "key": "espn-4567104",
+          "playerId": 4567104,
+          "name": "Will Reichard",
+          "position": "K",
+          "lineupSlot": "K",
+          "slotPosition": "K",
+          "proTeam": "MIN",
+          "proOpponent": "BUF",
+          "points": 0,
+          "projectedPoints": 11.41,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4688813",
+          "playerId": 4688813,
+          "name": "Josh Downs",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "IND",
+          "proOpponent": "DAL",
+          "points": 5.4,
+          "projectedPoints": 8.72,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-3042519",
+          "playerId": 3042519,
+          "name": "Aaron Jones Sr.",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "MIN",
+          "proOpponent": "BUF",
+          "points": 0,
+          "projectedPoints": 8.7,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4361432",
+          "playerId": 4361432,
+          "name": "Romeo Doubs",
+          "position": "WR",
+          "lineupSlot": "IR",
+          "slotPosition": "IR",
+          "proTeam": "NE",
+          "proOpponent": "GB",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "INJURY_RESERVE"
+        },
+        {
+          "key": "espn--16016",
+          "playerId": -16016,
+          "name": "Vikings D/ST",
+          "position": "D/ST",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "MIN",
+          "proOpponent": "BUF",
+          "points": 0,
+          "projectedPoints": 7.73,
+          "injuryStatus": "NORMAL"
+        },
+        {
+          "key": "espn-4431611",
+          "playerId": 4431611,
+          "name": "Caleb Williams",
+          "position": "QB",
+          "lineupSlot": "QB",
+          "slotPosition": "QB",
+          "proTeam": "CHI",
+          "proOpponent": "TB",
+          "points": 13.76,
+          "projectedPoints": 17.96,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn--16030",
+          "playerId": -16030,
+          "name": "Jaguars D/ST",
+          "position": "D/ST",
+          "lineupSlot": "D/ST",
+          "slotPosition": "D/ST",
+          "proTeam": "JAX",
+          "proOpponent": "BAL",
+          "points": 12,
+          "projectedPoints": 10.34,
+          "injuryStatus": "NORMAL"
+        },
+        {
+          "key": "espn-4686658",
+          "playerId": 4686658,
+          "name": "Mike Washington Jr.",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "LV",
+          "proOpponent": "SF",
+          "points": -0.3,
+          "projectedPoints": 7.36,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4373626",
+          "playerId": 4373626,
+          "name": "Tyler Allgeier",
+          "position": "RB",
+          "lineupSlot": "RB/WR",
+          "slotPosition": "RB/WR",
+          "proTeam": "ARI",
+          "proOpponent": "SEA",
+          "points": 6.6,
+          "projectedPoints": 14.35,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4433970",
+          "playerId": 4433970,
+          "name": "J.J. McCarthy",
+          "position": "QB",
+          "lineupSlot": "OP",
+          "slotPosition": "OP",
+          "proTeam": "NYG",
+          "proOpponent": "PHI",
+          "points": 7.28,
+          "projectedPoints": 18.43,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "key": "espn-4569682",
+          "playerId": 4569682,
+          "name": "Audric Estime",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "NO",
+          "proOpponent": "CLE",
+          "points": 14.7,
+          "projectedPoints": 12.23,
+          "injuryStatus": "ACTIVE"
+        }
+      ],
+      "awayLineup": [
+        {
+          "key": "espn-4696981",
+          "playerId": 4696981,
+          "name": "Cam Skattebo",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "NYG",
+          "proOpponent": "PHI",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "OUT"
+        },
+        {
+          "key": "espn-4241389",
+          "playerId": 4241389,
+          "name": "CeeDee Lamb",
+          "position": "WR",
+          "lineupSlot": "WR",
+          "slotPosition": "WR",
+          "proTeam": "DAL",
+          "proOpponent": "IND",
+          "points": 39.5,
+          "projectedPoints": 22.71,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4242335",
+          "playerId": 4242335,
+          "name": "Jonathan Taylor",
+          "position": "RB",
+          "lineupSlot": "RB",
+          "slotPosition": "RB",
+          "proTeam": "IND",
+          "proOpponent": "DAL",
+          "points": 10.4,
+          "projectedPoints": 21.62,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-3915511",
+          "playerId": 3915511,
+          "name": "Joe Burrow",
+          "position": "QB",
+          "lineupSlot": "QB",
+          "slotPosition": "QB",
+          "proTeam": "CIN",
+          "proOpponent": "ATL",
+          "points": 30.54,
+          "projectedPoints": 22.83,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4870808",
+          "playerId": 4870808,
+          "name": "Jeremiyah Love",
+          "position": "RB",
+          "lineupSlot": "IR",
+          "slotPosition": "IR",
+          "proTeam": "ARI",
+          "proOpponent": "SEA",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "INJURY_RESERVE"
+        },
+        {
+          "key": "espn-4595348",
+          "playerId": 4595348,
+          "name": "Malik Nabers",
+          "position": "WR",
+          "lineupSlot": "WR",
+          "slotPosition": "WR",
+          "proTeam": "NYG",
+          "proOpponent": "PHI",
+          "points": 9.3,
+          "projectedPoints": 17.99,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4360248",
+          "playerId": 4360248,
+          "name": "Kyle Pitts Sr.",
+          "position": "TE",
+          "lineupSlot": "TE",
+          "slotPosition": "TE",
+          "proTeam": "ATL",
+          "proOpponent": "CIN",
+          "points": 5.3,
+          "projectedPoints": 10.09,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-3052587",
+          "playerId": 3052587,
+          "name": "Baker Mayfield",
+          "position": "QB",
+          "lineupSlot": "QB",
+          "slotPosition": "QB",
+          "proTeam": "TB",
+          "proOpponent": "CHI",
+          "points": 7.72,
+          "projectedPoints": 13.75,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4871023",
+          "playerId": 4871023,
+          "name": "Carnell Tate",
+          "position": "WR",
+          "lineupSlot": "IR",
+          "slotPosition": "IR",
+          "proTeam": "TEN",
+          "proOpponent": "None",
+          "points": 0,
+          "projectedPoints": 0,
+          "injuryStatus": "OUT"
+        },
+        {
+          "key": "espn-4429059",
+          "playerId": 4429059,
+          "name": "Woody Marks",
+          "position": "RB",
+          "lineupSlot": "RB/WR",
+          "slotPosition": "RB/WR",
+          "proTeam": "HOU",
+          "proOpponent": "LAC",
+          "points": 8.4,
+          "projectedPoints": 15.93,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4683062",
+          "playerId": 4683062,
+          "name": "Xavier Worthy",
+          "position": "WR",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "KC",
+          "proOpponent": "NYJ",
+          "points": 10.8,
+          "projectedPoints": 9.29,
+          "injuryStatus": "QUESTIONABLE"
+        },
+        {
+          "key": "espn-4431459",
+          "playerId": 4431459,
+          "name": "Tyler Warren",
+          "position": "TE",
+          "lineupSlot": "RB/WR/TE",
+          "slotPosition": "RB/WR/TE",
+          "proTeam": "IND",
+          "proOpponent": "DAL",
+          "points": 8.4,
+          "projectedPoints": 12.04,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn--16026",
+          "playerId": -16026,
+          "name": "Seahawks D/ST",
+          "position": "D/ST",
+          "lineupSlot": "D/ST",
+          "slotPosition": "D/ST",
+          "proTeam": "SEA",
+          "proOpponent": "ARI",
+          "points": 13,
+          "projectedPoints": 9.76,
+          "injuryStatus": "NORMAL"
+        },
+        {
+          "key": "espn-5081397",
+          "playerId": 5081397,
+          "name": "Dylan Sampson",
+          "position": "RB",
+          "lineupSlot": "BE",
+          "slotPosition": "BE",
+          "proTeam": "CLE",
+          "proOpponent": "NO",
+          "points": 7.8,
+          "projectedPoints": 9.04,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-3043078",
+          "playerId": 3043078,
+          "name": "Derrick Henry",
+          "position": "RB",
+          "lineupSlot": "RB",
+          "slotPosition": "RB",
+          "proTeam": "BAL",
+          "proOpponent": "JAX",
+          "points": 5.58,
+          "projectedPoints": 15.72,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4361741",
+          "playerId": 4361741,
+          "name": "Brock Purdy",
+          "position": "QB",
+          "lineupSlot": "OP",
+          "slotPosition": "OP",
+          "proTeam": "SF",
+          "proOpponent": "LV",
+          "points": 25.28,
+          "projectedPoints": 23.76,
+          "injuryStatus": "ACTIVE"
+        },
+        {
+          "key": "espn-4363538",
+          "playerId": 4363538,
+          "name": "Chad Ryland",
+          "position": "K",
+          "lineupSlot": "K",
+          "slotPosition": "K",
+          "proTeam": "ARI",
+          "proOpponent": "SEA",
+          "points": 2.8,
+          "projectedPoints": 10.17,
+          "injuryStatus": "ACTIVE"
+        }
+      ]
+    }
+  ],
+  "transactions": [
+    {
+      "transactionKey": "2026-w09-x0001",
+      "teamKey": "2026-t05",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 10,
+      "date": 1794231231455,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4702555",
+          "playerId": 4702555,
+          "player": "Jonah Coleman",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3054850",
+          "playerId": 3054850,
+          "player": "Alvin Kamara",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0002",
+      "teamKey": "2026-t02",
+      "type": "TRADE_PROPOSAL",
+      "status": "CANCELED",
+      "scoringPeriod": 9,
+      "date": 1793833299032,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "TRADE",
+          "playerKey": "espn-8439",
+          "playerId": 8439,
+          "player": "Aaron Rodgers",
+          "fromTeamKey": "2026-t05",
+          "toTeamKey": "2026-t02"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-4262921",
+          "playerId": 4262921,
+          "player": "Justin Jefferson",
+          "fromTeamKey": "2026-t05",
+          "toTeamKey": "2026-t02"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3917315",
+          "playerId": 3917315,
+          "player": "Kyler Murray",
+          "fromTeamKey": "2026-t02",
+          "toTeamKey": "2026-t05"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-4685702",
+          "playerId": 4685702,
+          "player": "Quinshon Judkins",
+          "fromTeamKey": "2026-t02",
+          "toTeamKey": "2026-t05"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0003",
+      "teamKey": "2026-t10",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793805548802,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3116164",
+          "playerId": 3116164,
+          "player": "Mike Gesicki",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3046439",
+          "playerId": 3046439,
+          "player": "Hunter Henry",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0004",
+      "teamKey": "2026-t02",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794087170567,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4360761",
+          "playerId": 4360761,
+          "player": "Michael Wilson",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4567750",
+          "playerId": 4567750,
+          "player": "Emeka Egbuka",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0005",
+      "teamKey": "2026-t02",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793980465818,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3917315",
+          "playerId": 3917315,
+          "player": "Kyler Murray",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4685702",
+          "playerId": 4685702,
+          "player": "Quinshon Judkins",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0006",
+      "teamKey": "2026-t03",
+      "type": "TRADE_VETO",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793757777429,
+      "bidAmount": 0,
+      "items": []
+    },
+    {
+      "transactionKey": "2026-w09-x0007",
+      "teamKey": "2026-t06",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793708862642,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3121023",
+          "playerId": 3121023,
+          "player": "Dallas Goedert",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4429086",
+          "playerId": 4429086,
+          "player": "Michael Mayer",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0008",
+      "teamKey": "2026-t10",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794094224765,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4427366",
+          "playerId": 4427366,
+          "player": "Breece Hall",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0009",
+      "teamKey": "2026-t13",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794158305863,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-5083076",
+          "playerId": 5083076,
+          "player": "Harold Fannin Jr.",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4036133",
+          "playerId": 4036133,
+          "player": "T.J. Hockenson",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0010",
+      "teamKey": "2026-t05",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794139509368,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4427095",
+          "playerId": 4427095,
+          "player": "DeMario Douglas",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4429205",
+          "playerId": 4429205,
+          "player": "Jordan Addison",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0011",
+      "teamKey": "2026-t11",
+      "type": "WAIVER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793782688238,
+      "bidAmount": 37,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "espn-4373626",
+          "playerId": 4373626,
+          "player": "Tyler Allgeier",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t11"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0012",
+      "teamKey": "2026-t10",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794094232201,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4040761",
+          "playerId": 4040761,
+          "player": "Devin Singletary",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0013",
+      "teamKey": "2026-t06",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793708829805,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4432577",
+          "playerId": 4432577,
+          "player": "C.J. Stroud",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3116165",
+          "playerId": 3116165,
+          "player": "Chris Godwin Jr.",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0014",
+      "teamKey": "2026-t10",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793986970630,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4426385",
+          "playerId": 4426385,
+          "player": "Zach Charbonnet",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0015",
+      "teamKey": "2026-t05",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794166741657,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4837248",
+          "playerId": 4837248,
+          "player": "Fernando Mendoza",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0016",
+      "teamKey": "2026-t02",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793980473257,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4567750",
+          "playerId": 4567750,
+          "player": "Emeka Egbuka",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4426354",
+          "playerId": 4426354,
+          "player": "George Pickens",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0017",
+      "teamKey": "2026-t02",
+      "type": "TRADE_PROPOSAL",
+      "status": "PENDING",
+      "scoringPeriod": 9,
+      "date": 1793823773374,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "TRADE",
+          "playerKey": "espn-8439",
+          "playerId": 8439,
+          "player": "Aaron Rodgers",
+          "fromTeamKey": "2026-t05",
+          "toTeamKey": "2026-t02"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-4262921",
+          "playerId": 4262921,
+          "player": "Justin Jefferson",
+          "fromTeamKey": "2026-t05",
+          "toTeamKey": "2026-t02"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3917315",
+          "playerId": 3917315,
+          "player": "Kyler Murray",
+          "fromTeamKey": "2026-t02",
+          "toTeamKey": "2026-t05"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-4685702",
+          "playerId": 4685702,
+          "player": "Quinshon Judkins",
+          "fromTeamKey": "2026-t02",
+          "toTeamKey": "2026-t05"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0018",
+      "teamKey": "2026-t05",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793801922889,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "espn-4360438",
+          "playerId": 4360438,
+          "player": "Brandon Aiyuk",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t05"
+        },
+        {
+          "type": "DROP",
+          "playerKey": "espn-4869645",
+          "playerId": 4869645,
+          "player": "Caleb Douglas",
+          "fromTeamKey": "2026-t05",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0019",
+      "teamKey": "2026-t13",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793913882149,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3916387",
+          "playerId": 3916387,
+          "player": "Lamar Jackson",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0020",
+      "teamKey": "2026-t02",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793983611717,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4685702",
+          "playerId": 4685702,
+          "player": "Quinshon Judkins",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4567750",
+          "playerId": 4567750,
+          "player": "Emeka Egbuka",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0021",
+      "teamKey": "2026-t10",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794076755342,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4427366",
+          "playerId": 4427366,
+          "player": "Breece Hall",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0022",
+      "teamKey": "2026-t03",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793752651026,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4360569",
+          "playerId": 4360569,
+          "player": "Jordan Mason",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0023",
+      "teamKey": "2026-t13",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793741304154,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4360689",
+          "playerId": 4360689,
+          "player": "Tyler Shough",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3916387",
+          "playerId": 3916387,
+          "player": "Lamar Jackson",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0024",
+      "teamKey": "2026-t10",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794155755428,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "espn-4432762",
+          "playerId": 4432762,
+          "player": "Shedeur Sanders",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t10"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0025",
+      "teamKey": "2026-t02",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794087150390,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4385690",
+          "playerId": 4385690,
+          "player": "Dalton Kincaid",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0026",
+      "teamKey": "2026-t10",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794094208554,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4880281",
+          "playerId": 4880281,
+          "player": "Jordyn Tyson",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0027",
+      "teamKey": "2026-t04",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793765754036,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4683062",
+          "playerId": 4683062,
+          "player": "Xavier Worthy",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0028",
+      "teamKey": "2026-t11",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793710702436,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4431611",
+          "playerId": 4431611,
+          "player": "Caleb Williams",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0029",
+      "teamKey": "2026-t05",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793800141736,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4832800",
+          "playerId": 4832800,
+          "player": "Denzel Boston",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4427095",
+          "playerId": 4427095,
+          "player": "DeMario Douglas",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0030",
+      "teamKey": "2026-t04",
+      "type": "TRADE_ACCEPT",
+      "scoringPeriod": 9,
+      "date": 1793749167030,
+      "bidAmount": 0,
+      "items": []
+    },
+    {
+      "transactionKey": "2026-w09-x0031",
+      "teamKey": "2026-t10",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 10,
+      "date": 1794183225855,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-14880",
+          "playerId": 14880,
+          "player": "Kirk Cousins",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4432762",
+          "playerId": 4432762,
+          "player": "Shedeur Sanders",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0032",
+      "teamKey": "2026-t02",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793885015397,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "espn--16027",
+          "playerId": -16027,
+          "player": "Buccaneers D/ST",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t02"
+        },
+        {
+          "type": "DROP",
+          "playerKey": "espn--16025",
+          "playerId": -16025,
+          "player": "49ers D/ST",
+          "fromTeamKey": "2026-t02",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0033",
+      "teamKey": "2026-t10",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793821628916,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-14880",
+          "playerId": 14880,
+          "player": "Kirk Cousins",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0034",
+      "teamKey": "2026-t05",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794139423855,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4837248",
+          "playerId": 4837248,
+          "player": "Fernando Mendoza",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-8439",
+          "playerId": 8439,
+          "player": "Aaron Rodgers",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0035",
+      "teamKey": "2026-t11",
+      "type": "TRADE_UPHOLD",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793759778755,
+      "bidAmount": 0,
+      "items": []
+    },
+    {
+      "transactionKey": "2026-w09-x0036",
+      "teamKey": "2026-t03",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793752669746,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "playerKey": "espn--16017",
+          "playerId": -16017,
+          "player": "Patriots D/ST",
+          "fromTeamKey": "2026-t03",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0037",
+      "teamKey": "2026-t04",
+      "type": "TRADE_PROPOSAL",
+      "status": "PENDING",
+      "scoringPeriod": 9,
+      "date": 1793754188337,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "TRADE",
+          "playerKey": "espn-4832800",
+          "playerId": 4832800,
+          "player": "Denzel Boston",
+          "fromTeamKey": "2026-t04",
+          "toTeamKey": "2026-t05"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-4701936",
+          "playerId": 4701936,
+          "player": "Matthew Golden",
+          "fromTeamKey": "2026-t04",
+          "toTeamKey": "2026-t05"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-8439",
+          "playerId": 8439,
+          "player": "Aaron Rodgers",
+          "fromTeamKey": "2026-t04",
+          "toTeamKey": "2026-t05"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3043078",
+          "playerId": 3043078,
+          "player": "Derrick Henry",
+          "fromTeamKey": "2026-t05",
+          "toTeamKey": "2026-t04"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-4361741",
+          "playerId": 4361741,
+          "player": "Brock Purdy",
+          "fromTeamKey": "2026-t05",
+          "toTeamKey": "2026-t04"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0038",
+      "teamKey": "2026-t09",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 10,
+      "date": 1794180790237,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4426515",
+          "playerId": 4426515,
+          "player": "Puka Nacua",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0039",
+      "teamKey": "2026-t10",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794153115074,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4685247",
+          "playerId": 4685247,
+          "player": "Braelon Allen",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4040761",
+          "playerId": 4040761,
+          "player": "Devin Singletary",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0040",
+      "teamKey": "2026-t10",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794097129330,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4428718",
+          "playerId": 4428718,
+          "player": "Tre Tucker",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0041",
+      "teamKey": "2026-t10",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 16,
+      "date": 1794266020977,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4426385",
+          "playerId": 4426385,
+          "player": "Zach Charbonnet",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4259545",
+          "playerId": 4259545,
+          "player": "D'Andre Swift",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0042",
+      "teamKey": "2026-t06",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793708842109,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-16737",
+          "playerId": 16737,
+          "player": "Mike Evans",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4047650",
+          "playerId": 4047650,
+          "player": "DK Metcalf",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0043",
+      "teamKey": "2026-t04",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793728541806,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "playerKey": "espn-4887558",
+          "playerId": 4887558,
+          "player": "Emanuel Wilson",
+          "fromTeamKey": "2026-t04",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0044",
+      "teamKey": "2026-t02",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794154515047,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4038815",
+          "playerId": 4038815,
+          "player": "Rico Dowdle",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4360761",
+          "playerId": 4360761,
+          "player": "Michael Wilson",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0045",
+      "teamKey": "2026-t10",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793986960047,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4685247",
+          "playerId": 4685247,
+          "player": "Braelon Allen",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0046",
+      "teamKey": "2026-t09",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 10,
+      "date": 1794180799444,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4426502",
+          "playerId": 4426502,
+          "player": "Drake London",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0047",
+      "teamKey": "2026-t10",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793821719644,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4427366",
+          "playerId": 4427366,
+          "player": "Breece Hall",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0048",
+      "teamKey": "2026-t12",
+      "type": "TRADE_VETO",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793753750172,
+      "bidAmount": 0,
+      "items": []
+    },
+    {
+      "transactionKey": "2026-w09-x0049",
+      "teamKey": "2026-t10",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794096096509,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "playerKey": "espn-4040715",
+          "playerId": 4040715,
+          "player": "Jalen Hurts",
+          "fromTeamKey": "2026-t10",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0050",
+      "teamKey": "2026-t02",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793757117564,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4685512",
+          "playerId": 4685512,
+          "player": "Jadarian Price",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0051",
+      "teamKey": "2026-t09",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793796740610,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-15864",
+          "playerId": 15864,
+          "player": "Geno Smith",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4569618",
+          "playerId": 4569618,
+          "player": "Garrett Wilson",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0052",
+      "teamKey": "2026-t11",
+      "type": "WAIVER",
+      "status": "FAILED_INVALIDPLAYERSOURCE",
+      "scoringPeriod": 9,
+      "date": 1793866091536,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "espn-15818",
+          "playerId": 15818,
+          "player": "Keenan Allen",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t11"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0053",
+      "teamKey": "2026-t05",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 10,
+      "date": 1794231214288,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4426338",
+          "playerId": 4426338,
+          "player": "Bo Nix",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4837248",
+          "playerId": 4837248,
+          "player": "Fernando Mendoza",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0054",
+      "teamKey": "2026-t10",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 10,
+      "date": 1794183333522,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4428718",
+          "playerId": 4428718,
+          "player": "Tre Tucker",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4426385",
+          "playerId": 4426385,
+          "player": "Zach Charbonnet",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0055",
+      "teamKey": "2026-t12",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793708883663,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4360423",
+          "playerId": 4360423,
+          "player": "Michael Penix Jr.",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0056",
+      "teamKey": "2026-t06",
+      "type": "WAIVER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793782688302,
+      "bidAmount": 1,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "espn--16005",
+          "playerId": -16005,
+          "player": "Browns D/ST",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t06"
+        },
+        {
+          "type": "DROP",
+          "playerKey": "espn--16009",
+          "playerId": -16009,
+          "player": "Packers D/ST",
+          "fromTeamKey": "2026-t06",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0057",
+      "teamKey": "2026-t02",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794087154013,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4685702",
+          "playerId": 4685702,
+          "player": "Quinshon Judkins",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0058",
+      "teamKey": "2026-t04",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793759911796,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4431459",
+          "playerId": 4431459,
+          "player": "Tyler Warren",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4361741",
+          "playerId": 4361741,
+          "player": "Brock Purdy",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0059",
+      "teamKey": "2026-t10",
+      "type": "TRADE_PROPOSAL",
+      "status": "CANCELED",
+      "scoringPeriod": 9,
+      "date": 1793808061067,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "TRADE",
+          "playerKey": "espn-2577417",
+          "playerId": 2577417,
+          "player": "Dak Prescott",
+          "fromTeamKey": "2026-t12",
+          "toTeamKey": "2026-t10"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-4379399",
+          "playerId": 4379399,
+          "player": "James Cook III",
+          "fromTeamKey": "2026-t12",
+          "toTeamKey": "2026-t10"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-4361050",
+          "playerId": 4361050,
+          "player": "Isaiah Likely",
+          "fromTeamKey": "2026-t12",
+          "toTeamKey": "2026-t10"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3915416",
+          "playerId": 3915416,
+          "player": "DJ Moore",
+          "fromTeamKey": "2026-t12",
+          "toTeamKey": "2026-t10"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-4431452",
+          "playerId": 4431452,
+          "player": "Drake Maye",
+          "fromTeamKey": "2026-t10",
+          "toTeamKey": "2026-t12"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-4248528",
+          "playerId": 4248528,
+          "player": "Christian Watson",
+          "fromTeamKey": "2026-t10",
+          "toTeamKey": "2026-t12"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-4426385",
+          "playerId": 4426385,
+          "player": "Zach Charbonnet",
+          "fromTeamKey": "2026-t10",
+          "toTeamKey": "2026-t12"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-4832955",
+          "playerId": 4832955,
+          "player": "Emmett Johnson",
+          "fromTeamKey": "2026-t10",
+          "toTeamKey": "2026-t12"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0060",
+      "teamKey": "2026-t10",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794155759673,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4432762",
+          "playerId": 4432762,
+          "player": "Shedeur Sanders",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4685247",
+          "playerId": 4685247,
+          "player": "Braelon Allen",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0061",
+      "teamKey": "2026-t11",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793710782683,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "playerKey": "espn--16019",
+          "playerId": -16019,
+          "player": "Giants D/ST",
+          "fromTeamKey": "2026-t11",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0062",
+      "teamKey": "2026-t05",
+      "type": "TRADE_DECLINE",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793833299032,
+      "bidAmount": 0,
+      "items": []
+    },
+    {
+      "transactionKey": "2026-w09-x0063",
+      "teamKey": "2026-t10",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 10,
+      "date": 1794096883279,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3916148",
+          "playerId": 3916148,
+          "player": "Tony Pollard",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4040761",
+          "playerId": 4040761,
+          "player": "Devin Singletary",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0064",
+      "teamKey": "2026-t10",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794097094240,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4428718",
+          "playerId": 4428718,
+          "player": "Tre Tucker",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4040761",
+          "playerId": 4040761,
+          "player": "Devin Singletary",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0065",
+      "teamKey": "2026-t05",
+      "type": "TRADE_PROPOSAL",
+      "status": "PENDING",
+      "scoringPeriod": 9,
+      "date": 1793748153228,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "TRADE",
+          "playerKey": "espn-4361741",
+          "playerId": 4361741,
+          "player": "Brock Purdy",
+          "fromTeamKey": "2026-t05",
+          "toTeamKey": "2026-t04"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3043078",
+          "playerId": 3043078,
+          "player": "Derrick Henry",
+          "fromTeamKey": "2026-t05",
+          "toTeamKey": "2026-t04"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-4262921",
+          "playerId": 4262921,
+          "player": "Justin Jefferson",
+          "fromTeamKey": "2026-t05",
+          "toTeamKey": "2026-t04"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-4832800",
+          "playerId": 4832800,
+          "player": "Denzel Boston",
+          "fromTeamKey": "2026-t04",
+          "toTeamKey": "2026-t05"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-8439",
+          "playerId": 8439,
+          "player": "Aaron Rodgers",
+          "fromTeamKey": "2026-t04",
+          "toTeamKey": "2026-t05"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-4701936",
+          "playerId": 4701936,
+          "player": "Matthew Golden",
+          "fromTeamKey": "2026-t04",
+          "toTeamKey": "2026-t05"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0066",
+      "teamKey": "2026-t10",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793821717251,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4685247",
+          "playerId": 4685247,
+          "player": "Braelon Allen",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0067",
+      "teamKey": "2026-t03",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793892453742,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4569603",
+          "playerId": 4569603,
+          "player": "Malik Washington",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0068",
+      "teamKey": "2026-t10",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794076428777,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "espn-4040761",
+          "playerId": 4040761,
+          "player": "Devin Singletary",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t10"
+        },
+        {
+          "type": "DROP",
+          "playerKey": "espn-3046439",
+          "playerId": 3046439,
+          "player": "Hunter Henry",
+          "fromTeamKey": "2026-t10",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0069",
+      "teamKey": "2026-t02",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794154533831,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4360761",
+          "playerId": 4360761,
+          "player": "Michael Wilson",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4567750",
+          "playerId": 4567750,
+          "player": "Emeka Egbuka",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0070",
+      "teamKey": "2026-t11",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794113501833,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "espn-4569682",
+          "playerId": 4569682,
+          "player": "Audric Estime",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t11"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0071",
+      "teamKey": "2026-t04",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793759917871,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4431459",
+          "playerId": 4431459,
+          "player": "Tyler Warren",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0072",
+      "teamKey": "2026-t10",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 10,
+      "date": 1794183328489,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4259545",
+          "playerId": 4259545,
+          "player": "D'Andre Swift",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4426385",
+          "playerId": 4426385,
+          "player": "Zach Charbonnet",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0073",
+      "teamKey": "2026-t13",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793913875079,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4429160",
+          "playerId": 4429160,
+          "player": "De'Von Achane",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0074",
+      "teamKey": "2026-t02",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793922596898,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4567750",
+          "playerId": 4567750,
+          "player": "Emeka Egbuka",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0075",
+      "teamKey": "2026-t06",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793708948409,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-12483",
+          "playerId": 12483,
+          "player": "Matthew Stafford",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4432577",
+          "playerId": 4432577,
+          "player": "C.J. Stroud",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0076",
+      "teamKey": "2026-t10",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793821726462,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4428718",
+          "playerId": 4428718,
+          "player": "Tre Tucker",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0077",
+      "teamKey": "2026-t10",
+      "type": "WAIVER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793782688303,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "espn-3116164",
+          "playerId": 3116164,
+          "player": "Mike Gesicki",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t10"
+        },
+        {
+          "type": "DROP",
+          "playerKey": "espn--16028",
+          "playerId": -16028,
+          "player": "Commanders D/ST",
+          "fromTeamKey": "2026-t10",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0078",
+      "teamKey": "2026-t06",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793921604525,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3116165",
+          "playerId": 3116165,
+          "player": "Chris Godwin Jr.",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-16737",
+          "playerId": 16737,
+          "player": "Mike Evans",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0079",
+      "teamKey": "2026-t10",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794155774189,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4259545",
+          "playerId": 4259545,
+          "player": "D'Andre Swift",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4428718",
+          "playerId": 4428718,
+          "player": "Tre Tucker",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0080",
+      "teamKey": "2026-t02",
+      "type": "TRADE_DECLINE",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793823534147,
+      "bidAmount": 0,
+      "items": []
+    },
+    {
+      "transactionKey": "2026-w09-x0081",
+      "teamKey": "2026-t02",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793713891916,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4426388",
+          "playerId": 4426388,
+          "player": "Jameson Williams",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4685702",
+          "playerId": 4685702,
+          "player": "Quinshon Judkins",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0082",
+      "teamKey": "2026-t11",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793897219682,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4373626",
+          "playerId": 4373626,
+          "player": "Tyler Allgeier",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4612826",
+          "playerId": 4612826,
+          "player": "Ladd McConkey",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0083",
+      "teamKey": "2026-t05",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794172090944,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "espn-4035687",
+          "playerId": 4035687,
+          "player": "Michael Pittman Jr.",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t05"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0084",
+      "teamKey": "2026-t13",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793832943250,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4597500",
+          "playerId": 4597500,
+          "player": "Adonai Mitchell",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3916433",
+          "playerId": 3916433,
+          "player": "Jakobi Meyers",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0085",
+      "teamKey": "2026-t04",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793728563561,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4832800",
+          "playerId": 4832800,
+          "player": "Denzel Boston",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4595348",
+          "playerId": 4595348,
+          "player": "Malik Nabers",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0086",
+      "teamKey": "2026-t10",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793821622562,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3122840",
+          "playerId": 3122840,
+          "player": "Deshaun Watson",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0087",
+      "teamKey": "2026-t02",
+      "type": "TRADE_VETO",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793749851026,
+      "bidAmount": 0,
+      "items": []
+    },
+    {
+      "transactionKey": "2026-w09-x0088",
+      "teamKey": "2026-t03",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793702882348,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3117251",
+          "playerId": 3117251,
+          "player": "Christian McCaffrey",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4882093",
+          "playerId": 4882093,
+          "player": "Bhayshul Tuten",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0089",
+      "teamKey": "2026-t10",
+      "type": "WAIVER",
+      "status": "FAILED_PLAYERALREADYDROPPED",
+      "scoringPeriod": 9,
+      "date": 1793782688303,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "espn-4367209",
+          "playerId": 4367209,
+          "player": "Greg Dulcich",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t10"
+        },
+        {
+          "type": "DROP",
+          "playerKey": "espn--16028",
+          "playerId": -16028,
+          "player": "Commanders D/ST",
+          "fromTeamKey": "2026-t10",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0090",
+      "teamKey": "2026-t10",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794076757936,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4040761",
+          "playerId": 4040761,
+          "player": "Devin Singletary",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0091",
+      "teamKey": "2026-t02",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794154490854,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4711533",
+          "playerId": 4711533,
+          "player": "Ollie Gordon II",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4685512",
+          "playerId": 4685512,
+          "player": "Jadarian Price",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0092",
+      "teamKey": "2026-t10",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793986965319,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4427366",
+          "playerId": 4427366,
+          "player": "Breece Hall",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0093",
+      "teamKey": "2026-t05",
+      "type": "TRADE_ACCEPT",
+      "status": "CANCELED",
+      "scoringPeriod": 9,
+      "date": 1793835567063,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "TRADE",
+          "playerKey": "espn-4361741",
+          "playerId": 4361741,
+          "player": "Brock Purdy",
+          "fromTeamKey": "2026-t05",
+          "toTeamKey": "2026-t04"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3043078",
+          "playerId": 3043078,
+          "player": "Derrick Henry",
+          "fromTeamKey": "2026-t05",
+          "toTeamKey": "2026-t04"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-4262921",
+          "playerId": 4262921,
+          "player": "Justin Jefferson",
+          "fromTeamKey": "2026-t05",
+          "toTeamKey": "2026-t04"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-4832800",
+          "playerId": 4832800,
+          "player": "Denzel Boston",
+          "fromTeamKey": "2026-t04",
+          "toTeamKey": "2026-t05"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-8439",
+          "playerId": 8439,
+          "player": "Aaron Rodgers",
+          "fromTeamKey": "2026-t04",
+          "toTeamKey": "2026-t05"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-4701936",
+          "playerId": 4701936,
+          "player": "Matthew Golden",
+          "fromTeamKey": "2026-t04",
+          "toTeamKey": "2026-t05"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0094",
+      "teamKey": "2026-t02",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794087175331,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4038815",
+          "playerId": 4038815,
+          "player": "Rico Dowdle",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0095",
+      "teamKey": "2026-t11",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793967795832,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4612826",
+          "playerId": 4612826,
+          "player": "Ladd McConkey",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4373626",
+          "playerId": 4373626,
+          "player": "Tyler Allgeier",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0096",
+      "teamKey": "2026-t02",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794155754636,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "espn-2991662",
+          "playerId": 2991662,
+          "player": "Mack Hollins",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t02"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0097",
+      "teamKey": "2026-t11",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793740913524,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3042519",
+          "playerId": 3042519,
+          "player": "Aaron Jones Sr.",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0098",
+      "teamKey": "2026-t10",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794076685811,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4040761",
+          "playerId": 4040761,
+          "player": "Devin Singletary",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4685247",
+          "playerId": 4685247,
+          "player": "Braelon Allen",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0099",
+      "teamKey": "2026-t10",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794076766004,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4428718",
+          "playerId": 4428718,
+          "player": "Tre Tucker",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0100",
+      "teamKey": "2026-t10",
+      "type": "TRADE_VETO",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793757642624,
+      "bidAmount": 0,
+      "items": []
+    },
+    {
+      "transactionKey": "2026-w09-x0101",
+      "teamKey": "2026-t12",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793708897008,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4685278",
+          "playerId": 4685278,
+          "player": "Luther Burden III",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0102",
+      "teamKey": "2026-t12",
+      "type": "WAIVER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793782688302,
+      "bidAmount": 2,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "espn--16018",
+          "playerId": -16018,
+          "player": "Saints D/ST",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t12"
+        },
+        {
+          "type": "DROP",
+          "playerKey": "espn--16008",
+          "playerId": -16008,
+          "player": "Lions D/ST",
+          "fromTeamKey": "2026-t12",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0103",
+      "teamKey": "2026-t13",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793913893063,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "espn-2573079",
+          "playerId": 2573079,
+          "player": "Carson Wentz",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t13"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0104",
+      "teamKey": "2026-t12",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793708894408,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4685278",
+          "playerId": 4685278,
+          "player": "Luther Burden III",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4430027",
+          "playerId": 4430027,
+          "player": "Sam LaPorta",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0105",
+      "teamKey": "2026-t04",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793728619031,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-8439",
+          "playerId": 8439,
+          "player": "Aaron Rodgers",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4431459",
+          "playerId": 4431459,
+          "player": "Tyler Warren",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0106",
+      "teamKey": "2026-t02",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794155735326,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4426354",
+          "playerId": 4426354,
+          "player": "George Pickens",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0107",
+      "teamKey": "2026-t10",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794153121746,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4428718",
+          "playerId": 4428718,
+          "player": "Tre Tucker",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4685247",
+          "playerId": 4685247,
+          "player": "Braelon Allen",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0108",
+      "teamKey": "2026-t05",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793876699552,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "playerKey": "espn-4360438",
+          "playerId": 4360438,
+          "player": "Brandon Aiyuk",
+          "fromTeamKey": "2026-t05",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0109",
+      "teamKey": "2026-t03",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793702876618,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4569987",
+          "playerId": 4569987,
+          "player": "Jaylen Warren",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3117251",
+          "playerId": 3117251,
+          "player": "Christian McCaffrey",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0110",
+      "teamKey": "2026-t02",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794154503754,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4385690",
+          "playerId": 4385690,
+          "player": "Dalton Kincaid",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4360635",
+          "playerId": 4360635,
+          "player": "Chig Okonkwo",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0111",
+      "teamKey": "2026-t04",
+      "type": "WAIVER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793782688303,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "espn-4363538",
+          "playerId": 4363538,
+          "player": "Chad Ryland",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t04"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0112",
+      "teamKey": "2026-t13",
+      "type": "TRADE_VETO",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793750119057,
+      "bidAmount": 0,
+      "items": []
+    },
+    {
+      "transactionKey": "2026-w09-x0113",
+      "teamKey": "2026-t02",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793922592398,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "playerKey": "espn--16027",
+          "playerId": -16027,
+          "player": "Buccaneers D/ST",
+          "fromTeamKey": "2026-t02",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0114",
+      "teamKey": "2026-t03",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793702903768,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4569603",
+          "playerId": 4569603,
+          "player": "Malik Washington",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4258173",
+          "playerId": 4258173,
+          "player": "Nico Collins",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0115",
+      "teamKey": "2026-t05",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793801940818,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4360438",
+          "playerId": 4360438,
+          "player": "Brandon Aiyuk",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0116",
+      "teamKey": "2026-t02",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794087183149,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4360635",
+          "playerId": 4360635,
+          "player": "Chig Okonkwo",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0117",
+      "teamKey": "2026-t04",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793922845424,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4683062",
+          "playerId": 4683062,
+          "player": "Xavier Worthy",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4429059",
+          "playerId": 4429059,
+          "player": "Woody Marks",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0118",
+      "teamKey": "2026-t10",
+      "type": "TRADE_VETO",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793750799024,
+      "bidAmount": 0,
+      "items": []
+    },
+    {
+      "transactionKey": "2026-w09-x0119",
+      "teamKey": "2026-t05",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 10,
+      "date": 1794231220186,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4723820",
+          "playerId": 4723820,
+          "player": "Omar Cooper Jr.",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4372016",
+          "playerId": 4372016,
+          "player": "Jaylen Waddle",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0120",
+      "teamKey": "2026-t11",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793740733291,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "playerKey": "espn-2578570",
+          "playerId": 2578570,
+          "player": "Jacoby Brissett",
+          "fromTeamKey": "2026-t11",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0121",
+      "teamKey": "2026-t10",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794155765745,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4432762",
+          "playerId": 4432762,
+          "player": "Shedeur Sanders",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-14880",
+          "playerId": 14880,
+          "player": "Kirk Cousins",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0122",
+      "teamKey": "2026-t05",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793700092026,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3126486",
+          "playerId": 3126486,
+          "player": "Deebo Samuel Sr.",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0123",
+      "teamKey": "2026-t05",
+      "type": "TRADE_PROPOSAL",
+      "status": "PENDING",
+      "scoringPeriod": 9,
+      "date": 1793800634683,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "TRADE",
+          "playerKey": "espn-4242512",
+          "playerId": 4242512,
+          "player": "Malik Willis",
+          "fromTeamKey": "2026-t02",
+          "toTeamKey": "2026-t05"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-8439",
+          "playerId": 8439,
+          "player": "Aaron Rodgers",
+          "fromTeamKey": "2026-t05",
+          "toTeamKey": "2026-t02"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-4427095",
+          "playerId": 4427095,
+          "player": "DeMario Douglas",
+          "fromTeamKey": "2026-t05",
+          "toTeamKey": "2026-t02"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0124",
+      "teamKey": "2026-t02",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794154488491,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4241416",
+          "playerId": 4241416,
+          "player": "Chuba Hubbard",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4696044",
+          "playerId": 4696044,
+          "player": "Kaelon Black",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0125",
+      "teamKey": "2026-t11",
+      "type": "WAIVER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793782688297,
+      "bidAmount": 21,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "espn-4433970",
+          "playerId": 4433970,
+          "player": "J.J. McCarthy",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t11"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0126",
+      "teamKey": "2026-t10",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793714608550,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4427366",
+          "playerId": 4427366,
+          "player": "Breece Hall",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4426385",
+          "playerId": 4426385,
+          "player": "Zach Charbonnet",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0127",
+      "teamKey": "2026-t05",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793795202044,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4701936",
+          "playerId": 4701936,
+          "player": "Matthew Golden",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0128",
+      "teamKey": "2026-t11",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794113484893,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "playerKey": "espn-4599739",
+          "playerId": 4599739,
+          "player": "Kendre Miller",
+          "fromTeamKey": "2026-t11",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0129",
+      "teamKey": "2026-t02",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794075547663,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3924327",
+          "playerId": 3924327,
+          "player": "Drew Lock",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4567750",
+          "playerId": 4567750,
+          "player": "Emeka Egbuka",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0130",
+      "teamKey": "2026-t11",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793710688130,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-2578570",
+          "playerId": 2578570,
+          "player": "Jacoby Brissett",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0131",
+      "teamKey": "2026-t05",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793821436840,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4427095",
+          "playerId": 4427095,
+          "player": "DeMario Douglas",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3126486",
+          "playerId": 3126486,
+          "player": "Deebo Samuel Sr.",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0132",
+      "teamKey": "2026-t04",
+      "type": "TRADE_ACCEPT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793759778790,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "TRADE",
+          "playerKey": "espn-4832800",
+          "playerId": 4832800,
+          "player": "Denzel Boston",
+          "fromTeamKey": "2026-t04",
+          "toTeamKey": "2026-t05"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-4701936",
+          "playerId": 4701936,
+          "player": "Matthew Golden",
+          "fromTeamKey": "2026-t04",
+          "toTeamKey": "2026-t05"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-8439",
+          "playerId": 8439,
+          "player": "Aaron Rodgers",
+          "fromTeamKey": "2026-t04",
+          "toTeamKey": "2026-t05"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-3043078",
+          "playerId": 3043078,
+          "player": "Derrick Henry",
+          "fromTeamKey": "2026-t05",
+          "toTeamKey": "2026-t04"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-4361741",
+          "playerId": 4361741,
+          "player": "Brock Purdy",
+          "fromTeamKey": "2026-t05",
+          "toTeamKey": "2026-t04"
+        },
+        {
+          "type": "DROP",
+          "playerKey": "espn-4870847",
+          "playerId": 4870847,
+          "player": "Ja'Kobi Lane",
+          "fromTeamKey": "2026-t05",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0133",
+      "teamKey": "2026-t02",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794087166647,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4711533",
+          "playerId": 4711533,
+          "player": "Ollie Gordon II",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4685512",
+          "playerId": 4685512,
+          "player": "Jadarian Price",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0134",
+      "teamKey": "2026-t05",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793700080544,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "playerKey": "espn-15818",
+          "playerId": 15818,
+          "player": "Keenan Allen",
+          "fromTeamKey": "2026-t05",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0135",
+      "teamKey": "2026-t03",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793922057987,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4569603",
+          "playerId": 4569603,
+          "player": "Malik Washington",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-15818",
+          "playerId": 15818,
+          "player": "Keenan Allen",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0136",
+      "teamKey": "2026-t04",
+      "type": "WAIVER",
+      "status": "FAILED_INVALIDPLAYERSOURCE",
+      "scoringPeriod": 9,
+      "date": 1793782688295,
+      "bidAmount": 30,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "espn-4373626",
+          "playerId": 4373626,
+          "player": "Tyler Allgeier",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t04"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0137",
+      "teamKey": "2026-t05",
+      "type": "TRADE_ACCEPT",
+      "scoringPeriod": 9,
+      "date": 1793757166180,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "playerKey": "espn-4870847",
+          "playerId": 4870847,
+          "player": "Ja'Kobi Lane",
+          "fromTeamKey": "2026-t05",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0138",
+      "teamKey": "2026-t12",
+      "type": "WAIVER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793782688303,
+      "bidAmount": 1,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "espn-2971573",
+          "playerId": 2971573,
+          "player": "Ka'imi Fairbairn",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t12"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0139",
+      "teamKey": "2026-t05",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793795192235,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4702555",
+          "playerId": 4702555,
+          "player": "Jonah Coleman",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0140",
+      "teamKey": "2026-t13",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793913901684,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-2573079",
+          "playerId": 2573079,
+          "player": "Carson Wentz",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-5083076",
+          "playerId": 5083076,
+          "player": "Harold Fannin Jr.",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0141",
+      "teamKey": "2026-t05",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793716351765,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4429205",
+          "playerId": 4429205,
+          "player": "Jordan Addison",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3126486",
+          "playerId": 3126486,
+          "player": "Deebo Samuel Sr.",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0142",
+      "teamKey": "2026-t13",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793832923589,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "espn-4360698",
+          "playerId": 4360698,
+          "player": "Joe Milton",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t13"
+        },
+        {
+          "type": "DROP",
+          "playerKey": "espn-4685201",
+          "playerId": 4685201,
+          "player": "Tanner McKee",
+          "fromTeamKey": "2026-t13",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0143",
+      "teamKey": "2026-t09",
+      "type": "FUTURE_ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 10,
+      "date": 1794180809278,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4870653",
+          "playerId": 4870653,
+          "player": "KC Concepcion",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0144",
+      "teamKey": "2026-t04",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793728583379,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3052587",
+          "playerId": 3052587,
+          "player": "Baker Mayfield",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-8439",
+          "playerId": 8439,
+          "player": "Aaron Rodgers",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0145",
+      "teamKey": "2026-t04",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793733660291,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4870808",
+          "playerId": 4870808,
+          "player": "Jeremiyah Love",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0146",
+      "teamKey": "2026-t05",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794166768420,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "espn-4038524",
+          "playerId": 4038524,
+          "player": "Gardner Minshew II",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t05"
+        },
+        {
+          "type": "DROP",
+          "playerKey": "espn-8439",
+          "playerId": 8439,
+          "player": "Aaron Rodgers",
+          "fromTeamKey": "2026-t05",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0147",
+      "teamKey": "2026-t11",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793710737494,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4612826",
+          "playerId": 4612826,
+          "player": "Ladd McConkey",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4361370",
+          "playerId": 4361370,
+          "player": "Chris Olave",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0148",
+      "teamKey": "2026-t05",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793716360746,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4262921",
+          "playerId": 4262921,
+          "player": "Justin Jefferson",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4702555",
+          "playerId": 4702555,
+          "player": "Jonah Coleman",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0149",
+      "teamKey": "2026-t05",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793801946788,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "espn-4241555",
+          "playerId": 4241555,
+          "player": "Elijah Mitchell",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t05"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0150",
+      "teamKey": "2026-t02",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794075540674,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "espn-3924327",
+          "playerId": 3924327,
+          "player": "Drew Lock",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t02"
+        },
+        {
+          "type": "DROP",
+          "playerKey": "espn-3917315",
+          "playerId": 3917315,
+          "player": "Kyler Murray",
+          "fromTeamKey": "2026-t02",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0151",
+      "teamKey": "2026-t10",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793986988998,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4426385",
+          "playerId": 4426385,
+          "player": "Zach Charbonnet",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4259545",
+          "playerId": 4259545,
+          "player": "D'Andre Swift",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0152",
+      "teamKey": "2026-t10",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794094239160,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4428718",
+          "playerId": 4428718,
+          "player": "Tre Tucker",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0153",
+      "teamKey": "2026-t02",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794087159204,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4241416",
+          "playerId": 4241416,
+          "player": "Chuba Hubbard",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4696044",
+          "playerId": 4696044,
+          "player": "Kaelon Black",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0154",
+      "teamKey": "2026-t05",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794139436608,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3126486",
+          "playerId": 3126486,
+          "player": "Deebo Samuel Sr.",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0155",
+      "teamKey": "2026-t09",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793706014811,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4047365",
+          "playerId": 4047365,
+          "player": "Josh Jacobs",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4569618",
+          "playerId": 4569618,
+          "player": "Garrett Wilson",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0156",
+      "teamKey": "2026-t12",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793708862025,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "playerKey": "espn-17372",
+          "playerId": 17372,
+          "player": "Chris Boswell",
+          "fromTeamKey": "2026-t12",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0157",
+      "teamKey": "2026-t04",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793728551018,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "playerKey": "espn-4697745",
+          "playerId": 4697745,
+          "player": "Tyler Loop",
+          "fromTeamKey": "2026-t04",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0158",
+      "teamKey": "2026-t10",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794155752191,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3122840",
+          "playerId": 3122840,
+          "player": "Deshaun Watson",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0159",
+      "teamKey": "2026-t02",
+      "type": "WAIVER",
+      "status": "FAILED_INVALIDPLAYERSOURCE",
+      "scoringPeriod": 9,
+      "date": 1793782688302,
+      "bidAmount": 19,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "espn-4373626",
+          "playerId": 4373626,
+          "player": "Tyler Allgeier",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t02"
+        },
+        {
+          "type": "DROP",
+          "playerKey": "espn-4360635",
+          "playerId": 4360635,
+          "player": "Chig Okonkwo",
+          "fromTeamKey": "2026-t02",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0160",
+      "teamKey": "2026-t10",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794097096691,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4685247",
+          "playerId": 4685247,
+          "player": "Braelon Allen",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0161",
+      "teamKey": "2026-t10",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794085568526,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4880281",
+          "playerId": 4880281,
+          "player": "Jordyn Tyson",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4047646",
+          "playerId": 4047646,
+          "player": "A.J. Brown",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0162",
+      "teamKey": "2026-t03",
+      "type": "FREEAGENT",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793892491193,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "espn--16012",
+          "playerId": -16012,
+          "player": "Chiefs D/ST",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t03"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0163",
+      "teamKey": "2026-t12",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793702397353,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn--16014",
+          "playerId": -16014,
+          "player": "Rams D/ST",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn--16008",
+          "playerId": -16008,
+          "player": "Lions D/ST",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0164",
+      "teamKey": "2026-t02",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793757113303,
+      "bidAmount": 19,
+      "items": [
+        {
+          "type": "DROP",
+          "playerKey": "espn-4608810",
+          "playerId": 4608810,
+          "player": "Tez Johnson",
+          "fromTeamKey": "2026-t02",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0165",
+      "teamKey": "2026-t10",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794076762050,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4426385",
+          "playerId": 4426385,
+          "player": "Zach Charbonnet",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0166",
+      "teamKey": "2026-t03",
+      "type": "WAIVER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793866091535,
+      "bidAmount": 21,
+      "items": [
+        {
+          "type": "ADD",
+          "playerKey": "espn-15818",
+          "playerId": 15818,
+          "player": "Keenan Allen",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t03"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0167",
+      "teamKey": "2026-t02",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1794154538557,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4685702",
+          "playerId": 4685702,
+          "player": "Quinshon Judkins",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4567750",
+          "playerId": 4567750,
+          "player": "Emeka Egbuka",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0168",
+      "teamKey": "2026-t05",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793716365210,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3126486",
+          "playerId": 3126486,
+          "player": "Deebo Samuel Sr.",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        },
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4262921",
+          "playerId": 4262921,
+          "player": "Justin Jefferson",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0169",
+      "teamKey": "2026-t05",
+      "type": "TRADE_PROPOSAL",
+      "status": "CANCELED",
+      "scoringPeriod": 9,
+      "date": 1793823534147,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "TRADE",
+          "playerKey": "espn-4242512",
+          "playerId": 4242512,
+          "player": "Malik Willis",
+          "fromTeamKey": "2026-t02",
+          "toTeamKey": "2026-t05"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-8439",
+          "playerId": 8439,
+          "player": "Aaron Rodgers",
+          "fromTeamKey": "2026-t05",
+          "toTeamKey": "2026-t02"
+        },
+        {
+          "type": "TRADE",
+          "playerKey": "espn-4427095",
+          "playerId": 4427095,
+          "player": "DeMario Douglas",
+          "fromTeamKey": "2026-t05",
+          "toTeamKey": "2026-t02"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0170",
+      "teamKey": "2026-t03",
+      "type": "TRADE_VETO",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793749819412,
+      "bidAmount": 0,
+      "items": []
+    },
+    {
+      "transactionKey": "2026-w09-x0171",
+      "teamKey": "2026-t03",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793892429106,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-3912547",
+          "playerId": 3912547,
+          "player": "Sam Darnold",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0172",
+      "teamKey": "2026-t11",
+      "type": "TRADE_VETO",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793752161327,
+      "bidAmount": 0,
+      "items": []
+    },
+    {
+      "transactionKey": "2026-w09-x0173",
+      "teamKey": "2026-t10",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793986977943,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "LINEUP",
+          "playerKey": "espn-4428718",
+          "playerId": 4428718,
+          "player": "Tre Tucker",
+          "fromTeamKey": "2026-t00",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    },
+    {
+      "transactionKey": "2026-w09-x0174",
+      "teamKey": "2026-t03",
+      "type": "ROSTER",
+      "status": "EXECUTED",
+      "scoringPeriod": 9,
+      "date": 1793752645608,
+      "bidAmount": 0,
+      "items": [
+        {
+          "type": "DROP",
+          "playerKey": "espn-3116365",
+          "playerId": 3116365,
+          "player": "Mark Andrews",
+          "fromTeamKey": "2026-t03",
+          "toTeamKey": "2026-t00"
+        }
+      ]
+    }
+  ]
+}

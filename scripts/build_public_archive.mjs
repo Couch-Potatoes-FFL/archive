@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { mkdir, readdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -462,6 +462,15 @@ function logoExtension(contentType) {
 async function cacheTeamLogos(year, teams) {
   const cookie = espnCookieHeader();
   const cache = new Map();
+  const logoDir = `assets/team-logos/${year}`;
+  const existingFiles = await readdir(path.join(outputDir, logoDir)).catch((error) => {
+    if (error.code === "ENOENT") return [];
+    throw error;
+  });
+  const existingLogos = new Map(existingFiles.map((file) => [
+    file.replace(/\.[^.]+$/, ""),
+    `archive/${logoDir}/${file}`,
+  ]));
 
   for (const team of teams) {
     if (!shouldCacheLogo(team.logoUrl) || cache.has(team.logoUrl)) {
@@ -506,7 +515,9 @@ async function cacheTeamLogos(year, teams) {
 
   return (team) => ({
     ...team,
-    logoUrl: cache.get(team.logoUrl) || team.logoUrl,
+    logoUrl: cache.get(team.logoUrl) ||
+      (shouldCacheLogo(team.logoUrl) && existingLogos.get(team.key)) ||
+      team.logoUrl,
   });
 }
 
@@ -1327,12 +1338,20 @@ async function buildSeason(year) {
   });
 
   for (const week of source.weeks || []) {
-    const scoreboard = (week.scoreboard?.data || []).map((matchup, index) =>
-      compactMatchup(year, week.week, matchup, index),
-    );
     const boxScores = (week.box_scores?.data || []).map((boxScore, index) =>
       compactBoxScore(year, week.week, boxScore, index),
     );
+    const scoreboard = (week.scoreboard?.data || []).map((matchup, index) => {
+      const boxScore = boxScores.find(
+        (score) => score.homeTeamKey === teamKey(year, matchup.home_team_id) &&
+          score.awayTeamKey === teamKey(year, matchup.away_team_id),
+      );
+      const useBoxScore = matchup.home_score === 0 && matchup.away_score === 0 &&
+        boxScore && (boxScore.homeScore > 0 || boxScore.awayScore > 0);
+      return compactMatchup(year, week.week, useBoxScore
+        ? { ...matchup, home_score: boxScore.homeScore, away_score: boxScore.awayScore }
+        : matchup, index);
+    });
     const transactions = (week.transactions?.data || []).map((transaction, index) =>
       compactTransaction(year, week.week, transaction, index),
     );
@@ -1695,8 +1714,8 @@ async function main() {
     .map((season) => season.year)
     .sort((a, b) => b - a);
 
-  await rm(outputDir, { recursive: true, force: true });
   await mkdir(outputDir, { recursive: true });
+  await rm(path.join(outputDir, "seasons"), { recursive: true, force: true });
 
   const publicSeasons = [];
   const searchRows = [];
@@ -1728,7 +1747,13 @@ async function main() {
     ),
   );
   await writeJson("players.json", mergePlayerSeasons(playerSeasons));
-  await writeJson("salary-cap-prices.json", await fetchSalaryCapPrices(manifest.league_id));
+  const prices = await fetchSalaryCapPrices(manifest.league_id);
+  const previousPrices = await readOptionalJson(path.join(outputDir, "salary-cap-prices.json"));
+  // ESPN zeroes auction values during the season; keep the last useful snapshot.
+  if (!previousPrices || previousPrices.year !== prices.year ||
+    prices.prices.some((price) => price.value > 0)) {
+    await writeJson("salary-cap-prices.json", prices);
+  }
 
   console.log(
     `Built public archive for ${publicSeasons.length} seasons and ${searchRows.length} searchable rows.`,

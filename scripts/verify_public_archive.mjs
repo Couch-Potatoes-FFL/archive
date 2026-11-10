@@ -76,6 +76,18 @@ async function main() {
   for (const file of files) {
     const payload = JSON.parse(await readFile(file, "utf8"));
     verifyValue(payload, path.relative(rootDir, file), failures, playerKeys);
+    if (Array.isArray(payload.scoreboard) && Array.isArray(payload.boxScores)) {
+      for (const matchup of payload.scoreboard) {
+        const boxScore = payload.boxScores.find(
+          (score) => score.homeTeamKey === matchup.homeTeamKey &&
+            score.awayTeamKey === matchup.awayTeamKey,
+        );
+        if (boxScore && (matchup.homeScore !== boxScore.homeScore ||
+          matchup.awayScore !== boxScore.awayScore)) {
+          failures.push(`Scoreboard and box score disagree at ${path.relative(rootDir, file)}: ${matchup.matchupKey}`);
+        }
+      }
+    }
   }
 
   if (failures.length) {
